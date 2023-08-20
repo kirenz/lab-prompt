@@ -2,10 +2,10 @@ project:
   type: website
 
 execute:
-  freeze: auto
+  freeze: true  # never re-render during project render
 
 website:
-  title: "Lab"
+  title: "Prompt"
   image: "/images/logo.png"
   favicon: "/images/logo.png"
   search:

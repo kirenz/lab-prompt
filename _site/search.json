@@ -4,77 +4,14 @@
     "href": "slide.html",
     "title": "Slides",
     "section": "",
-    "text": "This is a Quarto slidedeck."
+    "text": "This is a Quarto slidedeck.\n\n\n\n\n\n\n\n\n\n\nTake a look at the slides tutorial to learn how to use all slide options"
   },
   {
-    "objectID": "slides/slides.html#text",
-    "href": "slides/slides.html#text",
-    "title": "Title",
-    "section": "Text",
-    "text": "Text\n\na 🤖\n\nabc\n\n\n\n\nb\nc1\n\n📚 Required reading: A & B (2023)\nhttps://arxiv.org/pdf/2303.12712.pdf\n\nRussell & Norvig, 2009"
-  },
-  {
-    "objectID": "slides/slides.html#image",
-    "href": "slides/slides.html#image",
-    "title": "Title",
-    "section": "Image",
-    "text": "Image"
-  },
-  {
-    "objectID": "slides/slides.html#video",
-    "href": "slides/slides.html#video",
-    "title": "Title",
-    "section": "Video",
-    "text": "Video"
-  },
-  {
-    "objectID": "slides/slides.html#a-lot-of-text",
-    "href": "slides/slides.html#a-lot-of-text",
-    "title": "Title",
-    "section": "A lot of text",
-    "text": "A lot of text\nSmaller heading"
-  },
-  {
-    "objectID": "slides/slides.html#background-image",
-    "href": "slides/slides.html#background-image",
-    "title": "Title",
-    "section": "Background image",
-    "text": "Background image\nabc"
-  },
-  {
-    "objectID": "slides/slides.html#code",
-    "href": "slides/slides.html#code",
-    "title": "Title",
-    "section": "Code",
-    "text": "Code\n1print('Hello World')\n2for i in LIST:\n  df[i] = df[i].astype('cat')\n\n1\n\nPrint Hello World, and then,\n\n2\n\ntransform all columns in the LIST element to categorical variables"
-  },
-  {
-    "objectID": "slides/slides.html#end",
-    "href": "slides/slides.html#end",
-    "title": "Title",
-    "section": "End",
-    "text": "End\n\n\nJan Kirenz"
-  },
-  {
-    "objectID": "code/notebook.html",
-    "href": "code/notebook.html",
-    "title": "Notebook",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome 👋",
     "section": "",
-    "text": "Load Python libaries and API keys.\n\nimport os\nimport openai\nimport pandas as pd\nimport altair as alt\nfrom dotenv import load_dotenv, find_dotenv\n\n\n_ = load_dotenv(find_dotenv()) # read local .env file\nopenai.api_key  = os.environ['OPENAI_API_KEY']"
-  },
-  {
-    "objectID": "code/notebook.html#setup",
-    "href": "code/notebook.html#setup",
-    "title": "Notebook",
-    "section": "",
-    "text": "Load Python libaries and API keys.\n\nimport os\nimport openai\nimport pandas as pd\nimport altair as alt\nfrom dotenv import load_dotenv, find_dotenv\n\n\n_ = load_dotenv(find_dotenv()) # read local .env file\nopenai.api_key  = os.environ['OPENAI_API_KEY']"
-  },
-  {
-    "objectID": "code/notebook.html#data",
-    "href": "code/notebook.html#data",
-    "title": "Notebook",
-    "section": "Data",
-    "text": "Data"
+    "text": "Welcome to the lab “prompt engineering”\nIn this lab, we will use API access to leverage Large Language Models (LLMs) into custom applications, and learn to build a custom chatbot.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI."
   },
   {
     "objectID": "assignments.html",
@@ -88,20 +25,160 @@
     "href": "requirements.html",
     "title": "Requirements",
     "section": "",
-    "text": "To start this lab, you’ll need the following environments:\n\nSQL: MySQL, MySQL Workbench and a database called db_data\nPython: Anaconda, Anaconda Environment lab and Visual Studio Code\nWorking environment: A folder on your machine called competitive and an environment file with your MySQL password\n\n\n\n\n\n\n\nImportant\n\n\n\nVisit the “Programming Toolkit-webpage” to learn how to set up the environments."
+    "text": "To start this lab, you’ll need the following environments:\n\nSQL: MySQL, MySQL Workbench and a database called db_data\nPython: Anaconda, Anaconda Environment prompt and Visual Studio Code\nWorking environment: A folder on your machine called prompt and an environment file with your OpenAI-API\n\n\n\n\n\n\n\nImportant\n\n\n\nVisit the “Programming Toolkit-webpage” to learn how to set up the environments."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome 👋",
-    "section": "",
-    "text": "Lab “Name”\nIn this lab you will …\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nHow to set up a MySQL database\nUse SQL for data analysis\nMake use of Pandas for data analysis in Python\nUse Altair for data visualization in Python"
+    "objectID": "slides/guidelines.html#api-key-and-python-libaries",
+    "href": "slides/guidelines.html#api-key-and-python-libaries",
+    "title": "Guidelines",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nUse Anaconda environment “prompt”\n\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
   },
   {
-    "objectID": "howto.html",
-    "href": "howto.html",
-    "title": "Workflow",
-    "section": "",
-    "text": "This is a Quarto slidedeck.\n\nCreate new labs GitHub-Repo\nCreate new branch gh-pages\nChange settings in page: gh-pages and root\nOpen VS Code\nChange Quarto seetings in files\nRender all in terminal: quarto render\nPush to GitHub"
+    "objectID": "slides/guidelines.html#gpt-3.5-turbo-vs-gpt-4",
+    "href": "slides/guidelines.html#gpt-3.5-turbo-vs-gpt-4",
+    "title": "Guidelines",
+    "section": "GPT-3.5 Turbo vs GPT-4",
+    "text": "GPT-3.5 Turbo vs GPT-4\n\nFor cost efficiency reasons, we will use OpenAI’s gpt-3.5-turbo model and the chat completions endpoint.\nHowever, you can simply replace model=\"gpt-3.5-turbo\"with model=\"gpt-4\" in the helper function"
+  },
+  {
+    "objectID": "slides/guidelines.html#helper-function",
+    "href": "slides/guidelines.html#helper-function",
+    "title": "Guidelines",
+    "section": "Helper function",
+    "text": "Helper function\n\nThis helper function will make it easier to use prompts and look at the generated outputs:\n\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-1-delimiters",
+    "href": "slides/guidelines.html#tactic-1-delimiters",
+    "title": "Guidelines",
+    "section": "Tactic 1: delimiters",
+    "text": "Tactic 1: delimiters\n\nUse delimiters to clearly indicate distinct parts of the input\nDelimiters can be anything like: ``, \"\"\", &lt; &gt;, ,:`"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-1-example",
+    "href": "slides/guidelines.html#tactic-1-example",
+    "title": "Guidelines",
+    "section": "Tactic 1 example",
+    "text": "Tactic 1 example\n\ntext = f\"\"\"\nYou should express what you want a model to do by \\ \nproviding instructions that are as clear and \\ \nspecific as you can possibly make them. \\ \nThis will guide the model towards the desired output, \\ \nand reduce the chances of receiving irrelevant \\ \nor incorrect responses. Don't confuse writing a \\ \nclear prompt with writing a short prompt. \\ \nIn many cases, longer prompts provide more clarity \\ \nand context for the model, which can lead to \\ \nmore detailed and relevant outputs.\n\"\"\"\nprompt = f\"\"\"\nSummarize the text delimited by triple backticks \\ \ninto a single sentence.\n```{text}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-1-example-output",
+    "href": "slides/guidelines.html#tactic-1-example-output",
+    "title": "Guidelines",
+    "section": "Tactic 1 example",
+    "text": "Tactic 1 example\n\nTo guide a model towards the desired output and reduce irrelevant or incorrect responses, it is important to provide clear and specific instructions, which can be achieved through longer prompts that offer more clarity and context."
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-2-structured-output",
+    "href": "slides/guidelines.html#tactic-2-structured-output",
+    "title": "Guidelines",
+    "section": "Tactic 2: Structured output",
+    "text": "Tactic 2: Structured output\n\nAsk for a structured output\nJSON, HTML\n\n\n\nprompt = f\"\"\"\nGenerate a list of three made-up book titles along \\ \nwith their authors and genres. \nProvide them in JSON format with the following keys: \nbook_id, title, author, genre.\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-2-structured-output-output",
+    "href": "slides/guidelines.html#tactic-2-structured-output-output",
+    "title": "Guidelines",
+    "section": "Tactic 2: Structured output",
+    "text": "Tactic 2: Structured output\n\n{\n  \"books\": [\n    {\n      \"book_id\": 1,\n      \"title\": \"The Enigma of Elysium\",\n      \"author\": \"Evelyn Sinclair\",\n      \"genre\": \"Mystery\"\n    },\n    {\n      \"book_id\": 2,\n      \"title\": \"Whispers in the Wind\",\n      \"author\": \"Nathaniel Blackwood\",\n      \"genre\": \"Fantasy\"\n    },\n    {\n      \"book_id\": 3,\n      \"title\": \"Echoes of the Past\",\n      \"author\": \"Amelia Hart\",\n      \"genre\": \"Romance\"\n    }\n  ]\n}"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-3-conditions-satisfied",
+    "href": "slides/guidelines.html#tactic-3-conditions-satisfied",
+    "title": "Guidelines",
+    "section": "Tactic 3: Conditions satisfied",
+    "text": "Tactic 3: Conditions satisfied\n\nAsk the model to check whether conditions are satisfied\n\n\ntext_1 = f\"\"\"\nMaking a cup of tea is easy! First, you need to get some \\ \nwater boiling. While that's happening, \\ \ngrab a cup and put a tea bag in it. Once the water is \\ \nhot enough, just pour it over the tea bag. \\ \nLet it sit for a bit so the tea can steep. After a \\ \nfew minutes, take out the tea bag. If you \\ \nlike, you can add some sugar or milk to taste. \\ \nAnd that's it! You've got yourself a delicious \\ \ncup of tea to enjoy.\n\"\"\"\nprompt = f\"\"\"\nYou will be provided with text delimited by triple quotes. \nIf it contains a sequence of instructions, \\ \nre-write those instructions in the following format:\n\nStep 1 - ...\nStep 2 - …\n…\nStep N - …\n\nIf the text does not contain a sequence of instructions, \\ \nthen simply write \\\"No steps provided.\\\"\n\n\\\"\\\"\\\"{text_1}\\\"\\\"\\\"\n\"\"\"\nresponse = get_completion(prompt)\nprint(\"Completion for Text 1:\")\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-3-conditions-satisfied-output",
+    "href": "slides/guidelines.html#tactic-3-conditions-satisfied-output",
+    "title": "Guidelines",
+    "section": "Tactic 3: Conditions satisfied",
+    "text": "Tactic 3: Conditions satisfied\n\nCompletion for Text 1:\nStep 1 - Get some water boiling.\nStep 2 - Grab a cup and put a tea bag in it.\nStep 3 - Once the water is hot enough, pour it over the tea bag.\nStep 4 - Let it sit for a bit so the tea can steep.\nStep 5 - After a few minutes, take out the tea bag.\nStep 6 - If you like, add some sugar or milk to taste.\nStep 7 - Enjoy your delicious cup of tea."
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-3-conditions-satisfied-1",
+    "href": "slides/guidelines.html#tactic-3-conditions-satisfied-1",
+    "title": "Guidelines",
+    "section": "Tactic 3: Conditions satisfied",
+    "text": "Tactic 3: Conditions satisfied\n\ntext_2 = f\"\"\"\nThe sun is shining brightly today, and the birds are \\\nsinging. It's a beautiful day to go for a \\ \nwalk in the park. The flowers are blooming, and the \\ \ntrees are swaying gently in the breeze. People \\ \nare out and about, enjoying the lovely weather. \\ \nSome are having picnics, while others are playing \\ \ngames or simply relaxing on the grass. It's a \\ \nperfect day to spend time outdoors and appreciate the \\ \nbeauty of nature.\n\"\"\"\nprompt = f\"\"\"\nYou will be provided with text delimited by triple quotes. \nIf it contains a sequence of instructions, \\ \nre-write those instructions in the following format:\n\nStep 1 - ...\nStep 2 - …\n…\nStep N - …\n\nIf the text does not contain a sequence of instructions, \\ \nthen simply write \\\"No steps provided.\\\"\n\n\\\"\\\"\\\"{text_2}\\\"\\\"\\\"\n\"\"\"\nresponse = get_completion(prompt)\nprint(\"Completion for Text 2:\")\nprint(response)\n\n\nTactic 4: “Few-shot” prompting\n\nprompt = f\"\"\"\nYour task is to answer in a consistent style.\n\n&lt;child&gt;: Teach me about patience.\n\n&lt;grandparent&gt;: The river that carves the deepest \\ \nvalley flows from a modest spring; the \\ \ngrandest symphony originates from a single note; \\ \nthe most intricate tapestry begins with a solitary thread.\n\n&lt;child&gt;: Teach me about resilience.\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-3-conditions-satisfied-1-output",
+    "href": "slides/guidelines.html#tactic-3-conditions-satisfied-1-output",
+    "title": "Guidelines",
+    "section": "Tactic 3: Conditions satisfied",
+    "text": "Tactic 3: Conditions satisfied\n\nCompletion for Text 2:\nNo steps provided."
+  },
+  {
+    "objectID": "slides/guidelines.html#prompting-principle-2",
+    "href": "slides/guidelines.html#prompting-principle-2",
+    "title": "Guidelines",
+    "section": "Prompting Principle 2",
+    "text": "Prompting Principle 2\nPrinciple 2: Give the model time to “think”"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-1-specify-steps",
+    "href": "slides/guidelines.html#tactic-1-specify-steps",
+    "title": "Guidelines",
+    "section": "Tactic 1: Specify steps",
+    "text": "Tactic 1: Specify steps\n\nSpecify the steps required to complete a task\n\n\ntext = f\"\"\"\nIn a charming village, siblings Jack and Jill set out on \\ \na quest to fetch water from a hilltop \\ \nwell. As they climbed, singing joyfully, misfortune \\ \nstruck—Jack tripped on a stone and tumbled \\ \ndown the hill, with Jill following suit. \\ \nThough slightly battered, the pair returned home to \\ \ncomforting embraces. Despite the mishap, \\ \ntheir adventurous spirits remained undimmed, and they \\ \ncontinued exploring with delight.\n\"\"\"\n# example 1\nprompt_1 = f\"\"\"\nPerform the following actions: \n1 - Summarize the following text delimited by triple \\\nbackticks with 1 sentence.\n2 - Translate the summary into French.\n3 - List each name in the French summary.\n4 - Output a json object that contains the following \\\nkeys: french_summary, num_names.\n\nSeparate your answers with line breaks.\n\nText:\n```{text}```\n\"\"\"\nresponse = get_completion(prompt_1)\nprint(\"Completion for prompt 1:\")\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-1-specify-steps-output",
+    "href": "slides/guidelines.html#tactic-1-specify-steps-output",
+    "title": "Guidelines",
+    "section": "Tactic 1: Specify steps",
+    "text": "Tactic 1: Specify steps\n\nCompletion for prompt 1:\n1 - Jack and Jill, siblings, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit, yet they return home and remain undeterred in their adventurous spirits.\n\n2 - Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent inébranlables dans leur esprit d'aventure.\n\n3 - Jack, Jill\n\n4 - {\n  \"french_summary\": \"Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent inébranlables dans leur esprit d'aventure.\",\n  \"num_names\": 2\n}"
+  },
+  {
+    "objectID": "slides/guidelines.html#ask-for-output-in-a-specified-format",
+    "href": "slides/guidelines.html#ask-for-output-in-a-specified-format",
+    "title": "Guidelines",
+    "section": "Ask for output in a specified format",
+    "text": "Ask for output in a specified format\n\nprompt_2 = f\"\"\"\nYour task is to perform the following actions: \n1 - Summarize the following text delimited by \n  &lt;&gt; with 1 sentence.\n2 - Translate the summary into French.\n3 - List each name in the French summary.\n4 - Output a json object that contains the \n  following keys: french_summary, num_names.\n\nUse the following format:\nText: &lt;text to summarize&gt;\nSummary: &lt;summary&gt;\nTranslation: &lt;summary translation&gt;\nNames: &lt;list of names in Italian summary&gt;\nOutput JSON: &lt;json with summary and num_names&gt;\n\nText: &lt;{text}&gt;\n\"\"\"\nresponse = get_completion(prompt_2)\nprint(\"\\nCompletion for prompt 2:\")\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#ask-for-output-in-a-specified-format-output",
+    "href": "slides/guidelines.html#ask-for-output-in-a-specified-format-output",
+    "title": "Guidelines",
+    "section": "Ask for output in a specified format",
+    "text": "Ask for output in a specified format\n\n\nCompletion for prompt 2:\nSummary: Jack and Jill, siblings from a charming village, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit, yet they remain undeterred and continue exploring with delight.\n\nTranslation: Jack et Jill, frère et sœur d'un charmant village, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils restent déterminés et continuent à explorer avec joie.\n\nNames: Jack, Jill\n\nOutput JSON: {\"french_summary\": \"Jack et Jill, frère et sœur d'un charmant village, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils restent déterminés et continuent à explorer avec joie.\", \"num_names\": 2}"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-2-work-on-own-solution",
+    "href": "slides/guidelines.html#tactic-2-work-on-own-solution",
+    "title": "Guidelines",
+    "section": "Tactic 2: Work on own solution",
+    "text": "Tactic 2: Work on own solution\n\nInstruct the model to work out its own solution before rushing to a conclusion\n\n\nprompt = f\"\"\"\nDetermine if the student's solution is correct or not.\n\nQuestion:\nI'm building a solar power installation and I need \\\n help working out the financials. \n- Land costs $100 / square foot\n- I can buy solar panels for $250 / square foot\n- I negotiated a contract for maintenance that will cost \\ \nme a flat $100k per year, and an additional $10 / square \\\nfoot\nWhat is the total cost for the first year of operations \nas a function of the number of square feet.\n\nStudent's Solution:\nLet x be the size of the installation in square feet.\nCosts:\n1. Land cost: 100x\n2. Solar panel cost: 250x\n3. Maintenance cost: 100,000 + 100x\nTotal cost: 100x + 250x + 100,000 + 100x = 450x + 100,000\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-2-work-on-own-solution-output",
+    "href": "slides/guidelines.html#tactic-2-work-on-own-solution-output",
+    "title": "Guidelines",
+    "section": "Tactic 2: Work on own solution",
+    "text": "Tactic 2: Work on own solution\n\nThe student's solution is correct. They correctly identified the costs for land, solar panels, and maintenance, and calculated the total cost as a function of the number of square feet."
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-2-work-on-own-solution-1",
+    "href": "slides/guidelines.html#tactic-2-work-on-own-solution-1",
+    "title": "Guidelines",
+    "section": "Tactic 2: Work on own solution",
+    "text": "Tactic 2: Work on own solution\n\nNote that the student’s solution is actually not correct.\n\nWe can fix this by instructing the model to work out its own solution first.\n\nprompt = f\"\"\"\nYour task is to determine if the student's solution \\\nis correct or not.\nTo solve the problem do the following:\n- First, work out your own solution to the problem. \n- Then compare your solution to the student's solution \\ \nand evaluate if the student's solution is correct or not. \nDon't decide if the student's solution is correct until \nyou have done the problem yourself.\n\nUse the following format:\nQuestion:\n'''\nquestion here\n'''\nStudent's solution:\n'''\nstudent's solution here\n'''\nActual solution:\n'''\nsteps to work out the solution and your solution here\n'''\nIs the student's solution the same as actual solution \\\njust calculated:\n'''\nyes or no\n'''\nStudent grade:\n'''\ncorrect or incorrect\n'''\n\nQuestion:\n'''\nI'm building a solar power installation and I need help \\\nworking out the financials. \n- Land costs $100 / square foot\n- I can buy solar panels for $250 / square foot\n- I negotiated a contract for maintenance that will cost \\\nme a flat $100k per year, and an additional $10 / square \\\nfoot\nWhat is the total cost for the first year of operations \\\nas a function of the number of square feet.\n''' \nStudent's solution:\n'''\nLet x be the size of the installation in square feet.\nCosts:\n1. Land cost: 100x\n2. Solar panel cost: 250x\n3. Maintenance cost: 100,000 + 100x\nTotal cost: 100x + 250x + 100,000 + 100x = 450x + 100,000\n'''\nActual solution:\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#tactic-2-work-on-own-solution-1-output",
+    "href": "slides/guidelines.html#tactic-2-work-on-own-solution-1-output",
+    "title": "Guidelines",
+    "section": "Tactic 2: Work on own solution",
+    "text": "Tactic 2: Work on own solution\n\n'''\nTo calculate the total cost for the first year of operations, we need to add up the costs of land, solar panels, and maintenance.\n\n1. Land cost: $100 / square foot\n   Total land cost = $100 * x (x is the size of the installation in square feet)\n\n2. Solar panel cost: $250 / square foot\n   Total solar panel cost = $250 * x\n\n3. Maintenance cost: $100,000 + $10 / square foot\n   Total maintenance cost = $100,000 + $10 * x\n\nTotal cost = Land cost + Solar panel cost + Maintenance cost\n           = $100 * x + $250 * x + ($100,000 + $10 * x)\n           = $350 * x + $100,000 + $10 * x\n           = $360 * x + $100,000\n'''\n\nIs the student's solution the same as actual solution just calculated:\n'''\nYes\n'''\n\nStudent grade:\n'''\nCorrect\n'''"
+  },
+  {
+    "objectID": "slides/guidelines.html#model-limitations-hallucinations",
+    "href": "slides/guidelines.html#model-limitations-hallucinations",
+    "title": "Guidelines",
+    "section": "Model Limitations: Hallucinations",
+    "text": "Model Limitations: Hallucinations\n\nBoie is a real company, the product name is not real.\n\n\nprompt = f\"\"\"\nTell me about AeroGlide UltraSlim Smart Toothbrush by Boie\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\nThe AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception.\n\nOne of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean.\n\nThe AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine. The app provides real-time feedback on brushing technique, duration, and coverage, helping users to achieve optimal oral health.\n\nThe toothbrush features soft, antimicrobial bristles made from a durable thermoplastic elastomer. These bristles are gentle on the gums and teeth, while also being effective at removing plaque and debris. The antimicrobial properties of the bristles help to inhibit the growth of bacteria, keeping the brush clean and hygienic.\n\nIn terms of battery life, the AeroGlide UltraSlim Smart Toothbrush boasts an impressive 30-day battery life on a single charge. This makes it convenient for travel and ensures that users don't have to worry about constantly recharging their toothbrush.\n\nOverall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination of advanced technology, slim design, and effective cleaning capabilities. It is a great option for those looking to upgrade their oral care routine and achieve a healthier smile.\n\n\n\n\nJan Kirenz"
   }
 ]

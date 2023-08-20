@@ -1,7 +1,7 @@
 ---
 title: Guidelines
 lang: en
-subtitle: Prompt Engineering
+subtitle: Prompt Engineering 1
 author: Jan Kirenz
 execute:
   eval: true
@@ -38,7 +38,7 @@ In this lesson, you'll practice two prompting principles and their related tacti
 
 ## API key and Python libaries
 
-
+- Use Anaconda environment "prompt"
 
 ```{python}
 import openai
@@ -47,35 +47,53 @@ import os
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())
 
-openai.api_key  = os.getenv('OPENAI_API_KEY')
+openai.api_key = os.getenv('OPENAI_API_KEY')
 ```
 
-## Helper function
-Throughout this course, we will use OpenAI's `gpt-3.5-turbo` model and the [chat completions endpoint](https://platform.openai.com/docs/guides/chat). 
+## GPT-3.5 Turbo vs GPT-4
 
-This helper function will make it easier to use prompts and look at the generated outputs:
+- For cost efficiency reasons, we will use OpenAI's `gpt-3.5-turbo` model and the [chat completions endpoint](https://platform.openai.com/docs/guides/chat). 
+
+- However, you can simply replace `model="gpt-3.5-turbo"`with `model="gpt-4"` in the helper function
+
+
+## Helper function
+
+- This helper function will make it easier to use prompts and look at the generated outputs:
+
+. . .
 
 ```{python}
+
+
 def get_completion(prompt, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
-        temperature=0, # this is the degree of randomness of the model's output
+        temperature=0,  # this is the degree of randomness of the model's output
     )
     return response.choices[0].message["content"]
+
+
 ```
 
-## Prompting Principles
-- **Principle 1: Write clear and specific instructions**
-- **Principle 2: Give the model time to “think”**
+# Prompting Principle 1 
 
-### Tactics
 
-#### Tactic 1: Use delimiters to clearly indicate distinct parts of the input
+**Principle 1: Write clear and specific instructions**
+
+
+## Tactic 1: delimiters
+
+- Use delimiters to clearly indicate distinct parts of the input
+
 - Delimiters can be anything like: ```, """, < >, `<tag> </tag>`, `:`
 
+## Tactic 1 example {.smaller .scrollable}
+
 ```{python}
+# | output-location: slide
 text = f"""
 You should express what you want a model to do by \ 
 providing instructions that are as clear and \ 
@@ -97,10 +115,16 @@ response = get_completion(prompt)
 print(response)
 ```
 
-#### Tactic 2: Ask for a structured output
+## Tactic 2: Structured output
+
+- Ask for a structured output
+
 - JSON, HTML
 
+. . .
+
 ```{python}
+# | output-location: slide
 prompt = f"""
 Generate a list of three made-up book titles along \ 
 with their authors and genres. 
@@ -111,9 +135,12 @@ response = get_completion(prompt)
 print(response)
 ```
 
-#### Tactic 3: Ask the model to check whether conditions are satisfied
+## Tactic 3: Conditions satisfied {.scrollable}
+
+- Ask the model to check whether conditions are satisfied
 
 ```{python}
+# | output-location: slide
 text_1 = f"""
 Making a cup of tea is easy! First, you need to get some \ 
 water boiling. While that's happening, \ 
@@ -145,7 +172,11 @@ print("Completion for Text 1:")
 print(response)
 ```
 
+## Tactic 3: Conditions satisfied {.scrollable}
+
+
 ```{python}
+# | output-location: slide
 text_2 = f"""
 The sun is shining brightly today, and the birds are \
 singing. It's a beautiful day to go for a \ 
@@ -180,6 +211,7 @@ print(response)
 #### Tactic 4: "Few-shot" prompting
 
 ```{python}
+# | output-location: slide
 prompt = f"""
 Your task is to answer in a consistent style.
 
@@ -196,11 +228,18 @@ response = get_completion(prompt)
 print(response)
 ```
 
-### Principle 2: Give the model time to “think” 
 
-#### Tactic 1: Specify the steps required to complete a task
+
+## Prompting Principle 2
+
+**Principle 2: Give the model time to “think”**
+
+## Tactic 1: Specify steps {.smaller .scrollable}
+
+- Specify the steps required to complete a task
 
 ```{python}
+# | output-location: slide
 text = f"""
 In a charming village, siblings Jack and Jill set out on \ 
 a quest to fetch water from a hilltop \ 
@@ -232,9 +271,10 @@ print("Completion for prompt 1:")
 print(response)
 ```
 
-#### Ask for output in a specified format
+## Ask for output in a specified format
 
 ```{python}
+# | output-location: slide
 prompt_2 = f"""
 Your task is to perform the following actions: 
 1 - Summarize the following text delimited by 
@@ -258,9 +298,12 @@ print("\nCompletion for prompt 2:")
 print(response)
 ```
 
-#### Tactic 2: Instruct the model to work out its own solution before rushing to a conclusion
+## Tactic 2: Work on own solution
+
+- Instruct the model to work out its own solution before rushing to a conclusion
 
 ```{python}
+# | output-location: slide
 prompt = f"""
 Determine if the student's solution is correct or not.
 
@@ -287,10 +330,15 @@ response = get_completion(prompt)
 print(response)
 ```
 
-#### Note that the student's solution is actually not correct.
+## Tactic 2: Work on own solution
+
+- Note that the student's solution is actually not correct.
+
+
 #### We can fix this by instructing the model to work out its own solution first.
 
 ```{python}
+# | output-location: slide
 prompt = f"""
 Your task is to determine if the student's solution \
 is correct or not.
@@ -303,29 +351,29 @@ you have done the problem yourself.
 
 Use the following format:
 Question:
-```
+'''
 question here
-```
+'''
 Student's solution:
-```
+'''
 student's solution here
-```
+'''
 Actual solution:
-```
+'''
 steps to work out the solution and your solution here
-```
+'''
 Is the student's solution the same as actual solution \
 just calculated:
-```
+'''
 yes or no
-```
+'''
 Student grade:
-```
+'''
 correct or incorrect
-```
+'''
 
 Question:
-```
+'''
 I'm building a solar power installation and I need help \
 working out the financials. 
 - Land costs $100 / square foot
@@ -335,16 +383,16 @@ me a flat $100k per year, and an additional $10 / square \
 foot
 What is the total cost for the first year of operations \
 as a function of the number of square feet.
-``` 
+''' 
 Student's solution:
-```
+'''
 Let x be the size of the installation in square feet.
 Costs:
 1. Land cost: 100x
 2. Solar panel cost: 250x
 3. Maintenance cost: 100,000 + 100x
 Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
-```
+'''
 Actual solution:
 """
 response = get_completion(prompt)
@@ -352,6 +400,7 @@ print(response)
 ```
 
 ## Model Limitations: Hallucinations
+
 - Boie is a real company, the product name is not real.
 
 ```{python}
@@ -361,29 +410,4 @@ Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
 response = get_completion(prompt)
 print(response)
 ```
-
-#### Notes on using the OpenAI API outside of this classroom
-
-To install the OpenAI Python library:
-```
-!pip install openai
-```
-
-The library needs to be configured with your account's secret key, which is available on the [website](https://platform.openai.com/account/api-keys). 
-
-You can either set it as the `OPENAI_API_KEY` environment variable before using the library:
- ```
- !export OPENAI_API_KEY='sk-...'
- ```
-
-Or, set `openai.api_key` to its value:
-
-```
-import openai
-openai.api_key = "sk-..."
-```
-
-#### A note about the backslash
-- In the course, we are using a backslash `\` to make the text fit on the screen without inserting newline '\n' characters.
-- GPT-3 isn't really affected whether you insert newline characters or not.  But when working with LLMs in general, you may consider whether newline characters in your prompt may affect the model's performance.
 
