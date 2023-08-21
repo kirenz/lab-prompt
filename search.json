@@ -7,34 +7,6 @@
     "text": "To start this lab, you’ll need:\n\n\n\n\n\n\nImportant\n\n\n\nVisit the “Programming Toolkit-webpage” to learn how to meet all requirements.\n\n\n\nPython: Anaconda, Anaconda Environment prompt and Visual Studio Code\nEnvironment: A folder on your machine called prompt, an OpenAI-API key and an environment file"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome 👋",
-    "section": "",
-    "text": "Welcome to the lab “prompt engineering”\nIn this lab, we will use OpenAI’s API access to leverage Large Language Models (LLMs) like GPT-3.5 Turbo and GPT-4 into custom Python applications, and learn how to build our own chatbot.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI."
-  },
-  {
-    "objectID": "slide.html",
-    "href": "slide.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Take a look at the slides tutorial to learn how to use all slide options"
-  },
-  {
-    "objectID": "slide.html#guidelines",
-    "href": "slide.html#guidelines",
-    "title": "Slides",
-    "section": "Guidelines",
-    "text": "Guidelines\nIn this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:\n\n🖥️ Guidelines"
-  },
-  {
-    "objectID": "assignments.html",
-    "href": "assignments.html",
-    "title": "Assignments",
-    "section": "",
-    "text": "This is a Quarto slidedeck."
-  },
-  {
     "objectID": "slides/guidelines.html#api-key-and-python-libaries",
     "href": "slides/guidelines.html#api-key-and-python-libaries",
     "title": "Guidelines",
@@ -201,5 +173,152 @@
     "title": "Guidelines",
     "section": "Model Limitations: Hallucinations",
     "text": "Model Limitations: Hallucinations\n\nThe AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception.\n\nOne of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean.\n\nThe AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine. The app provides real-time feedback on brushing technique, duration, and coverage, helping users to achieve optimal oral health.\n\nThe toothbrush features soft, antimicrobial bristles made from a durable thermoplastic elastomer. These bristles are gentle on the gums and teeth, while also being effective at removing plaque and debris. The antimicrobial properties of the bristles help to inhibit the growth of bacteria, ensuring a hygienic brushing experience.\n\nIn terms of battery life, the AeroGlide UltraSlim Smart Toothbrush boasts an impressive 30-day battery life on a single charge. This makes it convenient for travel and ensures that users don't have to worry about constantly recharging their toothbrush.\n\nOverall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination of advanced technology, slim design, and effective cleaning capabilities. It is a great option for those looking to upgrade their oral care routine and achieve a healthier smile."
+  },
+  {
+    "objectID": "assignments.html",
+    "href": "assignments.html",
+    "title": "Assignments",
+    "section": "",
+    "text": "This is a Quarto slidedeck."
+  },
+  {
+    "objectID": "slide.html",
+    "href": "slide.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Take a look at the slides tutorial to learn how to use all slide options"
+  },
+  {
+    "objectID": "slide.html#guidelines",
+    "href": "slide.html#guidelines",
+    "title": "Slides",
+    "section": "Guidelines",
+    "text": "Guidelines\nIn this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:\n\n🖥️ Guidelines"
+  },
+  {
+    "objectID": "slide.html#iterative-prompt-development",
+    "href": "slide.html#iterative-prompt-development",
+    "title": "Slides",
+    "section": "Iterative prompt development",
+    "text": "Iterative prompt development\nIn this tutorial, you’ll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.\n\n🖥️ Iterative prompt development"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome 👋",
+    "section": "",
+    "text": "Welcome to the lab “prompt engineering”\nIn this lab, we will use OpenAI’s API access to leverage Large Language Models (LLMs) like GPT-3.5 Turbo and GPT-4 into custom Python applications, and learn how to build our own chatbot.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI."
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#api-key-and-python-libaries",
+    "href": "slides/iterative-prompt-development.html#api-key-and-python-libaries",
+    "title": "Iterative Prompt Development",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom IPython.display import display, HTML\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#gpt-3.5-turbo-vs-gpt-4",
+    "href": "slides/iterative-prompt-development.html#gpt-3.5-turbo-vs-gpt-4",
+    "title": "Iterative Prompt Development",
+    "section": "GPT-3.5 Turbo vs GPT-4",
+    "text": "GPT-3.5 Turbo vs GPT-4\n\nFor cost efficiency reasons, we will use OpenAI’s gpt-3.5-turbo model and the chat completions endpoint.\nHowever, you can simply replace model=\"gpt-3.5-turbo\"with model=\"gpt-4\" in the helper function"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#helper-function",
+    "href": "slides/iterative-prompt-development.html#helper-function",
+    "title": "Iterative Prompt Development",
+    "section": "Helper function",
+    "text": "Helper function\n\nThis helper function will make it easier to use prompts and look at the generated outputs:\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#marketing-product-description",
+    "href": "slides/iterative-prompt-development.html#marketing-product-description",
+    "title": "Iterative Prompt Development",
+    "section": "Marketing product description",
+    "text": "Marketing product description\n\nGenerate a marketing product description from a product fact sheet\n\n\n\nfact_sheet_chair = \"\"\"\nOVERVIEW\n- Part of a beautiful family of mid-century inspired office furniture, \nincluding filing cabinets, desks, bookcases, meeting tables, and more.\n- Several options of shell color and base finishes.\n- Available with plastic back and front upholstery (SWC-100) \nor full upholstery (SWC-110) in 10 fabric and 6 leather options.\n- Base finish options are: stainless steel, matte black, \ngloss white, or chrome.\n- Chair is available with or without armrests.\n- Suitable for home or business settings.\n- Qualified for contract use.\n\nCONSTRUCTION\n- 5-wheel plastic coated aluminum base.\n- Pneumatic chair adjust for easy raise/lower action.\n\nDIMENSIONS\n- WIDTH 53 CM | 20.87”\n- DEPTH 51 CM | 20.08”\n- HEIGHT 80 CM | 31.50”\n- SEAT HEIGHT 44 CM | 17.32”\n- SEAT DEPTH 41 CM | 16.14”\n\nOPTIONS\n- Soft or hard-floor caster options.\n- Two choices of seat foam densities: \n medium (1.8 lb/ft3) or high (2.8 lb/ft3)\n- Armless or 8 position PU armrests \n\nMATERIALS\nSHELL BASE GLIDER\n- Cast Aluminum with modified nylon PA6/PA66 coating.\n- Shell thickness: 10 mm.\nSEAT\n- HD36 foam\n\nCOUNTRY OF ORIGIN\n- Italy\n\"\"\""
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#initial-prompt",
+    "href": "slides/iterative-prompt-development.html#initial-prompt",
+    "title": "Iterative Prompt Development",
+    "section": "Initial prompt",
+    "text": "Initial prompt\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#initial-prompt-output",
+    "href": "slides/iterative-prompt-development.html#initial-prompt-output",
+    "title": "Iterative Prompt Development",
+    "section": "Initial prompt",
+    "text": "Initial prompt\n\nIntroducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. This chair is part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, all designed with a timeless mid-century aesthetic.\n\nOne of the standout features of this chair is the variety of customization options available. You can choose from several shell colors and base finishes to perfectly match your existing decor. The chair is available with either plastic back and front upholstery or full upholstery in a range of 10 fabric and 6 leather options, allowing you to create a look that is uniquely yours.\n\nThe chair is also available with or without armrests, giving you the flexibility to choose the option that best suits your needs. The base finish options include stainless steel, matte black, gloss white, or chrome, ensuring that you can find the perfect match for your space.\n\nIn terms of construction, this chair is built to last. It features a 5-wheel plastic coated aluminum base, providing stability and mobility. The pneumatic chair adjust allows for easy raise and lower action, ensuring optimal comfort throughout the day.\n\nWhen it comes to dimensions, this chair is designed with both style and comfort in mind. With a width of 53 cm (20.87\"), depth of 51 cm (20.08\"), and height of 80 cm (31.50\"), it offers ample space without overwhelming your space. The seat height is 44 cm (17.32\") and the seat depth is 41 cm (16.14\"), providing a comfortable seating experience for extended periods.\n\nWe understand that every space is unique, which is why we offer a range of options to further customize your chair. You can choose between soft or hard-floor caster options, ensuring that your chair glides smoothly on any surface. Additionally, you have the choice between two seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3), allowing you to select the level of support that suits your preferences. The chair is also available with armless design or 8 position PU armrests, providing additional comfort and versatility.\n\nWhen it comes to materials, this chair is crafted with the utmost attention to quality. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The shell thickness is 10 mm, providing a sturdy and reliable structure. The seat is made of HD36 foam, offering a comfortable and supportive seating experience.\n\nFinally, this chair is proudly made in Italy, known for its exceptional craftsmanship and attention to detail. With its timeless design and superior construction, this chair is not only a stylish addition to any space but also a reliable and functional piece of furniture.\n\nUpgrade your office or home with our mid-century inspired office chair and experience the perfect blend of style, comfort, and functionality."
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-too-long",
+    "href": "slides/iterative-prompt-development.html#issue-too-long",
+    "title": "Iterative Prompt Development",
+    "section": "Issue: Too long",
+    "text": "Issue: Too long\n\nThe text is too long\nLimit the number of words/sentences/characters.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-too-long-output",
+    "href": "slides/iterative-prompt-development.html#issue-too-long-output",
+    "title": "Iterative Prompt Development",
+    "section": "Issue: Too long",
+    "text": "Issue: Too long\n\nIntroducing our mid-century inspired office chair, part of a stunning furniture collection. With various color and finish options, choose between plastic or full upholstery in fabric or leather. The chair features a durable aluminum base with 5 wheels and pneumatic height adjustment. Perfect for home or business use. Made in Italy."
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-too-long-1",
+    "href": "slides/iterative-prompt-development.html#issue-too-long-1",
+    "title": "Iterative Prompt Development",
+    "section": "Issue: Too long",
+    "text": "Issue: Too long\n\nlen(response)\n\n\n\n333"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details",
+    "href": "slides/iterative-prompt-development.html#issue-wrong-details",
+    "title": "Iterative Prompt Development",
+    "section": "Issue: Wrong details",
+    "text": "Issue: Wrong details\n\nText focuses on the wrong details\nAsk it to focus on the aspects that are relevant to the intended audience.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-output",
+    "href": "slides/iterative-prompt-development.html#issue-wrong-details-output",
+    "title": "Iterative Prompt Development",
+    "section": "Issue: Wrong details",
+    "text": "Issue: Wrong details\n\nIntroducing our mid-century inspired office chair, part of a beautiful furniture collection. With various shell colors and base finishes, it offers versatility for any setting. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a durable aluminum base and pneumatic chair adjustment for easy height customization. Made in Italy."
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-1",
+    "href": "slides/iterative-prompt-development.html#issue-wrong-details-1",
+    "title": "Iterative Prompt Development",
+    "section": "Issue: Wrong details",
+    "text": "Issue: Wrong details\n\nInclude product ID’s\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nAt the end of the description, include every 7-character \nProduct ID in the technical specification.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-1-output",
+    "href": "slides/iterative-prompt-development.html#issue-wrong-details-1-output",
+    "title": "Iterative Prompt Development",
+    "section": "Issue: Wrong details",
+    "text": "Issue: Wrong details\n\nIntroducing our mid-century inspired office chair, part of a beautiful family of furniture. With various shell colors and base finishes, this chair offers versatility and style. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a 5-wheel plastic coated aluminum base and a pneumatic chair adjust for easy height adjustment. Available with or without armrests, this chair is suitable for both home and business settings. Made with high-quality materials, including a cast aluminum shell and HD36 foam seat, this chair is built to last. Product ID: SWC-100, SWC-110."
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-3-no-table",
+    "href": "slides/iterative-prompt-development.html#issue-3-no-table",
+    "title": "Iterative Prompt Development",
+    "section": "Issue 3: No Table",
+    "text": "Issue 3: No Table\n\nDescription needs a table of dimensions\nAsk it to extract information and organize it in a table.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nAt the end of the description, include every 7-character \nProduct ID in the technical specification.\n\nAfter the description, include a table that gives the \nproduct's dimensions. The table should have two columns.\nIn the first column include the name of the dimension. \nIn the second column include the measurements in inches only.\n\nGive the table the title 'Product Dimensions'.\n\nFormat everything as HTML that can be used in a website. \nPlace the description in a &lt;div&gt; element.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#issue-3-no-table-output",
+    "href": "slides/iterative-prompt-development.html#issue-3-no-table-output",
+    "title": "Iterative Prompt Development",
+    "section": "Issue 3: No Table",
+    "text": "Issue 3: No Table\n\n&lt;div&gt;\n  &lt;h2&gt;Product Description&lt;/h2&gt;\n  &lt;p&gt;\n    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is the perfect choice for any home or business setting.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair offers several options for customization. You can choose from a variety of shell colors and base finishes to match your existing decor. The chair is available with plastic back and front upholstery or full upholstery in a range of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. You can also choose whether to have armrests or not, depending on your preference.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The construction of the SWC Chair is top-notch. It features a 5-wheel plastic coated aluminum base, ensuring stability and durability. The chair also has a pneumatic adjuster, allowing for easy raise and lower action. This makes it convenient for users to find their desired height and maintain proper posture throughout the day.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair is designed with comfort in mind. The seat is made with HD36 foam, providing a plush and supportive cushioning experience. You can also choose between soft or hard-floor caster options, depending on the type of flooring in your space. Additionally, there are two choices of seat foam densities available: medium (1.8 lb/ft3) or high (2.8 lb/ft3). This allows you to customize the level of firmness to suit your preferences.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair is not only stylish and comfortable, but it is also built to last. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring strength and durability. The shell has a thickness of 10 mm, providing stability and support. With its high-quality materials and construction, the SWC Chair is qualified for contract use, making it suitable for commercial settings as well.\n  &lt;/p&gt;\n  &lt;p&gt;\n    Made in Italy, the SWC Chair is a testament to Italian craftsmanship and design. It combines style, functionality, and durability to create a chair that is both aesthetically pleasing and practical.\n  &lt;/p&gt;\n  &lt;h2&gt;Product Dimensions&lt;/h2&gt;\n  &lt;table&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Dimension&lt;/th&gt;\n      &lt;th&gt;Measurement (inches)&lt;/th&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Width&lt;/td&gt;\n      &lt;td&gt;20.87\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Depth&lt;/td&gt;\n      &lt;td&gt;20.08\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Height&lt;/td&gt;\n      &lt;td&gt;31.50\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Seat Height&lt;/td&gt;\n      &lt;td&gt;17.32\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Seat Depth&lt;/td&gt;\n      &lt;td&gt;16.14\"&lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/table&gt;\n&lt;/div&gt;\n\nProduct IDs: SWC-100, SWC-110"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#view-result-as-html",
+    "href": "slides/iterative-prompt-development.html#view-result-as-html",
+    "title": "Iterative Prompt Development",
+    "section": "View result as HTML",
+    "text": "View result as HTML\n\ndisplay(HTML(response))\n\n\n\n  Product Description\n  \n    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is the perfect choice for any home or business setting.\n  \n  \n    The SWC Chair offers several options for customization. You can choose from a variety of shell colors and base finishes to match your existing decor. The chair is available with plastic back and front upholstery or full upholstery in a range of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. You can also choose whether to have armrests or not, depending on your preference.\n  \n  \n    The construction of the SWC Chair is top-notch. It features a 5-wheel plastic coated aluminum base, ensuring stability and durability. The chair also has a pneumatic adjuster, allowing for easy raise and lower action. This makes it convenient for users to find their desired height and maintain proper posture throughout the day.\n  \n  \n    The SWC Chair is designed with comfort in mind. The seat is made with HD36 foam, providing a plush and supportive cushioning experience. You can also choose between soft or hard-floor caster options, depending on the type of flooring in your space. Additionally, there are two choices of seat foam densities available: medium (1.8 lb/ft3) or high (2.8 lb/ft3). This allows you to customize the level of firmness to suit your preferences.\n  \n  \n    The SWC Chair is not only stylish and comfortable, but it is also built to last. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring strength and durability. The shell has a thickness of 10 mm, providing stability and support. With its high-quality materials and construction, the SWC Chair is qualified for contract use, making it suitable for commercial settings as well.\n  \n  \n    Made in Italy, the SWC Chair is a testament to Italian craftsmanship and design. It combines style, functionality, and durability to create a chair that is both aesthetically pleasing and practical.\n  \n  Product Dimensions\n  \n\n\n\nDimension\nMeasurement (inches)\n\n\nWidth\n20.87\"\n\n\nDepth\n20.08\"\n\n\nHeight\n31.50\"\n\n\nSeat Height\n17.32\"\n\n\nSeat Depth\n16.14\"\n\n\n\n\n\n\nProduct IDs: SWC-100, SWC-110\n\n\n\n\nJan Kirenz"
   }
 ]
