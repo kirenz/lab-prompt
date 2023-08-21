@@ -2,10 +2,17 @@
 title: "Slides"
 ---
 
-This is a Quarto slidedeck. 
-
 
 ::: {.callout-note appearance="simple"}
 Take a look at the [slides tutorial](https://kirenz.github.io/lab-toolkit/slides/slides.html#/title-slide) to learn how to use all slide options 
 
 :::
+
+## Guidelines
+
+In this tutorial, you'll practice two prompting principles and their related tactics in order to write effective prompts for large language models:
+
+- [🖥️ Guidelines](/slides/guidelines.qmd)
+
+
+
