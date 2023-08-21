@@ -4,7 +4,7 @@
     "href": "requirements.html",
     "title": "Requirements",
     "section": "",
-    "text": "To start this lab, you’ll need:\n\n\n\n\n\n\nImportant\n\n\n\nVisit the “Programming Toolkit-webpage” to learn how to meet all requirements.\n\n\n\nPython: Anaconda, Anaconda Environment prompt and Visual Studio Code\nEnvironment: A folder on your machine called prompt, an OpenAI-API key and an environment file with your OpenAI-API key"
+    "text": "To start this lab, you’ll need:\n\n\n\n\n\n\nImportant\n\n\n\nVisit the “Programming Toolkit-webpage” to learn how to meet all requirements.\n\n\n\nPython: Anaconda, Anaconda Environment prompt and Visual Studio Code\nEnvironment: A folder on your machine called prompt, an OpenAI-API key and an environment file with your OpenAI-API keyqu"
   },
   {
     "objectID": "slides/summarizing.html#setup-1",
@@ -117,6 +117,251 @@
     "title": "Iterative Prompt Development",
     "section": "Summarize multiple product reviews",
     "text": "Summarize multiple product reviews\n\n0 Soft and cute panda plush toy loved by daughter, but a bit small for the price. Arrived early. \n\n1 Great lamp with storage, fast delivery, excellent customer service, and easy assembly. Highly recommended. \n\n2 The reviewer recommends the electric toothbrush for its impressive battery life, but criticizes the small brush head. \n\n3 The reviewer found the price increase after the sale disappointing and noticed a decrease in quality."
+  },
+  {
+    "objectID": "slides/transforming.html#api-key-and-python-libaries",
+    "href": "slides/transforming.html#api-key-and-python-libaries",
+    "title": "Transforming",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom redlines import Redlines\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "slides/transforming.html#helper-function",
+    "href": "slides/transforming.html#helper-function",
+    "title": "Transforming",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "slides/transforming.html#example-1",
+    "href": "slides/transforming.html#example-1",
+    "title": "Transforming",
+    "section": "Example 1",
+    "text": "Example 1\n\nprompt = f\"\"\"\nTranslate the following English text to Spanish: \\ \n```Hi, I would like to order a blender```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nHola, me gustaría ordenar una licuadora."
+  },
+  {
+    "objectID": "slides/transforming.html#example-2",
+    "href": "slides/transforming.html#example-2",
+    "title": "Transforming",
+    "section": "Example 2",
+    "text": "Example 2\n\nprompt = f\"\"\"\nTell me which language this is: \n```Combien coûte le lampadaire?```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nThis language is French."
+  },
+  {
+    "objectID": "slides/transforming.html#example-3",
+    "href": "slides/transforming.html#example-3",
+    "title": "Transforming",
+    "section": "Example 3",
+    "text": "Example 3\n\nprompt = f\"\"\"\nTranslate the following  text to French and Spanish\nand English pirate: \\\n```I want to order a basketball```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nFrench: ```Je veux commander un ballon de basket```\nSpanish: ```Quiero ordenar una pelota de baloncesto```\nEnglish: ```I want to order a basketball```"
+  },
+  {
+    "objectID": "slides/transforming.html#example-4",
+    "href": "slides/transforming.html#example-4",
+    "title": "Transforming",
+    "section": "Example 4",
+    "text": "Example 4\n\nprompt = f\"\"\"\nTranslate the following text to Spanish in both the \\\nformal and informal forms: \n'Would you like to order a pillow?'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nFormal: ¿Le gustaría ordenar una almohada?\nInformal: ¿Te gustaría ordenar una almohada?"
+  },
+  {
+    "objectID": "slides/transforming.html#context",
+    "href": "slides/transforming.html#context",
+    "title": "Transforming",
+    "section": "Context",
+    "text": "Context\n\nImagine you are in charge of IT at a large multinational e-commerce company\nUsers are messaging you with IT issues in all their native languages\nYour staff is from all over the world and speaks only their native languages\nYou need a universal translator!"
+  },
+  {
+    "objectID": "slides/transforming.html#user-messages",
+    "href": "slides/transforming.html#user-messages",
+    "title": "Transforming",
+    "section": "User messages",
+    "text": "User messages\n\nuser_messages = [\n    \"La performance du système est plus lente que d'habitude.\",\n    \"Mi monitor tiene píxeles que no se iluminan.\",\n    \"Il mio mouse non funziona\",\n    \"Mój klawisz Ctrl jest zepsuty\",\n    \"我的屏幕在闪烁\"\n]"
+  },
+  {
+    "objectID": "slides/transforming.html#translations",
+    "href": "slides/transforming.html#translations",
+    "title": "Transforming",
+    "section": "Translations",
+    "text": "Translations\n\nfor issue in user_messages:\n    prompt = f\"Tell me what language this is: ```{issue}```\"\n    lang = get_completion(prompt)\n    print(f\"Original message ({lang}): {issue}\")\n\n    prompt = f\"\"\"\n    Translate the following  text to English \\\n    and German: ```{issue}```\n    \"\"\"\n    response = get_completion(prompt)\n    print(response, \"\\n\")"
+  },
+  {
+    "objectID": "slides/transforming.html#translations-output",
+    "href": "slides/transforming.html#translations-output",
+    "title": "Transforming",
+    "section": "Translations",
+    "text": "Translations\n\nOriginal message (The language is French.): La performance du système est plus lente que d'habitude.\nThe performance of the system is slower than usual.\n\nDie Leistung des Systems ist langsamer als gewöhnlich. \n\nOriginal message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan.\nEnglish: \"My monitor has pixels that do not light up.\"\n\nGerman: \"Mein Monitor hat Pixel, die nicht aufleuchten.\" \n\nOriginal message (The language is Italian.): Il mio mouse non funziona\nEnglish: My mouse is not working.\nGerman: Meine Maus funktioniert nicht. \n\nOriginal message (The language is Polish.): Mój klawisz Ctrl jest zepsuty\nEnglish: \"My Ctrl key is broken\"\nGerman: \"Meine Strg-Taste ist kaputt\" \n\nOriginal message (The language is Chinese.): 我的屏幕在闪烁\nEnglish: My screen is flickering.\nGerman: Mein Bildschirm flackert."
+  },
+  {
+    "objectID": "slides/transforming.html#user-messages-with-english-translation",
+    "href": "slides/transforming.html#user-messages-with-english-translation",
+    "title": "Transforming",
+    "section": "User messages with English translation",
+    "text": "User messages with English translation\n\nSystem performance is slower than normal: “La performance du système est plus lente que d’habitude.”,\nMy monitor has pixels that are not lighting: “Mi monitor tiene píxeles que no se iluminan.”,\nMy mouse is not working: “Il mio mouse non funziona”,\nMy keyboard has a broken control key: “Mój klawisz Ctrl jest zepsuty”,\nMy screen is flashing: ‚“我的屏幕在闪烁”"
+  },
+  {
+    "objectID": "slides/transforming.html#from-slang-to-business-tone",
+    "href": "slides/transforming.html#from-slang-to-business-tone",
+    "title": "Transforming",
+    "section": "From slang to business tone",
+    "text": "From slang to business tone\n\nWriting can vary based on the intended audience.\nChatGPT can produce different tones.\n\n\nprompt = f\"\"\"\nTranslate the following from slang to a business letter: \n'Dude, This is Joe, check out this spec on this standing lamp.'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#from-slang-to-business-tone-output",
+    "href": "slides/transforming.html#from-slang-to-business-tone-output",
+    "title": "Transforming",
+    "section": "From slang to business tone",
+    "text": "From slang to business tone\n\nDear Sir/Madam,\n\nI hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp. \n\nI kindly request that you take a moment to review the attached document, as it provides detailed information about the features and specifications of the aforementioned standing lamp. \n\nThank you for your time and consideration. I look forward to discussing this further with you.\n\nYours sincerely,\nJoe"
+  },
+  {
+    "objectID": "slides/transforming.html#from-dictionary-to-html",
+    "href": "slides/transforming.html#from-dictionary-to-html",
+    "title": "Transforming",
+    "section": "From dictionary to HTML",
+    "text": "From dictionary to HTML\n\ndata_json = {\"restaurant employees\": [\n    {\"name\": \"Shyam\", \"email\": \"shyamjaiswal@gmail.com\"},\n    {\"name\": \"Bob\", \"email\": \"bob32@gmail.com\"},\n    {\"name\": \"Jai\", \"email\": \"jai87@gmail.com\"}\n]}\n\nprompt = f\"\"\"\nTranslate the following python dictionary from JSON to an HTML \\\ntable with column headers and title: {data_json}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#from-dictionary-to-html-output",
+    "href": "slides/transforming.html#from-dictionary-to-html-output",
+    "title": "Transforming",
+    "section": "From dictionary to HTML",
+    "text": "From dictionary to HTML\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;style&gt;\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd, th {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr:nth-child(even) {\n  background-color: #dddddd;\n}\n&lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n\n&lt;h2&gt;Restaurant Employees&lt;/h2&gt;\n\n&lt;table&gt;\n  &lt;tr&gt;\n    &lt;th&gt;Name&lt;/th&gt;\n    &lt;th&gt;Email&lt;/th&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Shyam&lt;/td&gt;\n    &lt;td&gt;shyamjaiswal@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Bob&lt;/td&gt;\n    &lt;td&gt;bob32@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Jai&lt;/td&gt;\n    &lt;td&gt;jai87@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;\n\n&lt;/body&gt;\n&lt;/html&gt;"
+  },
+  {
+    "objectID": "slides/transforming.html#html-output",
+    "href": "slides/transforming.html#html-output",
+    "title": "Transforming",
+    "section": "HTML output",
+    "text": "HTML output\n\ndisplay(HTML(response))"
+  },
+  {
+    "objectID": "slides/transforming.html#html-output-output",
+    "href": "slides/transforming.html#html-output-output",
+    "title": "Transforming",
+    "section": "HTML output",
+    "text": "HTML output\n\n\n\n\n\n\n\n\n\nRestaurant Employees\n\n\n\n\n\nName\nEmail\n\n\nShyam\nshyamjaiswal@gmail.com\n\n\nBob\nbob32@gmail.com\n\n\nJai\njai87@gmail.com"
+  },
+  {
+    "objectID": "slides/transforming.html#multiple-text-examples",
+    "href": "slides/transforming.html#multiple-text-examples",
+    "title": "Transforming",
+    "section": "Multiple text examples",
+    "text": "Multiple text examples\n\nText examples are taken from Writing Prompts\n\n\ntext = [\n    \"The girl with the black and white puppies have a ball.\",\n    \"Yolanda has her notebook.\",\n    \"Its going to be a long day. Does the car need it’s oil changed?\",\n    \"Their goes my freedom. There going to bring they’re suitcases.\",\n    \"Your going to need you’re notebook.\",\n    \"That medicine effects my ability to sleep. Have you heard of the butterfly affect?\",\n    \"This phrase is to cherck chatGPT for speling abilitty\"\n]"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading",
+    "href": "slides/transforming.html#proofreading",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: vow““” response = get_completion(prompt) print(response)\n\n\n## Review about a toy \n\n::: {#86249af3 .cell output-location='slide' execution_count=13}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading-1",
+    "href": "slides/transforming.html#proofreading-1",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\n\nprompt = f\"proofread and correct this review: ```{text}```\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading-1-output",
+    "href": "slides/transforming.html#proofreading-1-output",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\n\nGot this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it's super soft and cute. However, one of the ears is a bit lower than the other, and I don't think that was designed to be asymmetrical. Additionally, it's a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
+  },
+  {
+    "objectID": "slides/transforming.html#display-differences",
+    "href": "slides/transforming.html#display-differences",
+    "title": "Transforming",
+    "section": "Display differences",
+    "text": "Display differences\n\ndiff = Redlines(text, response)\ndisplay(Markdown(diff.output_markdown))"
+  },
+  {
+    "objectID": "slides/transforming.html#display-differences-output",
+    "href": "slides/transforming.html#display-differences-output",
+    "title": "Transforming",
+    "section": "Display differences",
+    "text": "Display differences\n\nGot this for my daughter for her birthday cuz because she keeps taking mine from my room. room. Yes, adults also like pandas too. too. She takes it everywhere with her, and it’s super soft and cute. One cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. It’s Additionally, it’s a bit small for what I paid for it though. it. I think believe there might be other options that are bigger for the same price. It price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
+  },
+  {
+    "objectID": "slides/transforming.html#make-it-more-compelling",
+    "href": "slides/transforming.html#make-it-more-compelling",
+    "title": "Transforming",
+    "section": "Make it more compelling",
+    "text": "Make it more compelling\n\nprompt = f\"\"\"\nproofread and correct this review. Make it more compelling. \nEnsure it follows APA style guide and targets an advanced reader. \nOutput in markdown format.\nText: ```{text}```\n\"\"\"\nresponse = get_completion(prompt)\ndisplay(Markdown(response))"
+  },
+  {
+    "objectID": "slides/transforming.html#make-it-more-compelling-output",
+    "href": "slides/transforming.html#make-it-more-compelling-output",
+    "title": "Transforming",
+    "section": "Make it more compelling",
+    "text": "Make it more compelling\n\nTitle: A Delightful Gift for All Ages: A Review of the Adorable Panda Plush Toy\nReviewer: [Your Name]\n\nI recently purchased the charming Panda Plush Toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of this endearing creature. This review aims to provide an insightful analysis of this delightful toy, catering to advanced readers who appreciate a comprehensive evaluation.\nFirst and foremost, the Panda Plush Toy has become an inseparable companion for my daughter, accompanying her on all her adventures. Its irresistibly soft and cuddly texture adds an extra layer of comfort, making it an instant favorite. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice. While this minor flaw does not detract significantly from the overall appeal, it is worth mentioning for the discerning buyer.\nIn terms of size, I must admit that I expected a more substantial presence for the price I paid. It is worth exploring alternative options that offer a larger plush toy within the same price range. Nevertheless, the compact size does lend itself well to portability, allowing my daughter to take her beloved panda wherever she goes.\nOne aspect that pleasantly surprised me was the prompt delivery of the product. It arrived a day earlier than anticipated, affording me the opportunity to experience the joy of playing with the panda myself before presenting it to my daughter. This unexpected bonus further exemplifies the exceptional service provided by the seller.\nIn conclusion, the Panda Plush Toy is an enchanting gift suitable for individuals of all ages, including adults who appreciate the allure of these captivating creatures. Its remarkable softness and undeniable cuteness make it an instant favorite, despite the slight asymmetry in one of the ears. While the size may not meet everyone’s expectations, the convenience of its portability compensates for this minor drawback. With its timely delivery, this delightful toy has exceeded my expectations, leaving me confident in recommending it to others seeking a charming companion.\n\nNote:\nThis review adheres to the APA style guide, providing a comprehensive analysis of the Panda Plush Toy. It targets advanced readers, employing a formal tone and structure."
+  },
+  {
+    "objectID": "slides/transforming.html#show-differences",
+    "href": "slides/transforming.html#show-differences",
+    "title": "Transforming",
+    "section": "Show differences",
+    "text": "Show differences\n\ndiff2 = Redlines(text, response)\ndisplay(Markdown(diff2.output_markdown))\n\n\n\n\nJan Kirenz"
+  },
+  {
+    "objectID": "slides/transforming.html#show-differences-output",
+    "href": "slides/transforming.html#show-differences-output",
+    "title": "Transforming",
+    "section": "Show differences",
+    "text": "Show differences\n\nGot Title: A Delightful Gift for All Ages: A Review of the Adorable Panda Plush Toy \nReviewer: [Your Name] \n— \nI recently purchased the charming Panda Plush Toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of this for my daughter for endearing creature. This review aims to provide an insightful analysis of this delightful toy, catering to advanced readers who appreciate a comprehensive evaluation. \nFirst and foremost, the Panda Plush Toy has become an inseparable companion for my daughter, accompanying her birthday cuz she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super on all her adventures. Its irresistibly soft and cute. One cuddly texture adds an extra layer of comfort, making it an instant favorite. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice. While this minor flaw does not detract significantly from the overall appeal, it is a bit lower than the other, and I don’t think worth mentioning for the discerning buyer. \nIn terms of size, I must admit that was designed to be asymmetrical. It’s a bit small for what I paid for it though. I think there might be other I expected a more substantial presence for the price I paid. It is worth exploring alternative options that are bigger for offer a larger plush toy within the same price. price range. Nevertheless, the compact size does lend itself well to portability, allowing my daughter to take her beloved panda wherever she goes. \nOne aspect that pleasantly surprised me was the prompt delivery of the product. It arrived a day earlier than expected, so I got to play anticipated, affording me the opportunity to experience the joy of playing with it the panda myself before I gave it to my daughter.presenting it to my daughter. This unexpected bonus further exemplifies the exceptional service provided by the seller. \nIn conclusion, the Panda Plush Toy is an enchanting gift suitable for individuals of all ages, including adults who appreciate the allure of these captivating creatures. Its remarkable softness and undeniable cuteness make it an instant favorite, despite the slight asymmetry in one of the ears. While the size may not meet everyone’s expectations, the convenience of its portability compensates for this minor drawback. With its timely delivery, this delightful toy has exceeded my expectations, leaving me confident in recommending it to others seeking a charming companion. \n— \nNote: \nThis review adheres to the APA style guide, providing a comprehensive analysis of the Panda Plush Toy. It targets advanced readers, employing a formal tone and structure."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome 👋",
+    "section": "",
+    "text": "Welcome to the lab “prompt engineering”\n\nIn this lab, we will use OpenAI’s API to leverage Large Language Models (LLMs) like GPT-3.5 Turbo and GPT-4 into custom Python applications, and learn how to build our own chatbot.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI."
+  },
+  {
+    "objectID": "slide.html",
+    "href": "slide.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Take a look at the slides tutorial to learn how to use all slide options"
+  },
+  {
+    "objectID": "slide.html#guidelines",
+    "href": "slide.html#guidelines",
+    "title": "Slides",
+    "section": "1 Guidelines",
+    "text": "1 Guidelines\nIn this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:\n\n🖥️ Guidelines"
+  },
+  {
+    "objectID": "slide.html#iterative-prompt-development",
+    "href": "slide.html#iterative-prompt-development",
+    "title": "Slides",
+    "section": "2 Iterative prompt development",
+    "text": "2 Iterative prompt development\nIn this tutorial, you’ll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.\n\n🖥️ Iterative prompt development"
+  },
+  {
+    "objectID": "slide.html#summarize-text",
+    "href": "slide.html#summarize-text",
+    "title": "Slides",
+    "section": "3 Summarize text",
+    "text": "3 Summarize text\nIn this tutorial, you will summarize text with a focus on specific topics.\n\n🖥️ Summarize text"
+  },
+  {
+    "objectID": "slide.html#inferring",
+    "href": "slide.html#inferring",
+    "title": "Slides",
+    "section": "4 Inferring",
+    "text": "4 Inferring\nIn this tutorial, you will infer sentiment and topics from product reviews and news articles.\n\n🖥️ Inferring"
+  },
+  {
+    "objectID": "slide.html#transforming",
+    "href": "slide.html#transforming",
+    "title": "Slides",
+    "section": "5 Transforming",
+    "text": "5 Transforming\nIn this presentation, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\n\n🖥️ Inferring"
+  },
+  {
+    "objectID": "assignments.html",
+    "href": "assignments.html",
+    "title": "Assignments",
+    "section": "",
+    "text": "This is a Quarto slidedeck."
   },
   {
     "objectID": "slides/guidelines.html#api-key-and-python-libaries",
@@ -285,55 +530,6 @@
     "title": "Guidelines",
     "section": "Model Limitations: Hallucinations",
     "text": "Model Limitations: Hallucinations\n\nThe AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception.\n\nOne of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean.\n\nThe AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine. The app provides real-time feedback on brushing technique, duration, and coverage, helping users to achieve optimal oral health.\n\nThe toothbrush features soft, antimicrobial bristles made from a durable thermoplastic elastomer. These bristles are gentle on the gums and teeth, while also being effective at removing plaque and debris. The antimicrobial properties of the bristles help to inhibit the growth of bacteria, ensuring a hygienic brushing experience.\n\nIn terms of battery life, the AeroGlide UltraSlim Smart Toothbrush boasts an impressive 30-day battery life on a single charge. This makes it convenient for travel and ensures that users don't have to worry about constantly recharging their toothbrush.\n\nOverall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination of advanced technology, slim design, and effective cleaning capabilities. It is a great option for those looking to upgrade their oral care routine and achieve a healthier smile."
-  },
-  {
-    "objectID": "assignments.html",
-    "href": "assignments.html",
-    "title": "Assignments",
-    "section": "",
-    "text": "This is a Quarto slidedeck."
-  },
-  {
-    "objectID": "slide.html",
-    "href": "slide.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Take a look at the slides tutorial to learn how to use all slide options"
-  },
-  {
-    "objectID": "slide.html#guidelines",
-    "href": "slide.html#guidelines",
-    "title": "Slides",
-    "section": "1 Guidelines",
-    "text": "1 Guidelines\nIn this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:\n\n🖥️ Guidelines"
-  },
-  {
-    "objectID": "slide.html#iterative-prompt-development",
-    "href": "slide.html#iterative-prompt-development",
-    "title": "Slides",
-    "section": "2 Iterative prompt development",
-    "text": "2 Iterative prompt development\nIn this tutorial, you’ll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.\n\n🖥️ Iterative prompt development"
-  },
-  {
-    "objectID": "slide.html#summarize-text",
-    "href": "slide.html#summarize-text",
-    "title": "Slides",
-    "section": "3 Summarize text",
-    "text": "3 Summarize text\nIn this tutorial, you will summarize text with a focus on specific topics.\n\n🖥️ Summarize text"
-  },
-  {
-    "objectID": "slide.html#inferring",
-    "href": "slide.html#inferring",
-    "title": "Slides",
-    "section": "4 Inferring",
-    "text": "4 Inferring\nIn this tutorial, you will infer sentiment and topics from product reviews and news articles.\n\n🖥️ Inferring"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome 👋",
-    "section": "",
-    "text": "Welcome to the lab “prompt engineering”\n\nIn this lab, we will use OpenAI’s API to leverage Large Language Models (LLMs) like GPT-3.5 Turbo and GPT-4 into custom Python applications, and learn how to build our own chatbot.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI."
   },
   {
     "objectID": "slides/iterative-prompt-development.html#api-key-and-python-libaries",
