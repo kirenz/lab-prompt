@@ -1,5 +1,6 @@
 ---
 title: "Slides"
+number-sections: true
 ---
 
 
@@ -20,3 +21,14 @@ In this tutorial, you'll iteratively analyze and refine your prompts to generate
 
 - [🖥️ Iterative prompt development](/slides/iterative-prompt-development.qmd)
 
+## Summarize text
+
+In this tutorial, you will summarize text with a focus on specific topics.
+
+- [🖥️ Summarize text](/slides/iterative-prompt-development.qmd)
+
+## Inferring
+
+In this tutorial, you will infer sentiment and topics from product reviews and news articles.
+
+- [🖥️ Inferring](/slides/inferring.qmd)
