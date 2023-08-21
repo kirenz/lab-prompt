@@ -409,17 +409,12 @@ Jan Kirenz
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li class="fragment"><a href="#/content" id="/toc-content">Content</a></li>
 <li class="fragment"><a href="#/setup" id="/toc-setup">Setup</a></li>
-<li class="fragment"><a href="#/prompting-principle-1" id="/toc-prompting-principle-1">Prompting Principle 1</a></li>
+<li class="fragment"><a href="#/principle-1-clear-and-specific" id="/toc-principle-1-clear-and-specific">Principle 1: Clear and Specific</a></li>
+<li class="fragment"><a href="#/principle-2-time-to-think" id="/toc-principle-2-time-to-think">Principle 2: Time to think</a></li>
 </ul>
 </nav>
 </section>
-<section id="content" class="title-slide slide level1 center">
-<h1>Content</h1>
-<p>In this lesson, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models.</p>
-</section>
-
 <section>
 <section id="setup" class="title-slide slide level1 center">
 <h1>Setup</h1>
@@ -427,10 +422,7 @@ Jan Kirenz
 </section>
 <section id="api-key-and-python-libaries" class="slide level2">
 <h2>API key and Python libaries</h2>
-<ul>
-<li class="fragment">Use Anaconda environment “prompt”</li>
-</ul>
-<div id="5963e001" class="cell" data-execution_count="1">
+<div id="e912a33d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> openai</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -447,13 +439,13 @@ Jan Kirenz
 <li class="fragment"><p>However, you can simply replace <code>model="gpt-3.5-turbo"</code>with <code>model="gpt-4"</code> in the helper function</p></li>
 </ul>
 </section>
-<section id="helper-function" class="slide level2">
+<section id="helper-function" class="slide level2 smaller">
 <h2>Helper function</h2>
 <ul>
 <li class="fragment">This helper function will make it easier to use prompts and look at the generated outputs:</li>
 </ul>
 <div class="fragment">
-<div id="5e2de11f" class="cell" data-execution_count="2">
+<div id="cdc3d010" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
@@ -466,9 +458,9 @@ Jan Kirenz
 </div>
 </section></section>
 <section>
-<section id="prompting-principle-1" class="title-slide slide level1 center">
-<h1>Prompting Principle 1</h1>
-<p><strong>Principle 1: Write clear and specific instructions</strong></p>
+<section id="principle-1-clear-and-specific" class="title-slide slide level1 center">
+<h1>Principle 1: Clear and Specific</h1>
+<p>Prompting Principle 1: Write clear and specific instructions</p>
 </section>
 <section id="tactic-1-delimiters" class="slide level2">
 <h2>Tactic 1: delimiters</h2>
@@ -479,7 +471,7 @@ Jan Kirenz
 </section>
 <section id="tactic-1-example" class="slide level2 smaller scrollable">
 <h2>Tactic 1 example</h2>
-<div id="fcb4b036" class="cell" data-execution_count="3">
+<div id="3d6ddccb" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="ss">You should express what you want a model to do by \ </span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="ss">providing instructions that are as clear and \ </span></span>
@@ -506,14 +498,14 @@ Jan Kirenz
 <div class="cell-output cell-output-stdout">
 <pre><code>To guide a model towards the desired output and reduce irrelevant or incorrect responses, it is important to provide clear and specific instructions, which can be achieved through longer prompts that offer more clarity and context.</code></pre>
 </div>
-</div></section><section id="tactic-2-structured-output" class="slide level2">
+</div></section><section id="tactic-2-structured-output" class="slide level2 smaller scrollable">
 <h2>Tactic 2: Structured output</h2>
 <ul>
 <li class="fragment"><p>Ask for a structured output</p></li>
 <li class="fragment"><p>JSON, HTML</p></li>
 </ul>
 <div class="fragment">
-<div id="24f5811e" class="cell" data-execution_count="4">
+<div id="b3f11ca4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="ss">Generate a list of three made-up book titles along \ </span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="ss">with their authors and genres. </span></span>
@@ -526,7 +518,7 @@ Jan Kirenz
 
 </div>
 </section>
-<section id="tactic-2-structured-output-output" class="slide level2 output-location-slide"><h2>Tactic 2: Structured output</h2><div class="cell output-location-slide" data-execution_count="4">
+<section id="tactic-2-structured-output-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 2: Structured output</h2><div class="cell output-location-slide" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "books": [
@@ -551,12 +543,12 @@ Jan Kirenz
   ]
 }</code></pre>
 </div>
-</div></section><section id="tactic-3-conditions-satisfied" class="slide level2 scrollable">
-<h2>Tactic 3: Conditions satisfied</h2>
+</div></section><section id="tactic-3-conditions-satisfied-1" class="slide level2 smaller scrollable">
+<h2>Tactic 3: Conditions satisfied 1</h2>
 <ul>
 <li class="fragment">Ask the model to check whether conditions are satisfied</li>
 </ul>
-<div id="6064f355" class="cell" data-execution_count="5">
+<div id="0091805d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>text_1 <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="ss">Making a cup of tea is easy! First, you need to get some \ </span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="ss">water boiling. While that's happening, \ </span></span>
@@ -589,7 +581,7 @@ Jan Kirenz
 </div>
 
 </section>
-<section id="tactic-3-conditions-satisfied-output" class="slide level2 scrollable output-location-slide"><h2>Tactic 3: Conditions satisfied</h2><div class="cell output-location-slide" data-execution_count="5">
+<section id="tactic-3-conditions-satisfied-1-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 3: Conditions satisfied 1</h2><div class="cell output-location-slide" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>Completion for Text 1:
 Step 1 - Get some water boiling.
@@ -600,9 +592,9 @@ Step 5 - After a few minutes, take out the tea bag.
 Step 6 - If you like, add some sugar or milk to taste.
 Step 7 - Enjoy your delicious cup of tea.</code></pre>
 </div>
-</div></section><section id="tactic-3-conditions-satisfied-1" class="slide level2 scrollable">
-<h2>Tactic 3: Conditions satisfied</h2>
-<div id="7b7426f4" class="cell" data-execution_count="6">
+</div></section><section id="tactic-3-conditions-satisfied-2" class="slide level2 smaller scrollable">
+<h2>Tactic 3: Conditions satisfied 2</h2>
+<div id="625afc20" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>text_2 <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="ss">The sun is shining brightly today, and the birds are </span><span class="ch">\</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="ss">singing. It's a beautiful day to go for a \ </span></span>
@@ -634,8 +626,15 @@ Step 7 - Enjoy your delicious cup of tea.</code></pre>
 <span id="cb9-29"><a href="#cb9-29"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<h4 id="tactic-4-few-shot-prompting">Tactic 4: “Few-shot” prompting</h4>
-<div id="9d6e6b3e" class="cell" data-execution_count="7">
+</section>
+<section id="tactic-3-conditions-satisfied-2-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 3: Conditions satisfied 2</h2><div class="cell output-location-slide" data-execution_count="6">
+<div class="cell-output cell-output-stdout">
+<pre><code>Completion for Text 2:
+No steps provided.</code></pre>
+</div>
+</div></section><section id="tactic-4-few-shot-prompting" class="slide level2 smaller scrollable">
+<h2>Tactic 4: “Few-shot” prompting</h2>
+<div id="21164ddf" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="ss">Your task is to answer in a consistent style.</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a></span>
@@ -652,26 +651,22 @@ Step 7 - Enjoy your delicious cup of tea.</code></pre>
 <span id="cb11-14"><a href="#cb11-14"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-</section>
-<section id="tactic-3-conditions-satisfied-1-output" class="slide level2 scrollable output-location-slide"><h2>Tactic 3: Conditions satisfied</h2><div class="cell output-location-slide" data-execution_count="7">
+</section><section id="tactic-4-few-shot-prompting-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 4: “Few-shot” prompting</h2><div class="cell output-location-slide" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;grandparent&gt;: Resilience is like a mighty oak tree that withstands the strongest storms, bending but never breaking. It is the ability to bounce back from adversity, to find strength in the face of challenges, and to persevere even when the odds seem insurmountable. Just as a diamond is formed under immense pressure, resilience is forged through the trials and tribulations of life.</code></pre>
 </div>
-</div></section><section id="tactic-3-conditions-satisfied-1-output" class="slide level2 scrollable output-location-slide"><h2>Tactic 3: Conditions satisfied</h2><div class="cell output-location-slide" data-execution_count="6">
-<div class="cell-output cell-output-stdout">
-<pre><code>Completion for Text 2:
-No steps provided.</code></pre>
-</div>
-</div></section><section id="prompting-principle-2" class="slide level2">
-<h2>Prompting Principle 2</h2>
-<p><strong>Principle 2: Give the model time to “think”</strong></p>
+</div></section></section>
+<section>
+<section id="principle-2-time-to-think" class="title-slide slide level1 center">
+<h1>Principle 2: Time to think</h1>
+<p>Prompting Principle 2: Give the model time to “think”</p>
 </section>
 <section id="tactic-1-specify-steps" class="slide level2 smaller scrollable">
 <h2>Tactic 1: Specify steps</h2>
 <ul>
 <li class="fragment">Specify the steps required to complete a task</li>
 </ul>
-<div id="fadb2f96" class="cell" data-execution_count="8">
+<div id="8dd133d5" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="ss">In a charming village, siblings Jack and Jill set out on \ </span></span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="ss">a quest to fetch water from a hilltop \ </span></span>
@@ -709,18 +704,18 @@ No steps provided.</code></pre>
 <pre><code>Completion for prompt 1:
 1 - Jack and Jill, siblings, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit, yet they return home and remain undeterred in their adventurous spirits.
 
-2 - Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent inébranlables dans leur esprit d'aventure.
+2 - Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent déterminés dans leur esprit d'aventure.
 
 3 - Jack, Jill
 
 4 - {
-  "french_summary": "Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent inébranlables dans leur esprit d'aventure.",
+  "french_summary": "Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent déterminés dans leur esprit d'aventure.",
   "num_names": 2
 }</code></pre>
 </div>
-</div></section><section id="ask-for-output-in-a-specified-format" class="slide level2">
+</div></section><section id="ask-for-output-in-a-specified-format" class="slide level2 smaller scrollable">
 <h2>Ask for output in a specified format</h2>
-<div id="01d834dd" class="cell" data-execution_count="9">
+<div id="af0c1a10" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>prompt_2 <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="ss">Your task is to perform the following actions: </span></span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="ss">1 - Summarize the following text delimited by </span></span>
@@ -745,24 +740,24 @@ No steps provided.</code></pre>
 </div>
 
 </section>
-<section id="ask-for-output-in-a-specified-format-output" class="slide level2 output-location-slide"><h2>Ask for output in a specified format</h2><div class="cell output-location-slide" data-execution_count="9">
+<section id="ask-for-output-in-a-specified-format-output" class="slide level2 smaller scrollable output-location-slide"><h2>Ask for output in a specified format</h2><div class="cell output-location-slide" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Completion for prompt 2:
-Summary: Jack and Jill, siblings from a charming village, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit, yet they remain undeterred and continue exploring with delight.
+Summary: Jack and Jill, siblings, go on a quest to fetch water from a hilltop well but encounter misfortune along the way.
 
-Translation: Jack et Jill, frère et sœur d'un charmant village, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils restent déterminés et continuent à explorer avec joie.
+Translation: Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline mais rencontrent des malheurs en chemin.
 
 Names: Jack, Jill
 
-Output JSON: {"french_summary": "Jack et Jill, frère et sœur d'un charmant village, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils restent déterminés et continuent à explorer avec joie.", "num_names": 2}</code></pre>
+Output JSON: {"french_summary": "Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline mais rencontrent des malheurs en chemin.", "num_names": 2}</code></pre>
 </div>
-</div></section><section id="tactic-2-work-on-own-solution" class="slide level2">
-<h2>Tactic 2: Work on own solution</h2>
+</div></section><section id="tactic-2-work-on-own-solution-1" class="slide level2 smaller scrollable">
+<h2>Tactic 2: Work on own solution 1</h2>
 <ul>
 <li class="fragment">Instruct the model to work out its own solution before rushing to a conclusion</li>
 </ul>
-<div id="306353e7" class="cell" data-execution_count="10">
+<div id="eb3f151e" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="ss">Determine if the student's solution is correct or not.</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a></span>
@@ -790,17 +785,17 @@ Output JSON: {"french_summary": "Jack et Jill, frère et sœur d'un charmant vil
 </div>
 
 </section>
-<section id="tactic-2-work-on-own-solution-output" class="slide level2 output-location-slide"><h2>Tactic 2: Work on own solution</h2><div class="cell output-location-slide" data-execution_count="10">
+<section id="tactic-2-work-on-own-solution-1-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 2: Work on own solution 1</h2><div class="cell output-location-slide" data-execution_count="10">
 <div class="cell-output cell-output-stdout">
 <pre><code>The student's solution is correct. They correctly identified the costs for land, solar panels, and maintenance, and calculated the total cost as a function of the number of square feet.</code></pre>
 </div>
-</div></section><section id="tactic-2-work-on-own-solution-1" class="slide level2">
-<h2>Tactic 2: Work on own solution</h2>
+</div></section><section id="tactic-2-work-on-own-solution-2" class="slide level2 smaller scrollable">
+<h2>Tactic 2: Work on own solution 2</h2>
 <ul>
 <li class="fragment">Note that the student’s solution is actually not correct.</li>
+<li class="fragment">We can fix this by instructing the model to work out its own solution first:</li>
 </ul>
-<h4 id="we-can-fix-this-by-instructing-the-model-to-work-out-its-own-solution-first.">We can fix this by instructing the model to work out its own solution first.</h4>
-<div id="2e0d4bbe" class="cell" data-execution_count="11">
+<div id="d42ff4bb" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="ss">Your task is to determine if the student's solution </span><span class="ch">\</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="ss">is correct or not.</span></span>
@@ -862,23 +857,22 @@ Output JSON: {"french_summary": "Jack et Jill, frère et sœur d'un charmant vil
 </div>
 
 </section>
-<section id="tactic-2-work-on-own-solution-1-output" class="slide level2 output-location-slide"><h2>Tactic 2: Work on own solution</h2><div class="cell output-location-slide" data-execution_count="11">
+<section id="tactic-2-work-on-own-solution-2-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 2: Work on own solution 2</h2><div class="cell output-location-slide" data-execution_count="11">
 <div class="cell-output cell-output-stdout">
 <pre><code>'''
 To calculate the total cost for the first year of operations, we need to add up the costs of land, solar panels, and maintenance.
 
 1. Land cost: $100 / square foot
-   Total land cost = $100 * x (x is the size of the installation in square feet)
+   Total land cost = $100 * x (where x is the size of the installation in square feet)
 
 2. Solar panel cost: $250 / square foot
    Total solar panel cost = $250 * x
 
-3. Maintenance cost: $100,000 + $10 / square foot
+3. Maintenance cost: $100,000 (flat fee) + $10 / square foot
    Total maintenance cost = $100,000 + $10 * x
 
 Total cost = Land cost + Solar panel cost + Maintenance cost
-           = $100 * x + $250 * x + ($100,000 + $10 * x)
-           = $350 * x + $100,000 + $10 * x
+           = $100 * x + $250 * x + $100,000 + $10 * x
            = $360 * x + $100,000
 '''
 
@@ -897,12 +891,19 @@ Correct
 <ul>
 <li class="fragment">Boie is a real company, the product name is not real.</li>
 </ul>
-<div id="30f616ae" class="cell" data-execution_count="12">
+<div id="66ae8834" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="ss">Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="ss">"""</span></span>
 <span id="cb21-4"><a href="#cb21-4"></a>response <span class="op">=</span> get_completion(prompt)</span>
 <span id="cb21-5"><a href="#cb21-5"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+<div class="footer footer-default">
+<p>Jan Kirenz</p>
+</div>
+</section><section id="model-limitations-hallucinations-output" class="slide level2 output-location-slide"><h2>Model Limitations: Hallucinations</h2><div class="cell output-location-slide" data-execution_count="12">
 <div class="cell-output cell-output-stdout">
 <pre><code>The AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception.
 
@@ -910,18 +911,13 @@ One of the standout features of this toothbrush is its ultra-slim design. The br
 
 The AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine. The app provides real-time feedback on brushing technique, duration, and coverage, helping users to achieve optimal oral health.
 
-The toothbrush features soft, antimicrobial bristles made from a durable thermoplastic elastomer. These bristles are gentle on the gums and teeth, while also being effective at removing plaque and debris. The antimicrobial properties of the bristles help to inhibit the growth of bacteria, keeping the brush clean and hygienic.
+The toothbrush features soft, antimicrobial bristles made from a durable thermoplastic elastomer. These bristles are gentle on the gums and teeth, while also being effective at removing plaque and debris. The antimicrobial properties of the bristles help to inhibit the growth of bacteria, ensuring a hygienic brushing experience.
 
 In terms of battery life, the AeroGlide UltraSlim Smart Toothbrush boasts an impressive 30-day battery life on a single charge. This makes it convenient for travel and ensures that users don't have to worry about constantly recharging their toothbrush.
 
 Overall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination of advanced technology, slim design, and effective cleaning capabilities. It is a great option for those looking to upgrade their oral care routine and achieve a healthier smile.</code></pre>
 </div>
-</div>
-
-<div class="footer footer-default">
-<p>Jan Kirenz</p>
-</div>
-</section></section>
+</div></section></section>
     </div>
   </div>
 
