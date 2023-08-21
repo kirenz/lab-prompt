@@ -1,5 +1,6 @@
 ---
 title: "Assignments"
+number-sections: true
 ---
 
 This is a Quarto slidedeck. 
