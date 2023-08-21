@@ -29,13 +29,10 @@ format:
     footer: Jan Kirenz
 ---
 
-
-
 # Setup
 
 
-## Setup
-
+## API key and Python libaries
 
 ```{python}
 # | output-location: slide
