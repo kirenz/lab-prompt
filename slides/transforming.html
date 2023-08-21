@@ -412,43 +412,12 @@ Jan Kirenz
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#/setup" id="/toc-setup">Setup</a>
-<ul>
-<li><a href="#/api-key-and-python-libaries" id="/toc-api-key-and-python-libaries">API key and Python libaries</a></li>
-<li><a href="#/helper-function" id="/toc-helper-function">Helper function</a></li>
-</ul></li>
-<li><a href="#/translation" id="/toc-translation">Translation</a>
-<ul>
-<li><a href="#/example-1" id="/toc-example-1">Example 1</a></li>
-<li><a href="#/example-2" id="/toc-example-2">Example 2</a></li>
-<li><a href="#/example-3" id="/toc-example-3">Example 3</a></li>
-<li><a href="#/example-4" id="/toc-example-4">Example 4</a></li>
-</ul></li>
-<li><a href="#/universal-translator" id="/toc-universal-translator">Universal Translator</a>
-<ul>
-<li><a href="#/context" id="/toc-context">Context</a></li>
-<li><a href="#/user-messages" id="/toc-user-messages">User messages</a></li>
-<li><a href="#/translations" id="/toc-translations">Translations</a></li>
-<li><a href="#/user-messages-with-english-translation" id="/toc-user-messages-with-english-translation">User messages with English translation</a></li>
-</ul></li>
-<li><a href="#/tone-transformation" id="/toc-tone-transformation">Tone Transformation</a>
-<ul>
-<li><a href="#/from-slang-to-business-tone" id="/toc-from-slang-to-business-tone">From slang to business tone</a></li>
-</ul></li>
-<li><a href="#/format-conversion" id="/toc-format-conversion">Format Conversion</a>
-<ul>
-<li><a href="#/from-dictionary-to-html" id="/toc-from-dictionary-to-html">From dictionary to HTML</a></li>
-<li><a href="#/html-output" id="/toc-html-output">HTML output</a></li>
-</ul></li>
-<li><a href="#/spellcheck-grammar-check" id="/toc-spellcheck-grammar-check">Spellcheck &amp; Grammar check</a>
-<ul>
-<li><a href="#/multiple-text-examples" id="/toc-multiple-text-examples">Multiple text examples</a></li>
-<li><a href="#/proofreading" id="/toc-proofreading">Proofreading</a></li>
-<li><a href="#/proofreading-1" id="/toc-proofreading-1">Proofreading</a></li>
-<li><a href="#/display-differences" id="/toc-display-differences">Display differences</a></li>
-<li><a href="#/make-it-more-compelling" id="/toc-make-it-more-compelling">Make it more compelling</a></li>
-<li><a href="#/show-differences" id="/toc-show-differences">Show differences</a></li>
-</ul></li>
+<li><a href="#/setup" id="/toc-setup">Setup</a></li>
+<li><a href="#/translation" id="/toc-translation">Translation</a></li>
+<li><a href="#/universal-translator" id="/toc-universal-translator">Universal Translator</a></li>
+<li><a href="#/tone-transformation" id="/toc-tone-transformation">Tone Transformation</a></li>
+<li><a href="#/format-conversion" id="/toc-format-conversion">Format Conversion</a></li>
+<li><a href="#/spellcheck-grammar-check" id="/toc-spellcheck-grammar-check">Spellcheck &amp; Grammar check</a></li>
 </ul>
 </nav>
 </section>
@@ -459,7 +428,7 @@ Jan Kirenz
 </section>
 <section id="api-key-and-python-libaries" class="slide level2">
 <h2>API key and Python libaries</h2>
-<div id="93451526" class="cell" data-execution_count="1">
+<div id="f08f1664" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> redlines <span class="im">import</span> Redlines</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, Markdown, Latex, HTML, JSON</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> openai</span>
@@ -473,7 +442,7 @@ Jan Kirenz
 </section>
 <section id="helper-function" class="slide level2">
 <h2>Helper function</h2>
-<div id="b37896c1" class="cell" data-execution_count="2">
+<div id="0b84e285" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>, temperature<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
@@ -494,7 +463,7 @@ Jan Kirenz
 </section>
 <section id="example-1" class="slide level2">
 <h2>Example 1</h2>
-<div id="a7239857" class="cell" data-execution_count="3">
+<div id="7559ba39" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="ss">Translate the following English text to Spanish: \ </span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="ss">```Hi, I would like to order a blender```</span></span>
@@ -510,7 +479,7 @@ Jan Kirenz
 </section>
 <section id="example-2" class="slide level2">
 <h2>Example 2</h2>
-<div id="eb605406" class="cell" data-execution_count="4">
+<div id="3c4a3b7f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="ss">Tell me which language this is: </span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="ss">```Combien coûte le lampadaire?```</span></span>
@@ -526,7 +495,7 @@ Jan Kirenz
 </section>
 <section id="example-3" class="slide level2">
 <h2>Example 3</h2>
-<div id="c3188cc5" class="cell" data-execution_count="5">
+<div id="8fe20304" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="ss">Translate the following  text to French and Spanish</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="ss">and English pirate: </span><span class="ch">\</span></span>
@@ -545,7 +514,7 @@ English: ```I want to order a basketball```</code></pre>
 </section>
 <section id="example-4" class="slide level2">
 <h2>Example 4</h2>
-<div id="fdccedcb" class="cell" data-execution_count="6">
+<div id="866f1271" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="ss">Translate the following text to Spanish in both the </span><span class="ch">\</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="ss">formal and informal forms: </span></span>
@@ -577,7 +546,7 @@ Informal: ¿Te gustaría ordenar una almohada?</code></pre>
 </section>
 <section id="user-messages" class="slide level2">
 <h2>User messages</h2>
-<div id="54f7fd57" class="cell" data-execution_count="7">
+<div id="293d6b00" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>user_messages <span class="op">=</span> [</span>
 <span id="cb11-2"><a href="#cb11-2"></a>    <span class="st">"La performance du système est plus lente que d'habitude."</span>,</span>
 <span id="cb11-3"><a href="#cb11-3"></a>    <span class="st">"Mi monitor tiene píxeles que no se iluminan."</span>,</span>
@@ -589,7 +558,7 @@ Informal: ¿Te gustaría ordenar una almohada?</code></pre>
 </section>
 <section id="translations" class="slide level2">
 <h2>Translations</h2>
-<div id="e39d5422" class="cell" data-execution_count="8">
+<div id="2c2bb83f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="cf">for</span> issue <span class="kw">in</span> user_messages:</span>
 <span id="cb12-2"><a href="#cb12-2"></a>    prompt <span class="op">=</span> <span class="ss">f"Tell me what language this is: ```</span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">```"</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>    lang <span class="op">=</span> get_completion(prompt)</span>
@@ -650,7 +619,7 @@ German: Mein Bildschirm flackert.
 <li>Writing can vary based on the intended audience.</li>
 <li>ChatGPT can produce different tones.</li>
 </ul>
-<div id="a041d5e0" class="cell" data-execution_count="9">
+<div id="53cd3506" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="ss">Translate the following from slang to a business letter: </span></span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="ss">'Dude, This is Joe, check out this spec on this standing lamp.'</span></span>
@@ -665,9 +634,9 @@ German: Mein Bildschirm flackert.
 
 I hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp. 
 
-I kindly request that you take a moment to review the attached document, as it provides detailed information about the features and specifications of the aforementioned standing lamp. 
+I kindly request that you take a moment to review the attached document, as it provides detailed information about the features and qualities of the aforementioned standing lamp. 
 
-Thank you for your time and consideration. I look forward to discussing this further with you.
+Thank you for your time and consideration. I look forward to discussing this matter further with you.
 
 Yours sincerely,
 Joe</code></pre>
@@ -683,7 +652,7 @@ Joe</code></pre>
 </section>
 <section id="from-dictionary-to-html" class="slide level2">
 <h2>From dictionary to HTML</h2>
-<div id="d0cb86d1" class="cell" data-execution_count="10">
+<div id="01fb4696" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>data_json <span class="op">=</span> {<span class="st">"restaurant employees"</span>: [</span>
 <span id="cb16-2"><a href="#cb16-2"></a>    {<span class="st">"name"</span>: <span class="st">"Shyam"</span>, <span class="st">"email"</span>: <span class="st">"shyamjaiswal@gmail.com"</span>},</span>
 <span id="cb16-3"><a href="#cb16-3"></a>    {<span class="st">"name"</span>: <span class="st">"Bob"</span>, <span class="st">"email"</span>: <span class="st">"bob32@gmail.com"</span>},</span>
@@ -750,7 +719,7 @@ tr:nth-child(even) {
 </div>
 </div></section><section id="html-output" class="slide level2">
 <h2>HTML output</h2>
-<div id="3ca136b3" class="cell" data-execution_count="11">
+<div id="7e78ceb3" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>display(HTML(response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
@@ -821,7 +790,7 @@ tr:nth-child(even) {
 <ul>
 <li>Text examples are taken from <a href="https://writingprompts.com/bad-grammar-examples/">Writing Prompts</a></li>
 </ul>
-<div id="54f875fa" class="cell" data-execution_count="12">
+<div id="d52ad057" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>text <span class="op">=</span> [</span>
 <span id="cb19-2"><a href="#cb19-2"></a>    <span class="st">"The girl with the black and white puppies have a ball."</span>,</span>
 <span id="cb19-3"><a href="#cb19-3"></a>    <span class="st">"Yolanda has her notebook."</span>,</span>
@@ -835,12 +804,12 @@ tr:nth-child(even) {
 </section>
 <section id="proofreading" class="slide level2">
 <h2>Proofreading</h2>
-<p>prompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: <code>vow</code>““” response = get_completion(prompt) print(response)</p>
+<p>prompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: <code>mvm</code>““” response = get_completion(prompt) print(response)</p>
 <pre><code>
 
-## Review about a toy 
+## Review about a toy  {.smaller}
 
-::: {#86249af3 .cell output-location='slide' execution_count=13}
+::: {#43ac26df .cell output-location='slide' execution_count=13}
 ``` {.python .cell-code}
 text = f"""
 Got this for my daughter for her birthday cuz she keeps taking \
@@ -856,7 +825,7 @@ to play with it myself before I gave it to my daughter.
 </section>
 <section id="proofreading-1" class="slide level2">
 <h2>Proofreading</h2>
-<div id="40e96383" class="cell" data-execution_count="14">
+<div id="2b63d81b" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>prompt <span class="op">=</span> <span class="ss">f"proofread and correct this review: ```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```"</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a>response <span class="op">=</span> get_completion(prompt)</span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -869,7 +838,7 @@ to play with it myself before I gave it to my daughter.
 </div>
 </div></section><section id="display-differences" class="slide level2">
 <h2>Display differences</h2>
-<div id="dbf72b18" class="cell" data-execution_count="15">
+<div id="00fd34f2" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>diff <span class="op">=</span> Redlines(text, response)</span>
 <span id="cb23-2"><a href="#cb23-2"></a>display(Markdown(diff.output_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -881,7 +850,7 @@ to play with it myself before I gave it to my daughter.
 </div>
 </div></section><section id="make-it-more-compelling" class="slide level2">
 <h2>Make it more compelling</h2>
-<div id="d8f8cb1a" class="cell" data-execution_count="16">
+<div id="19a4b85f" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb24-2"><a href="#cb24-2"></a><span class="ss">proofread and correct this review. Make it more compelling. </span></span>
 <span id="cb24-3"><a href="#cb24-3"></a><span class="ss">Ensure it follows APA style guide and targets an advanced reader. </span></span>
@@ -895,21 +864,16 @@ to play with it myself before I gave it to my daughter.
 </section>
 <section id="make-it-more-compelling-output" class="slide level2 output-location-slide"><h2>Make it more compelling</h2><div class="cell output-location-slide" data-execution_count="16">
 <div class="cell-output cell-output-display">
-<p><strong>Title: A Delightful Gift for All Ages: A Review of the Adorable Panda Plush Toy</strong></p>
-<p><em>Reviewer: [Your Name]</em></p>
-<hr>
-<p>I recently purchased the charming Panda Plush Toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of this endearing creature. This review aims to provide an insightful analysis of this delightful toy, catering to advanced readers who appreciate a comprehensive evaluation.</p>
-<p>First and foremost, the Panda Plush Toy has become an inseparable companion for my daughter, accompanying her on all her adventures. Its irresistibly soft and cuddly texture adds an extra layer of comfort, making it an instant favorite. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice. While this minor flaw does not detract significantly from the overall appeal, it is worth mentioning for the discerning buyer.</p>
-<p>In terms of size, I must admit that I expected a more substantial presence for the price I paid. It is worth exploring alternative options that offer a larger plush toy within the same price range. Nevertheless, the compact size does lend itself well to portability, allowing my daughter to take her beloved panda wherever she goes.</p>
-<p>One aspect that pleasantly surprised me was the prompt delivery of the product. It arrived a day earlier than anticipated, affording me the opportunity to experience the joy of playing with the panda myself before presenting it to my daughter. This unexpected bonus further exemplifies the exceptional service provided by the seller.</p>
-<p>In conclusion, the Panda Plush Toy is an enchanting gift suitable for individuals of all ages, including adults who appreciate the allure of these captivating creatures. Its remarkable softness and undeniable cuteness make it an instant favorite, despite the slight asymmetry in one of the ears. While the size may not meet everyone’s expectations, the convenience of its portability compensates for this minor drawback. With its timely delivery, this delightful toy has exceeded my expectations, leaving me confident in recommending it to others seeking a charming companion.</p>
-<hr>
-<p><strong>Note:</strong></p>
-<p>This review adheres to the APA style guide, providing a comprehensive analysis of the Panda Plush Toy. It targets advanced readers, employing a formal tone and structure.</p>
+<p><strong>Review of a Panda Plush Toy</strong></p>
+<p>I purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her constant companion, accompanying her wherever she goes. Its irresistibly soft and cute appearance is simply delightful.</p>
+<p>However, I did notice a minor flaw in the design. One of the ears is slightly lower than the other, which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable.</p>
+<p>In terms of size, I must admit that I expected it to be a bit larger considering its price. It would be worthwhile to explore other options that offer a larger size for the same price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly.</p>
+<p>To my surprise, the panda plush toy arrived a day earlier than the expected delivery date. This allowed me to indulge in some playtime with it before presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience.</p>
+<p>In conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift.</p>
 </div>
 </div></section><section id="show-differences" class="slide level2">
 <h2>Show differences</h2>
-<div id="fb8f06ee" class="cell" data-execution_count="17">
+<div id="6937675f" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>diff2 <span class="op">=</span> Redlines(text, response)</span>
 <span id="cb25-2"><a href="#cb25-2"></a>display(Markdown(diff2.output_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -920,17 +884,12 @@ to play with it myself before I gave it to my daughter.
 </div>
 </section><section id="show-differences-output" class="slide level2 output-location-slide"><h2>Show differences</h2><div class="cell output-location-slide" data-execution_count="17">
 <div class="cell-output cell-output-display">
-<p><span style="color:red;font-weight:700;text-decoration:line-through;">Got </span><span style="color:green;font-weight:700;"><strong>Title: A Delightful Gift for All Ages: A Review of the Adorable Panda Plush Toy</strong> </span></p>
-<p><span style="color:green;font-weight:700;"><em>Reviewer: [Your Name]</em> </span></p>
-<p><span style="color:green;font-weight:700;">— </span></p>
-<p><span style="color:green;font-weight:700;">I recently purchased the charming Panda Plush Toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of </span>this <span style="color:red;font-weight:700;text-decoration:line-through;">for my daughter for </span><span style="color:green;font-weight:700;">endearing creature. This review aims to provide an insightful analysis of this delightful toy, catering to advanced readers who appreciate a comprehensive evaluation. </span></p>
-<p><span style="color:green;font-weight:700;">First and foremost, the Panda Plush Toy has become an inseparable companion for my daughter, accompanying </span>her <span style="color:red;font-weight:700;text-decoration:line-through;">birthday cuz she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super </span><span style="color:green;font-weight:700;">on all her adventures. Its irresistibly </span>soft and <span style="color:red;font-weight:700;text-decoration:line-through;">cute. One </span><span style="color:green;font-weight:700;">cuddly texture adds an extra layer of comfort, making it an instant favorite. However, it is worth noting that one </span>of the ears <span style="color:green;font-weight:700;">appears to be slightly asymmetrical, which may not have been an intentional design choice. While this minor flaw does not detract significantly from the overall appeal, it </span>is <span style="color:red;font-weight:700;text-decoration:line-through;">a bit lower than the other, and I don’t think </span><span style="color:green;font-weight:700;">worth mentioning for the discerning buyer. </span></p>
-<p><span style="color:green;font-weight:700;">In terms of size, I must admit </span>that <span style="color:red;font-weight:700;text-decoration:line-through;">was designed to be asymmetrical. It’s a bit small for what I paid for it though. I think there might be other </span><span style="color:green;font-weight:700;">I expected a more substantial presence for the price I paid. It is worth exploring alternative </span>options that <span style="color:red;font-weight:700;text-decoration:line-through;">are bigger for </span><span style="color:green;font-weight:700;">offer a larger plush toy within </span>the same <span style="color:red;font-weight:700;text-decoration:line-through;">price. </span><span style="color:green;font-weight:700;">price range. Nevertheless, the compact size does lend itself well to portability, allowing my daughter to take her beloved panda wherever she goes. </span></p>
-<p><span style="color:green;font-weight:700;">One aspect that pleasantly surprised me was the prompt delivery of the product. </span>It arrived a day earlier than <span style="color:red;font-weight:700;text-decoration:line-through;">expected, so I got to play </span><span style="color:green;font-weight:700;">anticipated, affording me the opportunity to experience the joy of playing </span>with <span style="color:red;font-weight:700;text-decoration:line-through;">it </span><span style="color:green;font-weight:700;">the panda </span>myself before <span style="color:red;font-weight:700;text-decoration:line-through;">I gave it to my daughter.</span><span style="color:green;font-weight:700;">presenting it to my daughter. This unexpected bonus further exemplifies the exceptional service provided by the seller. </span></p>
-<p><span style="color:green;font-weight:700;">In conclusion, the Panda Plush Toy is an enchanting gift suitable for individuals of all ages, including adults who appreciate the allure of these captivating creatures. Its remarkable softness and undeniable cuteness make it an instant favorite, despite the slight asymmetry in one of the ears. While the size may not meet everyone’s expectations, the convenience of its portability compensates for this minor drawback. With its timely delivery, this delightful toy has exceeded my expectations, leaving me confident in recommending it to others seeking a charming companion. </span></p>
-<p><span style="color:green;font-weight:700;">— </span></p>
-<p><span style="color:green;font-weight:700;"><strong>Note:</strong> </span></p>
-<p><span style="color:green;font-weight:700;">This review adheres to the APA style guide, providing a comprehensive analysis of the Panda Plush Toy. It targets advanced readers, employing a formal tone and structure.</span></p>
+<p><span style="color:red;font-weight:700;text-decoration:line-through;">Got this for my daughter for </span><span style="color:green;font-weight:700;"><strong>Review of a Panda Plush Toy</strong> </span></p>
+<p><span style="color:green;font-weight:700;">I purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become </span>her <span style="color:red;font-weight:700;text-decoration:line-through;">birthday cuz </span><span style="color:green;font-weight:700;">constant companion, accompanying her wherever </span>she <span style="color:red;font-weight:700;text-decoration:line-through;">keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super </span><span style="color:green;font-weight:700;">goes. Its irresistibly </span>soft and <span style="color:red;font-weight:700;text-decoration:line-through;">cute. </span><span style="color:green;font-weight:700;">cute appearance is simply delightful. </span></p>
+<p><span style="color:green;font-weight:700;">However, I did notice a minor flaw in the design. </span>One of the ears is <span style="color:red;font-weight:700;text-decoration:line-through;">a bit </span><span style="color:green;font-weight:700;">slightly </span>lower than the other, <span style="color:red;font-weight:700;text-decoration:line-through;">and I don’t think </span><span style="color:green;font-weight:700;">which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable. </span></p>
+<p><span style="color:green;font-weight:700;">In terms of size, I must admit </span>that <span style="color:red;font-weight:700;text-decoration:line-through;">was designed </span><span style="color:green;font-weight:700;">I expected it </span>to be <span style="color:red;font-weight:700;text-decoration:line-through;">asymmetrical. It’s </span>a bit <span style="color:red;font-weight:700;text-decoration:line-through;">small for what I paid for it though. I think there might </span><span style="color:green;font-weight:700;">larger considering its price. It would </span>be <span style="color:green;font-weight:700;">worthwhile to explore </span>other options that <span style="color:red;font-weight:700;text-decoration:line-through;">are bigger </span><span style="color:green;font-weight:700;">offer a larger size </span>for the same <span style="color:red;font-weight:700;text-decoration:line-through;">price. It </span><span style="color:green;font-weight:700;">price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly. </span></p>
+<p><span style="color:green;font-weight:700;">To my surprise, the panda plush toy </span>arrived a day earlier than <span style="color:red;font-weight:700;text-decoration:line-through;">expected, so I got to play </span><span style="color:green;font-weight:700;">the expected delivery date. This allowed me to indulge in some playtime </span>with it <span style="color:red;font-weight:700;text-decoration:line-through;">myself </span>before <span style="color:red;font-weight:700;text-decoration:line-through;">I gave it to my daughter.</span><span style="color:green;font-weight:700;">presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience. </span></p>
+<p><span style="color:green;font-weight:700;">In conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift.</span></p>
 </div>
 </div></section></section>
     </div>
@@ -960,14 +919,14 @@ to play with it myself before I gave it to my daughter.
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
-'smaller': true,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,
