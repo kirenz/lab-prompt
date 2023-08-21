@@ -14,5 +14,9 @@ In this tutorial, you'll practice two prompting principles and their related tac
 
 - [🖥️ Guidelines](/slides/guidelines.qmd)
 
+## Iterative prompt development
 
+In this tutorial, you'll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.
+
+- [🖥️ Iterative prompt development](/slides/iterative-prompt-development.qmd)
 
