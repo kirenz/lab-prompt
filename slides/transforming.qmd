@@ -10,7 +10,7 @@ highlight-style: github
 format:
   revealjs: 
     toc: true
-    toc-depth: 2
+    toc-depth: 1
     embed-resources: false
     theme: [dark, ../custom.scss]  
     incremental: false
@@ -19,7 +19,7 @@ format:
     transition-speed: slow
     code-copy: true
     code-line-numbers: true
-    smaller: true
+    smaller: false
     scrollable: true
     slide-number: c
     preview-links: auto
@@ -67,6 +67,7 @@ def get_completion(prompt, model="gpt-3.5-turbo", temperature=0):
 
 - ChatGPT is trained with sources in many languages
 - This gives the model the ability to do translation
+
 
 ## Example 1
 
@@ -256,7 +257,7 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Review about a toy 
+## Review about a toy  {.smaller}
 
 ```{python}
 # | output-location: slide
