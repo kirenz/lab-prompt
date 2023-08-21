@@ -2,7 +2,7 @@
 title: "Requirements"
 ---
 
-To start this lab, you'll need the following environments:
+To start this lab, you'll need:
 
 :::{.callout-important}
 Visit the "[Programming Toolkit-webpage](https://kirenz.github.io/lab-toolkit/)" to learn how to meet all requirements.
