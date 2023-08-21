@@ -29,16 +29,9 @@ format:
     footer: Jan Kirenz
 ---
 
-# Content
-
-In this lesson, you'll practice two prompting principles and their related tactics in order to write effective prompts for large language models.
-
 # Setup
 
-
 ## API key and Python libaries
-
-- Use Anaconda environment "prompt"
 
 ```{python}
 import openai
@@ -57,7 +50,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 - However, you can simply replace `model="gpt-3.5-turbo"`with `model="gpt-4"` in the helper function
 
 
-## Helper function
+## Helper function {.smaller}
 
 - This helper function will make it easier to use prompts and look at the generated outputs:
 
@@ -78,10 +71,9 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
 ```
 
-# Prompting Principle 1 
+# Principle 1: Clear and Specific 
 
-
-**Principle 1: Write clear and specific instructions**
+Prompting Principle 1: Write clear and specific instructions
 
 
 ## Tactic 1: delimiters
@@ -115,7 +107,7 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Tactic 2: Structured output
+## Tactic 2: Structured output {.smaller .scrollable}
 
 - Ask for a structured output
 
@@ -135,7 +127,7 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Tactic 3: Conditions satisfied {.scrollable}
+## Tactic 3: Conditions satisfied 1{.smaller .scrollable}
 
 - Ask the model to check whether conditions are satisfied
 
@@ -172,7 +164,7 @@ print("Completion for Text 1:")
 print(response)
 ```
 
-## Tactic 3: Conditions satisfied {.scrollable}
+## Tactic 3: Conditions satisfied 2 {.smaller .scrollable}
 
 
 ```{python}
@@ -208,7 +200,7 @@ print("Completion for Text 2:")
 print(response)
 ```
 
-#### Tactic 4: "Few-shot" prompting
+## Tactic 4: "Few-shot" prompting {.smaller .scrollable}
 
 ```{python}
 # | output-location: slide
@@ -229,10 +221,9 @@ print(response)
 ```
 
 
+# Principle 2: Time to think
 
-## Prompting Principle 2
-
-**Principle 2: Give the model time to “think”**
+Prompting Principle 2: Give the model time to “think”
 
 ## Tactic 1: Specify steps {.smaller .scrollable}
 
@@ -271,7 +262,7 @@ print("Completion for prompt 1:")
 print(response)
 ```
 
-## Ask for output in a specified format
+## Ask for output in a specified format {.smaller .scrollable}
 
 ```{python}
 # | output-location: slide
@@ -298,7 +289,7 @@ print("\nCompletion for prompt 2:")
 print(response)
 ```
 
-## Tactic 2: Work on own solution
+## Tactic 2: Work on own solution 1 {.smaller .scrollable}
 
 - Instruct the model to work out its own solution before rushing to a conclusion
 
@@ -330,12 +321,10 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Tactic 2: Work on own solution
+## Tactic 2: Work on own solution 2 {.smaller .scrollable}
 
 - Note that the student's solution is actually not correct.
-
-
-#### We can fix this by instructing the model to work out its own solution first.
+- We can fix this by instructing the model to work out its own solution first:
 
 ```{python}
 # | output-location: slide
@@ -404,6 +393,7 @@ print(response)
 - Boie is a real company, the product name is not real.
 
 ```{python}
+# | output-location: slide
 prompt = f"""
 Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
 """
