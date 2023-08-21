@@ -607,5 +607,250 @@
     "title": "Inferring",
     "section": "Give answer as list with 0 and 1",
     "text": "Give answer as list with 0 and 1\n\n[1, 0, 0, 1, 1]"
+  },
+  {
+    "objectID": "slides/transforming.html",
+    "href": "slides/transforming.html",
+    "title": "Transforming",
+    "section": "",
+    "text": "In this notebook, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion."
+  },
+  {
+    "objectID": "slides/transforming.html#setup",
+    "href": "slides/transforming.html#setup",
+    "title": "Transforming",
+    "section": "Setup",
+    "text": "Setup\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv()) # read local .env file\n\nopenai.api_key  = os.getenv('OPENAI_API_KEY')\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0): \n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature, \n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "slides/transforming.html#translation",
+    "href": "slides/transforming.html#translation",
+    "title": "Transforming",
+    "section": "Translation",
+    "text": "Translation\nChatGPT is trained with sources in many languages. This gives the model the ability to do translation. Here are some examples of how to use this capability.\n\nprompt = f\"\"\"\nTranslate the following English text to Spanish: \\ \n```Hi, I would like to order a blender```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\nHola, me gustaría ordenar una licuadora.\n\n\n\nprompt = f\"\"\"\nTell me which language this is: \n```Combien coûte le lampadaire?```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\nThis language is French.\n\n\n\nprompt = f\"\"\"\nTranslate the following  text to French and Spanish\nand English pirate: \\\n```I want to order a basketball```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\nFrench: ```Je veux commander un ballon de basket```\nSpanish: ```Quiero ordenar una pelota de baloncesto```\nEnglish: ```I want to order a basketball```\n\n\n\nprompt = f\"\"\"\nTranslate the following text to Spanish in both the \\\nformal and informal forms: \n'Would you like to order a pillow?'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\nFormal: ¿Le gustaría ordenar una almohada?\nInformal: ¿Te gustaría ordenar una almohada?\n\n\n\nUniversal Translator\nImagine you are in charge of IT at a large multinational e-commerce company. Users are messaging you with IT issues in all their native languages. Your staff is from all over the world and speaks only their native languages. You need a universal translator!\n\nuser_messages = [\n  \"La performance du système est plus lente que d'habitude.\",  # System performance is slower than normal         \n  \"Mi monitor tiene píxeles que no se iluminan.\",              # My monitor has pixels that are not lighting\n  \"Il mio mouse non funziona\",                                 # My mouse is not working\n  \"Mój klawisz Ctrl jest zepsuty\",                             # My keyboard has a broken control key\n  \"我的屏幕在闪烁\"                                               # My screen is flashing\n] \n\n\nfor issue in user_messages:\n    prompt = f\"Tell me what language this is: ```{issue}```\"\n    lang = get_completion(prompt)\n    print(f\"Original message ({lang}): {issue}\")\n\n    prompt = f\"\"\"\n    Translate the following  text to English \\\n    and Korean: ```{issue}```\n    \"\"\"\n    response = get_completion(prompt)\n    print(response, \"\\n\")\n\nOriginal message (The language is French.): La performance du système est plus lente que d'habitude.\nThe performance of the system is slower than usual.\n\n시스템의 성능이 평소보다 느립니다. \n\nOriginal message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan.\nEnglish: \"My monitor has pixels that do not light up.\"\n\nKorean: \"내 모니터에는 밝아지지 않는 픽셀이 있습니다.\" \n\nOriginal message (The language is Italian.): Il mio mouse non funziona\nEnglish: \"My mouse is not working.\"\nKorean: \"내 마우스가 작동하지 않습니다.\" \n\nOriginal message (The language is Polish.): Mój klawisz Ctrl jest zepsuty\nEnglish: \"My Ctrl key is broken\"\nKorean: \"내 Ctrl 키가 고장 났어요\" \n\nOriginal message (The language is Chinese.): 我的屏幕在闪烁\nEnglish: My screen is flickering.\nKorean: 내 화면이 깜박거립니다."
+  },
+  {
+    "objectID": "slides/transforming.html#try-it-yourself",
+    "href": "slides/transforming.html#try-it-yourself",
+    "title": "Transforming",
+    "section": "Try it yourself!",
+    "text": "Try it yourself!\nTry some translations on your own!"
+  },
+  {
+    "objectID": "slides/transforming.html#tone-transformation",
+    "href": "slides/transforming.html#tone-transformation",
+    "title": "Transforming",
+    "section": "Tone Transformation",
+    "text": "Tone Transformation\nWriting can vary based on the intended audience. ChatGPT can produce different tones.\n\nprompt = f\"\"\"\nTranslate the following from slang to a business letter: \n'Dude, This is Joe, check out this spec on this standing lamp.'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\nDear Sir/Madam,\n\nI hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp. \n\nI kindly request that you take a moment to review the attached document, as it provides detailed information about the features and specifications of the aforementioned standing lamp. \n\nThank you for your time and consideration. I look forward to discussing this further with you.\n\nYours sincerely,\nJoe"
+  },
+  {
+    "objectID": "slides/transforming.html#format-conversion",
+    "href": "slides/transforming.html#format-conversion",
+    "title": "Transforming",
+    "section": "Format Conversion",
+    "text": "Format Conversion\nChatGPT can translate between formats. The prompt should describe the input and output formats.\n\ndata_json = { \"restaurant employees\" :[ \n    {\"name\":\"Shyam\", \"email\":\"shyamjaiswal@gmail.com\"},\n    {\"name\":\"Bob\", \"email\":\"bob32@gmail.com\"},\n    {\"name\":\"Jai\", \"email\":\"jai87@gmail.com\"}\n]}\n\nprompt = f\"\"\"\nTranslate the following python dictionary from JSON to an HTML \\\ntable with column headers and title: {data_json}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;style&gt;\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd, th {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr:nth-child(even) {\n  background-color: #dddddd;\n}\n&lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n\n&lt;h2&gt;Restaurant Employees&lt;/h2&gt;\n\n&lt;table&gt;\n  &lt;tr&gt;\n    &lt;th&gt;Name&lt;/th&gt;\n    &lt;th&gt;Email&lt;/th&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Shyam&lt;/td&gt;\n    &lt;td&gt;shyamjaiswal@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Bob&lt;/td&gt;\n    &lt;td&gt;bob32@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Jai&lt;/td&gt;\n    &lt;td&gt;jai87@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;\n\n&lt;/body&gt;\n&lt;/html&gt;\n\n\n\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\ndisplay(HTML(response))\n\n\n\n\n\n\n\n\nRestaurant Employees\n\n\n\n\n\nName\nEmail\n\n\nShyam\nshyamjaiswal@gmail.com\n\n\nBob\nbob32@gmail.com\n\n\nJai\njai87@gmail.com"
+  },
+  {
+    "objectID": "slides/transforming.html#spellcheckgrammar-check.",
+    "href": "slides/transforming.html#spellcheckgrammar-check.",
+    "title": "Transforming",
+    "section": "Spellcheck/Grammar check.",
+    "text": "Spellcheck/Grammar check.\nHere are some examples of common grammar and spelling problems and the LLM’s response.\nTo signal to the LLM that you want it to proofread your text, you instruct the model to ‘proofread’ or ‘proofread and correct’.\n\ntext = [ \n  \"The girl with the black and white puppies have a ball.\",  # The girl has a ball.\n  \"Yolanda has her notebook.\", # ok\n  \"Its going to be a long day. Does the car need it’s oil changed?\",  # Homonyms\n  \"Their goes my freedom. There going to bring they’re suitcases.\",  # Homonyms\n  \"Your going to need you’re notebook.\",  # Homonyms\n  \"That medicine effects my ability to sleep. Have you heard of the butterfly affect?\", # Homonyms\n  \"This phrase is to cherck chatGPT for speling abilitty\"  # spelling\n]\nfor t in text:\n    prompt = f\"\"\"Proofread and correct the following text\n    and rewrite the corrected version. If you don't find\n    and errors, just say \"No errors found\". Don't use \n    any punctuation around the text:\n    ```{t}```\"\"\"\n    response = get_completion(prompt)\n    print(response)\n\nThe girl with the black and white puppies has a ball.\nNo errors found.\nNo errors found.\nThere goes my freedom. They're going to bring their suitcases.\nYou're going to need your notebook.\nThat medicine affects my ability to sleep. Have you heard of the butterfly effect?\nThis phrase is to check chatGPT for spelling ability.\n\n\n\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\nprompt = f\"proofread and correct this review: ```{text}```\"\nresponse = get_completion(prompt)\nprint(response)\n\nGot this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it's super soft and cute. However, one of the ears is a bit lower than the other, and I don't think that was designed to be asymmetrical. Additionally, it's a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter.\n\n\n\nfrom redlines import Redlines\n\ndiff = Redlines(text,response)\ndisplay(Markdown(diff.output_markdown))\n\nGot this for my daughter for her birthday cuz because she keeps taking mine from my room. room. Yes, adults also like pandas too. too. She takes it everywhere with her, and it’s super soft and cute. One cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. It’s Additionally, it’s a bit small for what I paid for it though. it. I think believe there might be other options that are bigger for the same price. It price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter.\n\n\n\nprompt = f\"\"\"\nproofread and correct this review. Make it more compelling. \nEnsure it follows APA style guide and targets an advanced reader. \nOutput in markdown format.\nText: ```{text}```\n\"\"\"\nresponse = get_completion(prompt)\ndisplay(Markdown(response))\n\nReview of a Panda Plush Toy\nI purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her constant companion, accompanying her wherever she goes. Its irresistibly soft and cute appearance is truly captivating.\nHowever, upon closer inspection, I noticed a slight asymmetry in the placement of the ears. While this may not have been intentional, it adds a unique touch to the toy’s design. Nevertheless, considering the price I paid, I expected a slightly larger size. It is worth noting that there may be alternative options available at the same price point that offer a more substantial presence.\nOn a positive note, the delivery of the panda plush toy exceeded my expectations. It arrived a day earlier than anticipated, allowing me the opportunity to indulge in some playtime before presenting it to my daughter. This unexpected delight further enhanced my overall satisfaction with the purchase.\nIn conclusion, despite a minor flaw and a slightly smaller size than expected, this panda plush toy has won the hearts of both my daughter and myself. Its undeniable charm and exceptional softness make it a delightful addition to any collection. For those seeking a larger option, it may be worth exploring alternative choices within the same price range. Nevertheless, the prompt delivery and the joy it has brought to our lives make this purchase well worth it.\n\n\n\ndiff2 = Redlines(text,response)\ndisplay(Markdown(diff2.output_markdown))\n\nGot this Review of a Panda Plush Toy \nI purchased this adorable panda plush toy as a birthday gift for my daughter daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her birthday cuz constant companion, accompanying her wherever she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super goes. Its irresistibly soft and cute. One of the ears cute appearance is a bit lower than the other, and I don’t think truly captivating. \nHowever, upon closer inspection, I noticed a slight asymmetry in the placement of the ears. While this may not have been intentional, it adds a unique touch to the toy’s design. Nevertheless, considering the price I paid, I expected a slightly larger size. It is worth noting that was designed to there may be asymmetrical. It’s a bit small for what I paid for it though. I think there might be other alternative options available at the same price point that are bigger for the same price. offer a more substantial presence. \nOn a positive note, the delivery of the panda plush toy exceeded my expectations. It arrived a day earlier than anticipated, allowing me the opportunity to indulge in some playtime before presenting it to my daughter. This unexpected delight further enhanced my overall satisfaction with the purchase. \nIn conclusion, despite a minor flaw and a slightly smaller size than expected, so I got to play with it myself before I gave it to my daughter.this panda plush toy has won the hearts of both my daughter and myself. Its undeniable charm and exceptional softness make it a delightful addition to any collection. For those seeking a larger option, it may be worth exploring alternative choices within the same price range. Nevertheless, the prompt delivery and the joy it has brought to our lives make this purchase well worth it."
+  },
+  {
+    "objectID": "slides/transforming.html#try-it-yourself-1",
+    "href": "slides/transforming.html#try-it-yourself-1",
+    "title": "Transforming",
+    "section": "Try it yourself!",
+    "text": "Try it yourself!\nTry changing the instructions to form your own review.\nThanks to the following sites:\nhttps://writingprompts.com/bad-grammar-examples/"
+  },
+  {
+    "objectID": "slides/transforming.html#api-key-and-python-libaries",
+    "href": "slides/transforming.html#api-key-and-python-libaries",
+    "title": "Transforming",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom redlines import Redlines\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "slides/transforming.html#helper-function",
+    "href": "slides/transforming.html#helper-function",
+    "title": "Transforming",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "slides/transforming.html#example-1",
+    "href": "slides/transforming.html#example-1",
+    "title": "Transforming",
+    "section": "Example 1",
+    "text": "Example 1\n\nprompt = f\"\"\"\nTranslate the following English text to Spanish: \\ \n```Hi, I would like to order a blender```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nHola, me gustaría ordenar una licuadora."
+  },
+  {
+    "objectID": "slides/transforming.html#example-2",
+    "href": "slides/transforming.html#example-2",
+    "title": "Transforming",
+    "section": "Example 2",
+    "text": "Example 2\n\nprompt = f\"\"\"\nTell me which language this is: \n```Combien coûte le lampadaire?```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nThis language is French."
+  },
+  {
+    "objectID": "slides/transforming.html#example-3",
+    "href": "slides/transforming.html#example-3",
+    "title": "Transforming",
+    "section": "Example 3",
+    "text": "Example 3\n\nprompt = f\"\"\"\nTranslate the following  text to French and Spanish\nand English pirate: \\\n```I want to order a basketball```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nFrench: ```Je veux commander un ballon de basket```\nSpanish: ```Quiero ordenar una pelota de baloncesto```\nEnglish: ```I want to order a basketball```"
+  },
+  {
+    "objectID": "slides/transforming.html#example-4",
+    "href": "slides/transforming.html#example-4",
+    "title": "Transforming",
+    "section": "Example 4",
+    "text": "Example 4\n\nprompt = f\"\"\"\nTranslate the following text to Spanish in both the \\\nformal and informal forms: \n'Would you like to order a pillow?'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nFormal: ¿Le gustaría ordenar una almohada?\nInformal: ¿Te gustaría ordenar una almohada?"
+  },
+  {
+    "objectID": "slides/transforming.html#context",
+    "href": "slides/transforming.html#context",
+    "title": "Transforming",
+    "section": "Context",
+    "text": "Context\n\nImagine you are in charge of IT at a large multinational e-commerce company\nUsers are messaging you with IT issues in all their native languages\nYour staff is from all over the world and speaks only their native languages\nYou need a universal translator!"
+  },
+  {
+    "objectID": "slides/transforming.html#user-messages",
+    "href": "slides/transforming.html#user-messages",
+    "title": "Transforming",
+    "section": "User messages",
+    "text": "User messages\n\nuser_messages = [\n    \"La performance du système est plus lente que d'habitude.\",\n    \"Mi monitor tiene píxeles que no se iluminan.\",\n    \"Il mio mouse non funziona\",\n    \"Mój klawisz Ctrl jest zepsuty\",\n    \"我的屏幕在闪烁\"\n]"
+  },
+  {
+    "objectID": "slides/transforming.html#translations",
+    "href": "slides/transforming.html#translations",
+    "title": "Transforming",
+    "section": "Translations",
+    "text": "Translations\n\nfor issue in user_messages:\n    prompt = f\"Tell me what language this is: ```{issue}```\"\n    lang = get_completion(prompt)\n    print(f\"Original message ({lang}): {issue}\")\n\n    prompt = f\"\"\"\n    Translate the following  text to English \\\n    and German: ```{issue}```\n    \"\"\"\n    response = get_completion(prompt)\n    print(response, \"\\n\")"
+  },
+  {
+    "objectID": "slides/transforming.html#translations-output",
+    "href": "slides/transforming.html#translations-output",
+    "title": "Transforming",
+    "section": "Translations",
+    "text": "Translations\n\nOriginal message (The language is French.): La performance du système est plus lente que d'habitude.\nThe performance of the system is slower than usual.\n\nDie Leistung des Systems ist langsamer als gewöhnlich. \n\nOriginal message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan.\nEnglish: \"My monitor has pixels that do not light up.\"\n\nGerman: \"Mein Monitor hat Pixel, die nicht aufleuchten.\" \n\nOriginal message (The language is Italian.): Il mio mouse non funziona\nEnglish: My mouse is not working.\nGerman: Meine Maus funktioniert nicht. \n\nOriginal message (The language is Polish.): Mój klawisz Ctrl jest zepsuty\nEnglish: \"My Ctrl key is broken\"\nGerman: \"Meine Strg-Taste ist kaputt\" \n\nOriginal message (The language is Chinese.): 我的屏幕在闪烁\nEnglish: My screen is flickering.\nGerman: Mein Bildschirm flackert."
+  },
+  {
+    "objectID": "slides/transforming.html#user-messages-with-english-translation",
+    "href": "slides/transforming.html#user-messages-with-english-translation",
+    "title": "Transforming",
+    "section": "User messages with English translation",
+    "text": "User messages with English translation\n\nSystem performance is slower than normal: “La performance du système est plus lente que d’habitude.”,\nMy monitor has pixels that are not lighting: “Mi monitor tiene píxeles que no se iluminan.”,\nMy mouse is not working: “Il mio mouse non funziona”,\nMy keyboard has a broken control key: “Mój klawisz Ctrl jest zepsuty”,\nMy screen is flashing: ‚“我的屏幕在闪烁”"
+  },
+  {
+    "objectID": "slides/transforming.html#from-slang-to-business-tone",
+    "href": "slides/transforming.html#from-slang-to-business-tone",
+    "title": "Transforming",
+    "section": "From slang to business tone",
+    "text": "From slang to business tone\n\nWriting can vary based on the intended audience.\nChatGPT can produce different tones.\n\n\nprompt = f\"\"\"\nTranslate the following from slang to a business letter: \n'Dude, This is Joe, check out this spec on this standing lamp.'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#from-slang-to-business-tone-output",
+    "href": "slides/transforming.html#from-slang-to-business-tone-output",
+    "title": "Transforming",
+    "section": "From slang to business tone",
+    "text": "From slang to business tone\n\nDear Sir/Madam,\n\nI hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp. \n\nI kindly request that you take a moment to review the attached document, as it provides detailed information about the features and specifications of the aforementioned standing lamp. \n\nThank you for your time and consideration. I look forward to discussing this further with you.\n\nYours sincerely,\nJoe"
+  },
+  {
+    "objectID": "slides/transforming.html#from-dictionary-to-html",
+    "href": "slides/transforming.html#from-dictionary-to-html",
+    "title": "Transforming",
+    "section": "From dictionary to HTML",
+    "text": "From dictionary to HTML\n\ndata_json = {\"restaurant employees\": [\n    {\"name\": \"Shyam\", \"email\": \"shyamjaiswal@gmail.com\"},\n    {\"name\": \"Bob\", \"email\": \"bob32@gmail.com\"},\n    {\"name\": \"Jai\", \"email\": \"jai87@gmail.com\"}\n]}\n\nprompt = f\"\"\"\nTranslate the following python dictionary from JSON to an HTML \\\ntable with column headers and title: {data_json}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#from-dictionary-to-html-output",
+    "href": "slides/transforming.html#from-dictionary-to-html-output",
+    "title": "Transforming",
+    "section": "From dictionary to HTML",
+    "text": "From dictionary to HTML\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;style&gt;\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd, th {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr:nth-child(even) {\n  background-color: #dddddd;\n}\n&lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n\n&lt;h2&gt;Restaurant Employees&lt;/h2&gt;\n\n&lt;table&gt;\n  &lt;tr&gt;\n    &lt;th&gt;Name&lt;/th&gt;\n    &lt;th&gt;Email&lt;/th&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Shyam&lt;/td&gt;\n    &lt;td&gt;shyamjaiswal@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Bob&lt;/td&gt;\n    &lt;td&gt;bob32@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Jai&lt;/td&gt;\n    &lt;td&gt;jai87@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;\n\n&lt;/body&gt;\n&lt;/html&gt;"
+  },
+  {
+    "objectID": "slides/transforming.html#html-output",
+    "href": "slides/transforming.html#html-output",
+    "title": "Transforming",
+    "section": "HTML output",
+    "text": "HTML output\n\ndisplay(HTML(response))"
+  },
+  {
+    "objectID": "slides/transforming.html#html-output-output",
+    "href": "slides/transforming.html#html-output-output",
+    "title": "Transforming",
+    "section": "HTML output",
+    "text": "HTML output\n\n\n\n\n\n\n\n\nRestaurant Employees\n\n\n\n\n\nName\nEmail\n\n\nShyam\nshyamjaiswal@gmail.com\n\n\nBob\nbob32@gmail.com\n\n\nJai\njai87@gmail.com"
+  },
+  {
+    "objectID": "slides/transforming.html#multiple-text-examples",
+    "href": "slides/transforming.html#multiple-text-examples",
+    "title": "Transforming",
+    "section": "Multiple text examples",
+    "text": "Multiple text examples\n\nText examples are taken from Writing Prompts\n\n\ntext = [\n    \"The girl with the black and white puppies have a ball.\",\n    \"Yolanda has her notebook.\",\n    \"Its going to be a long day. Does the car need it’s oil changed?\",\n    \"Their goes my freedom. There going to bring they’re suitcases.\",\n    \"Your going to need you’re notebook.\",\n    \"That medicine effects my ability to sleep. Have you heard of the butterfly affect?\",\n    \"This phrase is to cherck chatGPT for speling abilitty\"\n]"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading",
+    "href": "slides/transforming.html#proofreading",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: pgw““” response = get_completion(prompt) print(response)\n\n\n## Review about a toy \n\n::: {#86249af3 .cell output-location='slide' execution_count=13}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading-1",
+    "href": "slides/transforming.html#proofreading-1",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\n\nprompt = f\"proofread and correct this review: ```{text}```\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading-1-output",
+    "href": "slides/transforming.html#proofreading-1-output",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\n\nGot this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it's super soft and cute. However, one of the ears is a bit lower than the other, and I don't think that was designed to be asymmetrical. Additionally, it's a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
+  },
+  {
+    "objectID": "slides/transforming.html#display-differences",
+    "href": "slides/transforming.html#display-differences",
+    "title": "Transforming",
+    "section": "Display differences",
+    "text": "Display differences\n\ndiff = Redlines(text, response)\ndisplay(Markdown(diff.output_markdown))"
+  },
+  {
+    "objectID": "slides/transforming.html#display-differences-output",
+    "href": "slides/transforming.html#display-differences-output",
+    "title": "Transforming",
+    "section": "Display differences",
+    "text": "Display differences\n\nGot this for my daughter for her birthday cuz because she keeps taking mine from my room. room. Yes, adults also like pandas too. too. She takes it everywhere with her, and it’s super soft and cute. One cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. It’s Additionally, it’s a bit small for what I paid for it though. it. I think believe there might be other options that are bigger for the same price. It price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
+  },
+  {
+    "objectID": "slides/transforming.html#make-it-more-compelling",
+    "href": "slides/transforming.html#make-it-more-compelling",
+    "title": "Transforming",
+    "section": "Make it more compelling",
+    "text": "Make it more compelling\n\nprompt = f\"\"\"\nproofread and correct this review. Make it more compelling. \nEnsure it follows APA style guide and targets an advanced reader. \nOutput in markdown format.\nText: ```{text}```\n\"\"\"\nresponse = get_completion(prompt)\ndisplay(Markdown(response))"
+  },
+  {
+    "objectID": "slides/transforming.html#make-it-more-compelling-output",
+    "href": "slides/transforming.html#make-it-more-compelling-output",
+    "title": "Transforming",
+    "section": "Make it more compelling",
+    "text": "Make it more compelling\n\nTitle: A Delightful Gift for All Ages: A Review of the Adorable Panda Plush Toy\nReviewer: [Your Name]\n\nI recently purchased the charming Panda Plush Toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of this endearing creature. This review aims to provide an insightful analysis of this delightful toy, catering to advanced readers who appreciate a comprehensive evaluation.\nFirst and foremost, the Panda Plush Toy has become an inseparable companion for my daughter, accompanying her on all her adventures. Its irresistibly soft and cuddly texture adds an extra layer of comfort, making it an instant favorite. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice. While this minor flaw does not detract significantly from the overall appeal, it is worth mentioning for the discerning buyer.\nIn terms of size, I must admit that I expected a more substantial presence for the price I paid. It is worth exploring alternative options that offer a larger plush toy within the same price range. Nevertheless, the compact size does lend itself well to portability, allowing my daughter to take her beloved panda wherever she goes.\nOne aspect that pleasantly surprised me was the prompt delivery of the product. It arrived a day earlier than anticipated, affording me the opportunity to experience the joy of playing with the panda myself before presenting it to my daughter. This unexpected bonus further exemplifies the exceptional service provided by the seller.\nIn conclusion, the Panda Plush Toy is an enchanting gift suitable for individuals of all ages, including adults who appreciate the allure of these captivating creatures. Its remarkable softness and undeniable cuteness make it an instant favorite, despite the slight asymmetry in one of the ears. While the size may not meet everyone’s expectations, the convenience of its portability compensates for this minor drawback. With its timely delivery, this delightful toy has exceeded my expectations, leaving me confident in recommending it to others seeking a charming companion.\n\nNote:\nThis review adheres to the APA style guide, providing a comprehensive analysis of the Panda Plush Toy. It targets advanced readers, employing a formal tone and structure."
+  },
+  {
+    "objectID": "slides/transforming.html#show-differences",
+    "href": "slides/transforming.html#show-differences",
+    "title": "Transforming",
+    "section": "Show differences",
+    "text": "Show differences\n\ndiff2 = Redlines(text, response)\ndisplay(Markdown(diff2.output_markdown))\n\n\n\n\nJan Kirenz"
+  },
+  {
+    "objectID": "slides/transforming.html#show-differences-output",
+    "href": "slides/transforming.html#show-differences-output",
+    "title": "Transforming",
+    "section": "Show differences",
+    "text": "Show differences\n\nGot Title: A Delightful Gift for All Ages: A Review of the Adorable Panda Plush Toy \nReviewer: [Your Name] \n— \nI recently purchased the charming Panda Plush Toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of this for my daughter for endearing creature. This review aims to provide an insightful analysis of this delightful toy, catering to advanced readers who appreciate a comprehensive evaluation. \nFirst and foremost, the Panda Plush Toy has become an inseparable companion for my daughter, accompanying her birthday cuz she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super on all her adventures. Its irresistibly soft and cute. One cuddly texture adds an extra layer of comfort, making it an instant favorite. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice. While this minor flaw does not detract significantly from the overall appeal, it is a bit lower than the other, and I don’t think worth mentioning for the discerning buyer. \nIn terms of size, I must admit that was designed to be asymmetrical. It’s a bit small for what I paid for it though. I think there might be other I expected a more substantial presence for the price I paid. It is worth exploring alternative options that are bigger for offer a larger plush toy within the same price. price range. Nevertheless, the compact size does lend itself well to portability, allowing my daughter to take her beloved panda wherever she goes. \nOne aspect that pleasantly surprised me was the prompt delivery of the product. It arrived a day earlier than expected, so I got to play anticipated, affording me the opportunity to experience the joy of playing with it the panda myself before I gave it to my daughter.presenting it to my daughter. This unexpected bonus further exemplifies the exceptional service provided by the seller. \nIn conclusion, the Panda Plush Toy is an enchanting gift suitable for individuals of all ages, including adults who appreciate the allure of these captivating creatures. Its remarkable softness and undeniable cuteness make it an instant favorite, despite the slight asymmetry in one of the ears. While the size may not meet everyone’s expectations, the convenience of its portability compensates for this minor drawback. With its timely delivery, this delightful toy has exceeded my expectations, leaving me confident in recommending it to others seeking a charming companion. \n— \nNote: \nThis review adheres to the APA style guide, providing a comprehensive analysis of the Panda Plush Toy. It targets advanced readers, employing a formal tone and structure."
   }
 ]
