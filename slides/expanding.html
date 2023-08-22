@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Jan Kirenz">
-  <title>Prompt - Transforming</title>
+  <title>Prompt - Expanding</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -388,17 +388,14 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Transforming</h1>
-  <p class="subtitle">Prompt Engineering 5</p>
+  <h1 class="title">Expanding</h1>
+  <p class="subtitle">Prompt Engineering 6</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -413,11 +410,7 @@ Jan Kirenz
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/setup" id="/toc-setup">Setup</a></li>
-<li><a href="#/translation" id="/toc-translation">Translation</a></li>
-<li><a href="#/universal-translator" id="/toc-universal-translator">Universal Translator</a></li>
-<li><a href="#/tone-transformation" id="/toc-tone-transformation">Tone Transformation</a></li>
-<li><a href="#/format-conversion" id="/toc-format-conversion">Format Conversion</a></li>
-<li><a href="#/spellcheck-grammar-check" id="/toc-spellcheck-grammar-check">Spellcheck &amp; Grammar check</a></li>
+<li><a href="#/customized-reply" id="/toc-customized-reply">Customized Reply</a></li>
 </ul>
 </nav>
 </section>
@@ -426,470 +419,162 @@ Jan Kirenz
 <h1>Setup</h1>
 
 </section>
-<section id="api-key-and-python-libaries" class="slide level2">
-<h2>API key and Python libaries</h2>
-<div id="f08f1664" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> redlines <span class="im">import</span> Redlines</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, Markdown, Latex, HTML, JSON</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> openai</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> os</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv, find_dotenv</span>
-<span id="cb1-7"><a href="#cb1-7"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())  <span class="co"># read local .env file</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="python" class="slide level2">
+<h2>Python</h2>
+<div id="9e9466a5" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> openai</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv, find_dotenv</span>
+<span id="cb1-5"><a href="#cb1-5"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())  <span class="co"># read local .env file</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="helper-function" class="slide level2">
 <h2>Helper function</h2>
-<div id="0b84e285" class="cell" data-execution_count="2">
+<div id="2a0820d9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>, temperature<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
 <span id="cb2-4"><a href="#cb2-4"></a>        model<span class="op">=</span>model,</span>
 <span id="cb2-5"><a href="#cb2-5"></a>        messages<span class="op">=</span>messages,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>        temperature<span class="op">=</span>temperature,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>        temperature<span class="op">=</span>temperature,  <span class="co"># this is the degree of randomness of the model's output</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a>    )</span>
 <span id="cb2-8"><a href="#cb2-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
-<section id="translation" class="title-slide slide level1 center">
-<h1>Translation</h1>
-<ul>
-<li>ChatGPT is trained with sources in many languages</li>
-<li>This gives the model the ability to do translation</li>
-</ul>
+<section id="customized-reply" class="title-slide slide level1 center">
+<h1>Customized Reply</h1>
+<p>Customize the automated reply to a customer email</p>
 </section>
-<section id="example-1" class="slide level2">
-<h2>Example 1</h2>
-<div id="7559ba39" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="ss">Translate the following English text to Spanish: \ </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ss">```Hi, I would like to order a blender```</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="ss">"""</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="sentiment-and-text" class="slide level2">
+<h2>Sentiment and text</h2>
+<div id="f7f1e848" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>sentiment <span class="op">=</span> <span class="st">"negative"</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># review for a blender</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>review <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="ss">So, they still had the 17 piece system on seasonal </span><span class="ch">\</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="ss">sale for around $49 in the month of November, about </span><span class="ch">\</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="ss">half off, but for some reason (call it price gouging) </span><span class="ch">\</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="ss">around the second week of December the prices all went </span><span class="ch">\</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="ss">up to about anywhere from between $70-$89 for the same </span><span class="ch">\</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="ss">system. And the 11 piece system went up around $10 or </span><span class="ch">\</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="ss">so in price also from the earlier sale price of $29. </span><span class="ch">\</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="ss">So it looks okay, but if you look at the base, the part </span><span class="ch">\</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="ss">where the blade locks into place doesn’t look as good </span><span class="ch">\</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="ss">as in previous editions from a few years ago, but I </span><span class="ch">\</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="ss">plan to be very gentle with it (example, I crush </span><span class="ch">\</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="ss">very hard items like beans, ice, rice, etc. in the \ </span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="ss">blender first then pulverize them in the serving size </span><span class="ch">\</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="ss">I want in the blender then switch to the whipping </span><span class="ch">\</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="ss">blade for a finer flour, and use the cross cutting blade </span><span class="ch">\</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="ss">first when making smoothies, then use the flat blade </span><span class="ch">\</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="ss">if I need them finer/less pulpy). Special tip when making </span><span class="ch">\</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="ss">smoothies, finely cut and freeze the fruits and </span><span class="ch">\</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="ss">vegetables (if using spinach-lightly stew soften the \ </span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="ss">spinach then freeze until ready for use-and if making </span><span class="ch">\</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="ss">sorbet, use a small to medium sized food processor) \ </span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="ss">that you plan to use that way you can avoid adding so </span><span class="ch">\</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="ss">much ice if at all-when making your smoothie. </span><span class="ch">\</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="ss">After about a year, the motor was making a funny noise. </span><span class="ch">\</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="ss">I called customer service but the warranty expired </span><span class="ch">\</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="ss">already, so I had to buy another one. FYI: The overall </span><span class="ch">\</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="ss">quality has gone done in these types of products, so </span><span class="ch">\</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="ss">they are kind of counting on brand recognition and </span><span class="ch">\</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="ss">consumer loyalty to maintain sales. Got it in about </span><span class="ch">\</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="ss">two days.</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="3">
+</section>
+<section id="prompt" class="slide level2">
+<h2>Prompt</h2>
+<div id="d18d61e7" class="cell" height="302" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ss">You are a customer service AI assistant.</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="ss">Your task is to send an email reply to a valued customer.</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ss">Given the customer email delimited by ```, </span><span class="ch">\</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="ss">Generate a reply to thank the customer for their review.</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="ss">If the sentiment is positive or neutral, thank them for </span><span class="ch">\</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="ss">their review.</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="ss">If the sentiment is negative, apologize and suggest that </span><span class="ch">\</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="ss">they can reach out to customer service. </span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="ss">Make sure to use specific details from the review.</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="ss">Write in a concise and professional tone.</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="ss">Sign the email as `AI customer agent`.</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="ss">Customer review: ```</span><span class="sc">{</span>review<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="ss">Review sentiment: </span><span class="sc">{</span>sentiment<span class="sc">}</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="ss">"""</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="prompt-output" class="slide level2 output-location-slide"><h2>Prompt</h2><div class="cell output-location-slide" height="302" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
-<pre><code>Hola, me gustaría ordenar una licuadora.</code></pre>
+<pre><code>Dear Valued Customer,
+
+Thank you for taking the time to share your review with us. We appreciate your feedback and apologize for any inconvenience you may have experienced.
+
+We are sorry to hear about the price increase you noticed in December. We strive to provide competitive pricing for our products, and we understand your frustration. If you have any further concerns regarding pricing, we recommend reaching out to our customer service team who will be happy to assist you.
+
+We also appreciate your feedback regarding the base of the system. We continuously work to improve the quality of our products, and your comments will be taken into consideration for future enhancements.
+
+Regarding the motor issue you encountered, we apologize for any inconvenience caused. Our customer service team is available to assist you with any technical difficulties you may encounter, even if the warranty has expired. Please do not hesitate to reach out to them for further assistance.
+
+Thank you once again for your review. We value your loyalty and appreciate your support. If you have any further questions or concerns, please feel free to contact our customer service team.
+
+Best regards,
+
+AI customer agent</code></pre>
 </div>
-</div>
-</section>
-<section id="example-2" class="slide level2">
-<h2>Example 2</h2>
-<div id="3c4a3b7f" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="ss">Tell me which language this is: </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="ss">```Combien coûte le lampadaire?```</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="ss">"""</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment" data-execution_count="4">
-<div class="cell-output cell-output-stdout">
-<pre><code>This language is French.</code></pre>
-</div>
-</div>
-</section>
-<section id="example-3" class="slide level2">
-<h2>Example 3</h2>
-<div id="8fe20304" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="ss">Translate the following  text to French and Spanish</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="ss">and English pirate: </span><span class="ch">\</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="ss">```I want to order a basketball```</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="ss">"""</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment" data-execution_count="5">
-<div class="cell-output cell-output-stdout">
-<pre><code>French: ```Je veux commander un ballon de basket```
-Spanish: ```Quiero ordenar una pelota de baloncesto```
-English: ```I want to order a basketball```</code></pre>
-</div>
-</div>
-</section>
-<section id="example-4" class="slide level2">
-<h2>Example 4</h2>
-<div id="866f1271" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ss">Translate the following text to Spanish in both the </span><span class="ch">\</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="ss">formal and informal forms: </span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="ss">'Would you like to order a pillow?'</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="ss">"""</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment" data-execution_count="6">
-<div class="cell-output cell-output-stdout">
-<pre><code>Formal: ¿Le gustaría ordenar una almohada?
-Informal: ¿Te gustaría ordenar una almohada?</code></pre>
-</div>
-</div>
-</section></section>
-<section>
-<section id="universal-translator" class="title-slide slide level1 center">
-<h1>Universal Translator</h1>
-
-</section>
-<section id="context" class="slide level2">
-<h2>Context</h2>
-<ul>
-<li>Imagine you are in charge of IT at a large multinational e-commerce company</li>
-<li>Users are messaging you with IT issues in all their native languages</li>
-<li>Your staff is from all over the world and speaks only their native languages</li>
-<li>You need a universal translator!</li>
-</ul>
-</section>
-<section id="user-messages" class="slide level2">
-<h2>User messages</h2>
-<div id="293d6b00" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>user_messages <span class="op">=</span> [</span>
-<span id="cb11-2"><a href="#cb11-2"></a>    <span class="st">"La performance du système est plus lente que d'habitude."</span>,</span>
-<span id="cb11-3"><a href="#cb11-3"></a>    <span class="st">"Mi monitor tiene píxeles que no se iluminan."</span>,</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="st">"Il mio mouse non funziona"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5"></a>    <span class="st">"Mój klawisz Ctrl jest zepsuty"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6"></a>    <span class="st">"我的屏幕在闪烁"</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="translations" class="slide level2">
-<h2>Translations</h2>
-<div id="2c2bb83f" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="cf">for</span> issue <span class="kw">in</span> user_messages:</span>
-<span id="cb12-2"><a href="#cb12-2"></a>    prompt <span class="op">=</span> <span class="ss">f"Tell me what language this is: ```</span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">```"</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>    lang <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb12-4"><a href="#cb12-4"></a>    <span class="bu">print</span>(<span class="ss">f"Original message (</span><span class="sc">{</span>lang<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a>    prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="ss">    Translate the following  text to English </span><span class="ch">\</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="ss">    and German: ```</span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="ss">    """</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>    response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb12-11"><a href="#cb12-11"></a>    <span class="bu">print</span>(response, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="translations-output" class="slide level2 output-location-slide"><h2>Translations</h2><div class="cell output-location-slide" data-execution_count="8">
-<div class="cell-output cell-output-stdout">
-<pre><code>Original message (The language is French.): La performance du système est plus lente que d'habitude.
-The performance of the system is slower than usual.
-
-Die Leistung des Systems ist langsamer als gewöhnlich. 
-
-Original message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan.
-English: "My monitor has pixels that do not light up."
-
-German: "Mein Monitor hat Pixel, die nicht aufleuchten." 
-
-Original message (The language is Italian.): Il mio mouse non funziona
-English: My mouse is not working.
-German: Meine Maus funktioniert nicht. 
-
-Original message (The language is Polish.): Mój klawisz Ctrl jest zepsuty
-English: "My Ctrl key is broken"
-German: "Meine Strg-Taste ist kaputt" 
-
-Original message (The language is Chinese.): 我的屏幕在闪烁
-English: My screen is flickering.
-German: Mein Bildschirm flackert. 
-</code></pre>
-</div>
-</div></section><section id="user-messages-with-english-translation" class="slide level2">
-<h2>User messages with English translation</h2>
-<ul>
-<li>System performance is slower than normal: “La performance du système est plus lente que d’habitude.”,</li>
-<li>My monitor has pixels that are not lighting: “Mi monitor tiene píxeles que no se iluminan.”,</li>
-<li>My mouse is not working: “Il mio mouse non funziona”,</li>
-<li>My keyboard has a broken control key: “Mój klawisz Ctrl jest zepsuty”,</li>
-<li>My screen is flashing: ‚“我的屏幕在闪烁”</li>
-</ul>
-</section></section>
-<section>
-<section id="tone-transformation" class="title-slide slide level1 center">
-<h1>Tone Transformation</h1>
-
-</section>
-<section id="from-slang-to-business-tone" class="slide level2">
-<h2>From slang to business tone</h2>
-<ul>
-<li>Writing can vary based on the intended audience.</li>
-<li>ChatGPT can produce different tones.</li>
-</ul>
-<div id="53cd3506" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="ss">Translate the following from slang to a business letter: </span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="ss">'Dude, This is Joe, check out this spec on this standing lamp.'</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="ss">"""</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section><section id="from-slang-to-business-tone-output" class="slide level2 output-location-slide"><h2>From slang to business tone</h2><div class="cell output-location-slide" data-execution_count="9">
-<div class="cell-output cell-output-stdout">
-<pre><code>Dear Sir/Madam,
-
-I hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp. 
-
-I kindly request that you take a moment to review the attached document, as it provides detailed information about the features and qualities of the aforementioned standing lamp. 
-
-Thank you for your time and consideration. I look forward to discussing this matter further with you.
-
-Yours sincerely,
-Joe</code></pre>
-</div>
-</div></section></section>
-<section>
-<section id="format-conversion" class="title-slide slide level1 center">
-<h1>Format Conversion</h1>
-<ul>
-<li>ChatGPT can translate between formats.</li>
-<li>The prompt should describe the input and output formats.</li>
-</ul>
-</section>
-<section id="from-dictionary-to-html" class="slide level2">
-<h2>From dictionary to HTML</h2>
-<div id="01fb4696" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>data_json <span class="op">=</span> {<span class="st">"restaurant employees"</span>: [</span>
-<span id="cb16-2"><a href="#cb16-2"></a>    {<span class="st">"name"</span>: <span class="st">"Shyam"</span>, <span class="st">"email"</span>: <span class="st">"shyamjaiswal@gmail.com"</span>},</span>
-<span id="cb16-3"><a href="#cb16-3"></a>    {<span class="st">"name"</span>: <span class="st">"Bob"</span>, <span class="st">"email"</span>: <span class="st">"bob32@gmail.com"</span>},</span>
-<span id="cb16-4"><a href="#cb16-4"></a>    {<span class="st">"name"</span>: <span class="st">"Jai"</span>, <span class="st">"email"</span>: <span class="st">"jai87@gmail.com"</span>}</span>
-<span id="cb16-5"><a href="#cb16-5"></a>]}</span>
-<span id="cb16-6"><a href="#cb16-6"></a></span>
-<span id="cb16-7"><a href="#cb16-7"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="ss">Translate the following python dictionary from JSON to an HTML </span><span class="ch">\</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="ss">table with column headers and title: </span><span class="sc">{</span>data_json<span class="sc">}</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="ss">"""</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb16-12"><a href="#cb16-12"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="from-dictionary-to-html-output" class="slide level2 output-location-slide"><h2>From dictionary to HTML</h2><div class="cell output-location-slide" data-execution_count="10">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;style&gt;
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h2&gt;Restaurant Employees&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;Name&lt;/th&gt;
-    &lt;th&gt;Email&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Shyam&lt;/td&gt;
-    &lt;td&gt;shyamjaiswal@gmail.com&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Bob&lt;/td&gt;
-    &lt;td&gt;bob32@gmail.com&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Jai&lt;/td&gt;
-    &lt;td&gt;jai87@gmail.com&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div></section><section id="html-output" class="slide level2">
-<h2>HTML output</h2>
-<div id="7e78ceb3" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>display(HTML(response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section><section id="html-output-output" class="slide level2 output-location-slide"><h2>HTML output</h2><div class="cell output-location-slide" data-execution_count="11">
-<div class="cell-output cell-output-display">
-
-
-
-
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-
-
-
-<h2>Restaurant Employees</h2>
-
-
-<table data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Name</td>
-<td data-quarto-table-cell-role="th">Email</td>
-</tr>
-<tr class="even">
-<td>Shyam</td>
-<td>shyamjaiswal@gmail.com</td>
-</tr>
-<tr class="odd">
-<td>Bob</td>
-<td>bob32@gmail.com</td>
-</tr>
-<tr class="even">
-<td>Jai</td>
-<td>jai87@gmail.com</td>
-</tr>
-</tbody>
-</table>
-
-
-
-
-</div>
-</div></section></section>
-<section>
-<section id="spellcheck-grammar-check" class="title-slide slide level1 center">
-<h1>Spellcheck &amp; Grammar check</h1>
-<ul>
-<li>To signal to the LLM that you want it to proofread your text, you instruct the model to ‘proofread’ or ‘proofread and correct’</li>
-</ul>
-</section>
-<section id="multiple-text-examples" class="slide level2">
-<h2>Multiple text examples</h2>
-<ul>
-<li>Text examples are taken from <a href="https://writingprompts.com/bad-grammar-examples/">Writing Prompts</a></li>
-</ul>
-<div id="d52ad057" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>text <span class="op">=</span> [</span>
-<span id="cb19-2"><a href="#cb19-2"></a>    <span class="st">"The girl with the black and white puppies have a ball."</span>,</span>
-<span id="cb19-3"><a href="#cb19-3"></a>    <span class="st">"Yolanda has her notebook."</span>,</span>
-<span id="cb19-4"><a href="#cb19-4"></a>    <span class="st">"Its going to be a long day. Does the car need it’s oil changed?"</span>,</span>
-<span id="cb19-5"><a href="#cb19-5"></a>    <span class="st">"Their goes my freedom. There going to bring they’re suitcases."</span>,</span>
-<span id="cb19-6"><a href="#cb19-6"></a>    <span class="st">"Your going to need you’re notebook."</span>,</span>
-<span id="cb19-7"><a href="#cb19-7"></a>    <span class="st">"That medicine effects my ability to sleep. Have you heard of the butterfly affect?"</span>,</span>
-<span id="cb19-8"><a href="#cb19-8"></a>    <span class="st">"This phrase is to cherck chatGPT for speling abilitty"</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="proofreading" class="slide level2">
-<h2>Proofreading</h2>
-<p>prompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: <code>ixw</code>““” response = get_completion(prompt) print(response)</p>
-<pre><code>
-
-## Review about a toy  {.smaller}
-
-::: {#43ac26df .cell output-location='slide' execution_count=13}
-``` {.python .cell-code}
-text = f"""
-Got this for my daughter for her birthday cuz she keeps taking \
-mine from my room.  Yes, adults also like pandas too.  She takes \
-it everywhere with her, and it's super soft and cute.  One of the \
-ears is a bit lower than the other, and I don't think that was \
-designed to be asymmetrical. It's a bit small for what I paid for it \
-though. I think there might be other options that are bigger for \
-the same price.  It arrived a day earlier than expected, so I got \
-to play with it myself before I gave it to my daughter.
-"""</code></pre>
-<p>:::</p>
-</section>
-<section id="proofreading-1" class="slide level2">
-<h2>Proofreading</h2>
-<div id="2b63d81b" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>prompt <span class="op">=</span> <span class="ss">f"proofread and correct this review: ```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```"</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="proofreading-1-output" class="slide level2 output-location-slide"><h2>Proofreading</h2><div class="cell output-location-slide" data-execution_count="14">
-<div class="cell-output cell-output-stdout">
-<pre><code>Got this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it's super soft and cute. However, one of the ears is a bit lower than the other, and I don't think that was designed to be asymmetrical. Additionally, it's a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter.</code></pre>
-</div>
-</div></section><section id="display-differences" class="slide level2">
-<h2>Display differences</h2>
-<div id="00fd34f2" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>diff <span class="op">=</span> Redlines(text, response)</span>
-<span id="cb23-2"><a href="#cb23-2"></a>display(Markdown(diff.output_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="display-differences-output" class="slide level2 output-location-slide"><h2>Display differences</h2><div class="cell output-location-slide" data-execution_count="15">
-<div class="cell-output cell-output-display">
-<p>Got this for my daughter for her birthday <span style="color:red;font-weight:700;text-decoration:line-through;">cuz </span><span style="color:green;font-weight:700;">because </span>she keeps taking mine from my <span style="color:red;font-weight:700;text-decoration:line-through;">room. </span><span style="color:green;font-weight:700;">room. </span>Yes, adults also like pandas <span style="color:red;font-weight:700;text-decoration:line-through;">too. </span><span style="color:green;font-weight:700;">too. </span>She takes it everywhere with her, and it’s super soft and <span style="color:red;font-weight:700;text-decoration:line-through;">cute. One </span><span style="color:green;font-weight:700;">cute. However, one </span>of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. <span style="color:red;font-weight:700;text-decoration:line-through;">It’s </span><span style="color:green;font-weight:700;">Additionally, it’s </span>a bit small for what I paid for <span style="color:red;font-weight:700;text-decoration:line-through;">it though. </span><span style="color:green;font-weight:700;">it. </span>I <span style="color:red;font-weight:700;text-decoration:line-through;">think </span><span style="color:green;font-weight:700;">believe </span>there might be other options that are bigger for the same <span style="color:red;font-weight:700;text-decoration:line-through;">price. It </span><span style="color:green;font-weight:700;">price. On the positive side, it </span>arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter.</p>
-</div>
-</div></section><section id="make-it-more-compelling" class="slide level2">
-<h2>Make it more compelling</h2>
-<div id="19a4b85f" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="ss">proofread and correct this review. Make it more compelling. </span></span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="ss">Ensure it follows APA style guide and targets an advanced reader. </span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="ss">Output in markdown format.</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="ss">Text: ```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="ss">"""</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb24-8"><a href="#cb24-8"></a>display(Markdown(response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="make-it-more-compelling-output" class="slide level2 output-location-slide"><h2>Make it more compelling</h2><div class="cell output-location-slide" data-execution_count="16">
-<div class="cell-output cell-output-display">
-<p><strong>Review of a Panda Plush Toy</strong></p>
-<p>I purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her constant companion, accompanying her wherever she goes. Its irresistibly soft and cute appearance is simply delightful.</p>
-<p>However, I did notice a minor flaw in the design. One of the ears is slightly lower than the other, which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable.</p>
-<p>In terms of size, I must admit that I expected it to be a bit larger considering its price. It would be worthwhile to explore other options that offer a larger size for the same price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly.</p>
-<p>To my surprise, the panda plush toy arrived a day earlier than the expected delivery date. This allowed me to indulge in some playtime with it before presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience.</p>
-<p>In conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift.</p>
-</div>
-</div></section><section id="show-differences" class="slide level2">
-<h2>Show differences</h2>
-<div id="6937675f" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>diff2 <span class="op">=</span> Redlines(text, response)</span>
-<span id="cb25-2"><a href="#cb25-2"></a>display(Markdown(diff2.output_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></section><section id="prompt-with-different-temperature" class="slide level2">
+<h2>Prompt with different temperature</h2>
+<div id="1e256bf4" class="cell" height="302" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ss">You are a customer service AI assistant.</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ss">Your task is to send an email reply to a valued customer.</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ss">Given the customer email delimited by ```, </span><span class="ch">\</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ss">Generate a reply to thank the customer for their review.</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ss">If the sentiment is positive or neutral, thank them for </span><span class="ch">\</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="ss">their review.</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="ss">If the sentiment is negative, apologize and suggest that </span><span class="ch">\</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="ss">they can reach out to customer service. </span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="ss">Make sure to use specific details from the review.</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="ss">Write in a concise and professional tone.</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="ss">Sign the email as `AI customer agent`.</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="ss">Customer review: ```</span><span class="sc">{</span>review<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="ss">Review sentiment: </span><span class="sc">{</span>sentiment<span class="sc">}</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="ss">"""</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>response <span class="op">=</span> get_completion(prompt, temperature<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
 <div class="footer footer-default">
 <p>Jan Kirenz</p>
 </div>
-</section><section id="show-differences-output" class="slide level2 output-location-slide"><h2>Show differences</h2><div class="cell output-location-slide" data-execution_count="17">
-<div class="cell-output cell-output-display">
-<p><span style="color:red;font-weight:700;text-decoration:line-through;">Got this for my daughter for </span><span style="color:green;font-weight:700;"><strong>Review of a Panda Plush Toy</strong> </span></p>
-<p><span style="color:green;font-weight:700;">I purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become </span>her <span style="color:red;font-weight:700;text-decoration:line-through;">birthday cuz </span><span style="color:green;font-weight:700;">constant companion, accompanying her wherever </span>she <span style="color:red;font-weight:700;text-decoration:line-through;">keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super </span><span style="color:green;font-weight:700;">goes. Its irresistibly </span>soft and <span style="color:red;font-weight:700;text-decoration:line-through;">cute. </span><span style="color:green;font-weight:700;">cute appearance is simply delightful. </span></p>
-<p><span style="color:green;font-weight:700;">However, I did notice a minor flaw in the design. </span>One of the ears is <span style="color:red;font-weight:700;text-decoration:line-through;">a bit </span><span style="color:green;font-weight:700;">slightly </span>lower than the other, <span style="color:red;font-weight:700;text-decoration:line-through;">and I don’t think </span><span style="color:green;font-weight:700;">which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable. </span></p>
-<p><span style="color:green;font-weight:700;">In terms of size, I must admit </span>that <span style="color:red;font-weight:700;text-decoration:line-through;">was designed </span><span style="color:green;font-weight:700;">I expected it </span>to be <span style="color:red;font-weight:700;text-decoration:line-through;">asymmetrical. It’s </span>a bit <span style="color:red;font-weight:700;text-decoration:line-through;">small for what I paid for it though. I think there might </span><span style="color:green;font-weight:700;">larger considering its price. It would </span>be <span style="color:green;font-weight:700;">worthwhile to explore </span>other options that <span style="color:red;font-weight:700;text-decoration:line-through;">are bigger </span><span style="color:green;font-weight:700;">offer a larger size </span>for the same <span style="color:red;font-weight:700;text-decoration:line-through;">price. It </span><span style="color:green;font-weight:700;">price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly. </span></p>
-<p><span style="color:green;font-weight:700;">To my surprise, the panda plush toy </span>arrived a day earlier than <span style="color:red;font-weight:700;text-decoration:line-through;">expected, so I got to play </span><span style="color:green;font-weight:700;">the expected delivery date. This allowed me to indulge in some playtime </span>with it <span style="color:red;font-weight:700;text-decoration:line-through;">myself </span>before <span style="color:red;font-weight:700;text-decoration:line-through;">I gave it to my daughter.</span><span style="color:green;font-weight:700;">presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience. </span></p>
-<p><span style="color:green;font-weight:700;">In conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift.</span></p>
+</section><section id="prompt-with-different-temperature-output" class="slide level2 output-location-slide"><h2>Prompt with different temperature</h2><div class="cell output-location-slide" height="302" data-execution_count="5">
+<div class="cell-output cell-output-stdout">
+<pre><code>Dear Valued Customer,
+
+Thank you for taking the time to share your feedback with us. We appreciate your honesty and your loyalty to our brand.
+
+We sincerely apologize for any inconvenience you experienced regarding the pricing changes. We understand how frustrating it can be when prices fluctuate unexpectedly. We strive to offer competitive prices to our customers, and we apologize if this was not reflected in your recent purchase.
+
+Regarding the issue with the blade lock on the base, we apologize for any dissatisfaction caused. We appreciate your gentle usage and taking the time to share your observations. We value your feedback as it helps us identify areas for improvement.
+
+We are sorry to hear that you encountered a problem with the motor after a year of use. We understand your frustration, and we apologize for any inconvenience caused. If you have any further concerns or need assistance, please do not hesitate to reach out to our customer service team. They will be more than happy to assist you.
+
+Once again, we appreciate your feedback and your loyalty to our brand. We value your satisfaction and will continue working hard to improve our products and services.
+
+Thank you for choosing our brand.
+
+Best regards,
+
+AI customer agent</code></pre>
 </div>
 </div></section></section>
     </div>
@@ -919,14 +604,14 @@ to play with it myself before I gave it to my daughter.
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
-'smaller': false,
+'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
-'smaller': false,
+'smaller': true,
  
         // Display controls in the bottom right corner
         controls: false,

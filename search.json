@@ -7,361 +7,270 @@
     "text": "To start this lab, you’ll need:\n\n\n\n\n\n\nImportant\n\n\n\nVisit the “Programming Toolkit-webpage” to learn how to meet all requirements.\n\n\n\nPython: Anaconda, Anaconda Environment prompt and Visual Studio Code\nEnvironment: A folder on your machine called prompt, an OpenAI-API key and an environment file with your OpenAI-API keyqu"
   },
   {
-    "objectID": "slides/summarizing.html#setup-1",
-    "href": "slides/summarizing.html#setup-1",
-    "title": "Iterative Prompt Development",
-    "section": "Setup",
-    "text": "Setup\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+    "objectID": "slides/inferring.html#api-key-and-python-libaries",
+    "href": "slides/inferring.html#api-key-and-python-libaries",
+    "title": "Inferring",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
   },
   {
-    "objectID": "slides/summarizing.html#setup-1-output",
-    "href": "slides/summarizing.html#setup-1-output",
-    "title": "Iterative Prompt Development",
-    "section": "Setup",
-    "text": "Setup"
+    "objectID": "slides/inferring.html#helper-function",
+    "href": "slides/inferring.html#helper-function",
+    "title": "Inferring",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
   },
   {
-    "objectID": "slides/summarizing.html#gpt-3.5-turbo-vs-gpt-4",
-    "href": "slides/summarizing.html#gpt-3.5-turbo-vs-gpt-4",
+    "objectID": "slides/inferring.html#text",
+    "href": "slides/inferring.html#text",
+    "title": "Inferring",
+    "section": "Text",
+    "text": "Text\n\nlamp_review = \"\"\"\nNeeded a nice lamp for my bedroom, and this one had \\\nadditional storage and not too high of a price point. \\\nGot it fast.  The string to our lamp broke during the \\\ntransit and the company happily sent over a new one. \\\nCame within a few days as well. It was easy to put \\\ntogether.  I had a missing part, so I contacted their \\\nsupport and they very quickly got me the missing piece! \\\nLumina seems to me to be a great company that cares \\\nabout their customers and products!!\n\"\"\""
+  },
+  {
+    "objectID": "slides/inferring.html#infer-sentiment",
+    "href": "slides/inferring.html#infer-sentiment",
+    "title": "Inferring",
+    "section": "Infer sentiment",
+    "text": "Infer sentiment\n\nprompt = f\"\"\"\nWhat is the sentiment of the following product review, \nwhich is delimited with triple backticks?\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/inferring.html#infer-sentiment-output",
+    "href": "slides/inferring.html#infer-sentiment-output",
+    "title": "Inferring",
+    "section": "Infer sentiment",
+    "text": "Infer sentiment\n\nThe sentiment of the product review is positive."
+  },
+  {
+    "objectID": "slides/inferring.html#infer-sentiment-positivenegative",
+    "href": "slides/inferring.html#infer-sentiment-positivenegative",
+    "title": "Inferring",
+    "section": "Infer sentiment (positive/negative)",
+    "text": "Infer sentiment (positive/negative)\n\nprompt = f\"\"\"\nWhat is the sentiment of the following product review, \nwhich is delimited with triple backticks?\n\nGive your answer as a single word, either \"positive\" \\\nor \"negative\".\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/inferring.html#infer-sentiment-positivenegative-output",
+    "href": "slides/inferring.html#infer-sentiment-positivenegative-output",
+    "title": "Inferring",
+    "section": "Infer sentiment (positive/negative)",
+    "text": "Infer sentiment (positive/negative)\n\npositive"
+  },
+  {
+    "objectID": "slides/inferring.html#identify-types-of-emotions",
+    "href": "slides/inferring.html#identify-types-of-emotions",
+    "title": "Inferring",
+    "section": "Identify types of emotions",
+    "text": "Identify types of emotions\n\nprompt = f\"\"\"\nIdentify a list of emotions that the writer of the \\\nfollowing review is expressing. Include no more than \\\nfive items in the list. Format your answer as a list of \\\nlower-case words separated by commas.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/inferring.html#identify-types-of-emotions-output",
+    "href": "slides/inferring.html#identify-types-of-emotions-output",
+    "title": "Inferring",
+    "section": "Identify types of emotions",
+    "text": "Identify types of emotions\n\nsatisfied, grateful, impressed, pleased, happy"
+  },
+  {
+    "objectID": "slides/inferring.html#identify-anger",
+    "href": "slides/inferring.html#identify-anger",
+    "title": "Inferring",
+    "section": "Identify anger",
+    "text": "Identify anger\n\nprompt = f\"\"\"\nIs the writer of the following review expressing anger?\\\nThe review is delimited with triple backticks. \\\nGive your answer as either yes or no.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/inferring.html#identify-anger-output",
+    "href": "slides/inferring.html#identify-anger-output",
+    "title": "Inferring",
+    "section": "Identify anger",
+    "text": "Identify anger\n\nNo"
+  },
+  {
+    "objectID": "slides/inferring.html#extract-product-and-company-name",
+    "href": "slides/inferring.html#extract-product-and-company-name",
+    "title": "Inferring",
+    "section": "Extract product and company name",
+    "text": "Extract product and company name\n\nprompt = f\"\"\"\nIdentify the following items from the review text: \n- Item purchased by reviewer\n- Company that made the item\n\nThe review is delimited with triple backticks. \\\nFormat your response as a JSON object with \\\n\"Item\" and \"Brand\" as the keys. \nIf the information isn't present, use \"unknown\" \\\nas the value.\nMake your response as short as possible.\n  \nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/inferring.html#extract-product-and-company-name-output",
+    "href": "slides/inferring.html#extract-product-and-company-name-output",
+    "title": "Inferring",
+    "section": "Extract product and company name",
+    "text": "Extract product and company name\n\n{\n  \"Item\": \"lamp\",\n  \"Brand\": \"Lumina\"\n}"
+  },
+  {
+    "objectID": "slides/inferring.html#doing-multiple-tasks-at-once",
+    "href": "slides/inferring.html#doing-multiple-tasks-at-once",
+    "title": "Inferring",
+    "section": "Doing multiple tasks at once",
+    "text": "Doing multiple tasks at once\n\nprompt = f\"\"\"\nIdentify the following items from the review text: \n- Sentiment (positive or negative)\n- Is the reviewer expressing anger? (true or false)\n- Item purchased by reviewer\n- Company that made the item\n\nThe review is delimited with triple backticks. \\\nFormat your response as a JSON object with \\\n\"Sentiment\", \"Anger\", \"Item\" and \"Brand\" as the keys.\nIf the information isn't present, use \"unknown\" \\\nas the value.\nMake your response as short as possible.\nFormat the Anger value as a boolean.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/inferring.html#doing-multiple-tasks-at-once-output",
+    "href": "slides/inferring.html#doing-multiple-tasks-at-once-output",
+    "title": "Inferring",
+    "section": "Doing multiple tasks at once",
+    "text": "Doing multiple tasks at once\n\n{\n  \"Sentiment\": \"positive\",\n  \"Anger\": false,\n  \"Item\": \"lamp\",\n  \"Brand\": \"Lumina\"\n}"
+  },
+  {
+    "objectID": "slides/inferring.html#text-1",
+    "href": "slides/inferring.html#text-1",
+    "title": "Inferring",
+    "section": "Text",
+    "text": "Text\n\nstory = \"\"\"\nIn a recent survey conducted by the government, \npublic sector employees were asked to rate their level \nof satisfaction with the department they work at. \nThe results revealed that NASA was the most popular \ndepartment with a satisfaction rating of 95%.\n\nOne NASA employee, John Smith, commented on the findings, \nstating, \"I'm not surprised that NASA came out on top. \nIt's a great place to work with amazing people and \nincredible opportunities. I'm proud to be a part of \nsuch an innovative organization.\"\n\nThe results were also welcomed by NASA's management team, \nwith Director Tom Johnson stating, \"We are thrilled to \nhear that our employees are satisfied with their work at NASA. \nWe have a talented and dedicated team who work tirelessly \nto achieve our goals, and it's fantastic to see that their \nhard work is paying off.\"\n\nThe survey also revealed that the \nSocial Security Administration had the lowest satisfaction \nrating, with only 45% of employees indicating they were \nsatisfied with their job. The government has pledged to \naddress the concerns raised by employees in the survey and \nwork towards improving job satisfaction across all departments.\n\"\"\""
+  },
+  {
+    "objectID": "slides/inferring.html#infer-5-topics",
+    "href": "slides/inferring.html#infer-5-topics",
+    "title": "Inferring",
+    "section": "Infer 5 topics",
+    "text": "Infer 5 topics\n\nprompt = f\"\"\"\nDetermine five topics that are being discussed in the \\\nfollowing text, which is delimited by triple backticks.\n\nMake each item one or two words long. \n\nFormat your response as a list of items separated by commas.\n\nText sample: '''{story}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/inferring.html#infer-5-topics-output",
+    "href": "slides/inferring.html#infer-5-topics-output",
+    "title": "Inferring",
+    "section": "Infer 5 topics",
+    "text": "Infer 5 topics\n\n1. Government survey\n2. Department satisfaction rating\n3. NASA\n4. Social Security Administration\n5. Job satisfaction improvement"
+  },
+  {
+    "objectID": "slides/inferring.html#split-responses",
+    "href": "slides/inferring.html#split-responses",
+    "title": "Inferring",
+    "section": "Split responses",
+    "text": "Split responses\n\nresponse.split(sep=',')\n\n['1. Government survey\\n2. Department satisfaction rating\\n3. NASA\\n4. Social Security Administration\\n5. Job satisfaction improvement']"
+  },
+  {
+    "objectID": "slides/inferring.html#topic-list",
+    "href": "slides/inferring.html#topic-list",
+    "title": "Inferring",
+    "section": "Topic list",
+    "text": "Topic list\n\ntopic_list = [\n    \"nasa\", \"local government\", \"engineering\",\n    \"employee satisfaction\", \"federal government\"\n]"
+  },
+  {
+    "objectID": "slides/inferring.html#give-answer-as-list-with-0-and-1",
+    "href": "slides/inferring.html#give-answer-as-list-with-0-and-1",
+    "title": "Inferring",
+    "section": "Give answer as list with 0 and 1",
+    "text": "Give answer as list with 0 and 1\n\nprompt = f\"\"\"\nDetermine whether each item in the following list of \\\ntopics is a topic in the text below, which\nis delimited with triple backticks.\n\nGive your answer as list with 0 or 1 for each topic.\\\n\nList of topics: {\", \".join(topic_list)}\n\nText sample: '''{story}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\n\nJan Kirenz"
+  },
+  {
+    "objectID": "slides/inferring.html#give-answer-as-list-with-0-and-1-output",
+    "href": "slides/inferring.html#give-answer-as-list-with-0-and-1-output",
+    "title": "Inferring",
+    "section": "Give answer as list with 0 and 1",
+    "text": "Give answer as list with 0 and 1\n\n[1, 0, 0, 1, 1]"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#api-key-and-python-libaries",
+    "href": "slides/iterative-prompt-development.html#api-key-and-python-libaries",
+    "title": "Iterative Prompt Development",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom IPython.display import display, HTML\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "slides/iterative-prompt-development.html#gpt-3.5-turbo-vs-gpt-4",
+    "href": "slides/iterative-prompt-development.html#gpt-3.5-turbo-vs-gpt-4",
     "title": "Iterative Prompt Development",
     "section": "GPT-3.5 Turbo vs GPT-4",
     "text": "GPT-3.5 Turbo vs GPT-4\n\nFor cost efficiency reasons, we will use OpenAI’s gpt-3.5-turbo model and the chat completions endpoint.\nHowever, you can simply replace model=\"gpt-3.5-turbo\"with model=\"gpt-4\" in the helper function"
   },
   {
-    "objectID": "slides/summarizing.html#helper-function",
-    "href": "slides/summarizing.html#helper-function",
+    "objectID": "slides/iterative-prompt-development.html#helper-function",
+    "href": "slides/iterative-prompt-development.html#helper-function",
     "title": "Iterative Prompt Development",
     "section": "Helper function",
-    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
+    "text": "Helper function\n\nThis helper function will make it easier to use prompts and look at the generated outputs:\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
   },
   {
-    "objectID": "slides/summarizing.html#text-to-summarize",
-    "href": "slides/summarizing.html#text-to-summarize",
+    "objectID": "slides/iterative-prompt-development.html#marketing-product-description",
+    "href": "slides/iterative-prompt-development.html#marketing-product-description",
     "title": "Iterative Prompt Development",
-    "section": "Text to summarize",
-    "text": "Text to summarize\n\nprod_review = \"\"\"\nGot this panda plush toy for my daughter's birthday, \\\nwho loves it and takes it everywhere. It's soft and \\ \nsuper cute, and its face has a friendly look. It's \\ \na bit small for what I paid though. I think there \\ \nmight be other options that are bigger for the \\ \nsame price. It arrived a day earlier than expected, \\ \nso I got to play with it myself before I gave it \\ \nto her.\n\"\"\""
+    "section": "Marketing product description",
+    "text": "Marketing product description\n\nGenerate a marketing product description from a product fact sheet\n\n\n\nfact_sheet_chair = \"\"\"\nOVERVIEW\n- Part of a beautiful family of mid-century inspired office furniture, \nincluding filing cabinets, desks, bookcases, meeting tables, and more.\n- Several options of shell color and base finishes.\n- Available with plastic back and front upholstery (SWC-100) \nor full upholstery (SWC-110) in 10 fabric and 6 leather options.\n- Base finish options are: stainless steel, matte black, \ngloss white, or chrome.\n- Chair is available with or without armrests.\n- Suitable for home or business settings.\n- Qualified for contract use.\n\nCONSTRUCTION\n- 5-wheel plastic coated aluminum base.\n- Pneumatic chair adjust for easy raise/lower action.\n\nDIMENSIONS\n- WIDTH 53 CM | 20.87”\n- DEPTH 51 CM | 20.08”\n- HEIGHT 80 CM | 31.50”\n- SEAT HEIGHT 44 CM | 17.32”\n- SEAT DEPTH 41 CM | 16.14”\n\nOPTIONS\n- Soft or hard-floor caster options.\n- Two choices of seat foam densities: \n medium (1.8 lb/ft3) or high (2.8 lb/ft3)\n- Armless or 8 position PU armrests \n\nMATERIALS\nSHELL BASE GLIDER\n- Cast Aluminum with modified nylon PA6/PA66 coating.\n- Shell thickness: 10 mm.\nSEAT\n- HD36 foam\n\nCOUNTRY OF ORIGIN\n- Italy\n\"\"\""
   },
   {
-    "objectID": "slides/summarizing.html#summarization-1",
-    "href": "slides/summarizing.html#summarization-1",
+    "objectID": "slides/iterative-prompt-development.html#initial-prompt",
+    "href": "slides/iterative-prompt-development.html#initial-prompt",
     "title": "Iterative Prompt Development",
-    "section": "Summarization",
-    "text": "Summarization\n\nSummarize with a word/sentence/character limit\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "section": "Initial prompt",
+    "text": "Initial prompt\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/summarizing.html#summarization-1-output",
-    "href": "slides/summarizing.html#summarization-1-output",
+    "objectID": "slides/iterative-prompt-development.html#initial-prompt-output",
+    "href": "slides/iterative-prompt-development.html#initial-prompt-output",
     "title": "Iterative Prompt Development",
-    "section": "Summarization",
-    "text": "Summarization\n\nThis panda plush toy is loved by the reviewer's daughter, but they feel it is a bit small for the price."
+    "section": "Initial prompt",
+    "text": "Initial prompt\n\nIntroducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. This chair is part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, all designed with a timeless mid-century aesthetic.\n\nOne of the standout features of this chair is the variety of customization options available. You can choose from several shell colors and base finishes to perfectly match your existing decor. The chair is available with either plastic back and front upholstery or full upholstery in a range of 10 fabric and 6 leather options, allowing you to create a look that is uniquely yours.\n\nThe chair is also available with or without armrests, giving you the flexibility to choose the option that best suits your needs. The base finish options include stainless steel, matte black, gloss white, or chrome, ensuring that you can find the perfect match for your space.\n\nIn terms of construction, this chair is built to last. It features a 5-wheel plastic coated aluminum base, providing stability and mobility. The pneumatic chair adjust allows for easy raise and lower action, ensuring optimal comfort throughout the day.\n\nWhen it comes to dimensions, this chair is designed with both style and comfort in mind. With a width of 53 cm (20.87\"), depth of 51 cm (20.08\"), and height of 80 cm (31.50\"), it offers ample space without overwhelming your space. The seat height is 44 cm (17.32\") and the seat depth is 41 cm (16.14\"), providing a comfortable seating experience for extended periods.\n\nWe understand that every space is unique, which is why we offer a range of options to further customize your chair. You can choose between soft or hard-floor caster options, ensuring that your chair glides smoothly on any surface. Additionally, you have the choice between two seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3), allowing you to select the level of support that suits your preferences. The chair is also available with armless design or 8 position PU armrests, providing additional comfort and versatility.\n\nWhen it comes to materials, this chair is crafted with the utmost attention to quality. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The shell thickness is 10 mm, providing a sturdy and reliable structure. The seat is made of HD36 foam, offering a comfortable and supportive seating experience.\n\nFinally, this chair is proudly made in Italy, known for its exceptional craftsmanship and attention to detail. With its timeless design and superior construction, this chair is not only a stylish addition to any space but also a reliable and functional piece of furniture.\n\nUpgrade your office or home with our mid-century inspired office chair and experience the perfect blend of style, comfort, and functionality."
   },
   {
-    "objectID": "slides/summarizing.html#focus-on-shipping-and-delivery",
-    "href": "slides/summarizing.html#focus-on-shipping-and-delivery",
+    "objectID": "slides/iterative-prompt-development.html#issue-too-long",
+    "href": "slides/iterative-prompt-development.html#issue-too-long",
     "title": "Iterative Prompt Development",
-    "section": "Focus on shipping and delivery",
-    "text": "Focus on shipping and delivery\n\nSummarize with a focus on shipping and delivery\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\nShipping department. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat mention shipping and delivery of the product. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "section": "Issue: Too long",
+    "text": "Issue: Too long\n\nThe text is too long\nLimit the number of words/sentences/characters.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/summarizing.html#focus-on-shipping-and-delivery-output",
-    "href": "slides/summarizing.html#focus-on-shipping-and-delivery-output",
+    "objectID": "slides/iterative-prompt-development.html#issue-too-long-output",
+    "href": "slides/iterative-prompt-development.html#issue-too-long-output",
     "title": "Iterative Prompt Development",
-    "section": "Focus on shipping and delivery",
-    "text": "Focus on shipping and delivery\n\nThe customer is happy with the product but suggests offering larger options for the same price. They were pleased with the early delivery."
+    "section": "Issue: Too long",
+    "text": "Issue: Too long\n\nIntroducing our mid-century inspired office chair, part of a stunning furniture collection. With various color and finish options, choose between plastic or full upholstery in fabric or leather. The chair features a durable aluminum base with 5 wheels and pneumatic height adjustment. Perfect for home or business use. Made in Italy."
   },
   {
-    "objectID": "slides/summarizing.html#focus-on-price-and-value",
-    "href": "slides/summarizing.html#focus-on-price-and-value",
+    "objectID": "slides/iterative-prompt-development.html#issue-too-long-1",
+    "href": "slides/iterative-prompt-development.html#issue-too-long-1",
     "title": "Iterative Prompt Development",
-    "section": "Focus on price and value",
-    "text": "Focus on price and value\n\nSummarize with a focus on price and value\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\npricing department, responsible for determining the \\\nprice of the product.  \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat are relevant to the price and perceived value. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "section": "Issue: Too long",
+    "text": "Issue: Too long\n\nlen(response)\n\n\n\n333"
   },
   {
-    "objectID": "slides/summarizing.html#focus-on-price-and-value-output",
-    "href": "slides/summarizing.html#focus-on-price-and-value-output",
+    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details",
+    "href": "slides/iterative-prompt-development.html#issue-wrong-details",
     "title": "Iterative Prompt Development",
-    "section": "Focus on price and value",
-    "text": "Focus on price and value\n\nThe reviewer found the panda plush toy to be soft, cute, and loved by their daughter. However, they felt it was a bit small for the price and suggested that there may be larger options available for the same price."
+    "section": "Issue: Wrong details",
+    "text": "Issue: Wrong details\n\nText focuses on the wrong details\nAsk it to focus on the aspects that are relevant to the intended audience.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/summarizing.html#try-extract-instead-of-summarize",
-    "href": "slides/summarizing.html#try-extract-instead-of-summarize",
+    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-output",
+    "href": "slides/iterative-prompt-development.html#issue-wrong-details-output",
     "title": "Iterative Prompt Development",
-    "section": "Try “extract” instead of “summarize”",
-    "text": "Try “extract” instead of “summarize”\n\nprompt = f\"\"\"\nYour task is to extract relevant information from \\ \na product review from an ecommerce site to give \\\nfeedback to the Shipping department. \n\nFrom the review below, delimited by triple quotes \\\nextract the information relevant to shipping and \\ \ndelivery. Limit to 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "section": "Issue: Wrong details",
+    "text": "Issue: Wrong details\n\nIntroducing our mid-century inspired office chair, part of a beautiful furniture collection. With various shell colors and base finishes, it offers versatility for any setting. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a durable aluminum base and pneumatic chair adjustment for easy height customization. Made in Italy."
   },
   {
-    "objectID": "slides/summarizing.html#try-extract-instead-of-summarize-output",
-    "href": "slides/summarizing.html#try-extract-instead-of-summarize-output",
+    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-1",
+    "href": "slides/iterative-prompt-development.html#issue-wrong-details-1",
     "title": "Iterative Prompt Development",
-    "section": "Try “extract” instead of “summarize”",
-    "text": "Try “extract” instead of “summarize”\n\nThe shipping department should take note that the product arrived a day earlier than expected."
+    "section": "Issue: Wrong details",
+    "text": "Issue: Wrong details\n\nInclude product ID’s\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nAt the end of the description, include every 7-character \nProduct ID in the technical specification.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/summarizing.html#summarize-multiple-product-reviews",
-    "href": "slides/summarizing.html#summarize-multiple-product-reviews",
+    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-1-output",
+    "href": "slides/iterative-prompt-development.html#issue-wrong-details-1-output",
     "title": "Iterative Prompt Development",
-    "section": "Summarize multiple product reviews",
-    "text": "Summarize multiple product reviews\n\nreview_1 = prod_review\n\n# review for a standing lamp\nreview_2 = \"\"\"\nNeeded a nice lamp for my bedroom, and this one \\\nhad additional storage and not too high of a price \\\npoint. Got it fast - arrived in 2 days. The string \\\nto the lamp broke during the transit and the company \\\nhappily sent over a new one. Came within a few days \\\nas well. It was easy to put together. Then I had a \\\nmissing part, so I contacted their support and they \\\nvery quickly got me the missing piece! Seems to me \\\nto be a great company that cares about their customers \\\nand products. \n\"\"\"\n\n# review for an electric toothbrush\nreview_3 = \"\"\"\nMy dental hygienist recommended an electric toothbrush, \\\nwhich is why I got this. The battery life seems to be \\\npretty impressive so far. After initial charging and \\\nleaving the charger plugged in for the first week to \\\ncondition the battery, I've unplugged the charger and \\\nbeen using it for twice daily brushing for the last \\\n3 weeks all on the same charge. But the toothbrush head \\\nis too small. I’ve seen baby toothbrushes bigger than \\\nthis one. I wish the head was bigger with different \\\nlength bristles to get between teeth better because \\\nthis one doesn’t.  Overall if you can get this one \\\naround the $50 mark, it's a good deal. The manufactuer's \\\nreplacements heads are pretty expensive, but you can \\\nget generic ones that're more reasonably priced. This \\\ntoothbrush makes me feel like I've been to the dentist \\\nevery day. My teeth feel sparkly clean! \n\"\"\"\n\n# review for a blender\nreview_4 = \"\"\"\nSo, they still had the 17 piece system on seasonal \\\nsale for around $49 in the month of November, about \\\nhalf off, but for some reason (call it price gouging) \\\naround the second week of December the prices all went \\\nup to about anywhere from between $70-$89 for the same \\\nsystem. And the 11 piece system went up around $10 or \\\nso in price also from the earlier sale price of $29. \\\nSo it looks okay, but if you look at the base, the part \\\nwhere the blade locks into place doesn’t look as good \\\nas in previous editions from a few years ago, but I \\\nplan to be very gentle with it (example, I crush \\\nvery hard items like beans, ice, rice, etc. in the \\ \nblender first then pulverize them in the serving size \\\nI want in the blender then switch to the whipping \\\nblade for a finer flour, and use the cross cutting blade \\\nfirst when making smoothies, then use the flat blade \\\nif I need them finer/less pulpy). Special tip when making \\\nsmoothies, finely cut and freeze the fruits and \\\nvegetables (if using spinach-lightly stew soften the \\ \nspinach then freeze until ready for use-and if making \\\nsorbet, use a small to medium sized food processor) \\ \nthat you plan to use that way you can avoid adding so \\\nmuch ice if at all-when making your smoothie. \\\nAfter about a year, the motor was making a funny noise. \\\nI called customer service but the warranty expired \\\nalready, so I had to buy another one. FYI: The overall \\\nquality has gone done in these types of products, so \\\nthey are kind of counting on brand recognition and \\\nconsumer loyalty to maintain sales. Got it in about \\\ntwo days.\n\"\"\"\n\nreviews = [review_1, review_2, review_3, review_4]"
+    "section": "Issue: Wrong details",
+    "text": "Issue: Wrong details\n\nIntroducing our mid-century inspired office chair, part of a beautiful family of furniture. With various shell colors and base finishes, this chair offers versatility and style. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a 5-wheel plastic coated aluminum base and a pneumatic chair adjust for easy height adjustment. Available with or without armrests, this chair is suitable for both home and business settings. Made with high-quality materials, including a cast aluminum shell and HD36 foam seat, this chair is built to last. Product ID: SWC-100, SWC-110."
   },
   {
-    "objectID": "slides/summarizing.html#summarize-multiple-product-reviews-1",
-    "href": "slides/summarizing.html#summarize-multiple-product-reviews-1",
+    "objectID": "slides/iterative-prompt-development.html#issue-3-no-table",
+    "href": "slides/iterative-prompt-development.html#issue-3-no-table",
     "title": "Iterative Prompt Development",
-    "section": "Summarize multiple product reviews",
-    "text": "Summarize multiple product reviews\n\nfor i in range(len(reviews)):\n    prompt = f\"\"\"\n    Your task is to generate a short summary of a product \\ \n    review from an ecommerce site. \n\n    Summarize the review below, delimited by triple \\\n    backticks in at most 20 words. \n\n    Review: ```{reviews[i]}```\n    \"\"\"\n\n    response = get_completion(prompt)\n    print(i, response, \"\\n\")\n\n\n\n\nJan Kirenz"
+    "section": "Issue 3: No Table",
+    "text": "Issue 3: No Table\n\nDescription needs a table of dimensions\nAsk it to extract information and organize it in a table.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nAt the end of the description, include every 7-character \nProduct ID in the technical specification.\n\nAfter the description, include a table that gives the \nproduct's dimensions. The table should have two columns.\nIn the first column include the name of the dimension. \nIn the second column include the measurements in inches only.\n\nGive the table the title 'Product Dimensions'.\n\nFormat everything as HTML that can be used in a website. \nPlace the description in a &lt;div&gt; element.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/summarizing.html#summarize-multiple-product-reviews-1-output",
-    "href": "slides/summarizing.html#summarize-multiple-product-reviews-1-output",
+    "objectID": "slides/iterative-prompt-development.html#issue-3-no-table-output",
+    "href": "slides/iterative-prompt-development.html#issue-3-no-table-output",
     "title": "Iterative Prompt Development",
-    "section": "Summarize multiple product reviews",
-    "text": "Summarize multiple product reviews\n\n0 Soft and cute panda plush toy loved by daughter, but a bit small for the price. Arrived early. \n\n1 Great lamp with storage, fast delivery, excellent customer service, and easy assembly. Highly recommended. \n\n2 The reviewer recommends the electric toothbrush for its impressive battery life, but criticizes the small brush head. \n\n3 The reviewer found the price increase after the sale disappointing and noticed a decrease in quality."
+    "section": "Issue 3: No Table",
+    "text": "Issue 3: No Table\n\n&lt;div&gt;\n  &lt;h2&gt;Product Description&lt;/h2&gt;\n  &lt;p&gt;\n    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is the perfect choice for any home or business setting.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair offers several options for customization. You can choose from a variety of shell colors and base finishes to match your existing decor. The chair is available with plastic back and front upholstery or full upholstery in a range of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. You can also choose whether to have armrests or not, depending on your preference.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The construction of the SWC Chair is top-notch. It features a 5-wheel plastic coated aluminum base, ensuring stability and durability. The chair also has a pneumatic adjuster, allowing for easy raise and lower action. This makes it convenient for users to find their desired height and maintain proper posture throughout the day.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair is designed with comfort in mind. The seat is made with HD36 foam, providing a plush and supportive cushioning experience. You can also choose between soft or hard-floor caster options, depending on the type of flooring in your space. Additionally, there are two choices of seat foam densities available: medium (1.8 lb/ft3) or high (2.8 lb/ft3). This allows you to customize the level of firmness to suit your preferences.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair is not only stylish and comfortable, but it is also built to last. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring strength and durability. The shell has a thickness of 10 mm, providing stability and support. With its high-quality materials and construction, the SWC Chair is qualified for contract use, making it suitable for commercial settings as well.\n  &lt;/p&gt;\n  &lt;p&gt;\n    Made in Italy, the SWC Chair is a testament to Italian craftsmanship and design. It combines style, functionality, and durability to create a chair that is both aesthetically pleasing and practical.\n  &lt;/p&gt;\n  &lt;h2&gt;Product Dimensions&lt;/h2&gt;\n  &lt;table&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Dimension&lt;/th&gt;\n      &lt;th&gt;Measurement (inches)&lt;/th&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Width&lt;/td&gt;\n      &lt;td&gt;20.87\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Depth&lt;/td&gt;\n      &lt;td&gt;20.08\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Height&lt;/td&gt;\n      &lt;td&gt;31.50\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Seat Height&lt;/td&gt;\n      &lt;td&gt;17.32\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Seat Depth&lt;/td&gt;\n      &lt;td&gt;16.14\"&lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/table&gt;\n&lt;/div&gt;\n\nProduct IDs: SWC-100, SWC-110"
   },
   {
-    "objectID": "slides/transforming.html#api-key-and-python-libaries",
-    "href": "slides/transforming.html#api-key-and-python-libaries",
-    "title": "Transforming",
-    "section": "API key and Python libaries",
-    "text": "API key and Python libaries\n\nfrom redlines import Redlines\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
-  },
-  {
-    "objectID": "slides/transforming.html#helper-function",
-    "href": "slides/transforming.html#helper-function",
-    "title": "Transforming",
-    "section": "Helper function",
-    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    return response.choices[0].message[\"content\"]"
-  },
-  {
-    "objectID": "slides/transforming.html#example-1",
-    "href": "slides/transforming.html#example-1",
-    "title": "Transforming",
-    "section": "Example 1",
-    "text": "Example 1\n\nprompt = f\"\"\"\nTranslate the following English text to Spanish: \\ \n```Hi, I would like to order a blender```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nHola, me gustaría ordenar una licuadora."
-  },
-  {
-    "objectID": "slides/transforming.html#example-2",
-    "href": "slides/transforming.html#example-2",
-    "title": "Transforming",
-    "section": "Example 2",
-    "text": "Example 2\n\nprompt = f\"\"\"\nTell me which language this is: \n```Combien coûte le lampadaire?```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nThis language is French."
-  },
-  {
-    "objectID": "slides/transforming.html#example-3",
-    "href": "slides/transforming.html#example-3",
-    "title": "Transforming",
-    "section": "Example 3",
-    "text": "Example 3\n\nprompt = f\"\"\"\nTranslate the following  text to French and Spanish\nand English pirate: \\\n```I want to order a basketball```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nFrench: ```Je veux commander un ballon de basket```\nSpanish: ```Quiero ordenar una pelota de baloncesto```\nEnglish: ```I want to order a basketball```"
-  },
-  {
-    "objectID": "slides/transforming.html#example-4",
-    "href": "slides/transforming.html#example-4",
-    "title": "Transforming",
-    "section": "Example 4",
-    "text": "Example 4\n\nprompt = f\"\"\"\nTranslate the following text to Spanish in both the \\\nformal and informal forms: \n'Would you like to order a pillow?'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nFormal: ¿Le gustaría ordenar una almohada?\nInformal: ¿Te gustaría ordenar una almohada?"
-  },
-  {
-    "objectID": "slides/transforming.html#context",
-    "href": "slides/transforming.html#context",
-    "title": "Transforming",
-    "section": "Context",
-    "text": "Context\n\nImagine you are in charge of IT at a large multinational e-commerce company\nUsers are messaging you with IT issues in all their native languages\nYour staff is from all over the world and speaks only their native languages\nYou need a universal translator!"
-  },
-  {
-    "objectID": "slides/transforming.html#user-messages",
-    "href": "slides/transforming.html#user-messages",
-    "title": "Transforming",
-    "section": "User messages",
-    "text": "User messages\n\nuser_messages = [\n    \"La performance du système est plus lente que d'habitude.\",\n    \"Mi monitor tiene píxeles que no se iluminan.\",\n    \"Il mio mouse non funziona\",\n    \"Mój klawisz Ctrl jest zepsuty\",\n    \"我的屏幕在闪烁\"\n]"
-  },
-  {
-    "objectID": "slides/transforming.html#translations",
-    "href": "slides/transforming.html#translations",
-    "title": "Transforming",
-    "section": "Translations",
-    "text": "Translations\n\nfor issue in user_messages:\n    prompt = f\"Tell me what language this is: ```{issue}```\"\n    lang = get_completion(prompt)\n    print(f\"Original message ({lang}): {issue}\")\n\n    prompt = f\"\"\"\n    Translate the following  text to English \\\n    and German: ```{issue}```\n    \"\"\"\n    response = get_completion(prompt)\n    print(response, \"\\n\")"
-  },
-  {
-    "objectID": "slides/transforming.html#translations-output",
-    "href": "slides/transforming.html#translations-output",
-    "title": "Transforming",
-    "section": "Translations",
-    "text": "Translations\n\nOriginal message (The language is French.): La performance du système est plus lente que d'habitude.\nThe performance of the system is slower than usual.\n\nDie Leistung des Systems ist langsamer als gewöhnlich. \n\nOriginal message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan.\nEnglish: \"My monitor has pixels that do not light up.\"\n\nGerman: \"Mein Monitor hat Pixel, die nicht aufleuchten.\" \n\nOriginal message (The language is Italian.): Il mio mouse non funziona\nEnglish: My mouse is not working.\nGerman: Meine Maus funktioniert nicht. \n\nOriginal message (The language is Polish.): Mój klawisz Ctrl jest zepsuty\nEnglish: \"My Ctrl key is broken\"\nGerman: \"Meine Strg-Taste ist kaputt\" \n\nOriginal message (The language is Chinese.): 我的屏幕在闪烁\nEnglish: My screen is flickering.\nGerman: Mein Bildschirm flackert."
-  },
-  {
-    "objectID": "slides/transforming.html#user-messages-with-english-translation",
-    "href": "slides/transforming.html#user-messages-with-english-translation",
-    "title": "Transforming",
-    "section": "User messages with English translation",
-    "text": "User messages with English translation\n\nSystem performance is slower than normal: “La performance du système est plus lente que d’habitude.”,\nMy monitor has pixels that are not lighting: “Mi monitor tiene píxeles que no se iluminan.”,\nMy mouse is not working: “Il mio mouse non funziona”,\nMy keyboard has a broken control key: “Mój klawisz Ctrl jest zepsuty”,\nMy screen is flashing: ‚“我的屏幕在闪烁”"
-  },
-  {
-    "objectID": "slides/transforming.html#from-slang-to-business-tone",
-    "href": "slides/transforming.html#from-slang-to-business-tone",
-    "title": "Transforming",
-    "section": "From slang to business tone",
-    "text": "From slang to business tone\n\nWriting can vary based on the intended audience.\nChatGPT can produce different tones.\n\n\nprompt = f\"\"\"\nTranslate the following from slang to a business letter: \n'Dude, This is Joe, check out this spec on this standing lamp.'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/transforming.html#from-slang-to-business-tone-output",
-    "href": "slides/transforming.html#from-slang-to-business-tone-output",
-    "title": "Transforming",
-    "section": "From slang to business tone",
-    "text": "From slang to business tone\n\nDear Sir/Madam,\n\nI hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp. \n\nI kindly request that you take a moment to review the attached document, as it provides detailed information about the features and qualities of the aforementioned standing lamp. \n\nThank you for your time and consideration. I look forward to discussing this matter further with you.\n\nYours sincerely,\nJoe"
-  },
-  {
-    "objectID": "slides/transforming.html#from-dictionary-to-html",
-    "href": "slides/transforming.html#from-dictionary-to-html",
-    "title": "Transforming",
-    "section": "From dictionary to HTML",
-    "text": "From dictionary to HTML\n\ndata_json = {\"restaurant employees\": [\n    {\"name\": \"Shyam\", \"email\": \"shyamjaiswal@gmail.com\"},\n    {\"name\": \"Bob\", \"email\": \"bob32@gmail.com\"},\n    {\"name\": \"Jai\", \"email\": \"jai87@gmail.com\"}\n]}\n\nprompt = f\"\"\"\nTranslate the following python dictionary from JSON to an HTML \\\ntable with column headers and title: {data_json}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/transforming.html#from-dictionary-to-html-output",
-    "href": "slides/transforming.html#from-dictionary-to-html-output",
-    "title": "Transforming",
-    "section": "From dictionary to HTML",
-    "text": "From dictionary to HTML\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;style&gt;\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd, th {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr:nth-child(even) {\n  background-color: #dddddd;\n}\n&lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n\n&lt;h2&gt;Restaurant Employees&lt;/h2&gt;\n\n&lt;table&gt;\n  &lt;tr&gt;\n    &lt;th&gt;Name&lt;/th&gt;\n    &lt;th&gt;Email&lt;/th&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Shyam&lt;/td&gt;\n    &lt;td&gt;shyamjaiswal@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Bob&lt;/td&gt;\n    &lt;td&gt;bob32@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Jai&lt;/td&gt;\n    &lt;td&gt;jai87@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;\n\n&lt;/body&gt;\n&lt;/html&gt;"
-  },
-  {
-    "objectID": "slides/transforming.html#html-output",
-    "href": "slides/transforming.html#html-output",
-    "title": "Transforming",
-    "section": "HTML output",
-    "text": "HTML output\n\ndisplay(HTML(response))"
-  },
-  {
-    "objectID": "slides/transforming.html#html-output-output",
-    "href": "slides/transforming.html#html-output-output",
-    "title": "Transforming",
-    "section": "HTML output",
-    "text": "HTML output\n\n\n\n\n\n\n\n\n\nRestaurant Employees\n\n\n\n\n\nName\nEmail\n\n\nShyam\nshyamjaiswal@gmail.com\n\n\nBob\nbob32@gmail.com\n\n\nJai\njai87@gmail.com"
-  },
-  {
-    "objectID": "slides/transforming.html#multiple-text-examples",
-    "href": "slides/transforming.html#multiple-text-examples",
-    "title": "Transforming",
-    "section": "Multiple text examples",
-    "text": "Multiple text examples\n\nText examples are taken from Writing Prompts\n\n\ntext = [\n    \"The girl with the black and white puppies have a ball.\",\n    \"Yolanda has her notebook.\",\n    \"Its going to be a long day. Does the car need it’s oil changed?\",\n    \"Their goes my freedom. There going to bring they’re suitcases.\",\n    \"Your going to need you’re notebook.\",\n    \"That medicine effects my ability to sleep. Have you heard of the butterfly affect?\",\n    \"This phrase is to cherck chatGPT for speling abilitty\"\n]"
-  },
-  {
-    "objectID": "slides/transforming.html#proofreading",
-    "href": "slides/transforming.html#proofreading",
-    "title": "Transforming",
-    "section": "Proofreading",
-    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: mvm““” response = get_completion(prompt) print(response)\n\n\n## Review about a toy  {.smaller}\n\n::: {#43ac26df .cell output-location='slide' execution_count=13}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
-  },
-  {
-    "objectID": "slides/transforming.html#proofreading-1",
-    "href": "slides/transforming.html#proofreading-1",
-    "title": "Transforming",
-    "section": "Proofreading",
-    "text": "Proofreading\n\nprompt = f\"proofread and correct this review: ```{text}```\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/transforming.html#proofreading-1-output",
-    "href": "slides/transforming.html#proofreading-1-output",
-    "title": "Transforming",
-    "section": "Proofreading",
-    "text": "Proofreading\n\nGot this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it's super soft and cute. However, one of the ears is a bit lower than the other, and I don't think that was designed to be asymmetrical. Additionally, it's a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
-  },
-  {
-    "objectID": "slides/transforming.html#display-differences",
-    "href": "slides/transforming.html#display-differences",
-    "title": "Transforming",
-    "section": "Display differences",
-    "text": "Display differences\n\ndiff = Redlines(text, response)\ndisplay(Markdown(diff.output_markdown))"
-  },
-  {
-    "objectID": "slides/transforming.html#display-differences-output",
-    "href": "slides/transforming.html#display-differences-output",
-    "title": "Transforming",
-    "section": "Display differences",
-    "text": "Display differences\n\nGot this for my daughter for her birthday cuz because she keeps taking mine from my room. room. Yes, adults also like pandas too. too. She takes it everywhere with her, and it’s super soft and cute. One cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. It’s Additionally, it’s a bit small for what I paid for it though. it. I think believe there might be other options that are bigger for the same price. It price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
-  },
-  {
-    "objectID": "slides/transforming.html#make-it-more-compelling",
-    "href": "slides/transforming.html#make-it-more-compelling",
-    "title": "Transforming",
-    "section": "Make it more compelling",
-    "text": "Make it more compelling\n\nprompt = f\"\"\"\nproofread and correct this review. Make it more compelling. \nEnsure it follows APA style guide and targets an advanced reader. \nOutput in markdown format.\nText: ```{text}```\n\"\"\"\nresponse = get_completion(prompt)\ndisplay(Markdown(response))"
-  },
-  {
-    "objectID": "slides/transforming.html#make-it-more-compelling-output",
-    "href": "slides/transforming.html#make-it-more-compelling-output",
-    "title": "Transforming",
-    "section": "Make it more compelling",
-    "text": "Make it more compelling\n\nReview of a Panda Plush Toy\nI purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her constant companion, accompanying her wherever she goes. Its irresistibly soft and cute appearance is simply delightful.\nHowever, I did notice a minor flaw in the design. One of the ears is slightly lower than the other, which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable.\nIn terms of size, I must admit that I expected it to be a bit larger considering its price. It would be worthwhile to explore other options that offer a larger size for the same price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly.\nTo my surprise, the panda plush toy arrived a day earlier than the expected delivery date. This allowed me to indulge in some playtime with it before presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience.\nIn conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift."
-  },
-  {
-    "objectID": "slides/transforming.html#show-differences",
-    "href": "slides/transforming.html#show-differences",
-    "title": "Transforming",
-    "section": "Show differences",
-    "text": "Show differences\n\ndiff2 = Redlines(text, response)\ndisplay(Markdown(diff2.output_markdown))\n\n\n\n\nJan Kirenz"
-  },
-  {
-    "objectID": "slides/transforming.html#show-differences-output",
-    "href": "slides/transforming.html#show-differences-output",
-    "title": "Transforming",
-    "section": "Show differences",
-    "text": "Show differences\n\nGot this for my daughter for Review of a Panda Plush Toy \nI purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her birthday cuz constant companion, accompanying her wherever she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super goes. Its irresistibly soft and cute. cute appearance is simply delightful. \nHowever, I did notice a minor flaw in the design. One of the ears is a bit slightly lower than the other, and I don’t think which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable. \nIn terms of size, I must admit that was designed I expected it to be asymmetrical. It’s a bit small for what I paid for it though. I think there might larger considering its price. It would be worthwhile to explore other options that are bigger offer a larger size for the same price. It price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly. \nTo my surprise, the panda plush toy arrived a day earlier than expected, so I got to play the expected delivery date. This allowed me to indulge in some playtime with it myself before I gave it to my daughter.presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience. \nIn conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome 👋",
-    "section": "",
-    "text": "Welcome to the lab “prompt engineering”\n\nIn this lab, we will use OpenAI’s API to leverage Large Language Models (LLMs) like GPT-3.5 Turbo and GPT-4 into custom Python applications, and learn how to build our own chatbot.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI."
-  },
-  {
-    "objectID": "slide.html",
-    "href": "slide.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Take a look at the slides tutorial to learn how to use all slide options"
-  },
-  {
-    "objectID": "slide.html#guidelines",
-    "href": "slide.html#guidelines",
-    "title": "Slides",
-    "section": "1 Guidelines",
-    "text": "1 Guidelines\nIn this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:\n\n🖥️ Guidelines"
-  },
-  {
-    "objectID": "slide.html#iterative-prompt-development",
-    "href": "slide.html#iterative-prompt-development",
-    "title": "Slides",
-    "section": "2 Iterative prompt development",
-    "text": "2 Iterative prompt development\nIn this tutorial, you’ll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.\n\n🖥️ Iterative prompt development"
-  },
-  {
-    "objectID": "slide.html#summarize-text",
-    "href": "slide.html#summarize-text",
-    "title": "Slides",
-    "section": "3 Summarize text",
-    "text": "3 Summarize text\nIn this tutorial, you will summarize text with a focus on specific topics.\n\n🖥️ Summarize text"
-  },
-  {
-    "objectID": "slide.html#inferring",
-    "href": "slide.html#inferring",
-    "title": "Slides",
-    "section": "4 Inferring",
-    "text": "4 Inferring\nIn this tutorial, you will infer sentiment and topics from product reviews and news articles.\n\n🖥️ Inferring"
-  },
-  {
-    "objectID": "slide.html#transforming",
-    "href": "slide.html#transforming",
-    "title": "Slides",
-    "section": "5 Transforming",
-    "text": "5 Transforming\nIn this presentation, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\n\n🖥️ Transforming"
-  },
-  {
-    "objectID": "assignments.html",
-    "href": "assignments.html",
-    "title": "Assignments",
-    "section": "",
-    "text": "This is a Quarto slidedeck."
+    "objectID": "slides/iterative-prompt-development.html#view-result-as-html",
+    "href": "slides/iterative-prompt-development.html#view-result-as-html",
+    "title": "Iterative Prompt Development",
+    "section": "View result as HTML",
+    "text": "View result as HTML\n\ndisplay(HTML(response))\n\n\n\n  Product Description\n  \n    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is the perfect choice for any home or business setting.\n  \n  \n    The SWC Chair offers several options for customization. You can choose from a variety of shell colors and base finishes to match your existing decor. The chair is available with plastic back and front upholstery or full upholstery in a range of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. You can also choose whether to have armrests or not, depending on your preference.\n  \n  \n    The construction of the SWC Chair is top-notch. It features a 5-wheel plastic coated aluminum base, ensuring stability and durability. The chair also has a pneumatic adjuster, allowing for easy raise and lower action. This makes it convenient for users to find their desired height and maintain proper posture throughout the day.\n  \n  \n    The SWC Chair is designed with comfort in mind. The seat is made with HD36 foam, providing a plush and supportive cushioning experience. You can also choose between soft or hard-floor caster options, depending on the type of flooring in your space. Additionally, there are two choices of seat foam densities available: medium (1.8 lb/ft3) or high (2.8 lb/ft3). This allows you to customize the level of firmness to suit your preferences.\n  \n  \n    The SWC Chair is not only stylish and comfortable, but it is also built to last. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring strength and durability. The shell has a thickness of 10 mm, providing stability and support. With its high-quality materials and construction, the SWC Chair is qualified for contract use, making it suitable for commercial settings as well.\n  \n  \n    Made in Italy, the SWC Chair is a testament to Italian craftsmanship and design. It combines style, functionality, and durability to create a chair that is both aesthetically pleasing and practical.\n  \n  Product Dimensions\n  \n\n\n\nDimension\nMeasurement (inches)\n\n\nWidth\n20.87\"\n\n\nDepth\n20.08\"\n\n\nHeight\n31.50\"\n\n\nSeat Height\n17.32\"\n\n\nSeat Depth\n16.14\"\n\n\n\n\n\n\nProduct IDs: SWC-100, SWC-110\n\n\n\n\nJan Kirenz"
   },
   {
     "objectID": "slides/guidelines.html#api-key-and-python-libaries",
@@ -532,269 +441,416 @@
     "text": "Model Limitations: Hallucinations\n\nThe AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception.\n\nOne of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean.\n\nThe AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine. The app provides real-time feedback on brushing technique, duration, and coverage, helping users to achieve optimal oral health.\n\nThe toothbrush features soft, antimicrobial bristles made from a durable thermoplastic elastomer. These bristles are gentle on the gums and teeth, while also being effective at removing plaque and debris. The antimicrobial properties of the bristles help to inhibit the growth of bacteria, ensuring a hygienic brushing experience.\n\nIn terms of battery life, the AeroGlide UltraSlim Smart Toothbrush boasts an impressive 30-day battery life on a single charge. This makes it convenient for travel and ensures that users don't have to worry about constantly recharging their toothbrush.\n\nOverall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination of advanced technology, slim design, and effective cleaning capabilities. It is a great option for those looking to upgrade their oral care routine and achieve a healthier smile."
   },
   {
-    "objectID": "slides/iterative-prompt-development.html#api-key-and-python-libaries",
-    "href": "slides/iterative-prompt-development.html#api-key-and-python-libaries",
-    "title": "Iterative Prompt Development",
-    "section": "API key and Python libaries",
-    "text": "API key and Python libaries\n\nfrom IPython.display import display, HTML\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+    "objectID": "assignments.html",
+    "href": "assignments.html",
+    "title": "Assignments",
+    "section": "",
+    "text": "This is a Quarto slidedeck."
   },
   {
-    "objectID": "slides/iterative-prompt-development.html#gpt-3.5-turbo-vs-gpt-4",
-    "href": "slides/iterative-prompt-development.html#gpt-3.5-turbo-vs-gpt-4",
+    "objectID": "slide.html",
+    "href": "slide.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Take a look at the slides tutorial to learn how to use all slide options"
+  },
+  {
+    "objectID": "slide.html#guidelines",
+    "href": "slide.html#guidelines",
+    "title": "Slides",
+    "section": "1 Guidelines",
+    "text": "1 Guidelines\nIn this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:\n\n🖥️ Guidelines"
+  },
+  {
+    "objectID": "slide.html#iterative-prompt-development",
+    "href": "slide.html#iterative-prompt-development",
+    "title": "Slides",
+    "section": "2 Iterative prompt development",
+    "text": "2 Iterative prompt development\nIn this tutorial, you’ll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.\n\n🖥️ Iterative prompt development"
+  },
+  {
+    "objectID": "slide.html#summarize-text",
+    "href": "slide.html#summarize-text",
+    "title": "Slides",
+    "section": "3 Summarize text",
+    "text": "3 Summarize text\nIn this tutorial, you will summarize text with a focus on specific topics.\n\n🖥️ Summarize text"
+  },
+  {
+    "objectID": "slide.html#inferring",
+    "href": "slide.html#inferring",
+    "title": "Slides",
+    "section": "4 Inferring",
+    "text": "4 Inferring\nIn this tutorial, you will infer sentiment and topics from product reviews and news articles.\n\n🖥️ Inferring"
+  },
+  {
+    "objectID": "slide.html#transforming",
+    "href": "slide.html#transforming",
+    "title": "Slides",
+    "section": "5 Transforming",
+    "text": "5 Transforming\nIn this presentation, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\n\n🖥️ Transforming"
+  },
+  {
+    "objectID": "slide.html#expanding",
+    "href": "slide.html#expanding",
+    "title": "Slides",
+    "section": "6 Expanding",
+    "text": "6 Expanding\nIn this tutorial, you will generate customer service emails that are tailored to each customer’s review.\n\n🖥️ Expanding"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome 👋",
+    "section": "",
+    "text": "Welcome to the lab “prompt engineering”\n\nIn this lab, we will use OpenAI’s API to leverage Large Language Models (LLMs) like GPT-3.5 Turbo and GPT-4 into custom Python applications, and learn how to build our own chatbot.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI."
+  },
+  {
+    "objectID": "slides/transforming.html#api-key-and-python-libaries",
+    "href": "slides/transforming.html#api-key-and-python-libaries",
+    "title": "Transforming",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom redlines import Redlines\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "slides/transforming.html#helper-function",
+    "href": "slides/transforming.html#helper-function",
+    "title": "Transforming",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "slides/transforming.html#example-1",
+    "href": "slides/transforming.html#example-1",
+    "title": "Transforming",
+    "section": "Example 1",
+    "text": "Example 1\n\nprompt = f\"\"\"\nTranslate the following English text to Spanish: \\ \n```Hi, I would like to order a blender```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nHola, me gustaría ordenar una licuadora."
+  },
+  {
+    "objectID": "slides/transforming.html#example-2",
+    "href": "slides/transforming.html#example-2",
+    "title": "Transforming",
+    "section": "Example 2",
+    "text": "Example 2\n\nprompt = f\"\"\"\nTell me which language this is: \n```Combien coûte le lampadaire?```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nThis language is French."
+  },
+  {
+    "objectID": "slides/transforming.html#example-3",
+    "href": "slides/transforming.html#example-3",
+    "title": "Transforming",
+    "section": "Example 3",
+    "text": "Example 3\n\nprompt = f\"\"\"\nTranslate the following  text to French and Spanish\nand English pirate: \\\n```I want to order a basketball```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nFrench: ```Je veux commander un ballon de basket```\nSpanish: ```Quiero ordenar una pelota de baloncesto```\nEnglish: ```I want to order a basketball```"
+  },
+  {
+    "objectID": "slides/transforming.html#example-4",
+    "href": "slides/transforming.html#example-4",
+    "title": "Transforming",
+    "section": "Example 4",
+    "text": "Example 4\n\nprompt = f\"\"\"\nTranslate the following text to Spanish in both the \\\nformal and informal forms: \n'Would you like to order a pillow?'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nFormal: ¿Le gustaría ordenar una almohada?\nInformal: ¿Te gustaría ordenar una almohada?"
+  },
+  {
+    "objectID": "slides/transforming.html#context",
+    "href": "slides/transforming.html#context",
+    "title": "Transforming",
+    "section": "Context",
+    "text": "Context\n\nImagine you are in charge of IT at a large multinational e-commerce company\nUsers are messaging you with IT issues in all their native languages\nYour staff is from all over the world and speaks only their native languages\nYou need a universal translator!"
+  },
+  {
+    "objectID": "slides/transforming.html#user-messages",
+    "href": "slides/transforming.html#user-messages",
+    "title": "Transforming",
+    "section": "User messages",
+    "text": "User messages\n\nuser_messages = [\n    \"La performance du système est plus lente que d'habitude.\",\n    \"Mi monitor tiene píxeles que no se iluminan.\",\n    \"Il mio mouse non funziona\",\n    \"Mój klawisz Ctrl jest zepsuty\",\n    \"我的屏幕在闪烁\"\n]"
+  },
+  {
+    "objectID": "slides/transforming.html#translations",
+    "href": "slides/transforming.html#translations",
+    "title": "Transforming",
+    "section": "Translations",
+    "text": "Translations\n\nfor issue in user_messages:\n    prompt = f\"Tell me what language this is: ```{issue}```\"\n    lang = get_completion(prompt)\n    print(f\"Original message ({lang}): {issue}\")\n\n    prompt = f\"\"\"\n    Translate the following  text to English \\\n    and German: ```{issue}```\n    \"\"\"\n    response = get_completion(prompt)\n    print(response, \"\\n\")"
+  },
+  {
+    "objectID": "slides/transforming.html#translations-output",
+    "href": "slides/transforming.html#translations-output",
+    "title": "Transforming",
+    "section": "Translations",
+    "text": "Translations\n\nOriginal message (The language is French.): La performance du système est plus lente que d'habitude.\nThe performance of the system is slower than usual.\n\nDie Leistung des Systems ist langsamer als gewöhnlich. \n\nOriginal message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan.\nEnglish: \"My monitor has pixels that do not light up.\"\n\nGerman: \"Mein Monitor hat Pixel, die nicht aufleuchten.\" \n\nOriginal message (The language is Italian.): Il mio mouse non funziona\nEnglish: My mouse is not working.\nGerman: Meine Maus funktioniert nicht. \n\nOriginal message (The language is Polish.): Mój klawisz Ctrl jest zepsuty\nEnglish: \"My Ctrl key is broken\"\nGerman: \"Meine Strg-Taste ist kaputt\" \n\nOriginal message (The language is Chinese.): 我的屏幕在闪烁\nEnglish: My screen is flickering.\nGerman: Mein Bildschirm flackert."
+  },
+  {
+    "objectID": "slides/transforming.html#user-messages-with-english-translation",
+    "href": "slides/transforming.html#user-messages-with-english-translation",
+    "title": "Transforming",
+    "section": "User messages with English translation",
+    "text": "User messages with English translation\n\nSystem performance is slower than normal: “La performance du système est plus lente que d’habitude.”,\nMy monitor has pixels that are not lighting: “Mi monitor tiene píxeles que no se iluminan.”,\nMy mouse is not working: “Il mio mouse non funziona”,\nMy keyboard has a broken control key: “Mój klawisz Ctrl jest zepsuty”,\nMy screen is flashing: ‚“我的屏幕在闪烁”"
+  },
+  {
+    "objectID": "slides/transforming.html#from-slang-to-business-tone",
+    "href": "slides/transforming.html#from-slang-to-business-tone",
+    "title": "Transforming",
+    "section": "From slang to business tone",
+    "text": "From slang to business tone\n\nWriting can vary based on the intended audience.\nChatGPT can produce different tones.\n\n\nprompt = f\"\"\"\nTranslate the following from slang to a business letter: \n'Dude, This is Joe, check out this spec on this standing lamp.'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#from-slang-to-business-tone-output",
+    "href": "slides/transforming.html#from-slang-to-business-tone-output",
+    "title": "Transforming",
+    "section": "From slang to business tone",
+    "text": "From slang to business tone\n\nDear Sir/Madam,\n\nI hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp. \n\nI kindly request that you take a moment to review the attached document, as it provides detailed information about the features and qualities of the aforementioned standing lamp. \n\nThank you for your time and consideration. I look forward to discussing this matter further with you.\n\nYours sincerely,\nJoe"
+  },
+  {
+    "objectID": "slides/transforming.html#from-dictionary-to-html",
+    "href": "slides/transforming.html#from-dictionary-to-html",
+    "title": "Transforming",
+    "section": "From dictionary to HTML",
+    "text": "From dictionary to HTML\n\ndata_json = {\"restaurant employees\": [\n    {\"name\": \"Shyam\", \"email\": \"shyamjaiswal@gmail.com\"},\n    {\"name\": \"Bob\", \"email\": \"bob32@gmail.com\"},\n    {\"name\": \"Jai\", \"email\": \"jai87@gmail.com\"}\n]}\n\nprompt = f\"\"\"\nTranslate the following python dictionary from JSON to an HTML \\\ntable with column headers and title: {data_json}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#from-dictionary-to-html-output",
+    "href": "slides/transforming.html#from-dictionary-to-html-output",
+    "title": "Transforming",
+    "section": "From dictionary to HTML",
+    "text": "From dictionary to HTML\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;style&gt;\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd, th {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr:nth-child(even) {\n  background-color: #dddddd;\n}\n&lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n\n&lt;h2&gt;Restaurant Employees&lt;/h2&gt;\n\n&lt;table&gt;\n  &lt;tr&gt;\n    &lt;th&gt;Name&lt;/th&gt;\n    &lt;th&gt;Email&lt;/th&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Shyam&lt;/td&gt;\n    &lt;td&gt;shyamjaiswal@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Bob&lt;/td&gt;\n    &lt;td&gt;bob32@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Jai&lt;/td&gt;\n    &lt;td&gt;jai87@gmail.com&lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;\n\n&lt;/body&gt;\n&lt;/html&gt;"
+  },
+  {
+    "objectID": "slides/transforming.html#html-output",
+    "href": "slides/transforming.html#html-output",
+    "title": "Transforming",
+    "section": "HTML output",
+    "text": "HTML output\n\ndisplay(HTML(response))"
+  },
+  {
+    "objectID": "slides/transforming.html#html-output-output",
+    "href": "slides/transforming.html#html-output-output",
+    "title": "Transforming",
+    "section": "HTML output",
+    "text": "HTML output\n\n\n\n\n\n\n\n\n\nRestaurant Employees\n\n\n\n\n\nName\nEmail\n\n\nShyam\nshyamjaiswal@gmail.com\n\n\nBob\nbob32@gmail.com\n\n\nJai\njai87@gmail.com"
+  },
+  {
+    "objectID": "slides/transforming.html#multiple-text-examples",
+    "href": "slides/transforming.html#multiple-text-examples",
+    "title": "Transforming",
+    "section": "Multiple text examples",
+    "text": "Multiple text examples\n\nText examples are taken from Writing Prompts\n\n\ntext = [\n    \"The girl with the black and white puppies have a ball.\",\n    \"Yolanda has her notebook.\",\n    \"Its going to be a long day. Does the car need it’s oil changed?\",\n    \"Their goes my freedom. There going to bring they’re suitcases.\",\n    \"Your going to need you’re notebook.\",\n    \"That medicine effects my ability to sleep. Have you heard of the butterfly affect?\",\n    \"This phrase is to cherck chatGPT for speling abilitty\"\n]"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading",
+    "href": "slides/transforming.html#proofreading",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: ixw““” response = get_completion(prompt) print(response)\n\n\n## Review about a toy  {.smaller}\n\n::: {#43ac26df .cell output-location='slide' execution_count=13}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading-1",
+    "href": "slides/transforming.html#proofreading-1",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\n\nprompt = f\"proofread and correct this review: ```{text}```\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/transforming.html#proofreading-1-output",
+    "href": "slides/transforming.html#proofreading-1-output",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\n\nGot this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it's super soft and cute. However, one of the ears is a bit lower than the other, and I don't think that was designed to be asymmetrical. Additionally, it's a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
+  },
+  {
+    "objectID": "slides/transforming.html#display-differences",
+    "href": "slides/transforming.html#display-differences",
+    "title": "Transforming",
+    "section": "Display differences",
+    "text": "Display differences\n\ndiff = Redlines(text, response)\ndisplay(Markdown(diff.output_markdown))"
+  },
+  {
+    "objectID": "slides/transforming.html#display-differences-output",
+    "href": "slides/transforming.html#display-differences-output",
+    "title": "Transforming",
+    "section": "Display differences",
+    "text": "Display differences\n\nGot this for my daughter for her birthday cuz because she keeps taking mine from my room. room. Yes, adults also like pandas too. too. She takes it everywhere with her, and it’s super soft and cute. One cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. It’s Additionally, it’s a bit small for what I paid for it though. it. I think believe there might be other options that are bigger for the same price. It price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
+  },
+  {
+    "objectID": "slides/transforming.html#make-it-more-compelling",
+    "href": "slides/transforming.html#make-it-more-compelling",
+    "title": "Transforming",
+    "section": "Make it more compelling",
+    "text": "Make it more compelling\n\nprompt = f\"\"\"\nproofread and correct this review. Make it more compelling. \nEnsure it follows APA style guide and targets an advanced reader. \nOutput in markdown format.\nText: ```{text}```\n\"\"\"\nresponse = get_completion(prompt)\ndisplay(Markdown(response))"
+  },
+  {
+    "objectID": "slides/transforming.html#make-it-more-compelling-output",
+    "href": "slides/transforming.html#make-it-more-compelling-output",
+    "title": "Transforming",
+    "section": "Make it more compelling",
+    "text": "Make it more compelling\n\nReview of a Panda Plush Toy\nI purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her constant companion, accompanying her wherever she goes. Its irresistibly soft and cute appearance is simply delightful.\nHowever, I did notice a minor flaw in the design. One of the ears is slightly lower than the other, which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable.\nIn terms of size, I must admit that I expected it to be a bit larger considering its price. It would be worthwhile to explore other options that offer a larger size for the same price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly.\nTo my surprise, the panda plush toy arrived a day earlier than the expected delivery date. This allowed me to indulge in some playtime with it before presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience.\nIn conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift."
+  },
+  {
+    "objectID": "slides/transforming.html#show-differences",
+    "href": "slides/transforming.html#show-differences",
+    "title": "Transforming",
+    "section": "Show differences",
+    "text": "Show differences\n\ndiff2 = Redlines(text, response)\ndisplay(Markdown(diff2.output_markdown))\n\n\n\n\nJan Kirenz"
+  },
+  {
+    "objectID": "slides/transforming.html#show-differences-output",
+    "href": "slides/transforming.html#show-differences-output",
+    "title": "Transforming",
+    "section": "Show differences",
+    "text": "Show differences\n\nGot this for my daughter for Review of a Panda Plush Toy \nI purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her birthday cuz constant companion, accompanying her wherever she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super goes. Its irresistibly soft and cute. cute appearance is simply delightful. \nHowever, I did notice a minor flaw in the design. One of the ears is a bit slightly lower than the other, and I don’t think which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable. \nIn terms of size, I must admit that was designed I expected it to be asymmetrical. It’s a bit small for what I paid for it though. I think there might larger considering its price. It would be worthwhile to explore other options that are bigger offer a larger size for the same price. It price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly. \nTo my surprise, the panda plush toy arrived a day earlier than expected, so I got to play the expected delivery date. This allowed me to indulge in some playtime with it myself before I gave it to my daughter.presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience. \nIn conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift."
+  },
+  {
+    "objectID": "slides/summarizing.html#setup-1",
+    "href": "slides/summarizing.html#setup-1",
+    "title": "Iterative Prompt Development",
+    "section": "Setup",
+    "text": "Setup\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "slides/summarizing.html#setup-1-output",
+    "href": "slides/summarizing.html#setup-1-output",
+    "title": "Iterative Prompt Development",
+    "section": "Setup",
+    "text": "Setup"
+  },
+  {
+    "objectID": "slides/summarizing.html#gpt-3.5-turbo-vs-gpt-4",
+    "href": "slides/summarizing.html#gpt-3.5-turbo-vs-gpt-4",
     "title": "Iterative Prompt Development",
     "section": "GPT-3.5 Turbo vs GPT-4",
     "text": "GPT-3.5 Turbo vs GPT-4\n\nFor cost efficiency reasons, we will use OpenAI’s gpt-3.5-turbo model and the chat completions endpoint.\nHowever, you can simply replace model=\"gpt-3.5-turbo\"with model=\"gpt-4\" in the helper function"
   },
   {
-    "objectID": "slides/iterative-prompt-development.html#helper-function",
-    "href": "slides/iterative-prompt-development.html#helper-function",
+    "objectID": "slides/summarizing.html#helper-function",
+    "href": "slides/summarizing.html#helper-function",
     "title": "Iterative Prompt Development",
-    "section": "Helper function",
-    "text": "Helper function\n\nThis helper function will make it easier to use prompts and look at the generated outputs:\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#marketing-product-description",
-    "href": "slides/iterative-prompt-development.html#marketing-product-description",
-    "title": "Iterative Prompt Development",
-    "section": "Marketing product description",
-    "text": "Marketing product description\n\nGenerate a marketing product description from a product fact sheet\n\n\n\nfact_sheet_chair = \"\"\"\nOVERVIEW\n- Part of a beautiful family of mid-century inspired office furniture, \nincluding filing cabinets, desks, bookcases, meeting tables, and more.\n- Several options of shell color and base finishes.\n- Available with plastic back and front upholstery (SWC-100) \nor full upholstery (SWC-110) in 10 fabric and 6 leather options.\n- Base finish options are: stainless steel, matte black, \ngloss white, or chrome.\n- Chair is available with or without armrests.\n- Suitable for home or business settings.\n- Qualified for contract use.\n\nCONSTRUCTION\n- 5-wheel plastic coated aluminum base.\n- Pneumatic chair adjust for easy raise/lower action.\n\nDIMENSIONS\n- WIDTH 53 CM | 20.87”\n- DEPTH 51 CM | 20.08”\n- HEIGHT 80 CM | 31.50”\n- SEAT HEIGHT 44 CM | 17.32”\n- SEAT DEPTH 41 CM | 16.14”\n\nOPTIONS\n- Soft or hard-floor caster options.\n- Two choices of seat foam densities: \n medium (1.8 lb/ft3) or high (2.8 lb/ft3)\n- Armless or 8 position PU armrests \n\nMATERIALS\nSHELL BASE GLIDER\n- Cast Aluminum with modified nylon PA6/PA66 coating.\n- Shell thickness: 10 mm.\nSEAT\n- HD36 foam\n\nCOUNTRY OF ORIGIN\n- Italy\n\"\"\""
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#initial-prompt",
-    "href": "slides/iterative-prompt-development.html#initial-prompt",
-    "title": "Iterative Prompt Development",
-    "section": "Initial prompt",
-    "text": "Initial prompt\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#initial-prompt-output",
-    "href": "slides/iterative-prompt-development.html#initial-prompt-output",
-    "title": "Iterative Prompt Development",
-    "section": "Initial prompt",
-    "text": "Initial prompt\n\nIntroducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. This chair is part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, all designed with a timeless mid-century aesthetic.\n\nOne of the standout features of this chair is the variety of customization options available. You can choose from several shell colors and base finishes to perfectly match your existing decor. The chair is available with either plastic back and front upholstery or full upholstery in a range of 10 fabric and 6 leather options, allowing you to create a look that is uniquely yours.\n\nThe chair is also available with or without armrests, giving you the flexibility to choose the option that best suits your needs. The base finish options include stainless steel, matte black, gloss white, or chrome, ensuring that you can find the perfect match for your space.\n\nIn terms of construction, this chair is built to last. It features a 5-wheel plastic coated aluminum base, providing stability and mobility. The pneumatic chair adjust allows for easy raise and lower action, ensuring optimal comfort throughout the day.\n\nWhen it comes to dimensions, this chair is designed with both style and comfort in mind. With a width of 53 cm (20.87\"), depth of 51 cm (20.08\"), and height of 80 cm (31.50\"), it offers ample space without overwhelming your space. The seat height is 44 cm (17.32\") and the seat depth is 41 cm (16.14\"), providing a comfortable seating experience for extended periods.\n\nWe understand that every space is unique, which is why we offer a range of options to further customize your chair. You can choose between soft or hard-floor caster options, ensuring that your chair glides smoothly on any surface. Additionally, you have the choice between two seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3), allowing you to select the level of support that suits your preferences. The chair is also available with armless design or 8 position PU armrests, providing additional comfort and versatility.\n\nWhen it comes to materials, this chair is crafted with the utmost attention to quality. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The shell thickness is 10 mm, providing a sturdy and reliable structure. The seat is made of HD36 foam, offering a comfortable and supportive seating experience.\n\nFinally, this chair is proudly made in Italy, known for its exceptional craftsmanship and attention to detail. With its timeless design and superior construction, this chair is not only a stylish addition to any space but also a reliable and functional piece of furniture.\n\nUpgrade your office or home with our mid-century inspired office chair and experience the perfect blend of style, comfort, and functionality."
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-too-long",
-    "href": "slides/iterative-prompt-development.html#issue-too-long",
-    "title": "Iterative Prompt Development",
-    "section": "Issue: Too long",
-    "text": "Issue: Too long\n\nThe text is too long\nLimit the number of words/sentences/characters.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-too-long-output",
-    "href": "slides/iterative-prompt-development.html#issue-too-long-output",
-    "title": "Iterative Prompt Development",
-    "section": "Issue: Too long",
-    "text": "Issue: Too long\n\nIntroducing our mid-century inspired office chair, part of a stunning furniture collection. With various color and finish options, choose between plastic or full upholstery in fabric or leather. The chair features a durable aluminum base with 5 wheels and pneumatic height adjustment. Perfect for home or business use. Made in Italy."
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-too-long-1",
-    "href": "slides/iterative-prompt-development.html#issue-too-long-1",
-    "title": "Iterative Prompt Development",
-    "section": "Issue: Too long",
-    "text": "Issue: Too long\n\nlen(response)\n\n\n\n333"
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details",
-    "href": "slides/iterative-prompt-development.html#issue-wrong-details",
-    "title": "Iterative Prompt Development",
-    "section": "Issue: Wrong details",
-    "text": "Issue: Wrong details\n\nText focuses on the wrong details\nAsk it to focus on the aspects that are relevant to the intended audience.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-output",
-    "href": "slides/iterative-prompt-development.html#issue-wrong-details-output",
-    "title": "Iterative Prompt Development",
-    "section": "Issue: Wrong details",
-    "text": "Issue: Wrong details\n\nIntroducing our mid-century inspired office chair, part of a beautiful furniture collection. With various shell colors and base finishes, it offers versatility for any setting. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a durable aluminum base and pneumatic chair adjustment for easy height customization. Made in Italy."
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-1",
-    "href": "slides/iterative-prompt-development.html#issue-wrong-details-1",
-    "title": "Iterative Prompt Development",
-    "section": "Issue: Wrong details",
-    "text": "Issue: Wrong details\n\nInclude product ID’s\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nAt the end of the description, include every 7-character \nProduct ID in the technical specification.\n\nUse at most 50 words.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-wrong-details-1-output",
-    "href": "slides/iterative-prompt-development.html#issue-wrong-details-1-output",
-    "title": "Iterative Prompt Development",
-    "section": "Issue: Wrong details",
-    "text": "Issue: Wrong details\n\nIntroducing our mid-century inspired office chair, part of a beautiful family of furniture. With various shell colors and base finishes, this chair offers versatility and style. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a 5-wheel plastic coated aluminum base and a pneumatic chair adjust for easy height adjustment. Available with or without armrests, this chair is suitable for both home and business settings. Made with high-quality materials, including a cast aluminum shell and HD36 foam seat, this chair is built to last. Product ID: SWC-100, SWC-110."
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-3-no-table",
-    "href": "slides/iterative-prompt-development.html#issue-3-no-table",
-    "title": "Iterative Prompt Development",
-    "section": "Issue 3: No Table",
-    "text": "Issue 3: No Table\n\nDescription needs a table of dimensions\nAsk it to extract information and organize it in a table.\n\n\n\nprompt = f\"\"\"\nYour task is to help a marketing team create a \ndescription for a retail website of a product based \non a technical fact sheet.\n\nWrite a product description based on the information \nprovided in the technical specifications delimited by \ntriple backticks.\n\nThe description is intended for furniture retailers, \nso should be technical in nature and focus on the \nmaterials the product is constructed from.\n\nAt the end of the description, include every 7-character \nProduct ID in the technical specification.\n\nAfter the description, include a table that gives the \nproduct's dimensions. The table should have two columns.\nIn the first column include the name of the dimension. \nIn the second column include the measurements in inches only.\n\nGive the table the title 'Product Dimensions'.\n\nFormat everything as HTML that can be used in a website. \nPlace the description in a &lt;div&gt; element.\n\nTechnical specifications: ```{fact_sheet_chair}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#issue-3-no-table-output",
-    "href": "slides/iterative-prompt-development.html#issue-3-no-table-output",
-    "title": "Iterative Prompt Development",
-    "section": "Issue 3: No Table",
-    "text": "Issue 3: No Table\n\n&lt;div&gt;\n  &lt;h2&gt;Product Description&lt;/h2&gt;\n  &lt;p&gt;\n    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is the perfect choice for any home or business setting.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair offers several options for customization. You can choose from a variety of shell colors and base finishes to match your existing decor. The chair is available with plastic back and front upholstery or full upholstery in a range of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. You can also choose whether to have armrests or not, depending on your preference.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The construction of the SWC Chair is top-notch. It features a 5-wheel plastic coated aluminum base, ensuring stability and durability. The chair also has a pneumatic adjuster, allowing for easy raise and lower action. This makes it convenient for users to find their desired height and maintain proper posture throughout the day.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair is designed with comfort in mind. The seat is made with HD36 foam, providing a plush and supportive cushioning experience. You can also choose between soft or hard-floor caster options, depending on the type of flooring in your space. Additionally, there are two choices of seat foam densities available: medium (1.8 lb/ft3) or high (2.8 lb/ft3). This allows you to customize the level of firmness to suit your preferences.\n  &lt;/p&gt;\n  &lt;p&gt;\n    The SWC Chair is not only stylish and comfortable, but it is also built to last. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring strength and durability. The shell has a thickness of 10 mm, providing stability and support. With its high-quality materials and construction, the SWC Chair is qualified for contract use, making it suitable for commercial settings as well.\n  &lt;/p&gt;\n  &lt;p&gt;\n    Made in Italy, the SWC Chair is a testament to Italian craftsmanship and design. It combines style, functionality, and durability to create a chair that is both aesthetically pleasing and practical.\n  &lt;/p&gt;\n  &lt;h2&gt;Product Dimensions&lt;/h2&gt;\n  &lt;table&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Dimension&lt;/th&gt;\n      &lt;th&gt;Measurement (inches)&lt;/th&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Width&lt;/td&gt;\n      &lt;td&gt;20.87\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Depth&lt;/td&gt;\n      &lt;td&gt;20.08\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Height&lt;/td&gt;\n      &lt;td&gt;31.50\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Seat Height&lt;/td&gt;\n      &lt;td&gt;17.32\"&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Seat Depth&lt;/td&gt;\n      &lt;td&gt;16.14\"&lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/table&gt;\n&lt;/div&gt;\n\nProduct IDs: SWC-100, SWC-110"
-  },
-  {
-    "objectID": "slides/iterative-prompt-development.html#view-result-as-html",
-    "href": "slides/iterative-prompt-development.html#view-result-as-html",
-    "title": "Iterative Prompt Development",
-    "section": "View result as HTML",
-    "text": "View result as HTML\n\ndisplay(HTML(response))\n\n\n\n  Product Description\n  \n    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is the perfect choice for any home or business setting.\n  \n  \n    The SWC Chair offers several options for customization. You can choose from a variety of shell colors and base finishes to match your existing decor. The chair is available with plastic back and front upholstery or full upholstery in a range of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. You can also choose whether to have armrests or not, depending on your preference.\n  \n  \n    The construction of the SWC Chair is top-notch. It features a 5-wheel plastic coated aluminum base, ensuring stability and durability. The chair also has a pneumatic adjuster, allowing for easy raise and lower action. This makes it convenient for users to find their desired height and maintain proper posture throughout the day.\n  \n  \n    The SWC Chair is designed with comfort in mind. The seat is made with HD36 foam, providing a plush and supportive cushioning experience. You can also choose between soft or hard-floor caster options, depending on the type of flooring in your space. Additionally, there are two choices of seat foam densities available: medium (1.8 lb/ft3) or high (2.8 lb/ft3). This allows you to customize the level of firmness to suit your preferences.\n  \n  \n    The SWC Chair is not only stylish and comfortable, but it is also built to last. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring strength and durability. The shell has a thickness of 10 mm, providing stability and support. With its high-quality materials and construction, the SWC Chair is qualified for contract use, making it suitable for commercial settings as well.\n  \n  \n    Made in Italy, the SWC Chair is a testament to Italian craftsmanship and design. It combines style, functionality, and durability to create a chair that is both aesthetically pleasing and practical.\n  \n  Product Dimensions\n  \n\n\n\nDimension\nMeasurement (inches)\n\n\nWidth\n20.87\"\n\n\nDepth\n20.08\"\n\n\nHeight\n31.50\"\n\n\nSeat Height\n17.32\"\n\n\nSeat Depth\n16.14\"\n\n\n\n\n\n\nProduct IDs: SWC-100, SWC-110\n\n\n\n\nJan Kirenz"
-  },
-  {
-    "objectID": "slides/inferring.html#api-key-and-python-libaries",
-    "href": "slides/inferring.html#api-key-and-python-libaries",
-    "title": "Inferring",
-    "section": "API key and Python libaries",
-    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
-  },
-  {
-    "objectID": "slides/inferring.html#helper-function",
-    "href": "slides/inferring.html#helper-function",
-    "title": "Inferring",
     "section": "Helper function",
     "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
   },
   {
-    "objectID": "slides/inferring.html#text",
-    "href": "slides/inferring.html#text",
-    "title": "Inferring",
-    "section": "Text",
-    "text": "Text\n\nlamp_review = \"\"\"\nNeeded a nice lamp for my bedroom, and this one had \\\nadditional storage and not too high of a price point. \\\nGot it fast.  The string to our lamp broke during the \\\ntransit and the company happily sent over a new one. \\\nCame within a few days as well. It was easy to put \\\ntogether.  I had a missing part, so I contacted their \\\nsupport and they very quickly got me the missing piece! \\\nLumina seems to me to be a great company that cares \\\nabout their customers and products!!\n\"\"\""
+    "objectID": "slides/summarizing.html#text-to-summarize",
+    "href": "slides/summarizing.html#text-to-summarize",
+    "title": "Iterative Prompt Development",
+    "section": "Text to summarize",
+    "text": "Text to summarize\n\nprod_review = \"\"\"\nGot this panda plush toy for my daughter's birthday, \\\nwho loves it and takes it everywhere. It's soft and \\ \nsuper cute, and its face has a friendly look. It's \\ \na bit small for what I paid though. I think there \\ \nmight be other options that are bigger for the \\ \nsame price. It arrived a day earlier than expected, \\ \nso I got to play with it myself before I gave it \\ \nto her.\n\"\"\""
   },
   {
-    "objectID": "slides/inferring.html#infer-sentiment",
-    "href": "slides/inferring.html#infer-sentiment",
-    "title": "Inferring",
-    "section": "Infer sentiment",
-    "text": "Infer sentiment\n\nprompt = f\"\"\"\nWhat is the sentiment of the following product review, \nwhich is delimited with triple backticks?\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/summarizing.html#summarization-1",
+    "href": "slides/summarizing.html#summarization-1",
+    "title": "Iterative Prompt Development",
+    "section": "Summarization",
+    "text": "Summarization\n\nSummarize with a word/sentence/character limit\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/inferring.html#infer-sentiment-output",
-    "href": "slides/inferring.html#infer-sentiment-output",
-    "title": "Inferring",
-    "section": "Infer sentiment",
-    "text": "Infer sentiment\n\nThe sentiment of the product review is positive."
+    "objectID": "slides/summarizing.html#summarization-1-output",
+    "href": "slides/summarizing.html#summarization-1-output",
+    "title": "Iterative Prompt Development",
+    "section": "Summarization",
+    "text": "Summarization\n\nThis panda plush toy is loved by the reviewer's daughter, but they feel it is a bit small for the price."
   },
   {
-    "objectID": "slides/inferring.html#infer-sentiment-positivenegative",
-    "href": "slides/inferring.html#infer-sentiment-positivenegative",
-    "title": "Inferring",
-    "section": "Infer sentiment (positive/negative)",
-    "text": "Infer sentiment (positive/negative)\n\nprompt = f\"\"\"\nWhat is the sentiment of the following product review, \nwhich is delimited with triple backticks?\n\nGive your answer as a single word, either \"positive\" \\\nor \"negative\".\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/summarizing.html#focus-on-shipping-and-delivery",
+    "href": "slides/summarizing.html#focus-on-shipping-and-delivery",
+    "title": "Iterative Prompt Development",
+    "section": "Focus on shipping and delivery",
+    "text": "Focus on shipping and delivery\n\nSummarize with a focus on shipping and delivery\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\nShipping department. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat mention shipping and delivery of the product. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/inferring.html#infer-sentiment-positivenegative-output",
-    "href": "slides/inferring.html#infer-sentiment-positivenegative-output",
-    "title": "Inferring",
-    "section": "Infer sentiment (positive/negative)",
-    "text": "Infer sentiment (positive/negative)\n\npositive"
+    "objectID": "slides/summarizing.html#focus-on-shipping-and-delivery-output",
+    "href": "slides/summarizing.html#focus-on-shipping-and-delivery-output",
+    "title": "Iterative Prompt Development",
+    "section": "Focus on shipping and delivery",
+    "text": "Focus on shipping and delivery\n\nThe customer is happy with the product but suggests offering larger options for the same price. They were pleased with the early delivery."
   },
   {
-    "objectID": "slides/inferring.html#identify-types-of-emotions",
-    "href": "slides/inferring.html#identify-types-of-emotions",
-    "title": "Inferring",
-    "section": "Identify types of emotions",
-    "text": "Identify types of emotions\n\nprompt = f\"\"\"\nIdentify a list of emotions that the writer of the \\\nfollowing review is expressing. Include no more than \\\nfive items in the list. Format your answer as a list of \\\nlower-case words separated by commas.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/summarizing.html#focus-on-price-and-value",
+    "href": "slides/summarizing.html#focus-on-price-and-value",
+    "title": "Iterative Prompt Development",
+    "section": "Focus on price and value",
+    "text": "Focus on price and value\n\nSummarize with a focus on price and value\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\npricing department, responsible for determining the \\\nprice of the product.  \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat are relevant to the price and perceived value. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/inferring.html#identify-types-of-emotions-output",
-    "href": "slides/inferring.html#identify-types-of-emotions-output",
-    "title": "Inferring",
-    "section": "Identify types of emotions",
-    "text": "Identify types of emotions\n\nsatisfied, grateful, impressed, pleased, happy"
+    "objectID": "slides/summarizing.html#focus-on-price-and-value-output",
+    "href": "slides/summarizing.html#focus-on-price-and-value-output",
+    "title": "Iterative Prompt Development",
+    "section": "Focus on price and value",
+    "text": "Focus on price and value\n\nThe reviewer found the panda plush toy to be soft, cute, and loved by their daughter. However, they felt it was a bit small for the price and suggested that there may be larger options available for the same price."
   },
   {
-    "objectID": "slides/inferring.html#identify-anger",
-    "href": "slides/inferring.html#identify-anger",
-    "title": "Inferring",
-    "section": "Identify anger",
-    "text": "Identify anger\n\nprompt = f\"\"\"\nIs the writer of the following review expressing anger?\\\nThe review is delimited with triple backticks. \\\nGive your answer as either yes or no.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/summarizing.html#try-extract-instead-of-summarize",
+    "href": "slides/summarizing.html#try-extract-instead-of-summarize",
+    "title": "Iterative Prompt Development",
+    "section": "Try “extract” instead of “summarize”",
+    "text": "Try “extract” instead of “summarize”\n\nprompt = f\"\"\"\nYour task is to extract relevant information from \\ \na product review from an ecommerce site to give \\\nfeedback to the Shipping department. \n\nFrom the review below, delimited by triple quotes \\\nextract the information relevant to shipping and \\ \ndelivery. Limit to 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/inferring.html#identify-anger-output",
-    "href": "slides/inferring.html#identify-anger-output",
-    "title": "Inferring",
-    "section": "Identify anger",
-    "text": "Identify anger\n\nNo"
+    "objectID": "slides/summarizing.html#try-extract-instead-of-summarize-output",
+    "href": "slides/summarizing.html#try-extract-instead-of-summarize-output",
+    "title": "Iterative Prompt Development",
+    "section": "Try “extract” instead of “summarize”",
+    "text": "Try “extract” instead of “summarize”\n\nThe shipping department should take note that the product arrived a day earlier than expected."
   },
   {
-    "objectID": "slides/inferring.html#extract-product-and-company-name",
-    "href": "slides/inferring.html#extract-product-and-company-name",
-    "title": "Inferring",
-    "section": "Extract product and company name",
-    "text": "Extract product and company name\n\nprompt = f\"\"\"\nIdentify the following items from the review text: \n- Item purchased by reviewer\n- Company that made the item\n\nThe review is delimited with triple backticks. \\\nFormat your response as a JSON object with \\\n\"Item\" and \"Brand\" as the keys. \nIf the information isn't present, use \"unknown\" \\\nas the value.\nMake your response as short as possible.\n  \nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/summarizing.html#summarize-multiple-product-reviews",
+    "href": "slides/summarizing.html#summarize-multiple-product-reviews",
+    "title": "Iterative Prompt Development",
+    "section": "Summarize multiple product reviews",
+    "text": "Summarize multiple product reviews\n\nreview_1 = prod_review\n\n# review for a standing lamp\nreview_2 = \"\"\"\nNeeded a nice lamp for my bedroom, and this one \\\nhad additional storage and not too high of a price \\\npoint. Got it fast - arrived in 2 days. The string \\\nto the lamp broke during the transit and the company \\\nhappily sent over a new one. Came within a few days \\\nas well. It was easy to put together. Then I had a \\\nmissing part, so I contacted their support and they \\\nvery quickly got me the missing piece! Seems to me \\\nto be a great company that cares about their customers \\\nand products. \n\"\"\"\n\n# review for an electric toothbrush\nreview_3 = \"\"\"\nMy dental hygienist recommended an electric toothbrush, \\\nwhich is why I got this. The battery life seems to be \\\npretty impressive so far. After initial charging and \\\nleaving the charger plugged in for the first week to \\\ncondition the battery, I've unplugged the charger and \\\nbeen using it for twice daily brushing for the last \\\n3 weeks all on the same charge. But the toothbrush head \\\nis too small. I’ve seen baby toothbrushes bigger than \\\nthis one. I wish the head was bigger with different \\\nlength bristles to get between teeth better because \\\nthis one doesn’t.  Overall if you can get this one \\\naround the $50 mark, it's a good deal. The manufactuer's \\\nreplacements heads are pretty expensive, but you can \\\nget generic ones that're more reasonably priced. This \\\ntoothbrush makes me feel like I've been to the dentist \\\nevery day. My teeth feel sparkly clean! \n\"\"\"\n\n# review for a blender\nreview_4 = \"\"\"\nSo, they still had the 17 piece system on seasonal \\\nsale for around $49 in the month of November, about \\\nhalf off, but for some reason (call it price gouging) \\\naround the second week of December the prices all went \\\nup to about anywhere from between $70-$89 for the same \\\nsystem. And the 11 piece system went up around $10 or \\\nso in price also from the earlier sale price of $29. \\\nSo it looks okay, but if you look at the base, the part \\\nwhere the blade locks into place doesn’t look as good \\\nas in previous editions from a few years ago, but I \\\nplan to be very gentle with it (example, I crush \\\nvery hard items like beans, ice, rice, etc. in the \\ \nblender first then pulverize them in the serving size \\\nI want in the blender then switch to the whipping \\\nblade for a finer flour, and use the cross cutting blade \\\nfirst when making smoothies, then use the flat blade \\\nif I need them finer/less pulpy). Special tip when making \\\nsmoothies, finely cut and freeze the fruits and \\\nvegetables (if using spinach-lightly stew soften the \\ \nspinach then freeze until ready for use-and if making \\\nsorbet, use a small to medium sized food processor) \\ \nthat you plan to use that way you can avoid adding so \\\nmuch ice if at all-when making your smoothie. \\\nAfter about a year, the motor was making a funny noise. \\\nI called customer service but the warranty expired \\\nalready, so I had to buy another one. FYI: The overall \\\nquality has gone done in these types of products, so \\\nthey are kind of counting on brand recognition and \\\nconsumer loyalty to maintain sales. Got it in about \\\ntwo days.\n\"\"\"\n\nreviews = [review_1, review_2, review_3, review_4]"
   },
   {
-    "objectID": "slides/inferring.html#extract-product-and-company-name-output",
-    "href": "slides/inferring.html#extract-product-and-company-name-output",
-    "title": "Inferring",
-    "section": "Extract product and company name",
-    "text": "Extract product and company name\n\n{\n  \"Item\": \"lamp\",\n  \"Brand\": \"Lumina\"\n}"
+    "objectID": "slides/summarizing.html#summarize-multiple-product-reviews-1",
+    "href": "slides/summarizing.html#summarize-multiple-product-reviews-1",
+    "title": "Iterative Prompt Development",
+    "section": "Summarize multiple product reviews",
+    "text": "Summarize multiple product reviews\n\nfor i in range(len(reviews)):\n    prompt = f\"\"\"\n    Your task is to generate a short summary of a product \\ \n    review from an ecommerce site. \n\n    Summarize the review below, delimited by triple \\\n    backticks in at most 20 words. \n\n    Review: ```{reviews[i]}```\n    \"\"\"\n\n    response = get_completion(prompt)\n    print(i, response, \"\\n\")\n\n\n\n\nJan Kirenz"
   },
   {
-    "objectID": "slides/inferring.html#doing-multiple-tasks-at-once",
-    "href": "slides/inferring.html#doing-multiple-tasks-at-once",
-    "title": "Inferring",
-    "section": "Doing multiple tasks at once",
-    "text": "Doing multiple tasks at once\n\nprompt = f\"\"\"\nIdentify the following items from the review text: \n- Sentiment (positive or negative)\n- Is the reviewer expressing anger? (true or false)\n- Item purchased by reviewer\n- Company that made the item\n\nThe review is delimited with triple backticks. \\\nFormat your response as a JSON object with \\\n\"Sentiment\", \"Anger\", \"Item\" and \"Brand\" as the keys.\nIf the information isn't present, use \"unknown\" \\\nas the value.\nMake your response as short as possible.\nFormat the Anger value as a boolean.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/summarizing.html#summarize-multiple-product-reviews-1-output",
+    "href": "slides/summarizing.html#summarize-multiple-product-reviews-1-output",
+    "title": "Iterative Prompt Development",
+    "section": "Summarize multiple product reviews",
+    "text": "Summarize multiple product reviews\n\n0 Soft and cute panda plush toy loved by daughter, but a bit small for the price. Arrived early. \n\n1 Great lamp with storage, fast delivery, excellent customer service, and easy assembly. Highly recommended. \n\n2 The reviewer recommends the electric toothbrush for its impressive battery life, but criticizes the small brush head. \n\n3 The reviewer found the price increase after the sale disappointing and noticed a decrease in quality."
   },
   {
-    "objectID": "slides/inferring.html#doing-multiple-tasks-at-once-output",
-    "href": "slides/inferring.html#doing-multiple-tasks-at-once-output",
-    "title": "Inferring",
-    "section": "Doing multiple tasks at once",
-    "text": "Doing multiple tasks at once\n\n{\n  \"Sentiment\": \"positive\",\n  \"Anger\": false,\n  \"Item\": \"lamp\",\n  \"Brand\": \"Lumina\"\n}"
+    "objectID": "slides/expanding.html#python",
+    "href": "slides/expanding.html#python",
+    "title": "Expanding",
+    "section": "Python",
+    "text": "Python\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
   },
   {
-    "objectID": "slides/inferring.html#text-1",
-    "href": "slides/inferring.html#text-1",
-    "title": "Inferring",
-    "section": "Text",
-    "text": "Text\n\nstory = \"\"\"\nIn a recent survey conducted by the government, \npublic sector employees were asked to rate their level \nof satisfaction with the department they work at. \nThe results revealed that NASA was the most popular \ndepartment with a satisfaction rating of 95%.\n\nOne NASA employee, John Smith, commented on the findings, \nstating, \"I'm not surprised that NASA came out on top. \nIt's a great place to work with amazing people and \nincredible opportunities. I'm proud to be a part of \nsuch an innovative organization.\"\n\nThe results were also welcomed by NASA's management team, \nwith Director Tom Johnson stating, \"We are thrilled to \nhear that our employees are satisfied with their work at NASA. \nWe have a talented and dedicated team who work tirelessly \nto achieve our goals, and it's fantastic to see that their \nhard work is paying off.\"\n\nThe survey also revealed that the \nSocial Security Administration had the lowest satisfaction \nrating, with only 45% of employees indicating they were \nsatisfied with their job. The government has pledged to \naddress the concerns raised by employees in the survey and \nwork towards improving job satisfaction across all departments.\n\"\"\""
+    "objectID": "slides/expanding.html#helper-function",
+    "href": "slides/expanding.html#helper-function",
+    "title": "Expanding",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
   },
   {
-    "objectID": "slides/inferring.html#infer-5-topics",
-    "href": "slides/inferring.html#infer-5-topics",
-    "title": "Inferring",
-    "section": "Infer 5 topics",
-    "text": "Infer 5 topics\n\nprompt = f\"\"\"\nDetermine five topics that are being discussed in the \\\nfollowing text, which is delimited by triple backticks.\n\nMake each item one or two words long. \n\nFormat your response as a list of items separated by commas.\n\nText sample: '''{story}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/expanding.html#sentiment-and-text",
+    "href": "slides/expanding.html#sentiment-and-text",
+    "title": "Expanding",
+    "section": "Sentiment and text",
+    "text": "Sentiment and text\n\nsentiment = \"negative\"\n\n# review for a blender\nreview = f\"\"\"\nSo, they still had the 17 piece system on seasonal \\\nsale for around $49 in the month of November, about \\\nhalf off, but for some reason (call it price gouging) \\\naround the second week of December the prices all went \\\nup to about anywhere from between $70-$89 for the same \\\nsystem. And the 11 piece system went up around $10 or \\\nso in price also from the earlier sale price of $29. \\\nSo it looks okay, but if you look at the base, the part \\\nwhere the blade locks into place doesn’t look as good \\\nas in previous editions from a few years ago, but I \\\nplan to be very gentle with it (example, I crush \\\nvery hard items like beans, ice, rice, etc. in the \\ \nblender first then pulverize them in the serving size \\\nI want in the blender then switch to the whipping \\\nblade for a finer flour, and use the cross cutting blade \\\nfirst when making smoothies, then use the flat blade \\\nif I need them finer/less pulpy). Special tip when making \\\nsmoothies, finely cut and freeze the fruits and \\\nvegetables (if using spinach-lightly stew soften the \\ \nspinach then freeze until ready for use-and if making \\\nsorbet, use a small to medium sized food processor) \\ \nthat you plan to use that way you can avoid adding so \\\nmuch ice if at all-when making your smoothie. \\\nAfter about a year, the motor was making a funny noise. \\\nI called customer service but the warranty expired \\\nalready, so I had to buy another one. FYI: The overall \\\nquality has gone done in these types of products, so \\\nthey are kind of counting on brand recognition and \\\nconsumer loyalty to maintain sales. Got it in about \\\ntwo days.\n\"\"\""
   },
   {
-    "objectID": "slides/inferring.html#infer-5-topics-output",
-    "href": "slides/inferring.html#infer-5-topics-output",
-    "title": "Inferring",
-    "section": "Infer 5 topics",
-    "text": "Infer 5 topics\n\n1. Government survey\n2. Department satisfaction rating\n3. NASA\n4. Social Security Administration\n5. Job satisfaction improvement"
+    "objectID": "slides/expanding.html#prompt",
+    "href": "slides/expanding.html#prompt",
+    "title": "Expanding",
+    "section": "Prompt",
+    "text": "Prompt\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "slides/inferring.html#split-responses",
-    "href": "slides/inferring.html#split-responses",
-    "title": "Inferring",
-    "section": "Split responses",
-    "text": "Split responses\n\nresponse.split(sep=',')\n\n['1. Government survey\\n2. Department satisfaction rating\\n3. NASA\\n4. Social Security Administration\\n5. Job satisfaction improvement']"
+    "objectID": "slides/expanding.html#prompt-output",
+    "href": "slides/expanding.html#prompt-output",
+    "title": "Expanding",
+    "section": "Prompt",
+    "text": "Prompt\n\nDear Valued Customer,\n\nThank you for taking the time to share your review with us. We appreciate your feedback and apologize for any inconvenience you may have experienced.\n\nWe are sorry to hear about the price increase you noticed in December. We strive to provide competitive pricing for our products, and we understand your frustration. If you have any further concerns regarding pricing, we recommend reaching out to our customer service team who will be happy to assist you.\n\nWe also appreciate your feedback regarding the base of the system. We continuously work to improve the quality of our products, and your comments will be taken into consideration for future enhancements.\n\nRegarding the motor issue you encountered, we apologize for any inconvenience caused. Our customer service team is available to assist you with any technical difficulties you may encounter, even if the warranty has expired. Please do not hesitate to reach out to them for further assistance.\n\nThank you once again for your review. We value your loyalty and appreciate your support. If you have any further questions or concerns, please feel free to contact our customer service team.\n\nBest regards,\n\nAI customer agent"
   },
   {
-    "objectID": "slides/inferring.html#topic-list",
-    "href": "slides/inferring.html#topic-list",
-    "title": "Inferring",
-    "section": "Topic list",
-    "text": "Topic list\n\ntopic_list = [\n    \"nasa\", \"local government\", \"engineering\",\n    \"employee satisfaction\", \"federal government\"\n]"
+    "objectID": "slides/expanding.html#prompt-with-different-temperature",
+    "href": "slides/expanding.html#prompt-with-different-temperature",
+    "title": "Expanding",
+    "section": "Prompt with different temperature",
+    "text": "Prompt with different temperature\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\nresponse = get_completion(prompt, temperature=0.7)\nprint(response)\n\n\n\n\nJan Kirenz"
   },
   {
-    "objectID": "slides/inferring.html#give-answer-as-list-with-0-and-1",
-    "href": "slides/inferring.html#give-answer-as-list-with-0-and-1",
-    "title": "Inferring",
-    "section": "Give answer as list with 0 and 1",
-    "text": "Give answer as list with 0 and 1\n\nprompt = f\"\"\"\nDetermine whether each item in the following list of \\\ntopics is a topic in the text below, which\nis delimited with triple backticks.\n\nGive your answer as list with 0 or 1 for each topic.\\\n\nList of topics: {\", \".join(topic_list)}\n\nText sample: '''{story}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\n\nJan Kirenz"
-  },
-  {
-    "objectID": "slides/inferring.html#give-answer-as-list-with-0-and-1-output",
-    "href": "slides/inferring.html#give-answer-as-list-with-0-and-1-output",
-    "title": "Inferring",
-    "section": "Give answer as list with 0 and 1",
-    "text": "Give answer as list with 0 and 1\n\n[1, 0, 0, 1, 1]"
+    "objectID": "slides/expanding.html#prompt-with-different-temperature-output",
+    "href": "slides/expanding.html#prompt-with-different-temperature-output",
+    "title": "Expanding",
+    "section": "Prompt with different temperature",
+    "text": "Prompt with different temperature\n\nDear Valued Customer,\n\nThank you for taking the time to share your feedback with us. We appreciate your honesty and your loyalty to our brand.\n\nWe sincerely apologize for any inconvenience you experienced regarding the pricing changes. We understand how frustrating it can be when prices fluctuate unexpectedly. We strive to offer competitive prices to our customers, and we apologize if this was not reflected in your recent purchase.\n\nRegarding the issue with the blade lock on the base, we apologize for any dissatisfaction caused. We appreciate your gentle usage and taking the time to share your observations. We value your feedback as it helps us identify areas for improvement.\n\nWe are sorry to hear that you encountered a problem with the motor after a year of use. We understand your frustration, and we apologize for any inconvenience caused. If you have any further concerns or need assistance, please do not hesitate to reach out to our customer service team. They will be more than happy to assist you.\n\nOnce again, we appreciate your feedback and your loyalty to our brand. We value your satisfaction and will continue working hard to improve our products and services.\n\nThank you for choosing our brand.\n\nBest regards,\n\nAI customer agent"
   }
 ]
