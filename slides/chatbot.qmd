@@ -235,7 +235,7 @@ def collect_messages(_):
 ```
 
 
-## Panel Dashboard { .smaller .background-color="aquamarine"}
+## Panel Dashboard { .smaller background-color='aquamarine' }
 
 - Note that the dasboard in this presentation is **not** working 
 
