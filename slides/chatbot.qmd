@@ -91,7 +91,7 @@ messages = [
 ## Response
 
 ```{python}
-# | output-location: slide
+# | output-location: fragment
 response = get_completion_from_messages(messages, temperature=1)
 
 print(response)
@@ -111,7 +111,7 @@ messages = [
 
 
 ```{python}
-# | output-location: slide
+# | output-location: fragment
 response = get_completion_from_messages(messages, temperature=1)
 
 print(response)
@@ -131,7 +131,7 @@ messages = [
 ## Response
 
 ```{python}
-# | output-location: slide
+# | output-location: fragment
 response = get_completion_from_messages(messages, temperature=1)
 
 print(response)
@@ -154,7 +154,7 @@ Is there anything I can help you with today?"},
 ## Response
 
 ```{python}
-# | output-location: slide
+# | output-location: fragment
 response = get_completion_from_messages(messages, temperature=1)
 
 print(response)
@@ -234,7 +234,8 @@ def collect_messages(_):
 
 ```
 
-## Panel Dashboard {.smaller .background-color="aquamarine"}
+
+## Panel Dashboard { .smaller .background-color="aquamarine"}
 
 - Note that the dasboard in this presentation is **not** working 
 
