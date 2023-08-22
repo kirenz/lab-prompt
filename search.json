@@ -193,14 +193,7 @@
     "href": "slides/chatbot.html#response",
     "title": "Chatbot",
     "section": "Response",
-    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)"
-  },
-  {
-    "objectID": "slides/chatbot.html#response-output",
-    "href": "slides/chatbot.html#response-output",
-    "title": "Chatbot",
-    "section": "Response",
-    "text": "Response\n\n{\n  \"content\": \"To get to the other side, of course, but verily, the other side was wrought with peril and danger, so it swiftly returned from whence it came, forsooth!\",\n  \"role\": \"assistant\"\n}\nTo get to the other side, of course, but verily, the other side was wrought with peril and danger, so it swiftly returned from whence it came, forsooth!"
+    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n\n\n{\n  \"content\": \"Why, to gallantly traverse the thoroughfare and partake in a most noble adventure, of course! Verily, that is the jest of it!\",\n  \"role\": \"assistant\"\n}\nWhy, to gallantly traverse the thoroughfare and partake in a most noble adventure, of course! Verily, that is the jest of it!"
   },
   {
     "objectID": "slides/chatbot.html#messages-1",
@@ -214,14 +207,7 @@
     "href": "slides/chatbot.html#response-1",
     "title": "Chatbot",
     "section": "Response",
-    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)"
-  },
-  {
-    "objectID": "slides/chatbot.html#response-1-output",
-    "href": "slides/chatbot.html#response-1-output",
-    "title": "Chatbot",
-    "section": "Response",
-    "text": "Response\n\n{\n  \"content\": \"Hello Isa, nice to meet you! How can I assist you today?\",\n  \"role\": \"assistant\"\n}\nHello Isa, nice to meet you! How can I assist you today?"
+    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n\n\n{\n  \"content\": \"Hello Isa! It's nice to meet you. How can I assist you today?\",\n  \"role\": \"assistant\"\n}\nHello Isa! It's nice to meet you. How can I assist you today?"
   },
   {
     "objectID": "slides/chatbot.html#messages-2",
@@ -235,14 +221,7 @@
     "href": "slides/chatbot.html#response-2",
     "title": "Chatbot",
     "section": "Response",
-    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)"
-  },
-  {
-    "objectID": "slides/chatbot.html#response-2-output",
-    "href": "slides/chatbot.html#response-2-output",
-    "title": "Chatbot",
-    "section": "Response",
-    "text": "Response\n\n{\n  \"content\": \"I'm sorry, but as a chatbot, I don't have access to personal information. I don't know your name.\",\n  \"role\": \"assistant\"\n}\nI'm sorry, but as a chatbot, I don't have access to personal information. I don't know your name."
+    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n\n\n{\n  \"content\": \"I apologize, but I am not capable of knowing or remembering personal information. I am a friendly chatbot designed to provide information and engage in conversations.\",\n  \"role\": \"assistant\"\n}\nI apologize, but I am not capable of knowing or remembering personal information. I am a friendly chatbot designed to provide information and engage in conversations."
   },
   {
     "objectID": "slides/chatbot.html#messages-3",
@@ -256,14 +235,7 @@
     "href": "slides/chatbot.html#response-3",
     "title": "Chatbot",
     "section": "Response",
-    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)"
-  },
-  {
-    "objectID": "slides/chatbot.html#response-3-output",
-    "href": "slides/chatbot.html#response-3-output",
-    "title": "Chatbot",
-    "section": "Response",
-    "text": "Response\n\n{\n  \"content\": \"Of course! Your name is Isa. Let me know if there's anything else I can assist you with.\",\n  \"role\": \"assistant\"\n}\nOf course! Your name is Isa. Let me know if there's anything else I can assist you with."
+    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n\n\n{\n  \"content\": \"Your name is Isa!\",\n  \"role\": \"assistant\"\n}\nYour name is Isa!"
   },
   {
     "objectID": "slides/chatbot.html#context",
@@ -283,15 +255,15 @@
     "objectID": "slides/chatbot.html#panel-dashboard-.smaller-.background-coloraquamarine",
     "href": "slides/chatbot.html#panel-dashboard-.smaller-.background-coloraquamarine",
     "title": "Chatbot",
-    "section": "Panel Dashboard {.smaller .background-color=“aquamarine”}",
-    "text": "Panel Dashboard {.smaller .background-color=“aquamarine”}\n\nNote that the dasboard in this presentation is not working\nYou need to run the Jupyter Notebook on your own machine in order to use the Dashboard\n\n\npn.extension()\n\npanels = []  # collect display\n\ninp = pn.widgets.TextInput(value=\"Hi\", placeholder='Enter text here…')\nbutton_conversation = pn.widgets.Button(name=\"Chat!\")\n\ninteractive_conversation = pn.bind(collect_messages, button_conversation)\n\ndashboard = pn.Column(\n    inp,\n    pn.Row(button_conversation),\n    pn.panel(interactive_conversation, loading_indicator=True, height=300),\n)\n\ndashboard"
+    "section": "Panel Dashboard { .smaller .background-color=“aquamarine”}",
+    "text": "Panel Dashboard { .smaller .background-color=“aquamarine”}\n\nNote that the dasboard in this presentation is not working\nYou need to run the Jupyter Notebook on your own machine in order to use the Dashboard\n\n\npn.extension()\n\npanels = []  # collect display\n\ninp = pn.widgets.TextInput(value=\"Hi\", placeholder='Enter text here…')\nbutton_conversation = pn.widgets.Button(name=\"Chat!\")\n\ninteractive_conversation = pn.bind(collect_messages, button_conversation)\n\ndashboard = pn.Column(\n    inp,\n    pn.Row(button_conversation),\n    pn.panel(interactive_conversation, loading_indicator=True, height=300),\n)\n\ndashboard"
   },
   {
     "objectID": "slides/chatbot.html#panel-dashboard-.smaller-.background-coloraquamarine-output",
     "href": "slides/chatbot.html#panel-dashboard-.smaller-.background-coloraquamarine-output",
     "title": "Chatbot",
-    "section": "Panel Dashboard {.smaller .background-color=“aquamarine”}",
-    "text": "Panel Dashboard {.smaller .background-color=“aquamarine”}\n\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n{\n  \"content\": \"Hello! Welcome to our pizza restaurant. How can I assist you today?\",\n  \"role\": \"assistant\"\n}"
+    "section": "Panel Dashboard { .smaller .background-color=“aquamarine”}",
+    "text": "Panel Dashboard { .smaller .background-color=“aquamarine”}\n\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n{\n  \"content\": \"Hello! Welcome to our pizza restaurant. How can I assist you today?\",\n  \"role\": \"assistant\"\n}"
   },
   {
     "objectID": "slides/chatbot.html#json-food-order-summary",
@@ -312,7 +284,7 @@
     "href": "slides/chatbot.html#output-output",
     "title": "Chatbot",
     "section": "Output",
-    "text": "Output\n\n{\n  \"content\": \"Sure! Here's a JSON summary of your food order:\\n\\n{\\n  \\\"pizza\\\": {\\n    \\\"size\\\": \\\"12.95\\\",\\n    \\\"toppings\\\": [\\\"extra cheese\\\", \\\"mushrooms\\\"]\\n  },\\n  \\\"drinks\\\": [\\n    {\\n      \\\"name\\\": \\\"coke\\\",\\n      \\\"size\\\": \\\"3.00\\\"\\n    },\\n    {\\n      \\\"name\\\": \\\"sprite\\\",\\n      \\\"size\\\": \\\"2.00\\\"\\n    }\\n  ],\\n  \\\"sides\\\": [\\n    {\\n      \\\"name\\\": \\\"fries\\\",\\n      \\\"size\\\": \\\"4.50\\\"\\n    }\\n  ],\\n  \\\"total_price\\\": \\\"25.45\\\"\\n}\\n\\nPlease let me know if there's anything else you'd like to add to your order!\",\n  \"role\": \"assistant\"\n}\nSure! Here's a JSON summary of your food order:\n\n{\n  \"pizza\": {\n    \"size\": \"12.95\",\n    \"toppings\": [\"extra cheese\", \"mushrooms\"]\n  },\n  \"drinks\": [\n    {\n      \"name\": \"coke\",\n      \"size\": \"3.00\"\n    },\n    {\n      \"name\": \"sprite\",\n      \"size\": \"2.00\"\n    }\n  ],\n  \"sides\": [\n    {\n      \"name\": \"fries\",\n      \"size\": \"4.50\"\n    }\n  ],\n  \"total_price\": \"25.45\"\n}\n\nPlease let me know if there's anything else you'd like to add to your order!"
+    "text": "Output\n\n{\n  \"content\": \"Sure! Here's a JSON summary of your food order:\\n\\n{\\n  \\\"pizza\\\": {\\n    \\\"type\\\": \\\"pepperoni\\\",\\n    \\\"size\\\": \\\"large\\\"\\n  },\\n  \\\"toppings\\\": [\\n    \\\"extra cheese\\\",\\n    \\\"mushrooms\\\"\\n  ],\\n  \\\"drinks\\\": [\\n    {\\n      \\\"type\\\": \\\"coke\\\",\\n      \\\"size\\\": \\\"medium\\\"\\n    },\\n    {\\n      \\\"type\\\": \\\"sprite\\\",\\n      \\\"size\\\": \\\"small\\\"\\n    }\\n  ],\\n  \\\"sides\\\": [\\n    {\\n      \\\"type\\\": \\\"fries\\\",\\n      \\\"size\\\": \\\"regular\\\"\\n    }\\n  ],\\n  \\\"total_price\\\": 29.45\\n}\\n\\nPlease let me know if there's anything else you'd like to add to your order!\",\n  \"role\": \"assistant\"\n}\nSure! Here's a JSON summary of your food order:\n\n{\n  \"pizza\": {\n    \"type\": \"pepperoni\",\n    \"size\": \"large\"\n  },\n  \"toppings\": [\n    \"extra cheese\",\n    \"mushrooms\"\n  ],\n  \"drinks\": [\n    {\n      \"type\": \"coke\",\n      \"size\": \"medium\"\n    },\n    {\n      \"type\": \"sprite\",\n      \"size\": \"small\"\n    }\n  ],\n  \"sides\": [\n    {\n      \"type\": \"fries\",\n      \"size\": \"regular\"\n    }\n  ],\n  \"total_price\": 29.45\n}\n\nPlease let me know if there's anything else you'd like to add to your order!"
   },
   {
     "objectID": "slides/transforming.html#api-key-and-python-libaries",
@@ -445,7 +417,7 @@
     "href": "slides/transforming.html#proofreading",
     "title": "Transforming",
     "section": "Proofreading",
-    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: vyh““” response = get_completion(prompt) print(response)\n\n\n## Review about a toy  {.smaller}\n\n::: {#43ac26df .cell output-location='slide' execution_count=13}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
+    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: rte““” response = get_completion(prompt) print(response)\n\n\n## Review about a toy  {.smaller}\n\n::: {#43ac26df .cell output-location='slide' execution_count=13}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
   },
   {
     "objectID": "slides/transforming.html#proofreading-1",
