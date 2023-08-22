@@ -418,7 +418,8 @@ Jan Kirenz
 <li><a href="#/friendly-chatbot" id="/toc-friendly-chatbot">Friendly Chatbot</a></li>
 <li><a href="#/chat-without-history" id="/toc-chat-without-history">Chat without history</a></li>
 <li><a href="#/chat-with-history" id="/toc-chat-with-history">Chat with history</a></li>
-<li><a href="#/orderbot" id="/toc-orderbot">OrderBot</a></li>
+<li><a href="#/orderbot-with-panel" id="/toc-orderbot-with-panel">OrderBot with Panel</a></li>
+<li><a href="#/what-is-panel" id="/toc-what-is-panel">What is Panel?</a></li>
 </ul>
 </nav>
 </section>
@@ -429,7 +430,7 @@ Jan Kirenz
 </section>
 <section id="python" class="slide level2">
 <h2>Python</h2>
-<div id="fef0119c" class="cell" data-execution_count="1">
+<div id="f7881447" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> panel <span class="im">as</span> pn  <span class="co"># GUI</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> openai</span>
@@ -440,7 +441,7 @@ Jan Kirenz
 </section>
 <section id="helper-function-1" class="slide level2">
 <h2>Helper function 1</h2>
-<div id="99becda8" class="cell" data-execution_count="2">
+<div id="a8e70757" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
@@ -453,7 +454,7 @@ Jan Kirenz
 </section>
 <section id="helper-function-2" class="slide level2">
 <h2>Helper function 2</h2>
-<div id="fa4c3136" class="cell" data-execution_count="3">
+<div id="e1a9276d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">def</span> get_completion_from_messages(messages, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>, temperature<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb3-2"><a href="#cb3-2"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
 <span id="cb3-3"><a href="#cb3-3"></a>        model<span class="op">=</span>model,</span>
@@ -471,7 +472,7 @@ Jan Kirenz
 </section>
 <section id="messages" class="slide level2">
 <h2>Messages</h2>
-<div id="0bba1480" class="cell" data-execution_count="4">
+<div id="2ed99c98" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>messages <span class="op">=</span> [</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an assistant that speaks like Shakespeare.'</span>},</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'tell me a joke'</span>},</span>
@@ -481,7 +482,7 @@ Jan Kirenz
 </section>
 <section id="response" class="slide level2">
 <h2>Response</h2>
-<div id="05c49e0f" class="cell" data-execution_count="5">
+<div id="640c68df" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -490,10 +491,10 @@ Jan Kirenz
 </section><section id="response-output" class="slide level2 output-location-slide"><h2>Response</h2><div class="cell output-location-slide" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
-  "content": "To reach the other side, of course! 'Tis a classic jest that even a humble jester such as myself cannot resist.",
+  "content": "To get to the other side, of course, but verily, the other side was wrought with peril and danger, so it swiftly returned from whence it came, forsooth!",
   "role": "assistant"
 }
-To reach the other side, of course! 'Tis a classic jest that even a humble jester such as myself cannot resist.</code></pre>
+To get to the other side, of course, but verily, the other side was wrought with peril and danger, so it swiftly returned from whence it came, forsooth!</code></pre>
 </div>
 </div></section></section>
 <section>
@@ -503,18 +504,15 @@ To reach the other side, of course! 'Tis a classic jest that even a humble jeste
 </section>
 <section id="messages-1" class="slide level2">
 <h2>Messages</h2>
-<div id="da5d9730" class="cell" data-execution_count="6">
+<div id="dcdb197c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>messages <span class="op">=</span> [</span>
 <span id="cb7-2"><a href="#cb7-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are friendly chatbot.'</span>},</span>
 <span id="cb7-3"><a href="#cb7-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Hi, my name is Isa'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
 </section>
-<section id="messages-1-output" class="slide level2 output-location-slide"><h2>Messages</h2><div class="cell output-location-slide" data-execution_count="6">
-
-</div></section><section id="response-1" class="slide level2">
+<section id="response-1" class="slide level2">
 <h2>Response</h2>
-<div id="35ebb0eb" class="cell" data-execution_count="7">
+<div id="580aaaff" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -523,10 +521,10 @@ To reach the other side, of course! 'Tis a classic jest that even a humble jeste
 </section><section id="response-1-output" class="slide level2 output-location-slide"><h2>Response</h2><div class="cell output-location-slide" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
-  "content": "Hi Isa! It's nice to meet you. How can I help you today?",
+  "content": "Hello Isa, nice to meet you! How can I assist you today?",
   "role": "assistant"
 }
-Hi Isa! It's nice to meet you. How can I help you today?</code></pre>
+Hello Isa, nice to meet you! How can I assist you today?</code></pre>
 </div>
 </div></section></section>
 <section>
@@ -536,7 +534,7 @@ Hi Isa! It's nice to meet you. How can I help you today?</code></pre>
 </section>
 <section id="messages-2" class="slide level2">
 <h2>Messages</h2>
-<div id="763e2b14" class="cell" data-execution_count="8">
+<div id="c14e45c1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>messages <span class="op">=</span> [</span>
 <span id="cb10-2"><a href="#cb10-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are friendly chatbot.'</span>},</span>
 <span id="cb10-3"><a href="#cb10-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Yes,  can you remind me, What is my name?'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -544,7 +542,7 @@ Hi Isa! It's nice to meet you. How can I help you today?</code></pre>
 </section>
 <section id="response-2" class="slide level2">
 <h2>Response</h2>
-<div id="b6f64414" class="cell" data-execution_count="9">
+<div id="fc50e11b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -553,10 +551,10 @@ Hi Isa! It's nice to meet you. How can I help you today?</code></pre>
 </section><section id="response-2-output" class="slide level2 output-location-slide"><h2>Response</h2><div class="cell output-location-slide" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
-  "content": "I apologize, but as a chatbot, I do not have access to your personal information. Therefore, I cannot remind you of your name.",
+  "content": "I'm sorry, but as a chatbot, I don't have access to personal information. I don't know your name.",
   "role": "assistant"
 }
-I apologize, but as a chatbot, I do not have access to your personal information. Therefore, I cannot remind you of your name.</code></pre>
+I'm sorry, but as a chatbot, I don't have access to personal information. I don't know your name.</code></pre>
 </div>
 </div></section></section>
 <section>
@@ -566,7 +564,7 @@ I apologize, but as a chatbot, I do not have access to your personal information
 </section>
 <section id="messages-3" class="slide level2">
 <h2>Messages</h2>
-<div id="c83d9857" class="cell" data-execution_count="10">
+<div id="d912c105" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>messages <span class="op">=</span> [</span>
 <span id="cb13-2"><a href="#cb13-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are friendly chatbot.'</span>},</span>
 <span id="cb13-3"><a href="#cb13-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Hi, my name is Isa'</span>},</span>
@@ -577,7 +575,7 @@ I apologize, but as a chatbot, I do not have access to your personal information
 </section>
 <section id="response-3" class="slide level2">
 <h2>Response</h2>
-<div id="28be22b6" class="cell" data-execution_count="11">
+<div id="c6320e6b" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb14-2"><a href="#cb14-2"></a></span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -586,95 +584,107 @@ I apologize, but as a chatbot, I do not have access to your personal information
 </section><section id="response-3-output" class="slide level2 output-location-slide"><h2>Response</h2><div class="cell output-location-slide" data-execution_count="11">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
-  "content": "Your name is Isa.",
+  "content": "Of course! Your name is Isa. Let me know if there's anything else I can assist you with.",
   "role": "assistant"
 }
-Your name is Isa.</code></pre>
+Of course! Your name is Isa. Let me know if there's anything else I can assist you with.</code></pre>
 </div>
 </div></section></section>
-<section>
-<section id="orderbot" class="title-slide slide level1 center">
-<h1>OrderBot</h1>
-
-</section>
-<section id="context" class="slide level2">
-<h2>Context</h2>
+<section id="orderbot-with-panel" class="title-slide slide level1 center">
+<h1>OrderBot with Panel</h1>
 <ul>
-<li>We can automate the collection of user prompts and assistant responses to build a OrderBot.</li>
+<li><p>We can automate the collection of user prompts and assistant responses to build a OrderBot</p></li>
+<li><p>The OrderBot will take orders at a pizza restaurant</p></li>
+<li><p>We use Panel to build a Dashboard</p></li>
 </ul>
-<p>-The OrderBot will take orders at a pizza restaurant.</p>
+</section>
+
+<section>
+<section id="what-is-panel" class="title-slide slide level1 center">
+<h1>What is Panel?</h1>
+
+<img data-src="../images/panel.png" class="r-stretch"><ul>
+<li><a href="https://panel.holoviz.org/">Panel</a> is an open-source Python library that lets you easily build dashboards</li>
+</ul>
+</section>
+<section id="context" class="slide level2 smaller">
+<h2>Context</h2>
+<div id="66d62f6d" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>context <span class="op">=</span> [{<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">"""</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">You are OrderBot, an automated service to collect orders for a pizza restaurant. </span><span class="ch">\</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="st">You first greet the customer, then collects the order, </span><span class="ch">\</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="st">and then asks if it's a pickup or delivery. </span><span class="ch">\</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="st">You wait to collect the entire order, then summarize it and check for a final </span><span class="ch">\</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="st">time if the customer wants to add anything else. </span><span class="ch">\</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="st">If it's a delivery, you ask for an address. </span><span class="ch">\</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="st">Finally you collect the payment.</span><span class="ch">\</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="st">Make sure to clarify all options, extras and sizes to uniquely </span><span class="ch">\</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="st">identify the item from the menu.</span><span class="ch">\</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="st">You respond in a short, very conversational friendly style. </span><span class="ch">\</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="st">The menu includes </span><span class="ch">\</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="st">pepperoni pizza  12.95, 10.00, 7.00 </span><span class="ch">\</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="st">cheese pizza   10.95, 9.25, 6.50 </span><span class="ch">\</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="st">eggplant pizza   11.95, 9.75, 6.75 </span><span class="ch">\</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="st">fries 4.50, 3.50 </span><span class="ch">\</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="st">greek salad 7.25 </span><span class="ch">\</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="st">Toppings: </span><span class="ch">\</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="st">extra cheese 2.00, </span><span class="ch">\</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="st">mushrooms 1.50 </span><span class="ch">\</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a><span class="st">sausage 3.00 </span><span class="ch">\</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="st">canadian bacon 3.50 </span><span class="ch">\</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a><span class="st">AI sauce 1.50 </span><span class="ch">\</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="st">peppers 1.00 </span><span class="ch">\</span></span>
+<span id="cb16-25"><a href="#cb16-25"></a><span class="st">Drinks: </span><span class="ch">\</span></span>
+<span id="cb16-26"><a href="#cb16-26"></a><span class="st">coke 3.00, 2.00, 1.00 </span><span class="ch">\</span></span>
+<span id="cb16-27"><a href="#cb16-27"></a><span class="st">sprite 3.00, 2.00, 1.00 </span><span class="ch">\</span></span>
+<span id="cb16-28"><a href="#cb16-28"></a><span class="st">bottled water 5.00 </span><span class="ch">\</span></span>
+<span id="cb16-29"><a href="#cb16-29"></a><span class="st">"""</span>}]  <span class="co"># accumulate messages</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="helper-function" class="slide level2">
 <h2>Helper function</h2>
-<div id="192048bb" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">def</span> collect_messages(_):</span>
-<span id="cb16-2"><a href="#cb16-2"></a>    prompt <span class="op">=</span> inp.value_input</span>
-<span id="cb16-3"><a href="#cb16-3"></a>    inp.value <span class="op">=</span> <span class="st">''</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>    context.append({<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="ss">f"</span><span class="sc">{</span>prompt<span class="sc">}</span><span class="ss">"</span>})</span>
-<span id="cb16-5"><a href="#cb16-5"></a>    response <span class="op">=</span> get_completion_from_messages(context)</span>
-<span id="cb16-6"><a href="#cb16-6"></a>    context.append({<span class="st">'role'</span>: <span class="st">'assistant'</span>, <span class="st">'content'</span>: <span class="ss">f"</span><span class="sc">{</span>response<span class="sc">}</span><span class="ss">"</span>})</span>
-<span id="cb16-7"><a href="#cb16-7"></a>    panels.append(</span>
-<span id="cb16-8"><a href="#cb16-8"></a>        pn.Row(<span class="st">'User:'</span>, pn.pane.Markdown(prompt, width<span class="op">=</span><span class="dv">600</span>)))</span>
-<span id="cb16-9"><a href="#cb16-9"></a>    panels.append(</span>
-<span id="cb16-10"><a href="#cb16-10"></a>        pn.Row(<span class="st">'Assistant:'</span>, pn.pane.Markdown(response, width<span class="op">=</span><span class="dv">600</span>, styles<span class="op">=</span>{<span class="st">'background-color'</span>: <span class="st">'#F6F6F6'</span>})))</span>
-<span id="cb16-11"><a href="#cb16-11"></a></span>
-<span id="cb16-12"><a href="#cb16-12"></a>    <span class="cf">return</span> pn.Column(<span class="op">*</span>panels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="278f84cd" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">def</span> collect_messages(_):</span>
+<span id="cb17-2"><a href="#cb17-2"></a>    prompt <span class="op">=</span> inp.value_input</span>
+<span id="cb17-3"><a href="#cb17-3"></a>    inp.value <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>    context.append({<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="ss">f"</span><span class="sc">{</span>prompt<span class="sc">}</span><span class="ss">"</span>})</span>
+<span id="cb17-5"><a href="#cb17-5"></a>    response <span class="op">=</span> get_completion_from_messages(context)</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    context.append({<span class="st">'role'</span>: <span class="st">'assistant'</span>, <span class="st">'content'</span>: <span class="ss">f"</span><span class="sc">{</span>response<span class="sc">}</span><span class="ss">"</span>})</span>
+<span id="cb17-7"><a href="#cb17-7"></a>    panels.append(</span>
+<span id="cb17-8"><a href="#cb17-8"></a>        pn.Row(<span class="st">'User:'</span>, pn.pane.Markdown(prompt, width<span class="op">=</span><span class="dv">600</span>)))</span>
+<span id="cb17-9"><a href="#cb17-9"></a>    panels.append(</span>
+<span id="cb17-10"><a href="#cb17-10"></a>        pn.Row(<span class="st">'Assistant:'</span>, pn.pane.Markdown(response, width<span class="op">=</span><span class="dv">600</span>, styles<span class="op">=</span>{<span class="st">'background-color'</span>: <span class="st">'#F6F6F6'</span>})))</span>
+<span id="cb17-11"><a href="#cb17-11"></a></span>
+<span id="cb17-12"><a href="#cb17-12"></a>    <span class="cf">return</span> pn.Column(<span class="op">*</span>panels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="panel-dashboard" class="slide level2">
-<h2>Panel Dashboard</h2>
-<div id="5c88edfc" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>pn.extension()</span>
-<span id="cb17-2"><a href="#cb17-2"></a></span>
-<span id="cb17-3"><a href="#cb17-3"></a>panels <span class="op">=</span> []  <span class="co"># collect display</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a></span>
-<span id="cb17-5"><a href="#cb17-5"></a>context <span class="op">=</span> [{<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">"""</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="st">You are OrderBot, an automated service to collect orders for a pizza restaurant. </span><span class="ch">\</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="st">You first greet the customer, then collects the order, </span><span class="ch">\</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="st">and then asks if it's a pickup or delivery. </span><span class="ch">\</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="st">You wait to collect the entire order, then summarize it and check for a final </span><span class="ch">\</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="st">time if the customer wants to add anything else. </span><span class="ch">\</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="st">If it's a delivery, you ask for an address. </span><span class="ch">\</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="st">Finally you collect the payment.</span><span class="ch">\</span></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="st">Make sure to clarify all options, extras and sizes to uniquely </span><span class="ch">\</span></span>
-<span id="cb17-14"><a href="#cb17-14"></a><span class="st">identify the item from the menu.</span><span class="ch">\</span></span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="st">You respond in a short, very conversational friendly style. </span><span class="ch">\</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a><span class="st">The menu includes </span><span class="ch">\</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a><span class="st">pepperoni pizza  12.95, 10.00, 7.00 </span><span class="ch">\</span></span>
-<span id="cb17-18"><a href="#cb17-18"></a><span class="st">cheese pizza   10.95, 9.25, 6.50 </span><span class="ch">\</span></span>
-<span id="cb17-19"><a href="#cb17-19"></a><span class="st">eggplant pizza   11.95, 9.75, 6.75 </span><span class="ch">\</span></span>
-<span id="cb17-20"><a href="#cb17-20"></a><span class="st">fries 4.50, 3.50 </span><span class="ch">\</span></span>
-<span id="cb17-21"><a href="#cb17-21"></a><span class="st">greek salad 7.25 </span><span class="ch">\</span></span>
-<span id="cb17-22"><a href="#cb17-22"></a><span class="st">Toppings: </span><span class="ch">\</span></span>
-<span id="cb17-23"><a href="#cb17-23"></a><span class="st">extra cheese 2.00, </span><span class="ch">\</span></span>
-<span id="cb17-24"><a href="#cb17-24"></a><span class="st">mushrooms 1.50 </span><span class="ch">\</span></span>
-<span id="cb17-25"><a href="#cb17-25"></a><span class="st">sausage 3.00 </span><span class="ch">\</span></span>
-<span id="cb17-26"><a href="#cb17-26"></a><span class="st">canadian bacon 3.50 </span><span class="ch">\</span></span>
-<span id="cb17-27"><a href="#cb17-27"></a><span class="st">AI sauce 1.50 </span><span class="ch">\</span></span>
-<span id="cb17-28"><a href="#cb17-28"></a><span class="st">peppers 1.00 </span><span class="ch">\</span></span>
-<span id="cb17-29"><a href="#cb17-29"></a><span class="st">Drinks: </span><span class="ch">\</span></span>
-<span id="cb17-30"><a href="#cb17-30"></a><span class="st">coke 3.00, 2.00, 1.00 </span><span class="ch">\</span></span>
-<span id="cb17-31"><a href="#cb17-31"></a><span class="st">sprite 3.00, 2.00, 1.00 </span><span class="ch">\</span></span>
-<span id="cb17-32"><a href="#cb17-32"></a><span class="st">bottled water 5.00 </span><span class="ch">\</span></span>
-<span id="cb17-33"><a href="#cb17-33"></a><span class="st">"""</span>}]  <span class="co"># accumulate messages</span></span>
-<span id="cb17-34"><a href="#cb17-34"></a></span>
-<span id="cb17-35"><a href="#cb17-35"></a></span>
-<span id="cb17-36"><a href="#cb17-36"></a>inp <span class="op">=</span> pn.widgets.TextInput(value<span class="op">=</span><span class="st">"Hi"</span>, placeholder<span class="op">=</span><span class="st">'Enter text here…'</span>)</span>
-<span id="cb17-37"><a href="#cb17-37"></a>button_conversation <span class="op">=</span> pn.widgets.Button(name<span class="op">=</span><span class="st">"Chat!"</span>)</span>
-<span id="cb17-38"><a href="#cb17-38"></a></span>
-<span id="cb17-39"><a href="#cb17-39"></a>interactive_conversation <span class="op">=</span> pn.bind(collect_messages, button_conversation)</span>
-<span id="cb17-40"><a href="#cb17-40"></a></span>
-<span id="cb17-41"><a href="#cb17-41"></a>dashboard <span class="op">=</span> pn.Column(</span>
-<span id="cb17-42"><a href="#cb17-42"></a>    inp,</span>
-<span id="cb17-43"><a href="#cb17-43"></a>    pn.Row(button_conversation),</span>
-<span id="cb17-44"><a href="#cb17-44"></a>    pn.panel(interactive_conversation, loading_indicator<span class="op">=</span><span class="va">True</span>, height<span class="op">=</span><span class="dv">300</span>),</span>
-<span id="cb17-45"><a href="#cb17-45"></a>)</span>
-<span id="cb17-46"><a href="#cb17-46"></a></span>
-<span id="cb17-47"><a href="#cb17-47"></a>dashboard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="panel-dashboard-.smaller-.background-coloraquamarine" class="slide level2">
+<h2>Panel Dashboard {.smaller .background-color=“aquamarine”}</h2>
+<ul>
+<li><p>Note that the dasboard in this presentation is <strong>not</strong> working</p></li>
+<li><p>You need to run the Jupyter Notebook on your own machine in order to use the Dashboard</p></li>
+</ul>
+<div id="251b52dc" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>pn.extension()</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a>panels <span class="op">=</span> []  <span class="co"># collect display</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a>inp <span class="op">=</span> pn.widgets.TextInput(value<span class="op">=</span><span class="st">"Hi"</span>, placeholder<span class="op">=</span><span class="st">'Enter text here…'</span>)</span>
+<span id="cb18-6"><a href="#cb18-6"></a>button_conversation <span class="op">=</span> pn.widgets.Button(name<span class="op">=</span><span class="st">"Chat!"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7"></a></span>
+<span id="cb18-8"><a href="#cb18-8"></a>interactive_conversation <span class="op">=</span> pn.bind(collect_messages, button_conversation)</span>
+<span id="cb18-9"><a href="#cb18-9"></a></span>
+<span id="cb18-10"><a href="#cb18-10"></a>dashboard <span class="op">=</span> pn.Column(</span>
+<span id="cb18-11"><a href="#cb18-11"></a>    inp,</span>
+<span id="cb18-12"><a href="#cb18-12"></a>    pn.Row(button_conversation),</span>
+<span id="cb18-13"><a href="#cb18-13"></a>    pn.panel(interactive_conversation, loading_indicator<span class="op">=</span><span class="va">True</span>, height<span class="op">=</span><span class="dv">300</span>),</span>
+<span id="cb18-14"><a href="#cb18-14"></a>)</span>
+<span id="cb18-15"><a href="#cb18-15"></a></span>
+<span id="cb18-16"><a href="#cb18-16"></a>dashboard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
-<section id="panel-dashboard-output" class="slide level2 output-location-slide"><h2>Panel Dashboard</h2><div class="cell output-location-slide" data-execution_count="13">
+<section id="panel-dashboard-.smaller-.background-coloraquamarine-output" class="slide level2 output-location-slide"><h2>Panel Dashboard {.smaller .background-color=“aquamarine”}</h2><div class="cell output-location-slide" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
 (function(root) {
@@ -1217,12 +1227,12 @@ if (window.Jupyter !== undefined) {
 </style>
 </div>
 <div class="cell-output cell-output-display">
-<div id="b0a48ce8-09ef-4e3f-b3e7-2946cf102315">
-  <div id="b9d2b178-19d6-42c1-8e09-b6c8014f4026" data-root-id="b0a48ce8-09ef-4e3f-b3e7-2946cf102315" style="display: contents;"></div>
+<div id="2c8a841f-e8b2-4e88-a415-e4a6c3aa97d5">
+  <div id="b91e5587-bd27-4e35-a48f-7de2bd87e74b" data-root-id="2c8a841f-e8b2-4e88-a415-e4a6c3aa97d5" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"c2d8f2fe-e1f4-43b2-8362-854958126122":{"version":"3.2.1","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"b0a48ce8-09ef-4e3f-b3e7-2946cf102315"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"eb6f97e9-229e-42fc-aa12-c6ec69a1d6e8","attributes":{"plot_id":"b0a48ce8-09ef-4e3f-b3e7-2946cf102315","comm_id":"c2cb2e03dbdc4fecafaa81ec1b3f535f","client_comm_id":"8a279c68656e45ee9530145a7555ff0a"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"c2d8f2fe-e1f4-43b2-8362-854958126122","roots":{"b0a48ce8-09ef-4e3f-b3e7-2946cf102315":"b9d2b178-19d6-42c1-8e09-b6c8014f4026"},"root_ids":["b0a48ce8-09ef-4e3f-b3e7-2946cf102315"]}];
+  var docs_json = {"a33fe8b3-362e-4036-8172-113c12357a70":{"version":"3.2.1","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"2c8a841f-e8b2-4e88-a415-e4a6c3aa97d5"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"69fb2579-2c64-4081-afc8-834459ef6da7","attributes":{"plot_id":"2c8a841f-e8b2-4e88-a415-e4a6c3aa97d5","comm_id":"193ecd46a21b4768ac1fc05e4700ff6d","client_comm_id":"f7798fea83264359b2e069d1bb96dc2d"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"a33fe8b3-362e-4036-8172-113c12357a70","roots":{"2c8a841f-e8b2-4e88-a415-e4a6c3aa97d5":"b91e5587-bd27-4e35-a48f-7de2bd87e74b"},"root_ids":["2c8a841f-e8b2-4e88-a415-e4a6c3aa97d5"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -1294,12 +1304,12 @@ if (window.Jupyter !== undefined) {
 
 </div>
 <div class="cell-output cell-output-display" data-execution_count="14">
-<div id="35d65715-6d37-4c3f-8c34-41232e69fbb7">
-  <div id="d18af373-ce90-429b-93b4-73e7cedc91d7" data-root-id="35d65715-6d37-4c3f-8c34-41232e69fbb7" style="display: contents;"></div>
+<div id="7d49121e-71e0-4970-9c15-e2ed25aaf2d2">
+  <div id="f45b4acb-9884-42bd-a2dd-ce5a9eeb2b68" data-root-id="7d49121e-71e0-4970-9c15-e2ed25aaf2d2" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"050f7488-253c-4902-b387-70de658467e8":{"version":"3.2.1","title":"Bokeh Application","roots":[{"type":"object","name":"Column","id":"35d65715-6d37-4c3f-8c34-41232e69fbb7","attributes":{"name":"Column00174","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"type":"object","name":"ImportedStyleSheet","id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/loading.css"}},{"type":"object","name":"ImportedStyleSheet","id":"1d21270a-3701-45bd-84bf-27deedd33cec","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/listpanel.css"}},{"type":"object","name":"ImportedStyleSheet","id":"9953e6da-7196-483b-8e19-35bec346119b","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/bundled/theme/default.css"}},{"type":"object","name":"ImportedStyleSheet","id":"aa55434c-8a48-4af1-91ca-328bb785cf78","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/bundled/theme/native.css"}}],"margin":0,"align":"start","children":[{"type":"object","name":"TextInput","id":"a1b9ed68-c871-46b0-97ec-6d99d88e6452","attributes":{"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","placeholder":"Enter text here\u2026","max_length":5000}},{"type":"object","name":"Row","id":"cd338196-ec4b-4776-bffe-964773badc67","attributes":{"name":"Row00119","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"1d21270a-3701-45bd-84bf-27deedd33cec"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"margin":0,"align":"start","children":[{"type":"object","name":"Button","id":"fc631dbe-8c30-4ebc-9c85-df9dc197f9db","attributes":{"js_event_callbacks":{"type":"map","entries":[["button_click",[{"type":"object","name":"CustomJS","id":"70a47998-bdd0-4c81-b363-db445ba67782","attributes":{"tags":[[5044216208,[null,"event:button_click"],[null,"loading"]]],"args":{"type":"map","entries":[["bidirectional",false],["properties",{"type":"map","entries":[["event:button_click","loading"]]}],["source",{"id":"fc631dbe-8c30-4ebc-9c85-df9dc197f9db"}],["target",{"type":"object","name":"Column","id":"539073a6-9aac-4055-bf87-4c3a360a181c","attributes":{"name":"Column00134","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"1d21270a-3701-45bd-84bf-27deedd33cec"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"height":300,"min_height":300,"margin":0,"align":"start","children":[{"type":"object","name":"Column","id":"598d1ef5-3c32-4ab9-9383-7292cef9634c","attributes":{"name":"Column00168","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"1d21270a-3701-45bd-84bf-27deedd33cec"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"margin":0,"align":"start","children":[{"type":"object","name":"Row","id":"da6918cc-f752-4736-a74f-0f98c29e4f3d","attributes":{"name":"Row00150","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"1d21270a-3701-45bd-84bf-27deedd33cec"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.markup.HTML","id":"8fdc7906-a828-4a79-baa7-707fa7cf87c9","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"type":"object","name":"ImportedStyleSheet","id":"64d7bc43-89a3-49dc-9df5-b1d1be8dcd06","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/markdown.css"}},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"margin":[5,10],"align":"start","text":"&lt;p&gt;User:&lt;/p&gt;\n"}},{"type":"object","name":"panel.models.markup.HTML","id":"ada1bce1-ac13-465c-9d29-9b50d9a6c7f5","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"64d7bc43-89a3-49dc-9df5-b1d1be8dcd06"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"width":600,"min_width":600,"margin":[5,10],"align":"start"}}]}},{"type":"object","name":"Row","id":"a21cd162-a21b-4c05-bfe1-4aa60fd81cc9","attributes":{"name":"Row00165","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"1d21270a-3701-45bd-84bf-27deedd33cec"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.markup.HTML","id":"2d2072a8-f9d0-4fde-b2ca-045458c56606","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"64d7bc43-89a3-49dc-9df5-b1d1be8dcd06"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"margin":[5,10],"align":"start","text":"&lt;p&gt;Assistant:&lt;/p&gt;\n"}},{"type":"object","name":"panel.models.markup.HTML","id":"44efb314-c27b-430c-9b13-546059697c39","attributes":{"css_classes":["markdown"],"styles":{"type":"map","entries":[["background-color","#F6F6F6"]]},"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"id":"64d7bc43-89a3-49dc-9df5-b1d1be8dcd06"},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"width":600,"min_width":600,"margin":[5,10],"align":"start","text":"&lt;p&gt;Hello! Welcome to our pizza restaurant. How can I assist you today?&lt;/p&gt;\n"}}]}}]}}]}}]]},"code":"\n    if ('event:button_click'.startsWith('event:')) {\n      var value = true\n    } else {\n      var value = source['event:button_click'];\n      value = value;\n    }\n    if (typeof value !== 'boolean' || source.labels !== ['Loading']) {\n      value = true\n    }\n    var css_classes = target.css_classes.slice()\n    var loading_css = ['pn-loading', 'pn-arc']\n    if (value) {\n      for (var css of loading_css) {\n        if (!(css in css_classes)) {\n          css_classes.push(css)\n        }\n      }\n    } else {\n     for (var css of loading_css) {\n        var index = css_classes.indexOf(css)\n        if (index > -1) {\n          css_classes.splice(index, 1)\n        }\n      }\n    }\n    target['css_classes'] = css_classes\n    "}}]]]},"subscribed_events":{"type":"set","entries":["button_click"]},"css_classes":["solid"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"d4917b7e-2932-47d8-a7bd-9e8a1faf3b2d"},{"type":"object","name":"ImportedStyleSheet","id":"766465f2-4263-43c5-a892-ed00cd9ff411","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/button.css"}},{"id":"9953e6da-7196-483b-8e19-35bec346119b"},{"id":"aa55434c-8a48-4af1-91ca-328bb785cf78"}],"margin":[5,10],"align":"start","label":"Chat!"}}]}},{"id":"539073a6-9aac-4055-bf87-4c3a360a181c"}]}},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"59f0cf37-64ed-4dd8-bae8-f3e1956731e4","attributes":{"plot_id":"35d65715-6d37-4c3f-8c34-41232e69fbb7","comm_id":"bba4cdc0ef7d4e18983eeff1000ef64c","client_comm_id":"e94043ba647d494197e6d62fbdeb2e47"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"050f7488-253c-4902-b387-70de658467e8","roots":{"35d65715-6d37-4c3f-8c34-41232e69fbb7":"d18af373-ce90-429b-93b4-73e7cedc91d7"},"root_ids":["35d65715-6d37-4c3f-8c34-41232e69fbb7"]}];
+  var docs_json = {"ba5d8d7c-fa1f-4199-872e-b3b18b365a69":{"version":"3.2.1","title":"Bokeh Application","roots":[{"type":"object","name":"Column","id":"7d49121e-71e0-4970-9c15-e2ed25aaf2d2","attributes":{"name":"Column00174","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"type":"object","name":"ImportedStyleSheet","id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/loading.css"}},{"type":"object","name":"ImportedStyleSheet","id":"60a5c757-76b6-4864-93a3-4333fd6c46ea","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/listpanel.css"}},{"type":"object","name":"ImportedStyleSheet","id":"197a12b3-646d-40d1-a11d-52ec6399488b","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/bundled/theme/default.css"}},{"type":"object","name":"ImportedStyleSheet","id":"5c13e887-ad52-46a8-aebe-c680055eee6b","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/bundled/theme/native.css"}}],"margin":0,"align":"start","children":[{"type":"object","name":"TextInput","id":"0c1d8e98-36c2-49db-ab70-f5de99e1b255","attributes":{"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","placeholder":"Enter text here\u2026","max_length":5000}},{"type":"object","name":"Row","id":"08153573-c8d9-41ae-9d53-15a500465211","attributes":{"name":"Row00119","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"60a5c757-76b6-4864-93a3-4333fd6c46ea"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"margin":0,"align":"start","children":[{"type":"object","name":"Button","id":"71001726-c58c-498f-ae15-78b6a1bd979e","attributes":{"js_event_callbacks":{"type":"map","entries":[["button_click",[{"type":"object","name":"CustomJS","id":"50969c04-352f-4eaf-9f3d-20e3dcac0811","attributes":{"tags":[[5837507280,[null,"event:button_click"],[null,"loading"]]],"args":{"type":"map","entries":[["bidirectional",false],["properties",{"type":"map","entries":[["event:button_click","loading"]]}],["source",{"id":"71001726-c58c-498f-ae15-78b6a1bd979e"}],["target",{"type":"object","name":"Column","id":"41b7d822-aa37-4611-87d3-86bc527ac437","attributes":{"name":"Column00134","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"60a5c757-76b6-4864-93a3-4333fd6c46ea"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"height":300,"min_height":300,"margin":0,"align":"start","children":[{"type":"object","name":"Column","id":"5ef6c0fe-0df0-4580-b994-82b9463a8452","attributes":{"name":"Column00168","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"60a5c757-76b6-4864-93a3-4333fd6c46ea"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"margin":0,"align":"start","children":[{"type":"object","name":"Row","id":"931a9503-80b6-4a2c-ab25-25ea751b90c6","attributes":{"name":"Row00150","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"60a5c757-76b6-4864-93a3-4333fd6c46ea"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.markup.HTML","id":"dfff6475-bd9a-4498-95b8-9ccbc1fe8d22","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"type":"object","name":"ImportedStyleSheet","id":"deab0ae9-e962-4e52-bdc8-9dd4e68c9437","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/markdown.css"}},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"margin":[5,10],"align":"start","text":"&lt;p&gt;User:&lt;/p&gt;\n"}},{"type":"object","name":"panel.models.markup.HTML","id":"f674804c-1e63-4567-a7f1-cffc71000ccc","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"deab0ae9-e962-4e52-bdc8-9dd4e68c9437"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"width":600,"min_width":600,"margin":[5,10],"align":"start"}}]}},{"type":"object","name":"Row","id":"28d4431e-3ae4-4e01-a0c3-f0c9285fd903","attributes":{"name":"Row00165","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"60a5c757-76b6-4864-93a3-4333fd6c46ea"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.markup.HTML","id":"cc63c421-7fa7-4a95-829e-a0b8cf7396cb","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"deab0ae9-e962-4e52-bdc8-9dd4e68c9437"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"margin":[5,10],"align":"start","text":"&lt;p&gt;Assistant:&lt;/p&gt;\n"}},{"type":"object","name":"panel.models.markup.HTML","id":"ca4e0abf-23c3-4876-8352-5c13486a1b70","attributes":{"css_classes":["markdown"],"styles":{"type":"map","entries":[["background-color","#F6F6F6"]]},"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"id":"deab0ae9-e962-4e52-bdc8-9dd4e68c9437"},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"width":600,"min_width":600,"margin":[5,10],"align":"start","text":"&lt;p&gt;Hello! Welcome to our pizza restaurant. How can I assist you today?&lt;/p&gt;\n"}}]}}]}}]}}]]},"code":"\n    if ('event:button_click'.startsWith('event:')) {\n      var value = true\n    } else {\n      var value = source['event:button_click'];\n      value = value;\n    }\n    if (typeof value !== 'boolean' || source.labels !== ['Loading']) {\n      value = true\n    }\n    var css_classes = target.css_classes.slice()\n    var loading_css = ['pn-loading', 'pn-arc']\n    if (value) {\n      for (var css of loading_css) {\n        if (!(css in css_classes)) {\n          css_classes.push(css)\n        }\n      }\n    } else {\n     for (var css of loading_css) {\n        var index = css_classes.indexOf(css)\n        if (index > -1) {\n          css_classes.splice(index, 1)\n        }\n      }\n    }\n    target['css_classes'] = css_classes\n    "}}]]]},"subscribed_events":{"type":"set","entries":["button_click"]},"css_classes":["solid"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"caafeb5f-d9a9-41a9-9a0b-ddee7cde6c1f"},{"type":"object","name":"ImportedStyleSheet","id":"497e2362-7b3d-401a-a7b6-3f69e3313e83","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/button.css"}},{"id":"197a12b3-646d-40d1-a11d-52ec6399488b"},{"id":"5c13e887-ad52-46a8-aebe-c680055eee6b"}],"margin":[5,10],"align":"start","label":"Chat!"}}]}},{"id":"41b7d822-aa37-4611-87d3-86bc527ac437"}]}},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"864ab8d8-ab5d-48fb-bfbf-ed44116c6050","attributes":{"plot_id":"7d49121e-71e0-4970-9c15-e2ed25aaf2d2","comm_id":"03734acc4519430f83bbcf33625a3280","client_comm_id":"ecdf0461d4ce4116b21cf43b70a85fac"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"ba5d8d7c-fa1f-4199-872e-b3b18b365a69","roots":{"7d49121e-71e0-4970-9c15-e2ed25aaf2d2":"f45b4acb-9884-42bd-a2dd-ce5a9eeb2b68"},"root_ids":["7d49121e-71e0-4970-9c15-e2ed25aaf2d2"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -1363,59 +1373,59 @@ if (window.Jupyter !== undefined) {
 </div>
 </div></section><section id="json-food-order-summary" class="slide level2">
 <h2>JSON food order summary</h2>
-<div id="23886b21" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>messages <span class="op">=</span> context.copy()</span>
-<span id="cb19-2"><a href="#cb19-2"></a>messages.append(</span>
-<span id="cb19-3"><a href="#cb19-3"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'create a json summary of the previous food order. Itemize the price for each item</span><span class="ch">\</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="st"> The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '</span>},</span>
-<span id="cb19-5"><a href="#cb19-5"></a>)</span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="co"># The fields should be 1) pizza, price 2) list of toppings 3) list of drinks, include size include price  4) list of sides include size include price, 5)total price '},</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a></span>
-<span id="cb19-8"><a href="#cb19-8"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="57340b69" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>messages <span class="op">=</span> context.copy()</span>
+<span id="cb20-2"><a href="#cb20-2"></a>messages.append(</span>
+<span id="cb20-3"><a href="#cb20-3"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'create a json summary of the previous food order. Itemize the price for each item</span><span class="ch">\</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="st"> The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '</span>},</span>
+<span id="cb20-5"><a href="#cb20-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="output" class="slide level2">
+<h2>Output</h2>
+<div id="8dabeff1" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
 <div class="footer footer-default">
 <p>Jan Kirenz</p>
 </div>
-</section><section id="json-food-order-summary-output" class="slide level2 output-location-slide"><h2>JSON food order summary</h2><div class="cell output-location-slide" data-execution_count="14">
+</section><section id="output-output" class="slide level2 output-location-slide"><h2>Output</h2><div class="cell output-location-slide" data-execution_count="16">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
-  "content": "Sure! Here's a JSON summary of your food order:\n\n{\n  \"pizza\": {\n    \"type\": \"pepperoni\",\n    \"size\": \"large\"\n  },\n  \"toppings\": [\n    \"extra cheese\",\n    \"mushrooms\"\n  ],\n  \"drinks\": [\n    {\n      \"type\": \"coke\",\n      \"size\": \"medium\"\n    },\n    {\n      \"type\": \"sprite\",\n      \"size\": \"small\"\n    }\n  ],\n  \"sides\": [\n    {\n      \"type\": \"fries\",\n      \"size\": \"regular\"\n    }\n  ],\n  \"total_price\": 29.45\n}\n\nPlease let me know if there's anything else you'd like to add or modify.",
+  "content": "Sure! Here's a JSON summary of your food order:\n\n{\n  \"pizza\": {\n    \"size\": \"12.95\",\n    \"toppings\": [\"extra cheese\", \"mushrooms\"]\n  },\n  \"drinks\": [\n    {\n      \"name\": \"coke\",\n      \"size\": \"3.00\"\n    },\n    {\n      \"name\": \"sprite\",\n      \"size\": \"2.00\"\n    }\n  ],\n  \"sides\": [\n    {\n      \"name\": \"fries\",\n      \"size\": \"4.50\"\n    }\n  ],\n  \"total_price\": \"25.45\"\n}\n\nPlease let me know if there's anything else you'd like to add to your order!",
   "role": "assistant"
 }
 Sure! Here's a JSON summary of your food order:
 
 {
   "pizza": {
-    "type": "pepperoni",
-    "size": "large"
+    "size": "12.95",
+    "toppings": ["extra cheese", "mushrooms"]
   },
-  "toppings": [
-    "extra cheese",
-    "mushrooms"
-  ],
   "drinks": [
     {
-      "type": "coke",
-      "size": "medium"
+      "name": "coke",
+      "size": "3.00"
     },
     {
-      "type": "sprite",
-      "size": "small"
+      "name": "sprite",
+      "size": "2.00"
     }
   ],
   "sides": [
     {
-      "type": "fries",
-      "size": "regular"
+      "name": "fries",
+      "size": "4.50"
     }
   ],
-  "total_price": 29.45
+  "total_price": "25.45"
 }
 
-Please let me know if there's anything else you'd like to add or modify.</code></pre>
+Please let me know if there's anything else you'd like to add to your order!</code></pre>
 </div>
 </div></section></section>
     </div>
