@@ -852,5 +852,54 @@
     "title": "Transforming",
     "section": "Show differences",
     "text": "Show differences\n\nGot this for my daughter for Review of a Panda Plush Toy \nI purchased this adorable panda plush toy as a birthday gift for my daughter, who has a penchant for taking my belongings from my room. Contrary to popular belief, adults can also appreciate the charm of pandas. This cuddly companion has quickly become her birthday cuz constant companion, accompanying her wherever she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super goes. Its irresistibly soft and cute. cute appearance is simply delightful. \nHowever, I did notice a minor flaw in the design. One of the ears is a bit slightly lower than the other, and I don’t think which seems unintentional as the intention was not to create an asymmetrical look. Despite this small imperfection, the overall quality of the plush toy is commendable. \nIn terms of size, I must admit that was designed I expected it to be asymmetrical. It’s a bit small for what I paid for it though. I think there might larger considering its price. It would be worthwhile to explore other options that are bigger offer a larger size for the same price. It price point. Nevertheless, the compact size does make it convenient for my daughter to carry it around effortlessly. \nTo my surprise, the panda plush toy arrived a day earlier than expected, so I got to play the expected delivery date. This allowed me to indulge in some playtime with it myself before I gave it to my daughter.presenting it to my daughter. The early arrival was a pleasant surprise and added to the overall positive experience. \nIn conclusion, this panda plush toy is an enchanting gift that both children and adults can appreciate. Its softness and cuteness make it an irresistible companion. While there are minor design flaws and size considerations, the early delivery and overall quality make it a worthwhile purchase. I highly recommend this panda plush toy for anyone seeking a delightful and endearing gift."
+  },
+  {
+    "objectID": "slides/expanding.html#python",
+    "href": "slides/expanding.html#python",
+    "title": "Expanding",
+    "section": "Python",
+    "text": "Python\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "slides/expanding.html#helper-function",
+    "href": "slides/expanding.html#helper-function",
+    "title": "Expanding",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "slides/expanding.html#sentiment-and-text",
+    "href": "slides/expanding.html#sentiment-and-text",
+    "title": "Expanding",
+    "section": "Sentiment and text",
+    "text": "Sentiment and text\n\nsentiment = \"negative\"\n\n# review for a blender\nreview = f\"\"\"\nSo, they still had the 17 piece system on seasonal \\\nsale for around $49 in the month of November, about \\\nhalf off, but for some reason (call it price gouging) \\\naround the second week of December the prices all went \\\nup to about anywhere from between $70-$89 for the same \\\nsystem. And the 11 piece system went up around $10 or \\\nso in price also from the earlier sale price of $29. \\\nSo it looks okay, but if you look at the base, the part \\\nwhere the blade locks into place doesn’t look as good \\\nas in previous editions from a few years ago, but I \\\nplan to be very gentle with it (example, I crush \\\nvery hard items like beans, ice, rice, etc. in the \\ \nblender first then pulverize them in the serving size \\\nI want in the blender then switch to the whipping \\\nblade for a finer flour, and use the cross cutting blade \\\nfirst when making smoothies, then use the flat blade \\\nif I need them finer/less pulpy). Special tip when making \\\nsmoothies, finely cut and freeze the fruits and \\\nvegetables (if using spinach-lightly stew soften the \\ \nspinach then freeze until ready for use-and if making \\\nsorbet, use a small to medium sized food processor) \\ \nthat you plan to use that way you can avoid adding so \\\nmuch ice if at all-when making your smoothie. \\\nAfter about a year, the motor was making a funny noise. \\\nI called customer service but the warranty expired \\\nalready, so I had to buy another one. FYI: The overall \\\nquality has gone done in these types of products, so \\\nthey are kind of counting on brand recognition and \\\nconsumer loyalty to maintain sales. Got it in about \\\ntwo days.\n\"\"\""
+  },
+  {
+    "objectID": "slides/expanding.html#prompt",
+    "href": "slides/expanding.html#prompt",
+    "title": "Expanding",
+    "section": "Prompt",
+    "text": "Prompt\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/expanding.html#prompt-output",
+    "href": "slides/expanding.html#prompt-output",
+    "title": "Expanding",
+    "section": "Prompt",
+    "text": "Prompt\n\nDear Valued Customer,\n\nThank you for taking the time to share your review with us. We appreciate your feedback and apologize for any inconvenience you may have experienced.\n\nWe are sorry to hear about the price increase you noticed in December. We strive to provide competitive pricing for our products, and we understand your frustration. If you have any further concerns regarding pricing, we recommend reaching out to our customer service team who will be happy to assist you.\n\nWe also appreciate your feedback regarding the base of the system. We continuously work to improve the quality of our products, and your comments will be taken into consideration for future enhancements.\n\nRegarding the motor issue you encountered, we apologize for any inconvenience caused. Our customer service team is available to assist you with any technical difficulties you may encounter, even if the warranty has expired. Please do not hesitate to reach out to them for further assistance.\n\nThank you once again for your review. We value your loyalty and appreciate your support. If you have any further questions or concerns, please feel free to contact our customer service team.\n\nBest regards,\n\nAI customer agent"
+  },
+  {
+    "objectID": "slides/expanding.html#prompt-with-different-temperature",
+    "href": "slides/expanding.html#prompt-with-different-temperature",
+    "title": "Expanding",
+    "section": "Prompt with different temperature",
+    "text": "Prompt with different temperature\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\nresponse = get_completion(prompt, temperature=0.7)\nprint(response)\n\n\n\n\nJan Kirenz"
+  },
+  {
+    "objectID": "slides/expanding.html#prompt-with-different-temperature-output",
+    "href": "slides/expanding.html#prompt-with-different-temperature-output",
+    "title": "Expanding",
+    "section": "Prompt with different temperature",
+    "text": "Prompt with different temperature\n\nDear Valued Customer,\n\nThank you for taking the time to share your feedback with us. We appreciate your honesty and your loyalty to our brand.\n\nWe sincerely apologize for any inconvenience you experienced regarding the pricing changes. We understand how frustrating it can be when prices fluctuate unexpectedly. We strive to offer competitive prices to our customers, and we apologize if this was not reflected in your recent purchase.\n\nRegarding the issue with the blade lock on the base, we apologize for any dissatisfaction caused. We appreciate your gentle usage and taking the time to share your observations. We value your feedback as it helps us identify areas for improvement.\n\nWe are sorry to hear that you encountered a problem with the motor after a year of use. We understand your frustration, and we apologize for any inconvenience caused. If you have any further concerns or need assistance, please do not hesitate to reach out to our customer service team. They will be more than happy to assist you.\n\nOnce again, we appreciate your feedback and your loyalty to our brand. We value your satisfaction and will continue working hard to improve our products and services.\n\nThank you for choosing our brand.\n\nBest regards,\n\nAI customer agent"
   }
 ]
