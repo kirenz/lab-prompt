@@ -102,7 +102,6 @@ print(response)
 ## Messages
 
 ```{python}
-# | output-location: slide
 messages = [
     {'role': 'system', 'content': 'You are friendly chatbot.'},
     {'role': 'user', 'content': 'Hi, my name is Isa'}]
@@ -161,44 +160,25 @@ response = get_completion_from_messages(messages, temperature=1)
 print(response)
 ```
 
-# OrderBot
+# OrderBot with Panel
 
-## Context
+- We can automate the collection of user prompts and assistant responses to build a OrderBot
 
-- We can automate the collection of user prompts and assistant responses to build a  OrderBot. 
+- The OrderBot will take orders at a pizza restaurant
 
--The OrderBot will take orders at a pizza restaurant. 
+- We use Panel to build a Dashboard
 
-## Helper function 
+# What is Panel?
 
-```{python}
+![](../images/panel.png)
 
-
-def collect_messages(_):
-    prompt = inp.value_input
-    inp.value = ''
-    context.append({'role': 'user', 'content': f"{prompt}"})
-    response = get_completion_from_messages(context)
-    context.append({'role': 'assistant', 'content': f"{response}"})
-    panels.append(
-        pn.Row('User:', pn.pane.Markdown(prompt, width=600)))
-    panels.append(
-        pn.Row('Assistant:', pn.pane.Markdown(response, width=600, styles={'background-color': '#F6F6F6'})))
-
-    return pn.Column(*panels)
+- [Panel](https://panel.holoviz.org/) is an open-source Python library that lets you easily build dashboards 
 
 
-```
-
-## Panel Dashboard
+## Context {.smaller}
 
 
 ```{python}
-# | output-location: slide
-
-pn.extension()
-
-panels = []  # collect display
 
 context = [{'role': 'system', 'content': """
 You are OrderBot, an automated service to collect orders for a pizza restaurant. \
@@ -231,6 +211,42 @@ bottled water 5.00 \
 """}]  # accumulate messages
 
 
+```
+
+
+## Helper function 
+
+```{python}
+
+def collect_messages(_):
+    prompt = inp.value_input
+    inp.value = ''
+    context.append({'role': 'user', 'content': f"{prompt}"})
+    response = get_completion_from_messages(context)
+    context.append({'role': 'assistant', 'content': f"{response}"})
+    panels.append(
+        pn.Row('User:', pn.pane.Markdown(prompt, width=600)))
+    panels.append(
+        pn.Row('Assistant:', pn.pane.Markdown(response, width=600, styles={'background-color': '#F6F6F6'})))
+
+    return pn.Column(*panels)
+
+
+```
+
+## Panel Dashboard {.smaller .background-color="aquamarine"}
+
+- Note that the dasboard in this presentation is **not** working 
+
+- You need to run the Jupyter Notebook on your own machine in order to use the Dashboard
+
+```{python}
+# | output-location: slide
+
+pn.extension()
+
+panels = []  # collect display
+
 inp = pn.widgets.TextInput(value="Hi", placeholder='Enter text here…')
 button_conversation = pn.widgets.Button(name="Chat!")
 
@@ -243,22 +259,26 @@ dashboard = pn.Column(
 )
 
 dashboard
+
 ```
 
 
 ## JSON food order summary 
 
 ```{python}
-# | output-location: slide
 messages = context.copy()
 messages.append(
     {'role': 'system', 'content': 'create a json summary of the previous food order. Itemize the price for each item\
  The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '},
 )
-# The fields should be 1) pizza, price 2) list of toppings 3) list of drinks, include size include price  4) list of sides include size include price, 5)total price '},
 
-response = get_completion_from_messages(messages, temperature=0)
-print(response)
 ```
 
+## Output
 
+```{python}
+# | output-location: slide
+response = get_completion_from_messages(messages, temperature=0)
+
+print(response)
+```
