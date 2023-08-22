@@ -45,3 +45,9 @@ In this presentation, we will explore how to use Large Language Models for text 
 In this tutorial, you will generate customer service emails that are tailored to each customer's review.
 
 - [🖥️ Expanding](/slides/expanding.qmd)
+
+## Chatbot
+
+In this presentation, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.
+
+- [🖥️ Chatbot](/slides/chatbot.qmd)
