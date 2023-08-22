@@ -942,7 +942,7 @@
     "href": "slides/chatbot.html#response-output",
     "title": "Chatbot",
     "section": "Response",
-    "text": "Response\n\n{\n  \"content\": \"To reach the other side, of course! 'Tis a classic jest that even a humble jester such as myself cannot resist.\",\n  \"role\": \"assistant\"\n}\nTo reach the other side, of course! 'Tis a classic jest that even a humble jester such as myself cannot resist."
+    "text": "Response\n\n{\n  \"content\": \"To get to the other side, of course, but verily, the other side was wrought with peril and danger, so it swiftly returned from whence it came, forsooth!\",\n  \"role\": \"assistant\"\n}\nTo get to the other side, of course, but verily, the other side was wrought with peril and danger, so it swiftly returned from whence it came, forsooth!"
   },
   {
     "objectID": "slides/chatbot.html#messages-1",
@@ -970,7 +970,7 @@
     "href": "slides/chatbot.html#response-1-output",
     "title": "Chatbot",
     "section": "Response",
-    "text": "Response\n\n{\n  \"content\": \"Hi Isa! It's nice to meet you. How can I help you today?\",\n  \"role\": \"assistant\"\n}\nHi Isa! It's nice to meet you. How can I help you today?"
+    "text": "Response\n\n{\n  \"content\": \"Hello Isa, nice to meet you! How can I assist you today?\",\n  \"role\": \"assistant\"\n}\nHello Isa, nice to meet you! How can I assist you today?"
   },
   {
     "objectID": "slides/chatbot.html#messages-2",
@@ -991,7 +991,7 @@
     "href": "slides/chatbot.html#response-2-output",
     "title": "Chatbot",
     "section": "Response",
-    "text": "Response\n\n{\n  \"content\": \"I apologize, but as a chatbot, I do not have access to your personal information. Therefore, I cannot remind you of your name.\",\n  \"role\": \"assistant\"\n}\nI apologize, but as a chatbot, I do not have access to your personal information. Therefore, I cannot remind you of your name."
+    "text": "Response\n\n{\n  \"content\": \"I'm sorry, but as a chatbot, I don't have access to personal information. I don't know your name.\",\n  \"role\": \"assistant\"\n}\nI'm sorry, but as a chatbot, I don't have access to personal information. I don't know your name."
   },
   {
     "objectID": "slides/chatbot.html#messages-3",
@@ -1012,14 +1012,14 @@
     "href": "slides/chatbot.html#response-3-output",
     "title": "Chatbot",
     "section": "Response",
-    "text": "Response\n\n{\n  \"content\": \"Your name is Isa.\",\n  \"role\": \"assistant\"\n}\nYour name is Isa."
+    "text": "Response\n\n{\n  \"content\": \"Of course! Your name is Isa. Let me know if there's anything else I can assist you with.\",\n  \"role\": \"assistant\"\n}\nOf course! Your name is Isa. Let me know if there's anything else I can assist you with."
   },
   {
     "objectID": "slides/chatbot.html#context",
     "href": "slides/chatbot.html#context",
     "title": "Chatbot",
     "section": "Context",
-    "text": "Context\n\nWe can automate the collection of user prompts and assistant responses to build a OrderBot.\n\n-The OrderBot will take orders at a pizza restaurant."
+    "text": "Context\n\ncontext = [{'role': 'system', 'content': \"\"\"\nYou are OrderBot, an automated service to collect orders for a pizza restaurant. \\\nYou first greet the customer, then collects the order, \\\nand then asks if it's a pickup or delivery. \\\nYou wait to collect the entire order, then summarize it and check for a final \\\ntime if the customer wants to add anything else. \\\nIf it's a delivery, you ask for an address. \\\nFinally you collect the payment.\\\nMake sure to clarify all options, extras and sizes to uniquely \\\nidentify the item from the menu.\\\nYou respond in a short, very conversational friendly style. \\\nThe menu includes \\\npepperoni pizza  12.95, 10.00, 7.00 \\\ncheese pizza   10.95, 9.25, 6.50 \\\neggplant pizza   11.95, 9.75, 6.75 \\\nfries 4.50, 3.50 \\\ngreek salad 7.25 \\\nToppings: \\\nextra cheese 2.00, \\\nmushrooms 1.50 \\\nsausage 3.00 \\\ncanadian bacon 3.50 \\\nAI sauce 1.50 \\\npeppers 1.00 \\\nDrinks: \\\ncoke 3.00, 2.00, 1.00 \\\nsprite 3.00, 2.00, 1.00 \\\nbottled water 5.00 \\\n\"\"\"}]  # accumulate messages"
   },
   {
     "objectID": "slides/chatbot.html#helper-function",
@@ -1047,7 +1047,7 @@
     "href": "slides/chatbot.html#json-food-order-summary",
     "title": "Chatbot",
     "section": "JSON food order summary",
-    "text": "JSON food order summary\n\nmessages = context.copy()\nmessages.append(\n    {'role': 'system', 'content': 'create a json summary of the previous food order. Itemize the price for each item\\\n The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '},\n)\n# The fields should be 1) pizza, price 2) list of toppings 3) list of drinks, include size include price  4) list of sides include size include price, 5)total price '},\n\nresponse = get_completion_from_messages(messages, temperature=0)\nprint(response)\n\n\n\n\nJan Kirenz"
+    "text": "JSON food order summary\n\nmessages = context.copy()\nmessages.append(\n    {'role': 'system', 'content': 'create a json summary of the previous food order. Itemize the price for each item\\\n The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '},\n)"
   },
   {
     "objectID": "slides/chatbot.html#json-food-order-summary-output",
@@ -1055,5 +1055,33 @@
     "title": "Chatbot",
     "section": "JSON food order summary",
     "text": "JSON food order summary\n\n{\n  \"content\": \"Sure! Here's a JSON summary of your food order:\\n\\n{\\n  \\\"pizza\\\": {\\n    \\\"type\\\": \\\"pepperoni\\\",\\n    \\\"size\\\": \\\"large\\\"\\n  },\\n  \\\"toppings\\\": [\\n    \\\"extra cheese\\\",\\n    \\\"mushrooms\\\"\\n  ],\\n  \\\"drinks\\\": [\\n    {\\n      \\\"type\\\": \\\"coke\\\",\\n      \\\"size\\\": \\\"medium\\\"\\n    },\\n    {\\n      \\\"type\\\": \\\"sprite\\\",\\n      \\\"size\\\": \\\"small\\\"\\n    }\\n  ],\\n  \\\"sides\\\": [\\n    {\\n      \\\"type\\\": \\\"fries\\\",\\n      \\\"size\\\": \\\"regular\\\"\\n    }\\n  ],\\n  \\\"total_price\\\": 29.45\\n}\\n\\nPlease let me know if there's anything else you'd like to add or modify.\",\n  \"role\": \"assistant\"\n}\nSure! Here's a JSON summary of your food order:\n\n{\n  \"pizza\": {\n    \"type\": \"pepperoni\",\n    \"size\": \"large\"\n  },\n  \"toppings\": [\n    \"extra cheese\",\n    \"mushrooms\"\n  ],\n  \"drinks\": [\n    {\n      \"type\": \"coke\",\n      \"size\": \"medium\"\n    },\n    {\n      \"type\": \"sprite\",\n      \"size\": \"small\"\n    }\n  ],\n  \"sides\": [\n    {\n      \"type\": \"fries\",\n      \"size\": \"regular\"\n    }\n  ],\n  \"total_price\": 29.45\n}\n\nPlease let me know if there's anything else you'd like to add or modify."
+  },
+  {
+    "objectID": "slides/chatbot.html#panel-dashboard-.smaller-.background-coloraquamarine",
+    "href": "slides/chatbot.html#panel-dashboard-.smaller-.background-coloraquamarine",
+    "title": "Chatbot",
+    "section": "Panel Dashboard {.smaller .background-color=“aquamarine”}",
+    "text": "Panel Dashboard {.smaller .background-color=“aquamarine”}\n\nNote that the dasboard in this presentation is not working\nYou need to run the Jupyter Notebook on your own machine in order to use the Dashboard\n\n\npn.extension()\n\npanels = []  # collect display\n\ninp = pn.widgets.TextInput(value=\"Hi\", placeholder='Enter text here…')\nbutton_conversation = pn.widgets.Button(name=\"Chat!\")\n\ninteractive_conversation = pn.bind(collect_messages, button_conversation)\n\ndashboard = pn.Column(\n    inp,\n    pn.Row(button_conversation),\n    pn.panel(interactive_conversation, loading_indicator=True, height=300),\n)\n\ndashboard"
+  },
+  {
+    "objectID": "slides/chatbot.html#panel-dashboard-.smaller-.background-coloraquamarine-output",
+    "href": "slides/chatbot.html#panel-dashboard-.smaller-.background-coloraquamarine-output",
+    "title": "Chatbot",
+    "section": "Panel Dashboard {.smaller .background-color=“aquamarine”}",
+    "text": "Panel Dashboard {.smaller .background-color=“aquamarine”}\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n{\n  \"content\": \"Hello! Welcome to our pizza restaurant. How can I assist you today?\",\n  \"role\": \"assistant\"\n}"
+  },
+  {
+    "objectID": "slides/chatbot.html#output",
+    "href": "slides/chatbot.html#output",
+    "title": "Chatbot",
+    "section": "Output",
+    "text": "Output\n\nresponse = get_completion_from_messages(messages, temperature=0)\n\nprint(response)\n\n\n\n\nJan Kirenz"
+  },
+  {
+    "objectID": "slides/chatbot.html#output-output",
+    "href": "slides/chatbot.html#output-output",
+    "title": "Chatbot",
+    "section": "Output",
+    "text": "Output\n\n{\n  \"content\": \"Sure! Here's a JSON summary of your food order:\\n\\n{\\n  \\\"pizza\\\": {\\n    \\\"size\\\": \\\"12.95\\\",\\n    \\\"toppings\\\": [\\\"extra cheese\\\", \\\"mushrooms\\\"]\\n  },\\n  \\\"drinks\\\": [\\n    {\\n      \\\"name\\\": \\\"coke\\\",\\n      \\\"size\\\": \\\"3.00\\\"\\n    },\\n    {\\n      \\\"name\\\": \\\"sprite\\\",\\n      \\\"size\\\": \\\"2.00\\\"\\n    }\\n  ],\\n  \\\"sides\\\": [\\n    {\\n      \\\"name\\\": \\\"fries\\\",\\n      \\\"size\\\": \\\"4.50\\\"\\n    }\\n  ],\\n  \\\"total_price\\\": \\\"25.45\\\"\\n}\\n\\nPlease let me know if there's anything else you'd like to add to your order!\",\n  \"role\": \"assistant\"\n}\nSure! Here's a JSON summary of your food order:\n\n{\n  \"pizza\": {\n    \"size\": \"12.95\",\n    \"toppings\": [\"extra cheese\", \"mushrooms\"]\n  },\n  \"drinks\": [\n    {\n      \"name\": \"coke\",\n      \"size\": \"3.00\"\n    },\n    {\n      \"name\": \"sprite\",\n      \"size\": \"2.00\"\n    }\n  ],\n  \"sides\": [\n    {\n      \"name\": \"fries\",\n      \"size\": \"4.50\"\n    }\n  ],\n  \"total_price\": \"25.45\"\n}\n\nPlease let me know if there's anything else you'd like to add to your order!"
   }
 ]
