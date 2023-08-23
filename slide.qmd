@@ -3,6 +3,7 @@ title: "Slides"
 number-sections: true
 ---
 
+For cost reasons we mainly use OpenAI's `gpt-3.5-turbo` model in our tutorials. However, you can simply replace `model="gpt-3.5-turbo"` with `model="gpt-4"` in the helper function. Note the [price difference](https://openai.com/pricing) between the two models.
 
 ::: {.callout-note appearance="simple"}
 Take a look at the [slides tutorial](https://kirenz.github.io/lab-toolkit/slides/slides.html#/title-slide) to learn how to use all slide options 
