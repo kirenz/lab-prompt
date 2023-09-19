@@ -119,8 +119,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#summarize-text" id="toc-summarize-text" class="nav-link" data-scroll-target="#summarize-text"><span class="header-section-number">3</span> Summarize text</a></li>
   <li><a href="#inferring" id="toc-inferring" class="nav-link" data-scroll-target="#inferring"><span class="header-section-number">4</span> Inferring</a></li>
   <li><a href="#transforming" id="toc-transforming" class="nav-link" data-scroll-target="#transforming"><span class="header-section-number">5</span> Transforming</a></li>
-  <li><a href="#expanding" id="toc-expanding" class="nav-link" data-scroll-target="#expanding"><span class="header-section-number">6</span> Expanding</a></li>
-  <li><a href="#chatbot" id="toc-chatbot" class="nav-link" data-scroll-target="#chatbot"><span class="header-section-number">7</span> Chatbot</a></li>
+  <li><a href="#expanding" id="toc-expanding" class="nav-link" data-scroll-target="#expanding"><span class="header-section-number">6</span> Expanding</a>
+  <ul class="collapse">
+  <li><a href="#chatbot" id="toc-chatbot" class="nav-link" data-scroll-target="#chatbot"><span class="header-section-number">6.1</span> Chatbot</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -151,61 +153,132 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Take a look at the <a href="https://kirenz.github.io/lab-toolkit/slides/slides.html#/title-slide">slides tutorial</a> to learn how to use all slide options</p>
+<p>Take a look at the <a href="https://kirenz.github.io/lab-toolkit/slides/slides.html#/title-slide">slides tutorial</a> to learn how to use all slide options.</p>
+<p>To download Jupyter Notebooks: Go to the Colab menu and choose “File” &gt; “Download” &gt; “Download .ipynb”</p>
 </div>
 </div>
 </div>
-<section id="guidelines" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="guidelines"><span class="header-section-number">1</span> Guidelines</h2>
+<section id="guidelines" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Guidelines</h1>
 <p>In this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <ul>
-<li><a href="./slides/guidelines.html">🖥️ Guidelines</a></li>
+<li><a href="./slides/guidelines.html">🖥️ Presentation</a></li>
+<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/guidelines.ipynb">💻 Jupyter Notebook</a></li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="iterative-prompt-development" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="iterative-prompt-development"><span class="header-section-number">2</span> Iterative prompt development</h2>
+<section id="iterative-prompt-development" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Iterative prompt development</h1>
 <p>In this tutorial, you’ll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <ul>
-<li><a href="./slides/iterative-prompt-development.html">🖥️ Iterative prompt development</a></li>
+<li><a href="./slides/iterative-prompt-development.html">🖥️ Presentation</a></li>
+<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/iterative-prompt-development.ipynb">💻 Jupyter Notebook</a></li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="summarize-text" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="summarize-text"><span class="header-section-number">3</span> Summarize text</h2>
+<section id="summarize-text" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Summarize text</h1>
 <p>In this tutorial, you will summarize text with a focus on specific topics.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <ul>
-<li><a href="./slides/iterative-prompt-development.html">🖥️ Summarize text</a></li>
+<li><a href="./slides/summarizing.html">🖥️ Presentation</a></li>
+<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/summarizing.ipynb">💻 Jupyter Notebook</a></li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="inferring" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="inferring"><span class="header-section-number">4</span> Inferring</h2>
+<section id="inferring" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Inferring</h1>
 <p>In this tutorial, you will infer sentiment and topics from product reviews and news articles.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <ul>
-<li><a href="./slides/inferring.html">🖥️ Inferring</a></li>
+<li><a href="./slides/inferring.html">🖥️ Presentation</a></li>
+<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/inferring.ipynb">💻 Jupyter Notebook</a></li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="transforming" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="transforming"><span class="header-section-number">5</span> Transforming</h2>
+<section id="transforming" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Transforming</h1>
 <p>In this presentation, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <ul>
-<li><a href="./slides/transforming.html">🖥️ Transforming</a></li>
+<li><a href="./slides/transforming.html">🖥️ Presentation</a></li>
+<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/transforming.ipynb">💻 Jupyter Notebook</a></li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="expanding" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="expanding"><span class="header-section-number">6</span> Expanding</h2>
+<section id="expanding" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Expanding</h1>
 <p>In this tutorial, you will generate customer service emails that are tailored to each customer’s review.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <ul>
-<li><a href="./slides/expanding.html">🖥️ Expanding</a></li>
+<li><a href="./slides/expanding.html">🖥️ Presentation</a></li>
+<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/expanding.ipynb">💻 Jupyter Notebook</a></li>
 </ul>
-</section>
-<section id="chatbot" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="chatbot"><span class="header-section-number">7</span> Chatbot</h2>
+</div>
+</div>
+</div>
+<section id="chatbot" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="chatbot"><span class="header-section-number">6.1</span> Chatbot</h2>
 <p>In this presentation, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.</p>
 <p>We use <a href="https://panel.holoviz.org/">Panel</a>, an open-source Python library that lets you easily build powerful tools, dashboards and complex applications entirely in Python.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <ul>
-<li><a href="./slides/chatbot.html">🖥️ Chatbot</a></li>
+<li><a href="./slides/chatbot.html">🖥️ Presentation</a></li>
+<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/chatbot.ipynb">💻 Jupyter Notebook</a></li>
 </ul>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
