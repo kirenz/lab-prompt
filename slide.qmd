@@ -6,46 +6,71 @@ number-sections: true
 For cost reasons we mainly use OpenAI's `gpt-3.5-turbo` model in our tutorials. However, you can simply replace `model="gpt-3.5-turbo"` with `model="gpt-4"` in the helper function. Note the [price difference](https://openai.com/pricing) between the two models.
 
 ::: {.callout-note appearance="simple"}
-Take a look at the [slides tutorial](https://kirenz.github.io/lab-toolkit/slides/slides.html#/title-slide) to learn how to use all slide options 
+Take a look at the [slides tutorial](https://kirenz.github.io/lab-toolkit/slides/slides.html#/title-slide) to learn how to use all slide options. 
 
+To download Jupyter Notebooks: Go to the Colab menu and choose "File" > "Download" > "Download .ipynb"
 :::
 
-## Guidelines
+# Guidelines
 
 In this tutorial, you'll practice two prompting principles and their related tactics in order to write effective prompts for large language models:
 
-- [🖥️ Guidelines](/slides/guidelines.qmd)
 
-## Iterative prompt development
+::: {.callout-tip appearance="simple" icon=false}
+- [🖥️ Presentation](/slides/guidelines.qmd)
+- [💻 Jupyter Notebook](https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/guidelines.ipynb)
+:::
+
+
+
+# Iterative prompt development
 
 In this tutorial, you'll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.
 
-- [🖥️ Iterative prompt development](/slides/iterative-prompt-development.qmd)
+::: {.callout-tip appearance="simple" icon=false}
+- [🖥️ Presentation](/slides/iterative-prompt-development.qmd)
+- [💻 Jupyter Notebook](https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/iterative-prompt-development.ipynb)
+:::
 
-## Summarize text
+
+# Summarize text
 
 In this tutorial, you will summarize text with a focus on specific topics.
 
-- [🖥️ Summarize text](/slides/iterative-prompt-development.qmd)
+::: {.callout-tip appearance="simple" icon=false}
+- [🖥️ Presentation](/slides/summarizing.qmd)
+- [💻 Jupyter Notebook](https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/summarizing.ipynb)
+:::
 
-## Inferring
+
+# Inferring
 
 In this tutorial, you will infer sentiment and topics from product reviews and news articles.
 
-- [🖥️ Inferring](/slides/inferring.qmd)
+::: {.callout-tip appearance="simple" icon=false}
+- [🖥️ Presentation](/slides/inferring.qmd)
+- [💻 Jupyter Notebook](https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/inferring.ipynb)
+:::
 
-
-## Transforming
+# Transforming
 
 In this presentation, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.
 
-- [🖥️ Transforming](/slides/transforming.qmd)
+::: {.callout-tip appearance="simple" icon=false}
+- [🖥️ Presentation](/slides/transforming.qmd)
+- [💻 Jupyter Notebook](https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/transforming.ipynb)
+:::
 
-## Expanding
+
+# Expanding
 
 In this tutorial, you will generate customer service emails that are tailored to each customer's review.
 
-- [🖥️ Expanding](/slides/expanding.qmd)
+::: {.callout-tip appearance="simple" icon=false}
+- [🖥️ Presentation](/slides/expanding.qmd)
+- [💻 Jupyter Notebook](https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/expanding.ipynb)
+:::
+
 
 ## Chatbot
 
@@ -53,4 +78,8 @@ In this presentation, you will explore how you can utilize the chat format to ha
 
 We use [Panel](https://panel.holoviz.org/), an open-source Python library that lets you easily build powerful tools, dashboards and complex applications entirely in Python. 
 
-- [🖥️ Chatbot](/slides/chatbot.qmd)
+::: {.callout-tip appearance="simple" icon=false}
+- [🖥️ Presentation](/slides/chatbot.qmd)
+- [💻 Jupyter Notebook](https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/chatbot.ipynb)
+:::
+
