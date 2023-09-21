@@ -7,9 +7,9 @@ You can open the Jupyter Notebooks in Colab (on this [site](https://kirenz.githu
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/kirenz/lab-prompt?quickstart=1)
 
-- Simply choose the *default* settings and create the Codespace.
+1. Simply choose the *default* settings and create the Codespace.
 
-- After the container is created, you will see the following text in the terminal (wait until the installation process is done):
+2. After the container is created, you will see the following text in the terminal (wait until the installation process is done):
 
 ```bash
 	"postCreateCommand": "pip3 install --user -r requirements.txt"
