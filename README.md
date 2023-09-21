@@ -26,9 +26,9 @@ After your Codepsace is ready, you may want to:
 
 - Open *Extensions*, select *Atom One Dark Theme* and click twice on *Set Color Theme* to change the user interface
 
-- Open *Explorer* and open the folder 📂 *code*. Now you can select a Jupyter Notebook.
+- Open *Explorer* and open the folder 📂 *code*. Now you can select a Jupyter Notebook
 
-- Click on the *Kernel* picker, choose Python environments and select the latest Python version. 
+- Click on the *Kernel* picker, choose *Python environments* and select the latest Python version 
 
 - Note that the changes you make during the container session are not saved (this is only done with commits to the GitHub repo)
 
