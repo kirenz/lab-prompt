@@ -4,4 +4,12 @@ You can open the Jupyter Notebooks in GitHub Codespaces. The Notebooks are in th
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/kirenz/lab-prompt?quickstart=1)
 
-Note: You may need to provide API-keys in the file `.env-template` and rename the file to `.env`
+After your Codepsace is ready, you may want to: 
+
+- Activate the extension vscode-icons (just click on *activate* if the pop-up in the right lower corner occurs)
+
+- Provide **API-keys** in the file `.env-template`. Then save your changes and rename the file to `.env`
+
+- Open *Extensions*, select *Atom One Dark Theme* and click twice on *Set Color Theme* to change the user interace
+
+- Open *Explorer* and open the folder 📂 *code*. Now you can select a Jupyter Notebook and start coding.
