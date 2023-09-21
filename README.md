@@ -32,4 +32,6 @@ After your Codepsace is ready, you may want to:
 
 - Note that the changes you make during the container session are not saved (this is only done with commits to the GitHub repo)
 
-- When you are done, you can click on the connection icon `><` in the lower left corner of the VS Code user interface and select *Stop Codespace* from the menu.
+- When you are done, you can click on the connection icon `><` in the lower left corner of the VS Code user interface and select *Stop Codespace* from the menu
+
+- Visit the [GitHub Codespaces overview](https://github.com/codespaces) and make sure that you don't have active Codespaces
