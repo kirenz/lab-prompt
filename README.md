@@ -18,7 +18,7 @@ You can open the Jupyter Notebooks in Colab (on this [site](https://kirenz.githu
 
 ## Configure your Codespace
 
-After your Codepsace is ready, you may want to: 
+After your Codespace is ready, you may want to: 
 
 1. Click on *activate* if you see the pop-up *Thanks for installing vscode-icons* (in the lower right right corner of your screen)
 
