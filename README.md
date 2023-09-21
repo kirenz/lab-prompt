@@ -1,3 +1,7 @@
-# About this lab
+# Welcome to our lab 👋
 
-This lab is part of a lecture and was created by Jan Kirenz.
+You can open the Jupyter Notebooks in GitHub Codespaces. The Notebooks are in the folder 📂 `code`.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/kirenz/lab-template?quickstart=1)
+
+Note: You may need to provide API-keys in the file `.env-template` and rename the file to `.env`
