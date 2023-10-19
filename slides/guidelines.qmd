@@ -232,7 +232,7 @@ response = get_completion(prompt)
 print(response)
 ```
 
-- Output: "To get the desired output from a model, it's important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!"
+- *Output:* "To get the desired output from a model, it's important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!"
 
 
 
@@ -258,7 +258,7 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Output
+## Output {.smaller}
 
 ```json
 {
@@ -335,8 +335,6 @@ print(response)
 
 . . .
 
-- Output:
-
 ```bash
 Completion for Text 1:
 Step 1 - Get some water boiling.
@@ -378,7 +376,7 @@ response = get_completion(prompt)
 print(response)
 ```
 
-- Output: <grandparent>: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of obstacles. Just like a tree that bends but does not break in a storm, resilience allows us to weather the storms of life and come out stronger on the other side.
+- *Output:* <grandparent>: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of obstacles. Just like a tree that bends but does not break in a storm, resilience allows us to weather the storms of life and come out stronger on the other side.
 
 
 # Prompting Principle 2
@@ -430,15 +428,16 @@ print(response)
 
 ## Output {.smaller}
 
-- Completion for prompt 2:
-- Summary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.
+```bash
+Completion for prompt 2:
+Summary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.
 
-- Translation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.
+Translation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.
 
-- Names: Jack, Jill
+Names: Jack, Jill
 
-- Output JSON: {"german_summary": "Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.", "num_names": 2}
-
+Output JSON: {"german_summary": "Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.", "num_names": 2}
+```
 
 ## Work on own solution {.smaller}
 
@@ -505,6 +504,7 @@ print(response)
 
 ## Output {.smaller}
 
+```bash
 '''
 Let's assume the cost of the ball is x dollars. 
 According to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. 
@@ -526,6 +526,7 @@ Student grade:
 '''
 Incorrect
 '''
+```
 
 # Model Limitations: Hallucinations
 
@@ -560,7 +561,8 @@ response = get_completion(prompt)
 print(response)
 ```
 
-- Output: 
+
+- *Output:* The AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception. One of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean. The AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine... 
 
 
 # Acknowledgments
