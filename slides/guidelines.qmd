@@ -1,5 +1,5 @@
 ---
-title: Guidelines
+title: Prompt Engineering Guidelines
 lang: en
 subtitle: Prompt Engineering 1
 author: Jan Kirenz
@@ -29,6 +29,149 @@ format:
     footer: Jan Kirenz
 ---
 
+# Introduction
+
+## What is prompt engineering?
+
+- The inputs to LLMs are referred to as "**prompts**"
+
+- Designing a prompt is essentially how you “program” a LLM:
+  - with **instructions** 
+  - or some **examples** of how to successfully complete a task
+
+- Prompt **engineering**
+  - methods to improve model reasoning 
+  - reduce the likelihood of model hallucinations
+
+
+## Prompting in ChatGPT
+
+![](/images/prompt.png)
+
+## We use OpenAI's API {.smaller}
+
+![](/images/api.png)
+
+
+- The OpenAI API can be applied to virtually any task that requires understanding or generating natural language and code. 
+
+- Can also be used to generate and edit images or convert speech into text.
+
+## Example API prompt {.smaller}
+
+- Example prompt with a *system message* (helps set the behavior of the assistant)
+
+```{python}
+# | eval: false
+prompt = f"""
+Summarize the text delimited by triple backticks \ 
+into a single sentence and add a joke or playful comment
+
+```{text}```
+"""
+```
+
+- `f`: [Formatted strings](https://docs.python.org/3/tutorial/inputoutput.html) allow you to embed expressions inside string literals, using curly braces {}
+- Triple double-quotes are used to denote a string that spans multiple lines. 
+- The `\` (line break) is used to make the text more readable
+- `{text}` is a placeholder for a variable text that will be formatted into the string at that position. 
+
+## Example text
+
+```{python}
+# | eval: false
+text = f"""
+You should express what you want a model to do by \ 
+providing instructions that are as clear and \ 
+specific as you can possibly make them. \ 
+This will guide the model towards the desired output, \ 
+and reduce the chances of receiving irrelevant \ 
+or incorrect responses. Don't confuse writing a \ 
+clear prompt with writing a short prompt. \ 
+In many cases, longer prompts provide more clarity \ 
+and context for the model, which can lead to \ 
+more detailed and relevant outputs.
+"""
+```
+
+## Chat completion helper function {.smaller}
+
+- We create a helper function using use Open AI's [chat completions endpoint](https://platform.openai.com/docs/guides/chat)
+- For cost efficiency reasons, we will always use OpenAI's `gpt-3.5-turbo` model 
+
+
+```{python}
+# | code-line-numbers: 1|2|3|4|5|6|7|8
+
+def get_completion(prompt, model="gpt-3.5-turbo"): # <1>
+    messages = [{"role": "user", "content": prompt}] # <2>
+    response = openai.ChatCompletion.create( # <3>
+        model=model, # <4>
+        messages=messages, # <5>
+        temperature=0,   # <6> # 
+    )
+    return response.choices[0].message["content"] # <7>
+```
+
+
+1. Defines a new function named `get_completion` with two parameters: `prompt` and `model`
+2. Dictionary with two key-value pairs: setting the role as `"user"` and content as the `prompt` received by the function.
+3. Initiates an API call to OpenAI's `ChatCompletion` method, the result of which is stored in a variable named `response`.
+4. Specifies the language model to be used for the completion (we use `"gpt-3.5-turbo"`) 
+5. Passes the `messages` list constructed earlier to the API (will be used as the conversation history)
+6. The degree of randomness of the model's output (0 makes the model's output more focused and deterministic).
+7. Extracts and returns the content of the message from the first choice in the `choices` array present in the `response` object. 
+
+
+## What is a sytem message?
+
+- The *system message* is optional and helps set the behavior of the assistant.
+
+- You can modify the *personality* of the assistant or provide *specific instructions* about how it should behave
+  - If outputs are too simple, ask for expert-level writing.  
+  - If you dislike the format, demonstrate the format you’d like to see. 
+  - You can also use specific personas (e.g. write in the style of Socrates)
+
+## What is the temperature?
+
+- Lower values for temperature result in more consistent outputs
+
+- Higher values generate more diverse and creative results. 
+
+- Select a temperature value based on the desired trade-off between coherence and creativity for your specific application.
+
+
+## What are tokens?
+
+- Language models read and write text in chunks called tokens. 
+
+- In English, a token can be as short as one character or as long as one word (e.g., a or apple), 
+
+- For example, the string "ChatGPT is great!" is encoded into six tokens: 
+  - `["Chat", "G", "PT", " is", " great", "!"]`.
+
+## Tokens and API calls
+
+- The total number of tokens in an API call affects:
+  - How much your API call costs, as you pay per token
+  - How long your API call takes, as writing more tokens takes more time
+  - Whether your API call works at all, as total tokens must be below the model’s maximum limit (4097 tokens for gpt-3.5-turbo)
+
+<!--
+
+## Function calling {.smaller}
+
+- Function calling allows you to more reliably get structured data back from the model
+
+- Examples: 
+
+  - Create chatbots that answer questions by calling external APIs (e.g. like ChatGPT Plugins): e.g. define functions like send_email(to: string, body: string), or get_current_weather(location: string, unit: 'celsius' | 'fahrenheit')
+
+  - Convert natural language into API calls: e.g. convert "Who are my top customers?" to get_customers(min_revenue: int, created_before: string, limit: int) and call your internal API
+
+  - Extract structured data from text: e.g. define a function called extract_data(name: string, birthday: string), or sql_query(query: string)
+-->
+
 # Setup
 
 ## API key and Python libaries
@@ -43,18 +186,8 @@ _ = load_dotenv(find_dotenv())
 openai.api_key = os.getenv('OPENAI_API_KEY')
 ```
 
-## GPT-3.5 Turbo vs GPT-4
-
-- For cost efficiency reasons, we will use OpenAI's `gpt-3.5-turbo` model and the [chat completions endpoint](https://platform.openai.com/docs/guides/chat). 
-
-- However, you can simply replace `model="gpt-3.5-turbo"`with `model="gpt-4"` in the helper function
-
 
 ## Helper function {.smaller}
-
-- This helper function will make it easier to use prompts and look at the generated outputs:
-
-. . .
 
 ```{python}
 
@@ -64,7 +197,7 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
-        temperature=0,  # this is the degree of randomness of the model's output
+        temperature=0, 
     )
     return response.choices[0].message["content"]
 
@@ -76,13 +209,12 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 Prompting Principle 1: Write clear and specific instructions
 
 
-## Tactic 1: delimiters
+## Tactic 1: Delimiters {.smaller}
 
-- Use delimiters to clearly indicate distinct parts of the input
-
+- Always use delimiters to clearly indicate distinct parts of the input
 - Delimiters can be anything like: ```, """, < >, `<tag> </tag>`, `:`
 
-## Tactic 1 example {.smaller .scrollable}
+. . .
 
 ```{python}
 # | output-location: slide
@@ -98,41 +230,46 @@ In many cases, longer prompts provide more clarity \
 and context for the model, which can lead to \ 
 more detailed and relevant outputs.
 """
+
 prompt = f"""
 Summarize the text delimited by triple backticks \ 
-into a single sentence.
+into a single sentence and add a joke or playful comment
 ```{text}```
 """
+
 response = get_completion(prompt)
 print(response)
 ```
 
-## Tactic 2: Structured output {.smaller .scrollable}
 
-- Ask for a structured output
+## Tactic 2: Structured output
 
-- JSON, HTML
+- Ask for a structured output (e.g. JSON, HTML, ...)
 
 . . .
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Generate a list of three made-up book titles along \ 
 with their authors and genres. 
 Provide them in JSON format with the following keys: 
 book_id, title, author, genre.
 """
+```
+
+. . .
+
+```{python}
+# | output-location: slide
 response = get_completion(prompt)
 print(response)
 ```
 
-## Tactic 3: Conditions satisfied 1{.smaller .scrollable}
+## Tactic 3: Conditions satisfied text_1 
 
-- Ask the model to check whether conditions are satisfied
+. . .
 
 ```{python}
-# | output-location: slide
 text_1 = f"""
 Making a cup of tea is easy! First, you need to get some \ 
 water boiling. While that's happening, \ 
@@ -144,8 +281,17 @@ like, you can add some sugar or milk to taste. \
 And that's it! You've got yourself a delicious \ 
 cup of tea to enjoy.
 """
+```
+
+## Tactic 3: Conditions satisfied prompt {.smaller}
+
+- Ask the model to check whether conditions are satisfied
+
+. . .
+
+```{python}
 prompt = f"""
-You will be provided with text delimited by triple quotes. 
+You will be provided with text delimited by triple backticks. 
 If it contains a sequence of instructions, \ 
 re-write those instructions in the following format:
 
@@ -157,18 +303,25 @@ Step N - …
 If the text does not contain a sequence of instructions, \ 
 then simply write \"No steps provided.\"
 
-\"\"\"{text_1}\"\"\"
+```{text_1}```
 """
+
+```
+
+
+## Tactic 3: Conditions satisfied response
+
+```{python}
+# | output-location: fragment
 response = get_completion(prompt)
+
 print("Completion for Text 1:")
 print(response)
 ```
 
-## Tactic 3: Conditions satisfied 2 {.smaller .scrollable}
-
+## Tactic 3: Conditions satisfied text_2
 
 ```{python}
-# | output-location: slide
 text_2 = f"""
 The sun is shining brightly today, and the birds are \
 singing. It's a beautiful day to go for a \ 
@@ -180,8 +333,14 @@ games or simply relaxing on the grass. It's a \
 perfect day to spend time outdoors and appreciate the \ 
 beauty of nature.
 """
+```
+
+## Tactic 3: Conditions satisfied prompt
+
+
+```{python}
 prompt = f"""
-You will be provided with text delimited by triple quotes. 
+You will be provided with text delimited by triple backticks. 
 If it contains a sequence of instructions, \ 
 re-write those instructions in the following format:
 
@@ -193,17 +352,29 @@ Step N - …
 If the text does not contain a sequence of instructions, \ 
 then simply write \"No steps provided.\"
 
-\"\"\"{text_2}\"\"\"
+```{text_2}```
 """
+```
+
+## Tactic 3: Conditions satisfied response
+
+```{python}
+# | output-location: fragment
 response = get_completion(prompt)
+
 print("Completion for Text 2:")
 print(response)
 ```
 
-## Tactic 4: "Few-shot" prompting {.smaller .scrollable}
+## Tactic 4: "Few-shot" prompting 
+
+- In few-shot prompting, examples are included directly in the prompt. 
+- These examples serve as a reference or guide for the model to understand the task at hand.
+- Few-shot prompting can be an effective technique in prompt engineering, helping to guide the model's responses without the need for additional training data or fine-tuning.
+
+## Tactic 4: "Few-shot" prompting (prompt)
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Your task is to answer in a consistent style.
 
@@ -216,6 +387,13 @@ the most intricate tapestry begins with a solitary thread.
 
 <child>: Teach me about resilience.
 """
+```
+
+## Tactic 4: "Few-shot" prompting (result)
+
+
+```{python}
+# | output-location: fragment
 response = get_completion(prompt)
 print(response)
 ```
@@ -225,12 +403,9 @@ print(response)
 
 Prompting Principle 2: Give the model time to “think”
 
-## Tactic 1: Specify steps {.smaller .scrollable}
-
-- Specify the steps required to complete a task
+## Tactic 1: Specify steps (text)
 
 ```{python}
-# | output-location: slide
 text = f"""
 In a charming village, siblings Jack and Jill set out on \ 
 a quest to fetch water from a hilltop \ 
@@ -242,6 +417,15 @@ comforting embraces. Despite the mishap, \
 their adventurous spirits remained undimmed, and they \ 
 continued exploring with delight.
 """
+```
+
+## Tactic 1: Specify steps (prompt) 
+
+- Specify the steps required to complete a task
+
+. . .
+
+```{python}
 # example 1
 prompt_1 = f"""
 Perform the following actions: 
@@ -257,12 +441,20 @@ Separate your answers with line breaks.
 Text:
 ```{text}```
 """
+```
+
+
+## Tactic 1: Specify steps (output) 
+
+```{python}
+# | output-location: fragment
 response = get_completion(prompt_1)
+
 print("Completion for prompt 1:")
 print(response)
 ```
 
-## Ask for output in a specified format {.smaller .scrollable}
+## Ask for output in a specified format {.smaller}
 
 ```{python}
 # | output-location: slide
@@ -289,7 +481,7 @@ print("\nCompletion for prompt 2:")
 print(response)
 ```
 
-## Tactic 2: Work on own solution 1 {.smaller .scrollable}
+## Tactic 2: Work on own solution 1 {.smaller}
 
 - Instruct the model to work out its own solution before rushing to a conclusion
 
@@ -317,11 +509,12 @@ Costs:
 3. Maintenance cost: 100,000 + 100x
 Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
 """
+
 response = get_completion(prompt)
 print(response)
 ```
 
-## Tactic 2: Work on own solution 2 {.smaller .scrollable}
+## Tactic 2: Work on own solution 2 {.smaller}
 
 - Note that the student's solution is actually not correct.
 - We can fix this by instructing the model to work out its own solution first:
@@ -401,3 +594,14 @@ response = get_completion(prompt)
 print(response)
 ```
 
+
+
+# Acknowledgments
+
+*This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI as well as [OpenAI's GPT best practices](https://platform.openai.com/docs/guides/gpt-best-practices)*
+
+# What's next? {background-image="../images/logo.png" background-opacity="0.5"}
+
+**Congratulations! You have completed this tutorial** 👍
+
+**Next, you may want to go back to the [lab's website](https://kirenz.github.io/lab-prompt/)**
