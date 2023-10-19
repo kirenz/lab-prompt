@@ -459,7 +459,7 @@
     "href": "slides/transforming.html#proofreading",
     "title": "Transforming",
     "section": "Proofreading",
-    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: umw““” response = get_completion(prompt) print(response)\n\n\n## Review about a toy  {.smaller}\n\n::: {#43ac26df .cell output-location='slide' execution_count=13}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
+    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: jaj““” response = get_completion(prompt) print(response)\n\n\n## Review about a toy  {.smaller}\n\n::: {#43ac26df .cell output-location='slide' execution_count=13}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
   },
   {
     "objectID": "slides/transforming.html#proofreading-1",
@@ -539,11 +539,11 @@
     "text": "We use OpenAI’s API\n\n\nThe OpenAI API can be applied to virtually any task that requires understanding or generating natural language and code.\nCan also be used to generate and edit images or convert speech into text."
   },
   {
-    "objectID": "slides/guidelines.html#example-api-prompt",
-    "href": "slides/guidelines.html#example-api-prompt",
+    "objectID": "slides/guidelines.html#example-prompt",
+    "href": "slides/guidelines.html#example-prompt",
     "title": "Prompt Engineering Guidelines",
-    "section": "Example API prompt",
-    "text": "Example API prompt\n\nExample prompt with a system message (helps set the behavior of the assistant)\n\n\nprompt = f\"\"\"\nSummarize the text delimited by triple backticks \\ \ninto a single sentence and add a joke or playful comment\n\n```{text}```\n\"\"\"\n\n\nf: Formatted strings allow you to embed expressions inside string literals, using curly braces {}\nTriple double-quotes are used to denote a string that spans multiple lines.\nThe \\ (line break) is used to make the text more readable\n{text} is a placeholder for a variable text that will be formatted into the string at that position."
+    "section": "Example prompt",
+    "text": "Example prompt\n\nExample prompt with a system message (helps set the behavior of the assistant)\n\n\n\nprompt = f\"\"\"\nSummarize the text delimited by triple backticks \\ \ninto a single sentence and add a joke or playful comment\n\n```{text}```\n\"\"\"\n\n\nf: Formatted strings allow you to embed expressions inside string literals, using curly braces {}\n\"\"\": Triple double-quotes are used to denote a string that spans multiple lines.\n\\: line breaks are used to make the text more readable\n{text} is a placeholder for a variable text that will be placed into the string at that position."
   },
   {
     "objectID": "slides/guidelines.html#example-text",
@@ -557,7 +557,7 @@
     "href": "slides/guidelines.html#chat-completion-helper-function",
     "title": "Prompt Engineering Guidelines",
     "section": "Chat completion helper function",
-    "text": "Chat completion helper function\n\nWe create a helper function using use Open AI’s chat completions endpoint\nFor cost efficiency reasons, we will always use OpenAI’s gpt-3.5-turbo model\n\n\n1def get_completion(prompt, model=\"gpt-3.5-turbo\"):\n2    messages = [{\"role\": \"user\", \"content\": prompt}]\n3    response = openai.ChatCompletion.create(\n4        model=model,\n5        messages=messages,\n        temperature=0,   # &lt;6&gt; # \n    )\n7    return response.choices[0].message[\"content\"]\n\n\n1\n\nDefines a new function named get_completion with two parameters: prompt and model\n\n2\n\nDictionary with two key-value pairs: setting the role as \"user\" and content as the prompt received by the function.\n\n3\n\nInitiates an API call to OpenAI’s ChatCompletion method, the result of which is stored in a variable named response.\n\n4\n\nSpecifies the language model to be used for the completion (we use \"gpt-3.5-turbo\")\n\n5\n\nPasses the messages list constructed earlier to the API (will be used as the conversation history)\n\n7\n\nExtracts and returns the content of the message from the first choice in the choices array present in the response object."
+    "text": "Chat completion helper function\n\n1def get_completion(prompt, model=\"gpt-3.5-turbo\"):\n2    messages = [{\"role\": \"user\", \"content\": prompt}]\n3    response = openai.ChatCompletion.create(\n4        model=model,\n5        messages=messages,\n6        temperature=0,\n    )\n7    return response.choices[0].message[\"content\"]\n\n\n1\n\nDefines a new function named get_completion with two parameters: prompt and model\n\n2\n\nDictionary with two key-value pairs: setting the role as \"user\" and content as the prompt received by the function.\n\n3\n\nInitiates an API call to OpenAI’s ChatCompletion method, the result of which is stored in a variable named response.\n\n4\n\nSpecifies the language model to be used for the completion (for cost efficiency reasons we always use \"gpt-3.5-turbo\")\n\n5\n\nPasses the messages list constructed earlier to the API (will be used as the conversation history)\n\n6\n\nThe degree of randomness of the model’s output (0 makes the model’s output more focused and deterministic).\n\n7\n\nExtracts and returns the content of the message from the first choice in the choices array present in the response object."
   },
   {
     "objectID": "slides/guidelines.html#what-is-a-sytem-message",
@@ -606,14 +606,7 @@
     "href": "slides/guidelines.html#use-delimiters",
     "title": "Prompt Engineering Guidelines",
     "section": "Use delimiters",
-    "text": "Use delimiters\n\nAlways use delimiters to clearly indicate distinct parts of the input\nDelimiters can be anything like: ``, \"\"\", &lt; &gt;, ,:`\n\n\n\ntext = f\"\"\"\nYou should express what you want a model to do by \\ \nproviding instructions that are as clear and \\ \nspecific as you can possibly make them. \\ \nThis will guide the model towards the desired output, \\ \nand reduce the chances of receiving irrelevant \\ \nor incorrect responses. Don't confuse writing a \\ \nclear prompt with writing a short prompt. \\ \nIn many cases, longer prompts provide more clarity \\ \nand context for the model, which can lead to \\ \nmore detailed and relevant outputs.\n\"\"\"\n\nprompt = f\"\"\"\nSummarize the text delimited by triple backticks \\ \ninto a single sentence and add a joke or playful comment\n```{text}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/guidelines.html#use-delimiters-output",
-    "href": "slides/guidelines.html#use-delimiters-output",
-    "title": "Prompt Engineering Guidelines",
-    "section": "Use delimiters",
-    "text": "Use delimiters\n\nTo get the desired output from a model, it's important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!"
+    "text": "Use delimiters\n\nAlways use delimiters (like backticks) to clearly indicate distinct parts of the input\n\n\n\ntext = f\"\"\"\nYou should express what you want a model to do by \\ \nproviding instructions that are as clear and \\ \nspecific as you can possibly make them. \\ \nThis will guide the model towards the desired output, \\ \nand reduce the chances of receiving irrelevant \\ \nor incorrect responses. Don't confuse writing a \\ \nclear prompt with writing a short prompt. \\ \nIn many cases, longer prompts provide more clarity \\ \nand context for the model, which can lead to \\ \nmore detailed and relevant outputs.\n\"\"\"\nprompt = f\"\"\"\nSummarize the text delimited by triple backticks \\ \ninto a single sentence and add a joke or playful comment\n```{text}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n\nTo get the desired output from a model, it's important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!"
   },
   {
     "objectID": "slides/guidelines.html#ask-for-structured-output",
@@ -630,46 +623,18 @@
     "text": "Ask for structured output\n\n{\n  \"books\": [\n    {\n      \"book_id\": 1,\n      \"title\": \"The Enigma of Elysium\",\n      \"author\": \"Evelyn Sinclair\",\n      \"genre\": \"Mystery\"\n    },\n    {\n      \"book_id\": 2,\n      \"title\": \"Whispers in the Wind\",\n      \"author\": \"Nathaniel Blackwood\",\n      \"genre\": \"Fantasy\"\n    },\n    {\n      \"book_id\": 3,\n      \"title\": \"Echoes of the Past\",\n      \"author\": \"Amelia Hart\",\n      \"genre\": \"Romance\"\n    }\n  ]\n}"
   },
   {
-    "objectID": "slides/guidelines.html#ask-the-model-to-check-whether-conditions-are-satisfied",
-    "href": "slides/guidelines.html#ask-the-model-to-check-whether-conditions-are-satisfied",
+    "objectID": "slides/guidelines.html#check-whether-conditions-are-satisfied",
+    "href": "slides/guidelines.html#check-whether-conditions-are-satisfied",
     "title": "Prompt Engineering Guidelines",
-    "section": "Ask the model to check whether conditions are satisfied",
-    "text": "Ask the model to check whether conditions are satisfied\n\n\ntext_1 = f\"\"\"\nMaking a cup of tea is easy! First, you need to get some \\ \nwater boiling. While that's happening, \\ \ngrab a cup and put a tea bag in it. Once the water is \\ \nhot enough, just pour it over the tea bag. \\ \nLet it sit for a bit so the tea can steep. After a \\ \nfew minutes, take out the tea bag. If you \\ \nlike, you can add some sugar or milk to taste. \\ \nAnd that's it! You've got yourself a delicious \\ \ncup of tea to enjoy.\n\"\"\""
+    "section": "Check whether conditions are satisfied",
+    "text": "Check whether conditions are satisfied\n\ntext_1 = f\"\"\"\nMaking a cup of tea is easy! First, you need to get some \\ \nwater boiling. While that's happening, \\ \ngrab a cup and put a tea bag in it. Once the water is \\ \nhot enough, just pour it over the tea bag. \\ \nLet it sit for a bit so the tea can steep. After a \\ \nfew minutes, take out the tea bag. If you \\ \nlike, you can add some sugar or milk to taste. \\ \nAnd that's it! You've got yourself a delicious \\ \ncup of tea to enjoy.\n\"\"\"\n\n\nprompt = f\"\"\"\nYou will be provided with text delimited by triple backticks. \nIf it contains a sequence of instructions, \\ \nre-write those instructions in the following format:\n\nStep 1 - ...\nStep 2 - …\n…\nStep N - …\n\nIf the text does not contain a sequence of instructions, \\ \nthen simply write \\\"No steps provided.\\\"\n\n```{text_1}```\n\"\"\""
   },
   {
-    "objectID": "slides/guidelines.html#section",
-    "href": "slides/guidelines.html#section",
+    "objectID": "slides/guidelines.html#response",
+    "href": "slides/guidelines.html#response",
     "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "prompt = f\"\"\"\nYou will be provided with text delimited by triple backticks. \nIf it contains a sequence of instructions, \\ \nre-write those instructions in the following format:\n\nStep 1 - ...\nStep 2 - …\n…\nStep N - …\n\nIf the text does not contain a sequence of instructions, \\ \nthen simply write \\\"No steps provided.\\\"\n\n```{text_1}```\n\"\"\""
-  },
-  {
-    "objectID": "slides/guidelines.html#section-1",
-    "href": "slides/guidelines.html#section-1",
-    "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "response = get_completion(prompt)\n\nprint(\"Completion for Text 1:\")\nprint(response)\n\n\n\nCompletion for Text 1:\nStep 1 - Get some water boiling.\nStep 2 - Grab a cup and put a tea bag in it.\nStep 3 - Pour the hot water over the tea bag.\nStep 4 - Let the tea steep for a few minutes.\nStep 5 - Take out the tea bag.\nStep 6 - Add sugar or milk to taste.\nStep 7 - Enjoy your cup of tea."
-  },
-  {
-    "objectID": "slides/guidelines.html#section-2",
-    "href": "slides/guidelines.html#section-2",
-    "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "text_2 = f\"\"\"\nThe sun is shining brightly today, and the birds are \\\nsinging. It's a beautiful day to go for a \\ \nwalk in the park. The flowers are blooming, and the \\ \ntrees are swaying gently in the breeze. People \\ \nare out and about, enjoying the lovely weather. \\ \nSome are having picnics, while others are playing \\ \ngames or simply relaxing on the grass. It's a \\ \nperfect day to spend time outdoors and appreciate the \\ \nbeauty of nature.\n\"\"\""
-  },
-  {
-    "objectID": "slides/guidelines.html#section-3",
-    "href": "slides/guidelines.html#section-3",
-    "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "prompt = f\"\"\"\nYou will be provided with text delimited by triple backticks. \nIf it contains a sequence of instructions, \\ \nre-write those instructions in the following format:\n\nStep 1 - ...\nStep 2 - …\n…\nStep N - …\n\nIf the text does not contain a sequence of instructions, \\ \nthen simply write \\\"No steps provided.\\\"\n\n```{text_2}```\n\"\"\""
-  },
-  {
-    "objectID": "slides/guidelines.html#section-4",
-    "href": "slides/guidelines.html#section-4",
-    "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "response = get_completion(prompt)\n\nprint(\"Completion for Text 2:\")\nprint(response)\n\n\n\nCompletion for Text 2:\nNo steps provided."
+    "section": "Response",
+    "text": "Response\n\nresponse = get_completion(prompt)\n\nprint(\"Completion for Text 1:\")\nprint(response)\n\n\n\nCompletion for Text 1:\nStep 1 - Get some water boiling.\nStep 2 - Grab a cup and put a tea bag in it.\nStep 3 - Pour the hot water over the tea bag.\nStep 4 - Let the tea steep for a few minutes.\nStep 5 - Take out the tea bag.\nStep 6 - Add sugar or milk to taste.\nStep 7 - Enjoy your cup of tea."
   },
   {
     "objectID": "slides/guidelines.html#use-few-shot-prompting-with-examples",
@@ -679,60 +644,32 @@
     "text": "Use “few-shot” prompting with examples\n\nIn few-shot prompting, examples are included directly in the prompt.\nThese examples serve as a reference or guide for the model to understand the task at hand.\nFew-shot prompting can be an effective technique in prompt engineering, helping to guide the model’s responses without the need for additional training data or fine-tuning."
   },
   {
-    "objectID": "slides/guidelines.html#section-5",
-    "href": "slides/guidelines.html#section-5",
+    "objectID": "slides/guidelines.html#few-shot-example",
+    "href": "slides/guidelines.html#few-shot-example",
     "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "prompt = f\"\"\"\nYour task is to answer in a consistent style.\n\n&lt;child&gt;: Teach me about patience.\n\n&lt;grandparent&gt;: The river that carves the deepest \\ \nvalley flows from a modest spring; the \\ \ngrandest symphony originates from a single note; \\ \nthe most intricate tapestry begins with a solitary thread.\n\n&lt;child&gt;: Teach me about resilience.\n\"\"\""
+    "section": "Few-shot example",
+    "text": "Few-shot example\n\nprompt = f\"\"\"\nYour task is to answer in a consistent style.\n\n&lt;child&gt;: Teach me about patience.\n\n&lt;grandparent&gt;: The river that carves the deepest \\ \nvalley flows from a modest spring; the \\ \ngrandest symphony originates from a single note; \\ \nthe most intricate tapestry begins with a solitary thread.\n\n&lt;child&gt;: Teach me about resilience.\n\"\"\"\n\n\n\nresponse = get_completion(prompt)\nprint(response)\n\n\n\n&lt;grandparent&gt;: Resilience is like a mighty oak tree that withstands the strongest storms, bending but never breaking. It is the unwavering determination to rise again after every fall, and the ability to find strength in the face of adversity. Just as a diamond is formed under immense pressure, resilience is forged through challenges and hardships, making us stronger and more resilient in the process."
   },
   {
-    "objectID": "slides/guidelines.html#section-6",
-    "href": "slides/guidelines.html#section-6",
+    "objectID": "slides/guidelines.html#specify-the-the-steps-and-output",
+    "href": "slides/guidelines.html#specify-the-the-steps-and-output",
     "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "response = get_completion(prompt)\nprint(response)\n\n\n\n&lt;grandparent&gt;: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of setbacks. Like a mighty oak tree that withstands the fiercest storms, resilience allows us to weather the storms of life and come out stronger on the other side."
+    "section": "Specify the the steps and output",
+    "text": "Specify the the steps and output\n\ntext = f\"\"\"\nIn a charming village, siblings Jack and Jill set out on \\ \na quest to fetch water from a hilltop \\ \nwell. As they climbed, singing joyfully, misfortune \\ \nstruck—Jack tripped on a stone and tumbled \\ \ndown the hill, with Jill following suit. \\ \nThough slightly battered, the pair returned home to \\ \ncomforting embraces. Despite the mishap, \\ \ntheir adventurous spirits remained undimmed, and they \\ \ncontinued exploring with delight.\n\"\"\"\n\n\n\nprompt_2 = f\"\"\"\nYour task is to perform the following actions: \n1 - Summarize the following text delimited by \n  &lt;&gt; with 1 sentence.\n2 - Translate the summary into German.\n3 - List each name in the German summary.\n4 - Output a json object that contains the \n  following keys: german_summary, num_names.\n\nUse the following format:\nText: &lt;text to summarize&gt;\nSummary: &lt;summary&gt;\nTranslation: &lt;summary translation&gt;\nNames: &lt;list of names in German summary&gt;\nOutput JSON: &lt;json with summary and num_names&gt;\n\nText: &lt;{text}&gt;\n\"\"\"\nresponse = get_completion(prompt_2)\nprint(\"\\nCompletion for prompt 2:\")\nprint(response)"
   },
   {
-    "objectID": "slides/guidelines.html#specify-the-steps-required-to-complete-a-task",
-    "href": "slides/guidelines.html#specify-the-steps-required-to-complete-a-task",
+    "objectID": "slides/guidelines.html#specify-the-the-steps-and-output-output",
+    "href": "slides/guidelines.html#specify-the-the-steps-and-output-output",
     "title": "Prompt Engineering Guidelines",
-    "section": "Specify the steps required to complete a task",
-    "text": "Specify the steps required to complete a task\n\ntext = f\"\"\"\nIn a charming village, siblings Jack and Jill set out on \\ \na quest to fetch water from a hilltop \\ \nwell. As they climbed, singing joyfully, misfortune \\ \nstruck—Jack tripped on a stone and tumbled \\ \ndown the hill, with Jill following suit. \\ \nThough slightly battered, the pair returned home to \\ \ncomforting embraces. Despite the mishap, \\ \ntheir adventurous spirits remained undimmed, and they \\ \ncontinued exploring with delight.\n\"\"\""
-  },
-  {
-    "objectID": "slides/guidelines.html#section-7",
-    "href": "slides/guidelines.html#section-7",
-    "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "# example 1\nprompt_1 = f\"\"\"\nPerform the following actions: \n1 - Summarize the following text delimited by triple \\\nbackticks with 1 sentence.\n2 - Translate the summary into French.\n3 - List each name in the French summary.\n4 - Output a json object that contains the following \\\nkeys: french_summary, num_names.\n\nSeparate your answers with line breaks.\n\nText:\n```{text}```\n\"\"\""
-  },
-  {
-    "objectID": "slides/guidelines.html#section-8",
-    "href": "slides/guidelines.html#section-8",
-    "title": "Prompt Engineering Guidelines",
-    "section": "",
-    "text": "response = get_completion(prompt_1)\n\nprint(\"Completion for prompt 1:\")\nprint(response)\n\n\n\nCompletion for prompt 1:\n1 - Jack and Jill, siblings, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit, yet they return home and remain undeterred in their adventurous spirits.\n\n2 - Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent déterminés dans leur esprit d'aventure.\n\n3 - Jack, Jill\n\n4 - {\n  \"french_summary\": \"Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent déterminés dans leur esprit d'aventure.\",\n  \"num_names\": 2\n}"
-  },
-  {
-    "objectID": "slides/guidelines.html#ask-for-output-in-a-specified-format",
-    "href": "slides/guidelines.html#ask-for-output-in-a-specified-format",
-    "title": "Prompt Engineering Guidelines",
-    "section": "Ask for output in a specified format",
-    "text": "Ask for output in a specified format\n\nprompt_2 = f\"\"\"\nYour task is to perform the following actions: \n1 - Summarize the following text delimited by \n  &lt;&gt; with 1 sentence.\n2 - Translate the summary into German.\n3 - List each name in the German summary.\n4 - Output a json object that contains the \n  following keys: german_summary, num_names.\n\nUse the following format:\nText: &lt;text to summarize&gt;\nSummary: &lt;summary&gt;\nTranslation: &lt;summary translation&gt;\nNames: &lt;list of names in German summary&gt;\nOutput JSON: &lt;json with summary and num_names&gt;\n\nText: &lt;{text}&gt;\n\"\"\"\nresponse = get_completion(prompt_2)\nprint(\"\\nCompletion for prompt 2:\")\nprint(response)"
-  },
-  {
-    "objectID": "slides/guidelines.html#ask-for-output-in-a-specified-format-output",
-    "href": "slides/guidelines.html#ask-for-output-in-a-specified-format-output",
-    "title": "Prompt Engineering Guidelines",
-    "section": "Ask for output in a specified format",
-    "text": "Ask for output in a specified format\n\n\nCompletion for prompt 2:\nSummary: Jack and Jill, siblings from a charming village, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit. Despite the mishap, they return home and continue exploring with delight.\n\nTranslation: Jack und Jill, Geschwister aus einem charmanten Dorf, machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber erleiden ein Missgeschick, als Jack über einen Stein stolpert und den Hügel hinunterrollt, gefolgt von Jill. Trotz des Missgeschicks kehren sie nach Hause zurück und setzen ihre Erkundungen mit Freude fort.\n\nNames: Jack, Jill\n\nOutput JSON: \n{\n  \"german_summary\": \"Jack und Jill, Geschwister aus einem charmanten Dorf, machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber erleiden ein Missgeschick, als Jack über einen Stein stolpert und den Hügel hinunterrollt, gefolgt von Jill. Trotz des Missgeschicks kehren sie nach Hause zurück und setzen ihre Erkundungen mit Freude fort.\",\n  \"num_names\": 2\n}"
+    "section": "Specify the the steps and output",
+    "text": "Specify the the steps and output\n\n\nCompletion for prompt 2:\nSummary: Jack and Jill, siblings from a charming village, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit. Despite the mishap, they return home and continue exploring with delight.\n\nTranslation: Jack und Jill, Geschwister aus einem charmanten Dorf, machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber erleiden ein Missgeschick, als Jack über einen Stein stolpert und den Hügel hinunterrollt, gefolgt von Jill. Trotz des Missgeschicks kehren sie nach Hause zurück und setzen ihre Erkundungen mit Freude fort.\n\nNames: Jack, Jill\n\nOutput JSON: \n{\n  \"german_summary\": \"Jack und Jill, Geschwister aus einem charmanten Dorf, machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber erleiden ein Missgeschick, als Jack über einen Stein stolpert und den Hügel hinunterrollt, gefolgt von Jill. Trotz des Missgeschicks kehren sie nach Hause zurück und setzen ihre Erkundungen mit Freude fort.\",\n  \"num_names\": 2\n}"
   },
   {
     "objectID": "slides/guidelines.html#work-on-own-solution",
     "href": "slides/guidelines.html#work-on-own-solution",
     "title": "Prompt Engineering Guidelines",
     "section": "Work on own solution",
-    "text": "Work on own solution\nInstruct the model to work out its own solution before rushing to a conclusion\n\nprompt = f\"\"\"\nYour task is to determine if the student's solution \\\nis correct or not.\nTo solve the problem do the following:\n- First, work out your own solution to the problem. \n- Then compare your solution to the student's solution \\ \nand evaluate if the student's solution is correct or not. \nDon't decide if the student's solution is correct until \nyou have done the problem yourself.\n\nUse the following format:\n\nQuestion:\n'''\nquestion here\n'''\n\nStudent's solution:\n'''\nstudent's solution here\n'''\n\nActual solution:\n'''\nsteps to work out the solution and your solution here\n'''\n\nIs the student's solution the same as actual solution \\\njust calculated:\n'''\nyes or no\n'''\n\nStudent grade:\n'''\ncorrect or incorrect\n'''\n\nQuestion:\n'''\nA bat and a ball cost $1.10 in total. \nThe bat costs $1.00 more than the ball. \nHow much does the ball cost?\n''' \nStudent's solution:\n'''\n1. The bat costs $1.00\n2. Therefore, the ball costs $0.10 \n'''\n\nActual solution:\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "text": "Work on own solution\n\nInstruct the model to work out its own solution before rushing to a conclusion\n\n\n\nprompt = f\"\"\"\nYour task is to determine if the student's solution \\\nis correct or not.\nTo solve the problem do the following:\n- First, work out your own solution to the problem. \n- Then compare your solution to the student's solution \\ \nand evaluate if the student's solution is correct or not. \nDon't decide if the student's solution is correct until \nyou have done the problem yourself.\n\nUse the following format:\n\nQuestion:\n'''\nquestion here\n'''\n\nStudent's solution:\n'''\nstudent's solution here\n'''\n\nActual solution:\n'''\nsteps to work out the solution and your solution here\n'''\n\nIs the student's solution the same as actual solution \\\njust calculated:\n'''\nyes or no\n'''\n\nStudent grade:\n'''\ncorrect or incorrect\n'''\n\nQuestion:\n'''\nA bat and a ball cost $1.10 in total. \nThe bat costs $1.00 more than the ball. \nHow much does the ball cost?\n''' \nStudent's solution:\n'''\n1. The bat costs $1.00\n2. Therefore, the ball costs $0.10 \n'''\n\nActual solution:\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
     "objectID": "slides/guidelines.html#work-on-own-solution-output",
@@ -760,14 +697,14 @@
     "href": "slides/guidelines.html#example",
     "title": "Prompt Engineering Guidelines",
     "section": "Example",
-    "text": "Example\n\nBosch is a real company, the product name is not real.\n\n\nprompt = f\"\"\"\nTell me about the UltraSlim Cyborg Toothbrush by Bosch\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+    "text": "Example\n\nBoie is a real company, the product name is not real.\n\n\nprompt = f\"\"\"\nTell me about AeroGlide UltraSlim Smart Toothbrush by Boie\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
     "objectID": "slides/guidelines.html#example-output",
     "href": "slides/guidelines.html#example-output",
     "title": "Prompt Engineering Guidelines",
     "section": "Example",
-    "text": "Example\n\nI'm sorry, but as of my knowledge cutoff in September 2021, there is no information available about an UltraSlim Cyborg Toothbrush by Bosch. It's possible that this product does not exist or has not been widely publicized. Bosch is a well-known multinational engineering and technology company, but they primarily focus on manufacturing a wide range of products, including automotive components, power tools, home appliances, and security systems. If the UltraSlim Cyborg Toothbrush is a real product, it might be a specialized toothbrush that Bosch has developed, but without further information, it is difficult to provide specific details."
+    "text": "Example\n\nThe AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception.\n\nOne of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean.\n\nThe AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine. The app provides real-time feedback on brushing technique, duration, and coverage, helping users to achieve optimal oral health.\n\nThe toothbrush features soft, antimicrobial bristles made from a durable thermoplastic elastomer. These bristles are gentle on the gums and teeth, while also being effective at removing plaque and debris. The antimicrobial properties of the bristles help to inhibit the growth of bacteria, keeping the brush clean and hygienic.\n\nIn terms of battery life, the AeroGlide UltraSlim Smart Toothbrush boasts an impressive 30-day battery life on a single charge. This makes it convenient for travel and ensures that users don't have to worry about constantly recharging their toothbrush.\n\nOverall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination of advanced technology, slim design, and effective cleaning capabilities. It is a great option for those looking to upgrade their oral care routine and achieve a healthier smile."
   },
   {
     "objectID": "slides/summarizing.html#setup-1",
@@ -1621,7 +1558,7 @@
     "href": "code/transforming.html#proofreading",
     "title": "Setup",
     "section": "Proofreading",
-    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: vvd““” response = get_completion(prompt) print(response)\n\n## Review about a toy  {.smaller}\n\n::: {.cell output-location='slide'}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
+    "text": "Proofreading\nprompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: xtv““” response = get_completion(prompt) print(response)\n\n## Review about a toy  {.smaller}\n\n::: {.cell output-location='slide'}\n``` {.python .cell-code}\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\"\n:::"
   },
   {
     "objectID": "code/transforming.html#proofreading-1",
