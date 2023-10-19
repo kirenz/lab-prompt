@@ -209,7 +209,7 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 Prompting Principle 1: Write clear and specific instructions
 
 
-## Tactic 1: Delimiters {.smaller}
+## Use delimiters {.smaller}
 
 - Always use delimiters to clearly indicate distinct parts of the input
 - Delimiters can be anything like: ```, """, < >, `<tag> </tag>`, `:`
@@ -242,7 +242,7 @@ print(response)
 ```
 
 
-## Tactic 2: Structured output
+## Ask for structured output
 
 - Ask for a structured output (e.g. JSON, HTML, ...)
 
@@ -265,7 +265,7 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Tactic 3: Conditions satisfied text_1 
+## Ask the model to check whether conditions are satisfied
 
 . . .
 
@@ -283,11 +283,9 @@ cup of tea to enjoy.
 """
 ```
 
-## Tactic 3: Conditions satisfied prompt {.smaller}
+##  {.smaller}
 
-- Ask the model to check whether conditions are satisfied
 
-. . .
 
 ```{python}
 prompt = f"""
@@ -309,7 +307,7 @@ then simply write \"No steps provided.\"
 ```
 
 
-## Tactic 3: Conditions satisfied response
+## 
 
 ```{python}
 # | output-location: fragment
@@ -319,7 +317,7 @@ print("Completion for Text 1:")
 print(response)
 ```
 
-## Tactic 3: Conditions satisfied text_2
+## 
 
 ```{python}
 text_2 = f"""
@@ -335,7 +333,7 @@ beauty of nature.
 """
 ```
 
-## Tactic 3: Conditions satisfied prompt
+## 
 
 
 ```{python}
@@ -356,7 +354,7 @@ then simply write \"No steps provided.\"
 """
 ```
 
-## Tactic 3: Conditions satisfied response
+## 
 
 ```{python}
 # | output-location: fragment
@@ -366,13 +364,13 @@ print("Completion for Text 2:")
 print(response)
 ```
 
-## Tactic 4: "Few-shot" prompting 
+## Use "few-shot" prompting with examples 
 
 - In few-shot prompting, examples are included directly in the prompt. 
 - These examples serve as a reference or guide for the model to understand the task at hand.
 - Few-shot prompting can be an effective technique in prompt engineering, helping to guide the model's responses without the need for additional training data or fine-tuning.
 
-## Tactic 4: "Few-shot" prompting (prompt)
+## 
 
 ```{python}
 prompt = f"""
@@ -389,7 +387,7 @@ the most intricate tapestry begins with a solitary thread.
 """
 ```
 
-## Tactic 4: "Few-shot" prompting (result)
+## 
 
 
 ```{python}
@@ -403,7 +401,7 @@ print(response)
 
 Prompting Principle 2: Give the model time to “think”
 
-## Tactic 1: Specify steps (text)
+## Specify the steps required to complete a task
 
 ```{python}
 text = f"""
@@ -419,11 +417,8 @@ continued exploring with delight.
 """
 ```
 
-## Tactic 1: Specify steps (prompt) 
+## 
 
-- Specify the steps required to complete a task
-
-. . .
 
 ```{python}
 # example 1
@@ -444,7 +439,7 @@ Text:
 ```
 
 
-## Tactic 1: Specify steps (output) 
+## 
 
 ```{python}
 # | output-location: fragment
@@ -462,16 +457,16 @@ prompt_2 = f"""
 Your task is to perform the following actions: 
 1 - Summarize the following text delimited by 
   <> with 1 sentence.
-2 - Translate the summary into French.
-3 - List each name in the French summary.
+2 - Translate the summary into German.
+3 - List each name in the German summary.
 4 - Output a json object that contains the 
-  following keys: french_summary, num_names.
+  following keys: german_summary, num_names.
 
 Use the following format:
 Text: <text to summarize>
 Summary: <summary>
 Translation: <summary translation>
-Names: <list of names in Italian summary>
+Names: <list of names in German summary>
 Output JSON: <json with summary and num_names>
 
 Text: <{text}>
@@ -481,43 +476,9 @@ print("\nCompletion for prompt 2:")
 print(response)
 ```
 
-## Tactic 2: Work on own solution 1 {.smaller}
+## Work on own solution {.smaller}
 
-- Instruct the model to work out its own solution before rushing to a conclusion
-
-```{python}
-# | output-location: slide
-prompt = f"""
-Determine if the student's solution is correct or not.
-
-Question:
-I'm building a solar power installation and I need \
- help working out the financials. 
-- Land costs $100 / square foot
-- I can buy solar panels for $250 / square foot
-- I negotiated a contract for maintenance that will cost \ 
-me a flat $100k per year, and an additional $10 / square \
-foot
-What is the total cost for the first year of operations 
-as a function of the number of square feet.
-
-Student's Solution:
-Let x be the size of the installation in square feet.
-Costs:
-1. Land cost: 100x
-2. Solar panel cost: 250x
-3. Maintenance cost: 100,000 + 100x
-Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
-"""
-
-response = get_completion(prompt)
-print(response)
-```
-
-## Tactic 2: Work on own solution 2 {.smaller}
-
-- Note that the student's solution is actually not correct.
-- We can fix this by instructing the model to work out its own solution first:
+Instruct the model to work out its own solution before rushing to a conclusion
 
 ```{python}
 # | output-location: slide
@@ -532,23 +493,28 @@ Don't decide if the student's solution is correct until
 you have done the problem yourself.
 
 Use the following format:
+
 Question:
 '''
 question here
 '''
+
 Student's solution:
 '''
 student's solution here
 '''
+
 Actual solution:
 '''
 steps to work out the solution and your solution here
 '''
+
 Is the student's solution the same as actual solution \
 just calculated:
 '''
 yes or no
 '''
+
 Student grade:
 '''
 correct or incorrect
@@ -556,39 +522,51 @@ correct or incorrect
 
 Question:
 '''
-I'm building a solar power installation and I need help \
-working out the financials. 
-- Land costs $100 / square foot
-- I can buy solar panels for $250 / square foot
-- I negotiated a contract for maintenance that will cost \
-me a flat $100k per year, and an additional $10 / square \
-foot
-What is the total cost for the first year of operations \
-as a function of the number of square feet.
+A bat and a ball cost $1.10 in total. 
+The bat costs $1.00 more than the ball. 
+How much does the ball cost?
 ''' 
 Student's solution:
 '''
-Let x be the size of the installation in square feet.
-Costs:
-1. Land cost: 100x
-2. Solar panel cost: 250x
-3. Maintenance cost: 100,000 + 100x
-Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+1. The bat costs $1.00
+2. Therefore, the ball costs $0.10 
 '''
+
 Actual solution:
 """
 response = get_completion(prompt)
 print(response)
 ```
 
-## Model Limitations: Hallucinations
+# Model Limitations: Hallucinations
 
-- Boie is a real company, the product name is not real.
+The generation of factually incorrect or nonsensical information that wasn't present in the training data.
+
+## Causes
+
+- **Overgeneralization**: LLMs might overgeneralize from the patterns they have learned in the training data.
+
+- **Lack of Source of Truth**: Without a reliable source of truth during generation, LLMs can drift from accurate information.
+
+- **Insufficient Context**: Sometimes, the context provided to the model may not be sufficient for accurate generation.
+
+
+## Mitigation Strategies
+
+- **Data Augmentation**: Including a diverse range of data can help in reducing hallucinations.
+
+- **External Knowledge Bases**: Linking LLMs to external knowledge bases can provide a source of truth to verify generated information.
+
+- **User Feedback**: Incorporating user feedback can also help in identifying and reducing hallucinations.
+
+## Example
+
+- Bosch is a real company, the product name is not real.
 
 ```{python}
 # | output-location: slide
 prompt = f"""
-Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
+Tell me about the UltraSlim Cyborg Toothbrush by Bosch
 """
 response = get_completion(prompt)
 print(response)
