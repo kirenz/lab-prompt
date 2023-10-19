@@ -9,10 +9,10 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.268">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Jan Kirenz">
-  <title>Prompt - Guidelines</title>
+  <title>Prompt - Prompt Engineering Guidelines</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -224,8 +224,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -395,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Guidelines</h1>
+  <h1 class="title">Prompt Engineering Guidelines</h1>
   <p class="subtitle">Prompt Engineering 1</p>
 
 <div class="quarto-title-authors">
@@ -410,12 +409,188 @@ Jan Kirenz
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
+<li class="fragment"><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
 <li class="fragment"><a href="#/setup" id="/toc-setup">Setup</a></li>
 <li class="fragment"><a href="#/principle-1-clear-and-specific" id="/toc-principle-1-clear-and-specific">Principle 1: Clear and Specific</a></li>
 <li class="fragment"><a href="#/principle-2-time-to-think" id="/toc-principle-2-time-to-think">Principle 2: Time to think</a></li>
+<li class="fragment"><a href="#/model-limitations-hallucinations" id="/toc-model-limitations-hallucinations">Model Limitations: Hallucinations</a></li>
+<li class="fragment"><a href="#/acknowledgments" id="/toc-acknowledgments">Acknowledgments</a></li>
+<li class="fragment"><a href="#/whats-next" id="/toc-whats-next">What’s next?</a></li>
 </ul>
 </nav>
 </section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="what-is-prompt-engineering" class="slide level2">
+<h2>What is prompt engineering?</h2>
+<ul>
+<li class="fragment"><p>The inputs to LLMs are referred to as “<strong>prompts</strong>”</p></li>
+<li class="fragment"><p>Designing a prompt is essentially how you “program” a LLM:</p>
+<ul>
+<li class="fragment">with <strong>instructions</strong></li>
+<li class="fragment">or some <strong>examples</strong> of how to successfully complete a task</li>
+</ul></li>
+<li class="fragment"><p>Prompt <strong>engineering</strong></p>
+<ul>
+<li class="fragment">methods to improve model reasoning</li>
+<li class="fragment">reduce the likelihood of model hallucinations</li>
+</ul></li>
+</ul>
+</section>
+<section id="prompting-in-chatgpt" class="slide level2">
+<h2>Prompting in ChatGPT</h2>
+
+<img data-src="../images/prompt.png" class="r-stretch"></section>
+<section id="we-use-openais-api" class="slide level2 smaller">
+<h2>We use OpenAI’s API</h2>
+
+<img data-src="../images/api.png" class="r-stretch"><ul>
+<li class="fragment"><p>The OpenAI API can be applied to virtually any task that requires understanding or generating natural language and code.</p></li>
+<li class="fragment"><p>Can also be used to generate and edit images or convert speech into text.</p></li>
+</ul>
+</section>
+<section id="example-api-prompt" class="slide level2 smaller">
+<h2>Example API prompt</h2>
+<ul>
+<li class="fragment">Example prompt with a <em>system message</em> (helps set the behavior of the assistant)</li>
+</ul>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ss">Summarize the text delimited by triple backticks \ </span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="ss">into a single sentence and add a joke or playful comment</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="ss">```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment"><code>f</code>: <a href="https://docs.python.org/3/tutorial/inputoutput.html">Formatted strings</a> allow you to embed expressions inside string literals, using curly braces {}</li>
+<li class="fragment">Triple double-quotes are used to denote a string that spans multiple lines.</li>
+<li class="fragment">The <code>\</code> (line break) is used to make the text more readable</li>
+<li class="fragment"><code>{text}</code> is a placeholder for a variable text that will be formatted into the string at that position.</li>
+</ul>
+</section>
+<section id="example-text" class="slide level2">
+<h2>Example text</h2>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="ss">You should express what you want a model to do by \ </span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="ss">providing instructions that are as clear and \ </span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="ss">specific as you can possibly make them. \ </span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="ss">This will guide the model towards the desired output, \ </span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="ss">and reduce the chances of receiving irrelevant \ </span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="ss">or incorrect responses. Don't confuse writing a \ </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="ss">clear prompt with writing a short prompt. \ </span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="ss">In many cases, longer prompts provide more clarity \ </span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="ss">and context for the model, which can lead to \ </span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="ss">more detailed and relevant outputs.</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="chat-completion-helper-function" class="slide level2 smaller">
+<h2>Chat completion helper function</h2>
+<ul>
+<li class="fragment">We create a helper function using use Open AI’s <a href="https://platform.openai.com/docs/guides/chat">chat completions endpoint</a></li>
+<li class="fragment">For cost efficiency reasons, we will always use OpenAI’s <code>gpt-3.5-turbo</code> model</li>
+</ul>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="annotated-cell-3" data-code-line-numbers="1|2|3|4|5|6|7|8"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>        model<span class="op">=</span>model,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a>        messages<span class="op">=</span>messages,</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>        temperature<span class="op">=</span><span class="dv">0</span>,   <span class="co"># &lt;6&gt; # </span></span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a>    )</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd class="fragment">
+<span data-code-cell="annotated-cell-3" data-code-lines="1" data-code-annotation="1">Defines a new function named <code>get_completion</code> with two parameters: <code>prompt</code> and <code>model</code></span>
+</dd>
+<dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd class="fragment">
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="2">Dictionary with two key-value pairs: setting the role as <code>"user"</code> and content as the <code>prompt</code> received by the function.</span>
+</dd>
+<dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd class="fragment">
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="3">Initiates an API call to OpenAI’s <code>ChatCompletion</code> method, the result of which is stored in a variable named <code>response</code>.</span>
+</dd>
+<dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd class="fragment">
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="4">Specifies the language model to be used for the completion (we use <code>"gpt-3.5-turbo"</code>)</span>
+</dd>
+<dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd class="fragment">
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="5">Passes the <code>messages</code> list constructed earlier to the API (will be used as the conversation history)</span>
+</dd>
+<dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
+<dd class="fragment">
+<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="7">Extracts and returns the content of the message from the first choice in the <code>choices</code> array present in the <code>response</code> object.</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="what-is-a-sytem-message" class="slide level2">
+<h2>What is a sytem message?</h2>
+<ul>
+<li class="fragment"><p>The <em>system message</em> is optional and helps set the behavior of the assistant.</p></li>
+<li class="fragment"><p>You can modify the <em>personality</em> of the assistant or provide <em>specific instructions</em> about how it should behave</p>
+<ul>
+<li class="fragment">If outputs are too simple, ask for expert-level writing.<br>
+</li>
+<li class="fragment">If you dislike the format, demonstrate the format you’d like to see.</li>
+<li class="fragment">You can also use specific personas (e.g.&nbsp;write in the style of Socrates)</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-is-the-temperature" class="slide level2">
+<h2>What is the temperature?</h2>
+<ul>
+<li class="fragment"><p>Lower values for temperature result in more consistent outputs</p></li>
+<li class="fragment"><p>Higher values generate more diverse and creative results.</p></li>
+<li class="fragment"><p>Select a temperature value based on the desired trade-off between coherence and creativity for your specific application.</p></li>
+</ul>
+</section>
+<section id="what-are-tokens" class="slide level2">
+<h2>What are tokens?</h2>
+<ul>
+<li class="fragment"><p>Language models read and write text in chunks called tokens.</p></li>
+<li class="fragment"><p>In English, a token can be as short as one character or as long as one word (e.g., a or apple),</p></li>
+<li class="fragment"><p>For example, the string “ChatGPT is great!” is encoded into six tokens:</p>
+<ul>
+<li class="fragment"><code>["Chat", "G", "PT", " is", " great", "!"]</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="tokens-and-api-calls" class="slide level2">
+<h2>Tokens and API calls</h2>
+<ul>
+<li class="fragment">The total number of tokens in an API call affects:
+<ul>
+<li class="fragment">How much your API call costs, as you pay per token</li>
+<li class="fragment">How long your API call takes, as writing more tokens takes more time</li>
+<li class="fragment">Whether your API call works at all, as total tokens must be below the model’s maximum limit (4097 tokens for gpt-3.5-turbo)</li>
+</ul></li>
+</ul>
+<!--
+
+## Function calling {.smaller}
+
+- Function calling allows you to more reliably get structured data back from the model
+
+- Examples: 
+
+  - Create chatbots that answer questions by calling external APIs (e.g. like ChatGPT Plugins): e.g. define functions like send_email(to: string, body: string), or get_current_weather(location: string, unit: 'celsius' | 'fahrenheit')
+
+  - Convert natural language into API calls: e.g. convert "Who are my top customers?" to get_customers(min_revenue: int, created_before: string, limit: int) and call your internal API
+
+  - Extract structured data from text: e.g. define a function called extract_data(name: string, birthday: string), or sql_query(query: string)
+-->
+</section></section>
 <section>
 <section id="setup" class="title-slide slide level1 center">
 <h1>Setup</h1>
@@ -423,39 +598,27 @@ Jan Kirenz
 </section>
 <section id="api-key-and-python-libaries" class="slide level2">
 <h2>API key and Python libaries</h2>
-<div id="e912a33d" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> openai</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> os</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv, find_dotenv</span>
-<span id="cb1-5"><a href="#cb1-5"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> openai</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="im">import</span> os</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv, find_dotenv</span>
+<span id="cb3-5"><a href="#cb3-5"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="gpt-3.5-turbo-vs-gpt-4" class="slide level2">
-<h2>GPT-3.5 Turbo vs GPT-4</h2>
-<ul>
-<li class="fragment"><p>For cost efficiency reasons, we will use OpenAI’s <code>gpt-3.5-turbo</code> model and the <a href="https://platform.openai.com/docs/guides/chat">chat completions endpoint</a>.</p></li>
-<li class="fragment"><p>However, you can simply replace <code>model="gpt-3.5-turbo"</code>with <code>model="gpt-4"</code> in the helper function</p></li>
-</ul>
 </section>
 <section id="helper-function" class="slide level2 smaller">
 <h2>Helper function</h2>
-<ul>
-<li class="fragment">This helper function will make it easier to use prompts and look at the generated outputs:</li>
-</ul>
-<div class="fragment">
-<div id="cdc3d010" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>):</span>
-<span id="cb2-2"><a href="#cb2-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
-<span id="cb2-4"><a href="#cb2-4"></a>        model<span class="op">=</span>model,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>        messages<span class="op">=</span>messages,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>        temperature<span class="op">=</span><span class="dv">0</span>,  <span class="co"># this is the degree of randomness of the model's output</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    )</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>):</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>        model<span class="op">=</span>model,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>        messages<span class="op">=</span>messages,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>        temperature<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb4-7"><a href="#cb4-7"></a>    )</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -463,63 +626,67 @@ Jan Kirenz
 <h1>Principle 1: Clear and Specific</h1>
 <p>Prompting Principle 1: Write clear and specific instructions</p>
 </section>
-<section id="tactic-1-delimiters" class="slide level2">
-<h2>Tactic 1: delimiters</h2>
+<section id="use-delimiters" class="slide level2 smaller">
+<h2>Use delimiters</h2>
 <ul>
-<li class="fragment"><p>Use delimiters to clearly indicate distinct parts of the input</p></li>
-<li class="fragment"><p>Delimiters can be anything like: ``<code>, """, &lt; &gt;,</code><tag> </tag><code>,</code>:`</p></li>
-</ul>
-</section>
-<section id="tactic-1-example" class="slide level2 smaller scrollable">
-<h2>Tactic 1 example</h2>
-<div id="3d6ddccb" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="ss">You should express what you want a model to do by \ </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ss">providing instructions that are as clear and \ </span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="ss">specific as you can possibly make them. \ </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="ss">This will guide the model towards the desired output, \ </span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="ss">and reduce the chances of receiving irrelevant \ </span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="ss">or incorrect responses. Don't confuse writing a \ </span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="ss">clear prompt with writing a short prompt. \ </span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="ss">In many cases, longer prompts provide more clarity \ </span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="ss">and context for the model, which can lead to \ </span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="ss">more detailed and relevant outputs.</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="ss">"""</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="ss">Summarize the text delimited by triple backticks \ </span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="ss">into a single sentence.</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="ss">```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="ss">"""</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="tactic-1-example-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 1 example</h2><div class="cell output-location-slide" data-execution_count="3">
-<div class="cell-output cell-output-stdout">
-<pre><code>To guide a model towards the desired output and reduce irrelevant or incorrect responses, it is important to provide clear and specific instructions, which can be achieved through longer prompts that offer more clarity and context.</code></pre>
-</div>
-</div></section><section id="tactic-2-structured-output" class="slide level2 smaller scrollable">
-<h2>Tactic 2: Structured output</h2>
-<ul>
-<li class="fragment"><p>Ask for a structured output</p></li>
-<li class="fragment"><p>JSON, HTML</p></li>
+<li class="fragment">Always use delimiters to clearly indicate distinct parts of the input</li>
+<li class="fragment">Delimiters can be anything like: ``<code>, """, &lt; &gt;,</code><tag> </tag><code>,</code>:`</li>
 </ul>
 <div class="fragment">
-<div id="b3f11ca4" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="ss">Generate a list of three made-up book titles along \ </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="ss">with their authors and genres. </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="ss">Provide them in JSON format with the following keys: </span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="ss">book_id, title, author, genre.</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="ss">"""</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ss">You should express what you want a model to do by \ </span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="ss">providing instructions that are as clear and \ </span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="ss">specific as you can possibly make them. \ </span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="ss">This will guide the model towards the desired output, \ </span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="ss">and reduce the chances of receiving irrelevant \ </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="ss">or incorrect responses. Don't confuse writing a \ </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="ss">clear prompt with writing a short prompt. \ </span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="ss">In many cases, longer prompts provide more clarity \ </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="ss">and context for the model, which can lead to \ </span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="ss">more detailed and relevant outputs.</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="ss">"""</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="ss">Summarize the text delimited by triple backticks \ </span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="ss">into a single sentence and add a joke or playful comment</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="ss">```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="ss">"""</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </div>
 </section>
-<section id="tactic-2-structured-output-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 2: Structured output</h2><div class="cell output-location-slide" data-execution_count="4">
+<section id="use-delimiters-output" class="slide level2 smaller output-location-slide"><h2>Use delimiters</h2><div class="cell output-location-slide" data-execution_count="6">
+<div class="cell-output cell-output-stdout">
+<pre><code>To get the desired output from a model, it's important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!</code></pre>
+</div>
+</div></section><section id="ask-for-structured-output" class="slide level2">
+<h2>Ask for structured output</h2>
+<ul>
+<li class="fragment">Ask for a structured output (e.g.&nbsp;JSON, HTML, …)</li>
+</ul>
+<div class="fragment">
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ss">Generate a list of three made-up book titles along \ </span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ss">with their authors and genres. </span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ss">Provide them in JSON format with the following keys: </span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ss">book_id, title, author, genre.</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</div>
+</section>
+<section id="ask-for-structured-output-output" class="slide level2 output-location-slide"><h2>Ask for structured output</h2><div class="cell output-location-slide" data-execution_count="8">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "books": [
@@ -544,163 +711,203 @@ Jan Kirenz
   ]
 }</code></pre>
 </div>
-</div></section><section id="tactic-3-conditions-satisfied-1" class="slide level2 smaller scrollable">
-<h2>Tactic 3: Conditions satisfied 1</h2>
-<ul>
-<li class="fragment">Ask the model to check whether conditions are satisfied</li>
-</ul>
-<div id="0091805d" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>text_1 <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="ss">Making a cup of tea is easy! First, you need to get some \ </span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="ss">water boiling. While that's happening, \ </span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="ss">grab a cup and put a tea bag in it. Once the water is \ </span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="ss">hot enough, just pour it over the tea bag. \ </span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="ss">Let it sit for a bit so the tea can steep. After a \ </span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="ss">few minutes, take out the tea bag. If you \ </span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="ss">like, you can add some sugar or milk to taste. \ </span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="ss">And that's it! You've got yourself a delicious \ </span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="ss">cup of tea to enjoy.</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="ss">"""</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="ss">You will be provided with text delimited by triple quotes. </span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="ss">If it contains a sequence of instructions, \ </span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="ss">re-write those instructions in the following format:</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="ss">Step 1 - ...</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="ss">Step 2 - …</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="ss">…</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="ss">Step N - …</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="ss">If the text does not contain a sequence of instructions, \ </span></span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="ss">then simply write </span><span class="ch">\"</span><span class="ss">No steps provided.</span><span class="ch">\"</span></span>
-<span id="cb7-24"><a href="#cb7-24"></a></span>
-<span id="cb7-25"><a href="#cb7-25"></a><span class="ch">\"\"\"</span><span class="sc">{</span>text_1<span class="sc">}</span><span class="ch">\"\"\"</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="ss">"""</span></span>
-<span id="cb7-27"><a href="#cb7-27"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb7-28"><a href="#cb7-28"></a><span class="bu">print</span>(<span class="st">"Completion for Text 1:"</span>)</span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></section><section id="ask-the-model-to-check-whether-conditions-are-satisfied" class="slide level2">
+<h2>Ask the model to check whether conditions are satisfied</h2>
+<div class="fragment">
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>text_1 <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ss">Making a cup of tea is easy! First, you need to get some \ </span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="ss">water boiling. While that's happening, \ </span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="ss">grab a cup and put a tea bag in it. Once the water is \ </span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="ss">hot enough, just pour it over the tea bag. \ </span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="ss">Let it sit for a bit so the tea can steep. After a \ </span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="ss">few minutes, take out the tea bag. If you \ </span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="ss">like, you can add some sugar or milk to taste. \ </span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="ss">And that's it! You've got yourself a delicious \ </span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="ss">cup of tea to enjoy.</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
+</div>
 </section>
-<section id="tactic-3-conditions-satisfied-1-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 3: Conditions satisfied 1</h2><div class="cell output-location-slide" data-execution_count="5">
+<section id="section" class="slide level2 smaller">
+<h2></h2>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="ss">You will be provided with text delimited by triple backticks. </span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="ss">If it contains a sequence of instructions, \ </span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="ss">re-write those instructions in the following format:</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="ss">Step 1 - ...</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="ss">Step 2 - …</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="ss">…</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="ss">Step N - …</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="ss">If the text does not contain a sequence of instructions, \ </span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="ss">then simply write </span><span class="ch">\"</span><span class="ss">No steps provided.</span><span class="ch">\"</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="ss">```</span><span class="sc">{</span>text_1<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="bu">print</span>(<span class="st">"Completion for Text 1:"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="11">
 <div class="cell-output cell-output-stdout">
 <pre><code>Completion for Text 1:
 Step 1 - Get some water boiling.
 Step 2 - Grab a cup and put a tea bag in it.
-Step 3 - Once the water is hot enough, pour it over the tea bag.
-Step 4 - Let it sit for a bit so the tea can steep.
-Step 5 - After a few minutes, take out the tea bag.
-Step 6 - If you like, add some sugar or milk to taste.
-Step 7 - Enjoy your delicious cup of tea.</code></pre>
+Step 3 - Pour the hot water over the tea bag.
+Step 4 - Let the tea steep for a few minutes.
+Step 5 - Take out the tea bag.
+Step 6 - Add sugar or milk to taste.
+Step 7 - Enjoy your cup of tea.</code></pre>
 </div>
-</div></section><section id="tactic-3-conditions-satisfied-2" class="slide level2 smaller scrollable">
-<h2>Tactic 3: Conditions satisfied 2</h2>
-<div id="625afc20" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>text_2 <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ss">The sun is shining brightly today, and the birds are </span><span class="ch">\</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="ss">singing. It's a beautiful day to go for a \ </span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="ss">walk in the park. The flowers are blooming, and the \ </span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="ss">trees are swaying gently in the breeze. People \ </span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="ss">are out and about, enjoying the lovely weather. \ </span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="ss">Some are having picnics, while others are playing \ </span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="ss">games or simply relaxing on the grass. It's a \ </span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="ss">perfect day to spend time outdoors and appreciate the \ </span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="ss">beauty of nature.</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="ss">"""</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="ss">You will be provided with text delimited by triple quotes. </span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="ss">If it contains a sequence of instructions, \ </span></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="ss">re-write those instructions in the following format:</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="ss">Step 1 - ...</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="ss">Step 2 - …</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="ss">…</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="ss">Step N - …</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="ss">If the text does not contain a sequence of instructions, \ </span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="ss">then simply write </span><span class="ch">\"</span><span class="ss">No steps provided.</span><span class="ch">\"</span></span>
-<span id="cb9-24"><a href="#cb9-24"></a></span>
-<span id="cb9-25"><a href="#cb9-25"></a><span class="ch">\"\"\"</span><span class="sc">{</span>text_2<span class="sc">}</span><span class="ch">\"\"\"</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="ss">"""</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb9-28"><a href="#cb9-28"></a><span class="bu">print</span>(<span class="st">"Completion for Text 2:"</span>)</span>
-<span id="cb9-29"><a href="#cb9-29"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
 </section>
-<section id="tactic-3-conditions-satisfied-2-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 3: Conditions satisfied 2</h2><div class="cell output-location-slide" data-execution_count="6">
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>text_2 <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ss">The sun is shining brightly today, and the birds are </span><span class="ch">\</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="ss">singing. It's a beautiful day to go for a \ </span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="ss">walk in the park. The flowers are blooming, and the \ </span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="ss">trees are swaying gently in the breeze. People \ </span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="ss">are out and about, enjoying the lovely weather. \ </span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="ss">Some are having picnics, while others are playing \ </span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="ss">games or simply relaxing on the grass. It's a \ </span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="ss">perfect day to spend time outdoors and appreciate the \ </span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="ss">beauty of nature.</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ss">You will be provided with text delimited by triple backticks. </span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="ss">If it contains a sequence of instructions, \ </span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="ss">re-write those instructions in the following format:</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="ss">Step 1 - ...</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="ss">Step 2 - …</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="ss">…</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="ss">Step N - …</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="ss">If the text does not contain a sequence of instructions, \ </span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="ss">then simply write </span><span class="ch">\"</span><span class="ss">No steps provided.</span><span class="ch">\"</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="ss">```</span><span class="sc">{</span>text_2<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="bu">print</span>(<span class="st">"Completion for Text 2:"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="14">
 <div class="cell-output cell-output-stdout">
 <pre><code>Completion for Text 2:
 No steps provided.</code></pre>
 </div>
-</div></section><section id="tactic-4-few-shot-prompting" class="slide level2 smaller scrollable">
-<h2>Tactic 4: “Few-shot” prompting</h2>
-<div id="21164ddf" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="ss">Your task is to answer in a consistent style.</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="ss">&lt;child&gt;: Teach me about patience.</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="ss">&lt;grandparent&gt;: The river that carves the deepest \ </span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="ss">valley flows from a modest spring; the \ </span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="ss">grandest symphony originates from a single note; \ </span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="ss">the most intricate tapestry begins with a solitary thread.</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="ss">&lt;child&gt;: Teach me about resilience.</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="ss">"""</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-</section><section id="tactic-4-few-shot-prompting-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 4: “Few-shot” prompting</h2><div class="cell output-location-slide" data-execution_count="7">
+</section>
+<section id="use-few-shot-prompting-with-examples" class="slide level2">
+<h2>Use “few-shot” prompting with examples</h2>
+<ul>
+<li class="fragment">In few-shot prompting, examples are included directly in the prompt.</li>
+<li class="fragment">These examples serve as a reference or guide for the model to understand the task at hand.</li>
+<li class="fragment">Few-shot prompting can be an effective technique in prompt engineering, helping to guide the model’s responses without the need for additional training data or fine-tuning.</li>
+</ul>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ss">Your task is to answer in a consistent style.</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="ss">&lt;child&gt;: Teach me about patience.</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="ss">&lt;grandparent&gt;: The river that carves the deepest \ </span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="ss">valley flows from a modest spring; the \ </span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="ss">grandest symphony originates from a single note; \ </span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="ss">the most intricate tapestry begins with a solitary thread.</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="ss">&lt;child&gt;: Teach me about resilience.</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="16">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;grandparent&gt;: Resilience is like a mighty oak tree that withstands the strongest storms, bending but never breaking. It is the ability to bounce back from adversity, to find strength in the face of challenges, and to persevere even when the odds seem insurmountable. Just as a diamond is formed under immense pressure, resilience is forged through the trials and tribulations of life.</code></pre>
+<pre><code>&lt;grandparent&gt;: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of setbacks. Like a mighty oak tree that withstands the fiercest storms, resilience allows us to weather the storms of life and come out stronger on the other side.</code></pre>
 </div>
-</div></section></section>
+</div>
+</section></section>
 <section>
 <section id="principle-2-time-to-think" class="title-slide slide level1 center">
 <h1>Principle 2: Time to think</h1>
 <p>Prompting Principle 2: Give the model time to “think”</p>
 </section>
-<section id="tactic-1-specify-steps" class="slide level2 smaller scrollable">
-<h2>Tactic 1: Specify steps</h2>
-<ul>
-<li class="fragment">Specify the steps required to complete a task</li>
-</ul>
-<div id="8dd133d5" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="ss">In a charming village, siblings Jack and Jill set out on \ </span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="ss">a quest to fetch water from a hilltop \ </span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="ss">well. As they climbed, singing joyfully, misfortune \ </span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="ss">struck—Jack tripped on a stone and tumbled \ </span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="ss">down the hill, with Jill following suit. \ </span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="ss">Though slightly battered, the pair returned home to \ </span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="ss">comforting embraces. Despite the mishap, \ </span></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="ss">their adventurous spirits remained undimmed, and they \ </span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="ss">continued exploring with delight.</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a><span class="ss">"""</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a><span class="co"># example 1</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a>prompt_1 <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb13-14"><a href="#cb13-14"></a><span class="ss">Perform the following actions: </span></span>
-<span id="cb13-15"><a href="#cb13-15"></a><span class="ss">1 - Summarize the following text delimited by triple </span><span class="ch">\</span></span>
-<span id="cb13-16"><a href="#cb13-16"></a><span class="ss">backticks with 1 sentence.</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a><span class="ss">2 - Translate the summary into French.</span></span>
-<span id="cb13-18"><a href="#cb13-18"></a><span class="ss">3 - List each name in the French summary.</span></span>
-<span id="cb13-19"><a href="#cb13-19"></a><span class="ss">4 - Output a json object that contains the following </span><span class="ch">\</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a><span class="ss">keys: french_summary, num_names.</span></span>
-<span id="cb13-21"><a href="#cb13-21"></a></span>
-<span id="cb13-22"><a href="#cb13-22"></a><span class="ss">Separate your answers with line breaks.</span></span>
-<span id="cb13-23"><a href="#cb13-23"></a></span>
-<span id="cb13-24"><a href="#cb13-24"></a><span class="ss">Text:</span></span>
-<span id="cb13-25"><a href="#cb13-25"></a><span class="ss">```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb13-26"><a href="#cb13-26"></a><span class="ss">"""</span></span>
-<span id="cb13-27"><a href="#cb13-27"></a>response <span class="op">=</span> get_completion(prompt_1)</span>
-<span id="cb13-28"><a href="#cb13-28"></a><span class="bu">print</span>(<span class="st">"Completion for prompt 1:"</span>)</span>
-<span id="cb13-29"><a href="#cb13-29"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="specify-the-steps-required-to-complete-a-task" class="slide level2">
+<h2>Specify the steps required to complete a task</h2>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="ss">In a charming village, siblings Jack and Jill set out on \ </span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="ss">a quest to fetch water from a hilltop \ </span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="ss">well. As they climbed, singing joyfully, misfortune \ </span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="ss">struck—Jack tripped on a stone and tumbled \ </span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="ss">down the hill, with Jill following suit. \ </span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="ss">Though slightly battered, the pair returned home to \ </span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="ss">comforting embraces. Despite the mishap, \ </span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="ss">their adventurous spirits remained undimmed, and they \ </span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="ss">continued exploring with delight.</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
 </section>
-<section id="tactic-1-specify-steps-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 1: Specify steps</h2><div class="cell output-location-slide" data-execution_count="8">
+<section id="section-7" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># example 1</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>prompt_1 <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="ss">Perform the following actions: </span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="ss">1 - Summarize the following text delimited by triple </span><span class="ch">\</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="ss">backticks with 1 sentence.</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="ss">2 - Translate the summary into French.</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="ss">3 - List each name in the French summary.</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="ss">4 - Output a json object that contains the following </span><span class="ch">\</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="ss">keys: french_summary, num_names.</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="ss">Separate your answers with line breaks.</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="ss">Text:</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="ss">```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>response <span class="op">=</span> get_completion(prompt_1)</span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="bu">print</span>(<span class="st">"Completion for prompt 1:"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="19">
 <div class="cell-output cell-output-stdout">
 <pre><code>Completion for prompt 1:
 1 - Jack and Jill, siblings, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit, yet they return home and remain undeterred in their adventurous spirits.
@@ -714,211 +921,191 @@ No steps provided.</code></pre>
   "num_names": 2
 }</code></pre>
 </div>
-</div></section><section id="ask-for-output-in-a-specified-format" class="slide level2 smaller scrollable">
+</div>
+</section>
+<section id="ask-for-output-in-a-specified-format" class="slide level2 smaller">
 <h2>Ask for output in a specified format</h2>
-<div id="af0c1a10" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>prompt_2 <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="ss">Your task is to perform the following actions: </span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="ss">1 - Summarize the following text delimited by </span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="ss">  &lt;&gt; with 1 sentence.</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="ss">2 - Translate the summary into French.</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="ss">3 - List each name in the French summary.</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="ss">4 - Output a json object that contains the </span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="ss">  following keys: french_summary, num_names.</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="ss">Use the following format:</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="ss">Text: &lt;text to summarize&gt;</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="ss">Summary: &lt;summary&gt;</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a><span class="ss">Translation: &lt;summary translation&gt;</span></span>
-<span id="cb15-14"><a href="#cb15-14"></a><span class="ss">Names: &lt;list of names in Italian summary&gt;</span></span>
-<span id="cb15-15"><a href="#cb15-15"></a><span class="ss">Output JSON: &lt;json with summary and num_names&gt;</span></span>
-<span id="cb15-16"><a href="#cb15-16"></a></span>
-<span id="cb15-17"><a href="#cb15-17"></a><span class="ss">Text: &lt;</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">&gt;</span></span>
-<span id="cb15-18"><a href="#cb15-18"></a><span class="ss">"""</span></span>
-<span id="cb15-19"><a href="#cb15-19"></a>response <span class="op">=</span> get_completion(prompt_2)</span>
-<span id="cb15-20"><a href="#cb15-20"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Completion for prompt 2:"</span>)</span>
-<span id="cb15-21"><a href="#cb15-21"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>prompt_2 <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="ss">Your task is to perform the following actions: </span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="ss">1 - Summarize the following text delimited by </span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="ss">  &lt;&gt; with 1 sentence.</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="ss">2 - Translate the summary into German.</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="ss">3 - List each name in the German summary.</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="ss">4 - Output a json object that contains the </span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="ss">  following keys: german_summary, num_names.</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="ss">Use the following format:</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="ss">Text: &lt;text to summarize&gt;</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="ss">Summary: &lt;summary&gt;</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="ss">Translation: &lt;summary translation&gt;</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="ss">Names: &lt;list of names in German summary&gt;</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a><span class="ss">Output JSON: &lt;json with summary and num_names&gt;</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a></span>
+<span id="cb25-17"><a href="#cb25-17"></a><span class="ss">Text: &lt;</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">&gt;</span></span>
+<span id="cb25-18"><a href="#cb25-18"></a><span class="ss">"""</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a>response <span class="op">=</span> get_completion(prompt_2)</span>
+<span id="cb25-20"><a href="#cb25-20"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Completion for prompt 2:"</span>)</span>
+<span id="cb25-21"><a href="#cb25-21"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
-<section id="ask-for-output-in-a-specified-format-output" class="slide level2 smaller scrollable output-location-slide"><h2>Ask for output in a specified format</h2><div class="cell output-location-slide" data-execution_count="9">
+<section id="ask-for-output-in-a-specified-format-output" class="slide level2 smaller output-location-slide"><h2>Ask for output in a specified format</h2><div class="cell output-location-slide" data-execution_count="20">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Completion for prompt 2:
-Summary: Jack and Jill, siblings, go on a quest to fetch water from a hilltop well but encounter misfortune along the way.
+Summary: Jack and Jill, siblings from a charming village, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit. Despite the mishap, they return home and continue exploring with delight.
 
-Translation: Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline mais rencontrent des malheurs en chemin.
+Translation: Jack und Jill, Geschwister aus einem charmanten Dorf, machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber erleiden ein Missgeschick, als Jack über einen Stein stolpert und den Hügel hinunterrollt, gefolgt von Jill. Trotz des Missgeschicks kehren sie nach Hause zurück und setzen ihre Erkundungen mit Freude fort.
 
 Names: Jack, Jill
 
-Output JSON: {"french_summary": "Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline mais rencontrent des malheurs en chemin.", "num_names": 2}</code></pre>
+Output JSON: 
+{
+  "german_summary": "Jack und Jill, Geschwister aus einem charmanten Dorf, machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber erleiden ein Missgeschick, als Jack über einen Stein stolpert und den Hügel hinunterrollt, gefolgt von Jill. Trotz des Missgeschicks kehren sie nach Hause zurück und setzen ihre Erkundungen mit Freude fort.",
+  "num_names": 2
+}</code></pre>
 </div>
-</div></section><section id="tactic-2-work-on-own-solution-1" class="slide level2 smaller scrollable">
-<h2>Tactic 2: Work on own solution 1</h2>
-<ul>
-<li class="fragment">Instruct the model to work out its own solution before rushing to a conclusion</li>
-</ul>
-<div id="eb3f151e" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="ss">Determine if the student's solution is correct or not.</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="ss">Question:</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="ss">I'm building a solar power installation and I need </span><span class="ch">\</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="ss"> help working out the financials. </span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="ss">- Land costs $100 / square foot</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="ss">- I can buy solar panels for $250 / square foot</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="ss">- I negotiated a contract for maintenance that will cost \ </span></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="ss">me a flat $100k per year, and an additional $10 / square </span><span class="ch">\</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="ss">foot</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="ss">What is the total cost for the first year of operations </span></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="ss">as a function of the number of square feet.</span></span>
-<span id="cb17-14"><a href="#cb17-14"></a></span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="ss">Student's Solution:</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a><span class="ss">Let x be the size of the installation in square feet.</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a><span class="ss">Costs:</span></span>
-<span id="cb17-18"><a href="#cb17-18"></a><span class="ss">1. Land cost: 100x</span></span>
-<span id="cb17-19"><a href="#cb17-19"></a><span class="ss">2. Solar panel cost: 250x</span></span>
-<span id="cb17-20"><a href="#cb17-20"></a><span class="ss">3. Maintenance cost: 100,000 + 100x</span></span>
-<span id="cb17-21"><a href="#cb17-21"></a><span class="ss">Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000</span></span>
-<span id="cb17-22"><a href="#cb17-22"></a><span class="ss">"""</span></span>
-<span id="cb17-23"><a href="#cb17-23"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb17-24"><a href="#cb17-24"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="tactic-2-work-on-own-solution-1-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 2: Work on own solution 1</h2><div class="cell output-location-slide" data-execution_count="10">
-<div class="cell-output cell-output-stdout">
-<pre><code>The student's solution is correct. They correctly identified the costs for land, solar panels, and maintenance, and calculated the total cost as a function of the number of square feet.</code></pre>
-</div>
-</div></section><section id="tactic-2-work-on-own-solution-2" class="slide level2 smaller scrollable">
-<h2>Tactic 2: Work on own solution 2</h2>
-<ul>
-<li class="fragment">Note that the student’s solution is actually not correct.</li>
-<li class="fragment">We can fix this by instructing the model to work out its own solution first:</li>
-</ul>
-<div id="d42ff4bb" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="ss">Your task is to determine if the student's solution </span><span class="ch">\</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="ss">is correct or not.</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="ss">To solve the problem do the following:</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="ss">- First, work out your own solution to the problem. </span></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="ss">- Then compare your solution to the student's solution \ </span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="ss">and evaluate if the student's solution is correct or not. </span></span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="ss">Don't decide if the student's solution is correct until </span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="ss">you have done the problem yourself.</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a></span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="ss">Use the following format:</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="ss">Question:</span></span>
-<span id="cb19-13"><a href="#cb19-13"></a><span class="ss">'''</span></span>
-<span id="cb19-14"><a href="#cb19-14"></a><span class="ss">question here</span></span>
-<span id="cb19-15"><a href="#cb19-15"></a><span class="ss">'''</span></span>
-<span id="cb19-16"><a href="#cb19-16"></a><span class="ss">Student's solution:</span></span>
-<span id="cb19-17"><a href="#cb19-17"></a><span class="ss">'''</span></span>
-<span id="cb19-18"><a href="#cb19-18"></a><span class="ss">student's solution here</span></span>
-<span id="cb19-19"><a href="#cb19-19"></a><span class="ss">'''</span></span>
-<span id="cb19-20"><a href="#cb19-20"></a><span class="ss">Actual solution:</span></span>
-<span id="cb19-21"><a href="#cb19-21"></a><span class="ss">'''</span></span>
-<span id="cb19-22"><a href="#cb19-22"></a><span class="ss">steps to work out the solution and your solution here</span></span>
-<span id="cb19-23"><a href="#cb19-23"></a><span class="ss">'''</span></span>
-<span id="cb19-24"><a href="#cb19-24"></a><span class="ss">Is the student's solution the same as actual solution </span><span class="ch">\</span></span>
-<span id="cb19-25"><a href="#cb19-25"></a><span class="ss">just calculated:</span></span>
-<span id="cb19-26"><a href="#cb19-26"></a><span class="ss">'''</span></span>
-<span id="cb19-27"><a href="#cb19-27"></a><span class="ss">yes or no</span></span>
-<span id="cb19-28"><a href="#cb19-28"></a><span class="ss">'''</span></span>
-<span id="cb19-29"><a href="#cb19-29"></a><span class="ss">Student grade:</span></span>
-<span id="cb19-30"><a href="#cb19-30"></a><span class="ss">'''</span></span>
-<span id="cb19-31"><a href="#cb19-31"></a><span class="ss">correct or incorrect</span></span>
-<span id="cb19-32"><a href="#cb19-32"></a><span class="ss">'''</span></span>
-<span id="cb19-33"><a href="#cb19-33"></a></span>
-<span id="cb19-34"><a href="#cb19-34"></a><span class="ss">Question:</span></span>
-<span id="cb19-35"><a href="#cb19-35"></a><span class="ss">'''</span></span>
-<span id="cb19-36"><a href="#cb19-36"></a><span class="ss">I'm building a solar power installation and I need help </span><span class="ch">\</span></span>
-<span id="cb19-37"><a href="#cb19-37"></a><span class="ss">working out the financials. </span></span>
-<span id="cb19-38"><a href="#cb19-38"></a><span class="ss">- Land costs $100 / square foot</span></span>
-<span id="cb19-39"><a href="#cb19-39"></a><span class="ss">- I can buy solar panels for $250 / square foot</span></span>
-<span id="cb19-40"><a href="#cb19-40"></a><span class="ss">- I negotiated a contract for maintenance that will cost </span><span class="ch">\</span></span>
-<span id="cb19-41"><a href="#cb19-41"></a><span class="ss">me a flat $100k per year, and an additional $10 / square </span><span class="ch">\</span></span>
-<span id="cb19-42"><a href="#cb19-42"></a><span class="ss">foot</span></span>
-<span id="cb19-43"><a href="#cb19-43"></a><span class="ss">What is the total cost for the first year of operations </span><span class="ch">\</span></span>
-<span id="cb19-44"><a href="#cb19-44"></a><span class="ss">as a function of the number of square feet.</span></span>
-<span id="cb19-45"><a href="#cb19-45"></a><span class="ss">''' </span></span>
-<span id="cb19-46"><a href="#cb19-46"></a><span class="ss">Student's solution:</span></span>
-<span id="cb19-47"><a href="#cb19-47"></a><span class="ss">'''</span></span>
-<span id="cb19-48"><a href="#cb19-48"></a><span class="ss">Let x be the size of the installation in square feet.</span></span>
-<span id="cb19-49"><a href="#cb19-49"></a><span class="ss">Costs:</span></span>
-<span id="cb19-50"><a href="#cb19-50"></a><span class="ss">1. Land cost: 100x</span></span>
-<span id="cb19-51"><a href="#cb19-51"></a><span class="ss">2. Solar panel cost: 250x</span></span>
-<span id="cb19-52"><a href="#cb19-52"></a><span class="ss">3. Maintenance cost: 100,000 + 100x</span></span>
-<span id="cb19-53"><a href="#cb19-53"></a><span class="ss">Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000</span></span>
-<span id="cb19-54"><a href="#cb19-54"></a><span class="ss">'''</span></span>
-<span id="cb19-55"><a href="#cb19-55"></a><span class="ss">Actual solution:</span></span>
-<span id="cb19-56"><a href="#cb19-56"></a><span class="ss">"""</span></span>
-<span id="cb19-57"><a href="#cb19-57"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb19-58"><a href="#cb19-58"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></section><section id="work-on-own-solution" class="slide level2 smaller">
+<h2>Work on own solution</h2>
+<p>Instruct the model to work out its own solution before rushing to a conclusion</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="ss">Your task is to determine if the student's solution </span><span class="ch">\</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="ss">is correct or not.</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="ss">To solve the problem do the following:</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="ss">- First, work out your own solution to the problem. </span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="ss">- Then compare your solution to the student's solution \ </span></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="ss">and evaluate if the student's solution is correct or not. </span></span>
+<span id="cb27-8"><a href="#cb27-8"></a><span class="ss">Don't decide if the student's solution is correct until </span></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="ss">you have done the problem yourself.</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="ss">Use the following format:</span></span>
+<span id="cb27-12"><a href="#cb27-12"></a></span>
+<span id="cb27-13"><a href="#cb27-13"></a><span class="ss">Question:</span></span>
+<span id="cb27-14"><a href="#cb27-14"></a><span class="ss">'''</span></span>
+<span id="cb27-15"><a href="#cb27-15"></a><span class="ss">question here</span></span>
+<span id="cb27-16"><a href="#cb27-16"></a><span class="ss">'''</span></span>
+<span id="cb27-17"><a href="#cb27-17"></a></span>
+<span id="cb27-18"><a href="#cb27-18"></a><span class="ss">Student's solution:</span></span>
+<span id="cb27-19"><a href="#cb27-19"></a><span class="ss">'''</span></span>
+<span id="cb27-20"><a href="#cb27-20"></a><span class="ss">student's solution here</span></span>
+<span id="cb27-21"><a href="#cb27-21"></a><span class="ss">'''</span></span>
+<span id="cb27-22"><a href="#cb27-22"></a></span>
+<span id="cb27-23"><a href="#cb27-23"></a><span class="ss">Actual solution:</span></span>
+<span id="cb27-24"><a href="#cb27-24"></a><span class="ss">'''</span></span>
+<span id="cb27-25"><a href="#cb27-25"></a><span class="ss">steps to work out the solution and your solution here</span></span>
+<span id="cb27-26"><a href="#cb27-26"></a><span class="ss">'''</span></span>
+<span id="cb27-27"><a href="#cb27-27"></a></span>
+<span id="cb27-28"><a href="#cb27-28"></a><span class="ss">Is the student's solution the same as actual solution </span><span class="ch">\</span></span>
+<span id="cb27-29"><a href="#cb27-29"></a><span class="ss">just calculated:</span></span>
+<span id="cb27-30"><a href="#cb27-30"></a><span class="ss">'''</span></span>
+<span id="cb27-31"><a href="#cb27-31"></a><span class="ss">yes or no</span></span>
+<span id="cb27-32"><a href="#cb27-32"></a><span class="ss">'''</span></span>
+<span id="cb27-33"><a href="#cb27-33"></a></span>
+<span id="cb27-34"><a href="#cb27-34"></a><span class="ss">Student grade:</span></span>
+<span id="cb27-35"><a href="#cb27-35"></a><span class="ss">'''</span></span>
+<span id="cb27-36"><a href="#cb27-36"></a><span class="ss">correct or incorrect</span></span>
+<span id="cb27-37"><a href="#cb27-37"></a><span class="ss">'''</span></span>
+<span id="cb27-38"><a href="#cb27-38"></a></span>
+<span id="cb27-39"><a href="#cb27-39"></a><span class="ss">Question:</span></span>
+<span id="cb27-40"><a href="#cb27-40"></a><span class="ss">'''</span></span>
+<span id="cb27-41"><a href="#cb27-41"></a><span class="ss">A bat and a ball cost $1.10 in total. </span></span>
+<span id="cb27-42"><a href="#cb27-42"></a><span class="ss">The bat costs $1.00 more than the ball. </span></span>
+<span id="cb27-43"><a href="#cb27-43"></a><span class="ss">How much does the ball cost?</span></span>
+<span id="cb27-44"><a href="#cb27-44"></a><span class="ss">''' </span></span>
+<span id="cb27-45"><a href="#cb27-45"></a><span class="ss">Student's solution:</span></span>
+<span id="cb27-46"><a href="#cb27-46"></a><span class="ss">'''</span></span>
+<span id="cb27-47"><a href="#cb27-47"></a><span class="ss">1. The bat costs $1.00</span></span>
+<span id="cb27-48"><a href="#cb27-48"></a><span class="ss">2. Therefore, the ball costs $0.10 </span></span>
+<span id="cb27-49"><a href="#cb27-49"></a><span class="ss">'''</span></span>
+<span id="cb27-50"><a href="#cb27-50"></a></span>
+<span id="cb27-51"><a href="#cb27-51"></a><span class="ss">Actual solution:</span></span>
+<span id="cb27-52"><a href="#cb27-52"></a><span class="ss">"""</span></span>
+<span id="cb27-53"><a href="#cb27-53"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb27-54"><a href="#cb27-54"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-</section>
-<section id="tactic-2-work-on-own-solution-2-output" class="slide level2 smaller scrollable output-location-slide"><h2>Tactic 2: Work on own solution 2</h2><div class="cell output-location-slide" data-execution_count="11">
+</section><section id="work-on-own-solution-output" class="slide level2 smaller output-location-slide"><h2>Work on own solution</h2><div class="cell output-location-slide" data-execution_count="21">
 <div class="cell-output cell-output-stdout">
 <pre><code>'''
-To calculate the total cost for the first year of operations, we need to add up the costs of land, solar panels, and maintenance.
-
-1. Land cost: $100 / square foot
-   Total land cost = $100 * x (where x is the size of the installation in square feet)
-
-2. Solar panel cost: $250 / square foot
-   Total solar panel cost = $250 * x
-
-3. Maintenance cost: $100,000 (flat fee) + $10 / square foot
-   Total maintenance cost = $100,000 + $10 * x
-
-Total cost = Land cost + Solar panel cost + Maintenance cost
-           = $100 * x + $250 * x + $100,000 + $10 * x
-           = $360 * x + $100,000
+Let's assume the cost of the ball is x dollars. 
+According to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. 
+The total cost of the bat and the ball is $1.10, so we can write the equation: 
+x + (x + $1.00) = $1.10 
+Simplifying the equation, we get: 
+2x + $1.00 = $1.10 
+Subtracting $1.00 from both sides, we get: 
+2x = $0.10 
+Dividing both sides by 2, we get: 
+x = $0.05 
+Therefore, the ball costs $0.05. 
 '''
 
 Is the student's solution the same as actual solution just calculated:
 '''
-Yes
+No
 '''
 
 Student grade:
 '''
-Correct
+Incorrect
 '''</code></pre>
 </div>
-</div></section><section id="model-limitations-hallucinations" class="slide level2">
-<h2>Model Limitations: Hallucinations</h2>
+</div></section></section>
+<section>
+<section id="model-limitations-hallucinations" class="title-slide slide level1 center">
+<h1>Model Limitations: Hallucinations</h1>
+<p>The generation of factually incorrect or nonsensical information that wasn’t present in the training data.</p>
+</section>
+<section id="causes" class="slide level2">
+<h2>Causes</h2>
 <ul>
-<li class="fragment">Boie is a real company, the product name is not real.</li>
+<li class="fragment"><p><strong>Overgeneralization</strong>: LLMs might overgeneralize from the patterns they have learned in the training data.</p></li>
+<li class="fragment"><p><strong>Lack of Source of Truth</strong>: Without a reliable source of truth during generation, LLMs can drift from accurate information.</p></li>
+<li class="fragment"><p><strong>Insufficient Context</strong>: Sometimes, the context provided to the model may not be sufficient for accurate generation.</p></li>
 </ul>
-<div id="66ae8834" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="ss">Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="ss">"""</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="mitigation-strategies" class="slide level2">
+<h2>Mitigation Strategies</h2>
+<ul>
+<li class="fragment"><p><strong>Data Augmentation</strong>: Including a diverse range of data can help in reducing hallucinations.</p></li>
+<li class="fragment"><p><strong>External Knowledge Bases</strong>: Linking LLMs to external knowledge bases can provide a source of truth to verify generated information.</p></li>
+<li class="fragment"><p><strong>User Feedback</strong>: Incorporating user feedback can also help in identifying and reducing hallucinations.</p></li>
+</ul>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li class="fragment">Bosch is a real company, the product name is not real.</li>
+</ul>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="ss">Tell me about the UltraSlim Cyborg Toothbrush by Bosch</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="ss">"""</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
+</section><section id="example-output" class="slide level2 output-location-slide"><h2>Example</h2><div class="cell output-location-slide" data-execution_count="22">
+<div class="cell-output cell-output-stdout">
+<pre><code>I'm sorry, but as of my knowledge cutoff in September 2021, there is no information available about an UltraSlim Cyborg Toothbrush by Bosch. It's possible that this product does not exist or has not been widely publicized. Bosch is a well-known multinational engineering and technology company, but they primarily focus on manufacturing a wide range of products, including automotive components, power tools, home appliances, and security systems. If the UltraSlim Cyborg Toothbrush is a real product, it might be a specialized toothbrush that Bosch has developed, but without further information, it is difficult to provide specific details.</code></pre>
+</div>
+</div></section></section>
+<section id="acknowledgments" class="title-slide slide level1 center">
+<h1>Acknowledgments</h1>
+<p><em>This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI as well as <a href="https://platform.openai.com/docs/guides/gpt-best-practices">OpenAI’s GPT best practices</a></em></p>
+</section>
+
+<section id="whats-next" class="title-slide slide level1 center" data-background-image="../images/logo.png" data-background-opacity="0.5">
+<h1>What’s next?</h1>
+<p><strong>Congratulations! You have completed this tutorial</strong> 👍</p>
+<p><strong>Next, you may want to go back to the <a href="https://kirenz.github.io/lab-prompt/">lab’s website</a></strong></p>
 
 <div class="footer footer-default">
 <p>Jan Kirenz</p>
 </div>
-</section><section id="model-limitations-hallucinations-output" class="slide level2 output-location-slide"><h2>Model Limitations: Hallucinations</h2><div class="cell output-location-slide" data-execution_count="12">
-<div class="cell-output cell-output-stdout">
-<pre><code>The AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception.
-
-One of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean.
-
-The AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine. The app provides real-time feedback on brushing technique, duration, and coverage, helping users to achieve optimal oral health.
-
-The toothbrush features soft, antimicrobial bristles made from a durable thermoplastic elastomer. These bristles are gentle on the gums and teeth, while also being effective at removing plaque and debris. The antimicrobial properties of the bristles help to inhibit the growth of bacteria, ensuring a hygienic brushing experience.
-
-In terms of battery life, the AeroGlide UltraSlim Smart Toothbrush boasts an impressive 30-day battery life on a single charge. This makes it convenient for travel and ensures that users don't have to worry about constantly recharging their toothbrush.
-
-Overall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination of advanced technology, slim design, and effective cleaning capabilities. It is a great option for those looking to upgrade their oral care routine and achieve a healthier smile.</code></pre>
-</div>
-</div></section></section>
+</section>
     </div>
   </div>
 
@@ -946,6 +1133,7 @@ Overall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination o
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1207,9 +1395,10 @@ Overall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination o
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1219,17 +1408,8 @@ Overall, the AeroGlide UltraSlim Smart Toothbrush by Boie offers a combination o
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
