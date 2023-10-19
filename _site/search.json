@@ -1334,7 +1334,7 @@
     "href": "slides/guidelines.html#few-shot-example",
     "title": "Prompt Engineering Guidelines",
     "section": "Few-shot example",
-    "text": "Few-shot example\n\nprompt = f\"\"\"\nYour task is to answer in a consistent style.\n\n&lt;child&gt;: Teach me about patience.\n\n&lt;grandparent&gt;: The river that carves the deepest \\ \nvalley flows from a modest spring; the \\ \ngrandest symphony originates from a single note; \\ \nthe most intricate tapestry begins with a solitary thread.\n\n&lt;child&gt;: Teach me about resilience.\n\"\"\"\n\n\n\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: : Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of obstacles. Just like a tree that bends but does not break in a storm, resilience allows us to weather the storms of life and come out stronger on the other side."
+    "text": "Few-shot example\n\nprompt = f\"\"\"\nYour task is to answer in a consistent style.\n\n&lt;child&gt;: Teach me about patience.\n\n&lt;grandparent&gt;: The river that carves the deepest \\ \nvalley flows from a modest spring; the \\ \ngrandest symphony originates from a single note; \\ \nthe most intricate tapestry begins with a solitary thread.\n\n&lt;child&gt;: Teach me about resilience.\n\"\"\"\n\n\n\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: &lt;grandparent&gt;: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of obstacles. Just like a tree that bends but does not break in a storm, resilience allows us to weather the storms of life and come out stronger on the other side."
   },
   {
     "objectID": "slides/guidelines.html#specify-the-the-steps-and-output",
@@ -1362,13 +1362,13 @@
     "href": "slides/guidelines.html#output-1",
     "title": "Prompt Engineering Guidelines",
     "section": "Output",
-    "text": "Output\nCompletion for prompt 2:\nSummary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.\n\nTranslation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.\n\nNames: Jack, Jill\n\nOutput JSON: {\"german_summary\": \"Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.\", \"num_names\": 2}"
+    "text": "Output\nCompletion for prompt 2:\nSummary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.\nTranslation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.\nNames: Jack, Jill\nOutput JSON: {“german_summary”: “Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.”, “num_names”: 2}"
   },
   {
     "objectID": "slides/guidelines.html#output-2",
     "href": "slides/guidelines.html#output-2",
     "title": "Prompt Engineering Guidelines",
     "section": "Output",
-    "text": "Output\n'''\nLet's assume the cost of the ball is x dollars. \nAccording to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. \nThe total cost of the bat and the ball is $1.10, so we can write the equation: \nx + (x + $1.00) = $1.10 \nSimplifying the equation, we get: \n2x + $1.00 = $1.10 \nSubtracting $1.00 from both sides, we get: \n2x = $0.10 \nDividing both sides by 2, we get: \nx = $0.05 \nTherefore, the ball costs $0.05.\n'''\nIs the student's solution the same as actual solution just calculated:\n'''\nNo\n'''\nStudent grade:\n'''\nIncorrect\n'''"
+    "text": "Output\nLet’s assume the cost of the ball is x dollars.\nAccording to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. The total cost of the bat and the ball is $1.10, so we can write the equation:\nx + (x + $1.00) = $1.10\nSimplifying the equation, we get:\n2x + $1.00 = $1.10\nSubtracting $1.00 from both sides, we get:\n2x = $0.10\nDividing both sides by 2, we get:\nx = $0.05\nTherefore, the ball costs $0.05. ’’’\nIs the student’s solution the same as actual solution just calculated:\n’’’\nNo\n’’’\nStudent grade:\n’’’\nIncorrect\n’’’"
   }
 ]
