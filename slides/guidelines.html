@@ -505,31 +505,31 @@ Jan Kirenz
 <dl class="code-annotation-container-grid">
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd class="fragment">
-<span data-code-lines="1" data-code-annotation="1" data-code-cell="annotated-cell-3">Defines a new function named <code>get_completion</code> with two parameters: <code>prompt</code> and <code>model</code></span>
+<span data-code-lines="1" data-code-cell="annotated-cell-3" data-code-annotation="1">Defines a new function named <code>get_completion</code> with two parameters: <code>prompt</code> and <code>model</code></span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd class="fragment">
-<span data-code-lines="2" data-code-annotation="2" data-code-cell="annotated-cell-3">Dictionary with two key-value pairs: setting the role as <code>"user"</code> and content as the <code>prompt</code> received by the function.</span>
+<span data-code-lines="2" data-code-cell="annotated-cell-3" data-code-annotation="2">Dictionary with two key-value pairs: setting the role as <code>"user"</code> and content as the <code>prompt</code> received by the function.</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd class="fragment">
-<span data-code-lines="3" data-code-annotation="3" data-code-cell="annotated-cell-3">Initiates an API call to OpenAI’s <a href="https://platform.openai.com/docs/guides/chat">ChatCompletion</a> method, the result of which is stored in a variable named <code>response</code>.</span>
+<span data-code-lines="3" data-code-cell="annotated-cell-3" data-code-annotation="3">Initiates an API call to OpenAI’s <a href="https://platform.openai.com/docs/guides/chat">ChatCompletion</a> method, the result of which is stored in a variable named <code>response</code>.</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd class="fragment">
-<span data-code-lines="4" data-code-annotation="4" data-code-cell="annotated-cell-3">Specifies the language model to be used for the completion (for cost efficiency reasons we always use <code>"gpt-3.5-turbo"</code>)</span>
+<span data-code-lines="4" data-code-cell="annotated-cell-3" data-code-annotation="4">Specifies the language model to be used for the completion (for cost efficiency reasons we always use <code>"gpt-3.5-turbo"</code>)</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd class="fragment">
-<span data-code-lines="5" data-code-annotation="5" data-code-cell="annotated-cell-3">Passes the <code>messages</code> list constructed earlier to the API (will be used as the conversation history)</span>
+<span data-code-lines="5" data-code-cell="annotated-cell-3" data-code-annotation="5">Passes the <code>messages</code> list constructed earlier to the API (will be used as the conversation history)</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
 <dd class="fragment">
-<span data-code-lines="6" data-code-annotation="6" data-code-cell="annotated-cell-3">The degree of randomness of the model’s output (0 makes the model’s output more focused and deterministic).</span>
+<span data-code-lines="6" data-code-cell="annotated-cell-3" data-code-annotation="6">The degree of randomness of the model’s output (0 makes the model’s output more focused and deterministic).</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
 <dd class="fragment">
-<span data-code-lines="7" data-code-annotation="7" data-code-cell="annotated-cell-3">Extracts and returns the content of the message from the first choice in the <code>choices</code> array present in the <code>response</code> object.</span>
+<span data-code-lines="7" data-code-cell="annotated-cell-3" data-code-annotation="7">Extracts and returns the content of the message from the first choice in the <code>choices</code> array present in the <code>response</code> object.</span>
 </dd>
 </dl>
 </div>
@@ -658,7 +658,7 @@ Jan Kirenz
 
 </div>
 <ul>
-<li class="fragment">Output: “To get the desired output from a model, it’s important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!”</li>
+<li class="fragment"><em>Output:</em> “To get the desired output from a model, it’s important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!”</li>
 </ul>
 </div>
 </section>
@@ -684,7 +684,7 @@ Jan Kirenz
 </div>
 </div>
 </section>
-<section id="output" class="slide level2">
+<section id="output" class="slide level2 smaller">
 <h2>Output</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">{</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">"books"</span><span class="fu">:</span> <span class="ot">[</span></span>
@@ -751,9 +751,6 @@ Jan Kirenz
 <span id="cb11-4"><a href="#cb11-4"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<ul>
-<li class="fragment">Output:</li>
-</ul>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">Completion</span> for Text 1:</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="ex">Step</span> 1 <span class="at">-</span> Get some water boiling.</span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="ex">Step</span> 2 <span class="at">-</span> Grab a cup and put a tea bag in it.</span>
@@ -794,7 +791,7 @@ Jan Kirenz
 <span id="cb14-2"><a href="#cb14-2"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li class="fragment">Output: <grandparent>: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of obstacles. Just like a tree that bends but does not break in a storm, resilience allows us to weather the storms of life and come out stronger on the other side.</grandparent></li>
+<li class="fragment"><em>Output:</em> <grandparent>: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of obstacles. Just like a tree that bends but does not break in a storm, resilience allows us to weather the storms of life and come out stronger on the other side.</grandparent></li>
 </ul>
 </div>
 </section></section>
@@ -846,13 +843,14 @@ Jan Kirenz
 </section>
 <section id="output-1" class="slide level2 smaller">
 <h2>Output</h2>
-<ul>
-<li class="fragment"><p>Completion for prompt 2:</p></li>
-<li class="fragment"><p>Summary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.</p></li>
-<li class="fragment"><p>Translation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.</p></li>
-<li class="fragment"><p>Names: Jack, Jill</p></li>
-<li class="fragment"><p>Output JSON: {“german_summary”: “Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.”, “num_names”: 2}</p></li>
-</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">Completion</span> for prompt 2:</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">Summary:</span> Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="ex">Translation:</span> Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.</span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="ex">Names:</span> Jack, Jill</span>
+<span id="cb17-7"><a href="#cb17-7"></a></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="ex">Output</span> JSON: {<span class="st">"german_summary"</span>: <span class="st">"Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück."</span>, <span class="st">"num_names"</span>: 2}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="work-on-own-solution" class="slide level2 smaller">
 <h2>Work on own solution</h2>
@@ -861,66 +859,86 @@ Jan Kirenz
 </ul>
 <div class="fragment">
 <div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="ss">Your task is to determine if the student's solution </span><span class="ch">\</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="ss">is correct or not.</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="ss">To solve the problem do the following:</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="ss">- First, work out your own solution to the problem. </span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="ss">- Then compare your solution to the student's solution \ </span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="ss">and evaluate if the student's solution is correct or not. </span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="ss">Don't decide if the student's solution is correct until </span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="ss">you have done the problem yourself.</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="ss">Use the following format:</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="ss">Question:</span></span>
-<span id="cb17-14"><a href="#cb17-14"></a><span class="ss">'''</span></span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="ss">question here</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a><span class="ss">'''</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a></span>
-<span id="cb17-18"><a href="#cb17-18"></a><span class="ss">Student's solution:</span></span>
-<span id="cb17-19"><a href="#cb17-19"></a><span class="ss">'''</span></span>
-<span id="cb17-20"><a href="#cb17-20"></a><span class="ss">student's solution here</span></span>
-<span id="cb17-21"><a href="#cb17-21"></a><span class="ss">'''</span></span>
-<span id="cb17-22"><a href="#cb17-22"></a></span>
-<span id="cb17-23"><a href="#cb17-23"></a><span class="ss">Actual solution:</span></span>
-<span id="cb17-24"><a href="#cb17-24"></a><span class="ss">'''</span></span>
-<span id="cb17-25"><a href="#cb17-25"></a><span class="ss">steps to work out the solution and your solution here</span></span>
-<span id="cb17-26"><a href="#cb17-26"></a><span class="ss">'''</span></span>
-<span id="cb17-27"><a href="#cb17-27"></a></span>
-<span id="cb17-28"><a href="#cb17-28"></a><span class="ss">Is the student's solution the same as actual solution </span><span class="ch">\</span></span>
-<span id="cb17-29"><a href="#cb17-29"></a><span class="ss">just calculated:</span></span>
-<span id="cb17-30"><a href="#cb17-30"></a><span class="ss">'''</span></span>
-<span id="cb17-31"><a href="#cb17-31"></a><span class="ss">yes or no</span></span>
-<span id="cb17-32"><a href="#cb17-32"></a><span class="ss">'''</span></span>
-<span id="cb17-33"><a href="#cb17-33"></a></span>
-<span id="cb17-34"><a href="#cb17-34"></a><span class="ss">Student grade:</span></span>
-<span id="cb17-35"><a href="#cb17-35"></a><span class="ss">'''</span></span>
-<span id="cb17-36"><a href="#cb17-36"></a><span class="ss">correct or incorrect</span></span>
-<span id="cb17-37"><a href="#cb17-37"></a><span class="ss">'''</span></span>
-<span id="cb17-38"><a href="#cb17-38"></a></span>
-<span id="cb17-39"><a href="#cb17-39"></a><span class="ss">Question:</span></span>
-<span id="cb17-40"><a href="#cb17-40"></a><span class="ss">'''</span></span>
-<span id="cb17-41"><a href="#cb17-41"></a><span class="ss">A bat and a ball cost $1.10 in total. </span></span>
-<span id="cb17-42"><a href="#cb17-42"></a><span class="ss">The bat costs $1.00 more than the ball. </span></span>
-<span id="cb17-43"><a href="#cb17-43"></a><span class="ss">How much does the ball cost?</span></span>
-<span id="cb17-44"><a href="#cb17-44"></a><span class="ss">''' </span></span>
-<span id="cb17-45"><a href="#cb17-45"></a><span class="ss">Student's solution:</span></span>
-<span id="cb17-46"><a href="#cb17-46"></a><span class="ss">'''</span></span>
-<span id="cb17-47"><a href="#cb17-47"></a><span class="ss">1. The bat costs $1.00</span></span>
-<span id="cb17-48"><a href="#cb17-48"></a><span class="ss">2. Therefore, the ball costs $0.10 </span></span>
-<span id="cb17-49"><a href="#cb17-49"></a><span class="ss">'''</span></span>
-<span id="cb17-50"><a href="#cb17-50"></a></span>
-<span id="cb17-51"><a href="#cb17-51"></a><span class="ss">Actual solution:</span></span>
-<span id="cb17-52"><a href="#cb17-52"></a><span class="ss">"""</span></span>
-<span id="cb17-53"><a href="#cb17-53"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb17-54"><a href="#cb17-54"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ss">Your task is to determine if the student's solution </span><span class="ch">\</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="ss">is correct or not.</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="ss">To solve the problem do the following:</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="ss">- First, work out your own solution to the problem. </span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="ss">- Then compare your solution to the student's solution \ </span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="ss">and evaluate if the student's solution is correct or not. </span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="ss">Don't decide if the student's solution is correct until </span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="ss">you have done the problem yourself.</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="ss">Use the following format:</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="ss">Question:</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="ss">'''</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="ss">question here</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="ss">'''</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="ss">Student's solution:</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="ss">'''</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="ss">student's solution here</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a><span class="ss">'''</span></span>
+<span id="cb18-22"><a href="#cb18-22"></a></span>
+<span id="cb18-23"><a href="#cb18-23"></a><span class="ss">Actual solution:</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a><span class="ss">'''</span></span>
+<span id="cb18-25"><a href="#cb18-25"></a><span class="ss">steps to work out the solution and your solution here</span></span>
+<span id="cb18-26"><a href="#cb18-26"></a><span class="ss">'''</span></span>
+<span id="cb18-27"><a href="#cb18-27"></a></span>
+<span id="cb18-28"><a href="#cb18-28"></a><span class="ss">Is the student's solution the same as actual solution </span><span class="ch">\</span></span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="ss">just calculated:</span></span>
+<span id="cb18-30"><a href="#cb18-30"></a><span class="ss">'''</span></span>
+<span id="cb18-31"><a href="#cb18-31"></a><span class="ss">yes or no</span></span>
+<span id="cb18-32"><a href="#cb18-32"></a><span class="ss">'''</span></span>
+<span id="cb18-33"><a href="#cb18-33"></a></span>
+<span id="cb18-34"><a href="#cb18-34"></a><span class="ss">Student grade:</span></span>
+<span id="cb18-35"><a href="#cb18-35"></a><span class="ss">'''</span></span>
+<span id="cb18-36"><a href="#cb18-36"></a><span class="ss">correct or incorrect</span></span>
+<span id="cb18-37"><a href="#cb18-37"></a><span class="ss">'''</span></span>
+<span id="cb18-38"><a href="#cb18-38"></a></span>
+<span id="cb18-39"><a href="#cb18-39"></a><span class="ss">Question:</span></span>
+<span id="cb18-40"><a href="#cb18-40"></a><span class="ss">'''</span></span>
+<span id="cb18-41"><a href="#cb18-41"></a><span class="ss">A bat and a ball cost $1.10 in total. </span></span>
+<span id="cb18-42"><a href="#cb18-42"></a><span class="ss">The bat costs $1.00 more than the ball. </span></span>
+<span id="cb18-43"><a href="#cb18-43"></a><span class="ss">How much does the ball cost?</span></span>
+<span id="cb18-44"><a href="#cb18-44"></a><span class="ss">''' </span></span>
+<span id="cb18-45"><a href="#cb18-45"></a><span class="ss">Student's solution:</span></span>
+<span id="cb18-46"><a href="#cb18-46"></a><span class="ss">'''</span></span>
+<span id="cb18-47"><a href="#cb18-47"></a><span class="ss">1. The bat costs $1.00</span></span>
+<span id="cb18-48"><a href="#cb18-48"></a><span class="ss">2. Therefore, the ball costs $0.10 </span></span>
+<span id="cb18-49"><a href="#cb18-49"></a><span class="ss">'''</span></span>
+<span id="cb18-50"><a href="#cb18-50"></a></span>
+<span id="cb18-51"><a href="#cb18-51"></a><span class="ss">Actual solution:</span></span>
+<span id="cb18-52"><a href="#cb18-52"></a><span class="ss">"""</span></span>
+<span id="cb18-53"><a href="#cb18-53"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb18-54"><a href="#cb18-54"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="output-2" class="slide level2 smaller">
 <h2>Output</h2>
-<p>’’’ Let’s assume the cost of the ball is x dollars. According to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. The total cost of the bat and the ball is $1.10, so we can write the equation: x + (x + $1.00) = $1.10 Simplifying the equation, we get: 2x + $1.00 = $1.10 Subtracting $1.00 from both sides, we get: 2x = $0.10 Dividing both sides by 2, we get: x = $0.05 Therefore, the ball costs $0.05. ’’’ Is the student’s solution the same as actual solution just calculated: ’’’ No ’’’ Student grade: ’’’ Incorrect ’’’</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="st">'''</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="st">Let'</span><span class="ex">s</span> assume the cost of the ball is x dollars. </span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="ex">According</span> to the problem, the bat costs <span class="va">$1</span>.00 more than the ball, so the cost of the bat is x + <span class="va">$1</span>.00. </span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="ex">The</span> total cost of the bat and the ball is <span class="va">$1</span>.10, so we can write the equation: </span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="ex">x</span> + <span class="er">(</span><span class="ex">x</span> + <span class="va">$1</span>.00<span class="kw">)</span> <span class="ex">=</span> <span class="va">$1</span>.10 </span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="ex">Simplifying</span> the equation, we get: </span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="ex">2x</span> + <span class="va">$1</span>.00 = <span class="va">$1</span>.10 </span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="ex">Subtracting</span> <span class="va">$1</span>.00 from both sides, we get: </span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="ex">2x</span> = <span class="va">$0</span>.10 </span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="ex">Dividing</span> both sides by 2, we get: </span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="ex">x</span> = <span class="va">$0</span>.05 </span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="ex">Therefore,</span> the ball costs <span class="va">$0</span>.05.</span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="st">'''</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="st">Is the student'</span><span class="ex">s</span> solution the same as actual solution just calculated:</span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="st">'''</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="st">No</span></span>
+<span id="cb19-17"><a href="#cb19-17"></a><span class="st">'''</span></span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="ex">Student</span> grade:</span>
+<span id="cb19-19"><a href="#cb19-19"></a><span class="st">'''</span></span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="st">Incorrect</span></span>
+<span id="cb19-21"><a href="#cb19-21"></a><span class="st">'''</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="model-limitations-hallucinations" class="title-slide slide level1 center">
@@ -949,14 +967,14 @@ Jan Kirenz
 <li class="fragment">Boie is a real company, the product name is not real.</li>
 </ul>
 <div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="ss">Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="ss">"""</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="ss">Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="ss">"""</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li class="fragment">Output:</li>
+<li class="fragment"><em>Output:</em> The AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception. One of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean. The AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine…</li>
 </ul>
 </section></section>
 <section id="acknowledgments" class="title-slide slide level1 center">
