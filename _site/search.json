@@ -1299,7 +1299,7 @@
     "href": "slides/guidelines.html#example",
     "title": "Prompt Engineering Guidelines",
     "section": "Example",
-    "text": "Example\n\nBoie is a real company, the product name is not real.\n\n\nprompt = f\"\"\"\nTell me about AeroGlide UltraSlim Smart Toothbrush by Boie\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput:"
+    "text": "Example\n\nBoie is a real company, the product name is not real.\n\n\nprompt = f\"\"\"\nTell me about AeroGlide UltraSlim Smart Toothbrush by Boie\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: The AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception. One of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean. The AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine…"
   },
   {
     "objectID": "slides/guidelines.html#example-output",
@@ -1327,7 +1327,7 @@
     "href": "slides/guidelines.html#response",
     "title": "Prompt Engineering Guidelines",
     "section": "Response",
-    "text": "Response\n\nresponse = get_completion(prompt)\n\nprint(\"Completion for Text 1:\")\nprint(response)\n\n\n\nOutput:\n\nCompletion for Text 1:\nStep 1 - Get some water boiling.\nStep 2 - Grab a cup and put a tea bag in it.\nStep 3 - Pour the hot water over the tea bag.\nStep 4 - Let the tea steep for a bit.\nStep 5 - Take out the tea bag.\nStep 6 - Add sugar or milk to taste.\nStep 7 - Enjoy your cup of tea."
+    "text": "Response\n\nresponse = get_completion(prompt)\n\nprint(\"Completion for Text 1:\")\nprint(response)\n\n\nCompletion for Text 1:\nStep 1 - Get some water boiling.\nStep 2 - Grab a cup and put a tea bag in it.\nStep 3 - Pour the hot water over the tea bag.\nStep 4 - Let the tea steep for a bit.\nStep 5 - Take out the tea bag.\nStep 6 - Add sugar or milk to taste.\nStep 7 - Enjoy your cup of tea."
   },
   {
     "objectID": "slides/guidelines.html#few-shot-example",
@@ -1362,13 +1362,13 @@
     "href": "slides/guidelines.html#output-1",
     "title": "Prompt Engineering Guidelines",
     "section": "Output",
-    "text": "Output\n\nCompletion for prompt 2:\nSummary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.\nTranslation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.\nNames: Jack, Jill\nOutput JSON: {“german_summary”: “Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.”, “num_names”: 2}"
+    "text": "Output\nCompletion for prompt 2:\nSummary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.\n\nTranslation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.\n\nNames: Jack, Jill\n\nOutput JSON: {\"german_summary\": \"Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.\", \"num_names\": 2}"
   },
   {
     "objectID": "slides/guidelines.html#output-2",
     "href": "slides/guidelines.html#output-2",
     "title": "Prompt Engineering Guidelines",
     "section": "Output",
-    "text": "Output\n’’’ Let’s assume the cost of the ball is x dollars. According to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. The total cost of the bat and the ball is $1.10, so we can write the equation: x + (x + $1.00) = $1.10 Simplifying the equation, we get: 2x + $1.00 = $1.10 Subtracting $1.00 from both sides, we get: 2x = $0.10 Dividing both sides by 2, we get: x = $0.05 Therefore, the ball costs $0.05. ’’’ Is the student’s solution the same as actual solution just calculated: ’’’ No ’’’ Student grade: ’’’ Incorrect ’’’"
+    "text": "Output\n'''\nLet's assume the cost of the ball is x dollars. \nAccording to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. \nThe total cost of the bat and the ball is $1.10, so we can write the equation: \nx + (x + $1.00) = $1.10 \nSimplifying the equation, we get: \n2x + $1.00 = $1.10 \nSubtracting $1.00 from both sides, we get: \n2x = $0.10 \nDividing both sides by 2, we get: \nx = $0.05 \nTherefore, the ball costs $0.05.\n'''\nIs the student's solution the same as actual solution just calculated:\n'''\nNo\n'''\nStudent grade:\n'''\nIncorrect\n'''"
   }
 ]
