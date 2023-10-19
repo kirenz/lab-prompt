@@ -30,7 +30,7 @@
   {
     "objectID": "slides/guidelines.html#api-key-and-python-libaries",
     "href": "slides/guidelines.html#api-key-and-python-libaries",
-    "title": "Guidelines",
+    "title": "Prompt Engineering Guidelines",
     "section": "API key and Python libaries",
     "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
   },
@@ -44,9 +44,9 @@
   {
     "objectID": "slides/guidelines.html#helper-function",
     "href": "slides/guidelines.html#helper-function",
-    "title": "Guidelines",
+    "title": "Prompt Engineering Guidelines",
     "section": "Helper function",
-    "text": "Helper function\n\nThis helper function will make it easier to use prompts and look at the generated outputs:\n\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
   },
   {
     "objectID": "slides/guidelines.html#tactic-1-delimiters",
@@ -135,16 +135,16 @@
   {
     "objectID": "slides/guidelines.html#ask-for-output-in-a-specified-format",
     "href": "slides/guidelines.html#ask-for-output-in-a-specified-format",
-    "title": "Guidelines",
+    "title": "Prompt Engineering Guidelines",
     "section": "Ask for output in a specified format",
-    "text": "Ask for output in a specified format\n\nprompt_2 = f\"\"\"\nYour task is to perform the following actions: \n1 - Summarize the following text delimited by \n  &lt;&gt; with 1 sentence.\n2 - Translate the summary into French.\n3 - List each name in the French summary.\n4 - Output a json object that contains the \n  following keys: french_summary, num_names.\n\nUse the following format:\nText: &lt;text to summarize&gt;\nSummary: &lt;summary&gt;\nTranslation: &lt;summary translation&gt;\nNames: &lt;list of names in Italian summary&gt;\nOutput JSON: &lt;json with summary and num_names&gt;\n\nText: &lt;{text}&gt;\n\"\"\"\nresponse = get_completion(prompt_2)\nprint(\"\\nCompletion for prompt 2:\")\nprint(response)"
+    "text": "Ask for output in a specified format\n\nprompt_2 = f\"\"\"\nYour task is to perform the following actions: \n1 - Summarize the following text delimited by \n  &lt;&gt; with 1 sentence.\n2 - Translate the summary into German.\n3 - List each name in the German summary.\n4 - Output a json object that contains the \n  following keys: german_summary, num_names.\n\nUse the following format:\nText: &lt;text to summarize&gt;\nSummary: &lt;summary&gt;\nTranslation: &lt;summary translation&gt;\nNames: &lt;list of names in German summary&gt;\nOutput JSON: &lt;json with summary and num_names&gt;\n\nText: &lt;{text}&gt;\n\"\"\"\nresponse = get_completion(prompt_2)\nprint(\"\\nCompletion for prompt 2:\")\nprint(response)"
   },
   {
     "objectID": "slides/guidelines.html#ask-for-output-in-a-specified-format-output",
     "href": "slides/guidelines.html#ask-for-output-in-a-specified-format-output",
-    "title": "Guidelines",
+    "title": "Prompt Engineering Guidelines",
     "section": "Ask for output in a specified format",
-    "text": "Ask for output in a specified format\n\n\nCompletion for prompt 2:\nSummary: Jack and Jill, siblings, go on a quest to fetch water from a hilltop well but encounter misfortune along the way.\n\nTranslation: Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline mais rencontrent des malheurs en chemin.\n\nNames: Jack, Jill\n\nOutput JSON: {\"french_summary\": \"Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline mais rencontrent des malheurs en chemin.\", \"num_names\": 2}"
+    "text": "Ask for output in a specified format\n\n\nCompletion for prompt 2:\nSummary: Jack and Jill, siblings from a charming village, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit. Despite the mishap, they return home and continue exploring with delight.\n\nTranslation: Jack und Jill, Geschwister aus einem charmanten Dorf, machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber erleiden ein Missgeschick, als Jack über einen Stein stolpert und den Hügel hinunterrollt, gefolgt von Jill. Trotz des Missgeschicks kehren sie nach Hause zurück und setzen ihre Erkundungen mit Freude fort.\n\nNames: Jack, Jill\n\nOutput JSON: \n{\n  \"german_summary\": \"Jack und Jill, Geschwister aus einem charmanten Dorf, machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber erleiden ein Missgeschick, als Jack über einen Stein stolpert und den Hügel hinunterrollt, gefolgt von Jill. Trotz des Missgeschicks kehren sie nach Hause zurück und setzen ihre Erkundungen mit Freude fort.\",\n  \"num_names\": 2\n}"
   },
   {
     "objectID": "slides/guidelines.html#tactic-2-work-on-own-solution",
@@ -1083,5 +1083,229 @@
     "title": "Chatbot",
     "section": "Output",
     "text": "Output\n\n{\n  \"content\": \"Sure! Here's a JSON summary of your food order:\\n\\n{\\n  \\\"pizza\\\": {\\n    \\\"type\\\": \\\"pepperoni\\\",\\n    \\\"size\\\": \\\"large\\\"\\n  },\\n  \\\"toppings\\\": [\\n    \\\"extra cheese\\\",\\n    \\\"mushrooms\\\"\\n  ],\\n  \\\"drinks\\\": [\\n    {\\n      \\\"type\\\": \\\"coke\\\",\\n      \\\"size\\\": \\\"medium\\\"\\n    },\\n    {\\n      \\\"type\\\": \\\"sprite\\\",\\n      \\\"size\\\": \\\"small\\\"\\n    }\\n  ],\\n  \\\"sides\\\": [\\n    {\\n      \\\"type\\\": \\\"fries\\\",\\n      \\\"size\\\": \\\"regular\\\"\\n    }\\n  ],\\n  \\\"total_price\\\": 29.45\\n}\\n\\nPlease let me know if there's anything else you'd like to add or modify.\",\n  \"role\": \"assistant\"\n}\nSure! Here's a JSON summary of your food order:\n\n{\n  \"pizza\": {\n    \"type\": \"pepperoni\",\n    \"size\": \"large\"\n  },\n  \"toppings\": [\n    \"extra cheese\",\n    \"mushrooms\"\n  ],\n  \"drinks\": [\n    {\n      \"type\": \"coke\",\n      \"size\": \"medium\"\n    },\n    {\n      \"type\": \"sprite\",\n      \"size\": \"small\"\n    }\n  ],\n  \"sides\": [\n    {\n      \"type\": \"fries\",\n      \"size\": \"regular\"\n    }\n  ],\n  \"total_price\": 29.45\n}\n\nPlease let me know if there's anything else you'd like to add or modify."
+  },
+  {
+    "objectID": "slides/guidelines.html#what-is-prompt-engineering",
+    "href": "slides/guidelines.html#what-is-prompt-engineering",
+    "title": "Prompt Engineering Guidelines",
+    "section": "What is prompt engineering?",
+    "text": "What is prompt engineering?\n\nThe inputs to LLMs are referred to as “prompts”\nDesigning a prompt is essentially how you “program” a LLM:\n\nwith instructions\nor some examples of how to successfully complete a task\n\nPrompt engineering\n\nmethods to improve model reasoning\nreduce the likelihood of model hallucinations"
+  },
+  {
+    "objectID": "slides/guidelines.html#prompting-in-chatgpt",
+    "href": "slides/guidelines.html#prompting-in-chatgpt",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Prompting in ChatGPT",
+    "text": "Prompting in ChatGPT"
+  },
+  {
+    "objectID": "slides/guidelines.html#we-use-openais-api",
+    "href": "slides/guidelines.html#we-use-openais-api",
+    "title": "Prompt Engineering Guidelines",
+    "section": "We use OpenAI’s API",
+    "text": "We use OpenAI’s API\n\n\nThe OpenAI API can be applied to virtually any task that requires understanding or generating natural language and code.\nCan also be used to generate and edit images or convert speech into text."
+  },
+  {
+    "objectID": "slides/guidelines.html#example-api-prompt",
+    "href": "slides/guidelines.html#example-api-prompt",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Example API prompt",
+    "text": "Example API prompt\n\nExample prompt with a system message (helps set the behavior of the assistant)\n\n\nprompt = f\"\"\"\nSummarize the text delimited by triple backticks \\ \ninto a single sentence and add a joke or playful comment\n\n```{text}```\n\"\"\"\n\n\nf: Formatted strings allow you to embed expressions inside string literals, using curly braces {}\nTriple double-quotes are used to denote a string that spans multiple lines.\nThe \\ (line break) is used to make the text more readable\n{text} is a placeholder for a variable text that will be formatted into the string at that position."
+  },
+  {
+    "objectID": "slides/guidelines.html#example-text",
+    "href": "slides/guidelines.html#example-text",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Example text",
+    "text": "Example text\n\ntext = f\"\"\"\nYou should express what you want a model to do by \\ \nproviding instructions that are as clear and \\ \nspecific as you can possibly make them. \\ \nThis will guide the model towards the desired output, \\ \nand reduce the chances of receiving irrelevant \\ \nor incorrect responses. Don't confuse writing a \\ \nclear prompt with writing a short prompt. \\ \nIn many cases, longer prompts provide more clarity \\ \nand context for the model, which can lead to \\ \nmore detailed and relevant outputs.\n\"\"\""
+  },
+  {
+    "objectID": "slides/guidelines.html#chat-completion-helper-function",
+    "href": "slides/guidelines.html#chat-completion-helper-function",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Chat completion helper function",
+    "text": "Chat completion helper function\n\nWe create a helper function using use Open AI’s chat completions endpoint\nFor cost efficiency reasons, we will always use OpenAI’s gpt-3.5-turbo model\n\n\n1def get_completion(prompt, model=\"gpt-3.5-turbo\"):\n2    messages = [{\"role\": \"user\", \"content\": prompt}]\n3    response = openai.ChatCompletion.create(\n4        model=model,\n5        messages=messages,\n        temperature=0,   # &lt;6&gt; # \n    )\n7    return response.choices[0].message[\"content\"]\n\n\n1\n\nDefines a new function named get_completion with two parameters: prompt and model\n\n2\n\nDictionary with two key-value pairs: setting the role as \"user\" and content as the prompt received by the function.\n\n3\n\nInitiates an API call to OpenAI’s ChatCompletion method, the result of which is stored in a variable named response.\n\n4\n\nSpecifies the language model to be used for the completion (we use \"gpt-3.5-turbo\")\n\n5\n\nPasses the messages list constructed earlier to the API (will be used as the conversation history)\n\n7\n\nExtracts and returns the content of the message from the first choice in the choices array present in the response object."
+  },
+  {
+    "objectID": "slides/guidelines.html#what-is-a-sytem-message",
+    "href": "slides/guidelines.html#what-is-a-sytem-message",
+    "title": "Prompt Engineering Guidelines",
+    "section": "What is a sytem message?",
+    "text": "What is a sytem message?\n\nThe system message is optional and helps set the behavior of the assistant.\nYou can modify the personality of the assistant or provide specific instructions about how it should behave\n\nIf outputs are too simple, ask for expert-level writing.\n\nIf you dislike the format, demonstrate the format you’d like to see.\nYou can also use specific personas (e.g. write in the style of Socrates)"
+  },
+  {
+    "objectID": "slides/guidelines.html#what-is-the-temperature",
+    "href": "slides/guidelines.html#what-is-the-temperature",
+    "title": "Prompt Engineering Guidelines",
+    "section": "What is the temperature?",
+    "text": "What is the temperature?\n\nLower values for temperature result in more consistent outputs\nHigher values generate more diverse and creative results.\nSelect a temperature value based on the desired trade-off between coherence and creativity for your specific application."
+  },
+  {
+    "objectID": "slides/guidelines.html#what-are-tokens",
+    "href": "slides/guidelines.html#what-are-tokens",
+    "title": "Prompt Engineering Guidelines",
+    "section": "What are tokens?",
+    "text": "What are tokens?\n\nLanguage models read and write text in chunks called tokens.\nIn English, a token can be as short as one character or as long as one word (e.g., a or apple),\nFor example, the string “ChatGPT is great!” is encoded into six tokens:\n\n[\"Chat\", \"G\", \"PT\", \" is\", \" great\", \"!\"]."
+  },
+  {
+    "objectID": "slides/guidelines.html#tokens-and-api-calls",
+    "href": "slides/guidelines.html#tokens-and-api-calls",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Tokens and API calls",
+    "text": "Tokens and API calls\n\nThe total number of tokens in an API call affects:\n\nHow much your API call costs, as you pay per token\nHow long your API call takes, as writing more tokens takes more time\nWhether your API call works at all, as total tokens must be below the model’s maximum limit (4097 tokens for gpt-3.5-turbo)"
+  },
+  {
+    "objectID": "slides/guidelines.html#use-delimiters",
+    "href": "slides/guidelines.html#use-delimiters",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Use delimiters",
+    "text": "Use delimiters\n\nAlways use delimiters to clearly indicate distinct parts of the input\nDelimiters can be anything like: ``, \"\"\", &lt; &gt;, ,:`\n\n\n\ntext = f\"\"\"\nYou should express what you want a model to do by \\ \nproviding instructions that are as clear and \\ \nspecific as you can possibly make them. \\ \nThis will guide the model towards the desired output, \\ \nand reduce the chances of receiving irrelevant \\ \nor incorrect responses. Don't confuse writing a \\ \nclear prompt with writing a short prompt. \\ \nIn many cases, longer prompts provide more clarity \\ \nand context for the model, which can lead to \\ \nmore detailed and relevant outputs.\n\"\"\"\n\nprompt = f\"\"\"\nSummarize the text delimited by triple backticks \\ \ninto a single sentence and add a joke or playful comment\n```{text}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#use-delimiters-output",
+    "href": "slides/guidelines.html#use-delimiters-output",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Use delimiters",
+    "text": "Use delimiters\n\nTo get the desired output from a model, it's important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!"
+  },
+  {
+    "objectID": "slides/guidelines.html#ask-for-structured-output",
+    "href": "slides/guidelines.html#ask-for-structured-output",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Ask for structured output",
+    "text": "Ask for structured output\n\nAsk for a structured output (e.g. JSON, HTML, …)\n\n\n\nprompt = f\"\"\"\nGenerate a list of three made-up book titles along \\ \nwith their authors and genres. \nProvide them in JSON format with the following keys: \nbook_id, title, author, genre.\n\"\"\"\n\n\n\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#ask-for-structured-output-output",
+    "href": "slides/guidelines.html#ask-for-structured-output-output",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Ask for structured output",
+    "text": "Ask for structured output\n\n{\n  \"books\": [\n    {\n      \"book_id\": 1,\n      \"title\": \"The Enigma of Elysium\",\n      \"author\": \"Evelyn Sinclair\",\n      \"genre\": \"Mystery\"\n    },\n    {\n      \"book_id\": 2,\n      \"title\": \"Whispers in the Wind\",\n      \"author\": \"Nathaniel Blackwood\",\n      \"genre\": \"Fantasy\"\n    },\n    {\n      \"book_id\": 3,\n      \"title\": \"Echoes of the Past\",\n      \"author\": \"Amelia Hart\",\n      \"genre\": \"Romance\"\n    }\n  ]\n}"
+  },
+  {
+    "objectID": "slides/guidelines.html#ask-the-model-to-check-whether-conditions-are-satisfied",
+    "href": "slides/guidelines.html#ask-the-model-to-check-whether-conditions-are-satisfied",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Ask the model to check whether conditions are satisfied",
+    "text": "Ask the model to check whether conditions are satisfied\n\n\ntext_1 = f\"\"\"\nMaking a cup of tea is easy! First, you need to get some \\ \nwater boiling. While that's happening, \\ \ngrab a cup and put a tea bag in it. Once the water is \\ \nhot enough, just pour it over the tea bag. \\ \nLet it sit for a bit so the tea can steep. After a \\ \nfew minutes, take out the tea bag. If you \\ \nlike, you can add some sugar or milk to taste. \\ \nAnd that's it! You've got yourself a delicious \\ \ncup of tea to enjoy.\n\"\"\""
+  },
+  {
+    "objectID": "slides/guidelines.html#section",
+    "href": "slides/guidelines.html#section",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "prompt = f\"\"\"\nYou will be provided with text delimited by triple backticks. \nIf it contains a sequence of instructions, \\ \nre-write those instructions in the following format:\n\nStep 1 - ...\nStep 2 - …\n…\nStep N - …\n\nIf the text does not contain a sequence of instructions, \\ \nthen simply write \\\"No steps provided.\\\"\n\n```{text_1}```\n\"\"\""
+  },
+  {
+    "objectID": "slides/guidelines.html#section-1",
+    "href": "slides/guidelines.html#section-1",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "response = get_completion(prompt)\n\nprint(\"Completion for Text 1:\")\nprint(response)\n\n\n\nCompletion for Text 1:\nStep 1 - Get some water boiling.\nStep 2 - Grab a cup and put a tea bag in it.\nStep 3 - Pour the hot water over the tea bag.\nStep 4 - Let the tea steep for a few minutes.\nStep 5 - Take out the tea bag.\nStep 6 - Add sugar or milk to taste.\nStep 7 - Enjoy your cup of tea."
+  },
+  {
+    "objectID": "slides/guidelines.html#section-2",
+    "href": "slides/guidelines.html#section-2",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "text_2 = f\"\"\"\nThe sun is shining brightly today, and the birds are \\\nsinging. It's a beautiful day to go for a \\ \nwalk in the park. The flowers are blooming, and the \\ \ntrees are swaying gently in the breeze. People \\ \nare out and about, enjoying the lovely weather. \\ \nSome are having picnics, while others are playing \\ \ngames or simply relaxing on the grass. It's a \\ \nperfect day to spend time outdoors and appreciate the \\ \nbeauty of nature.\n\"\"\""
+  },
+  {
+    "objectID": "slides/guidelines.html#section-3",
+    "href": "slides/guidelines.html#section-3",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "prompt = f\"\"\"\nYou will be provided with text delimited by triple backticks. \nIf it contains a sequence of instructions, \\ \nre-write those instructions in the following format:\n\nStep 1 - ...\nStep 2 - …\n…\nStep N - …\n\nIf the text does not contain a sequence of instructions, \\ \nthen simply write \\\"No steps provided.\\\"\n\n```{text_2}```\n\"\"\""
+  },
+  {
+    "objectID": "slides/guidelines.html#section-4",
+    "href": "slides/guidelines.html#section-4",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "response = get_completion(prompt)\n\nprint(\"Completion for Text 2:\")\nprint(response)\n\n\n\nCompletion for Text 2:\nNo steps provided."
+  },
+  {
+    "objectID": "slides/guidelines.html#use-few-shot-prompting-with-examples",
+    "href": "slides/guidelines.html#use-few-shot-prompting-with-examples",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Use “few-shot” prompting with examples",
+    "text": "Use “few-shot” prompting with examples\n\nIn few-shot prompting, examples are included directly in the prompt.\nThese examples serve as a reference or guide for the model to understand the task at hand.\nFew-shot prompting can be an effective technique in prompt engineering, helping to guide the model’s responses without the need for additional training data or fine-tuning."
+  },
+  {
+    "objectID": "slides/guidelines.html#section-5",
+    "href": "slides/guidelines.html#section-5",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "prompt = f\"\"\"\nYour task is to answer in a consistent style.\n\n&lt;child&gt;: Teach me about patience.\n\n&lt;grandparent&gt;: The river that carves the deepest \\ \nvalley flows from a modest spring; the \\ \ngrandest symphony originates from a single note; \\ \nthe most intricate tapestry begins with a solitary thread.\n\n&lt;child&gt;: Teach me about resilience.\n\"\"\""
+  },
+  {
+    "objectID": "slides/guidelines.html#section-6",
+    "href": "slides/guidelines.html#section-6",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "response = get_completion(prompt)\nprint(response)\n\n\n\n&lt;grandparent&gt;: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of setbacks. Like a mighty oak tree that withstands the fiercest storms, resilience allows us to weather the storms of life and come out stronger on the other side."
+  },
+  {
+    "objectID": "slides/guidelines.html#specify-the-steps-required-to-complete-a-task",
+    "href": "slides/guidelines.html#specify-the-steps-required-to-complete-a-task",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Specify the steps required to complete a task",
+    "text": "Specify the steps required to complete a task\n\ntext = f\"\"\"\nIn a charming village, siblings Jack and Jill set out on \\ \na quest to fetch water from a hilltop \\ \nwell. As they climbed, singing joyfully, misfortune \\ \nstruck—Jack tripped on a stone and tumbled \\ \ndown the hill, with Jill following suit. \\ \nThough slightly battered, the pair returned home to \\ \ncomforting embraces. Despite the mishap, \\ \ntheir adventurous spirits remained undimmed, and they \\ \ncontinued exploring with delight.\n\"\"\""
+  },
+  {
+    "objectID": "slides/guidelines.html#section-7",
+    "href": "slides/guidelines.html#section-7",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "# example 1\nprompt_1 = f\"\"\"\nPerform the following actions: \n1 - Summarize the following text delimited by triple \\\nbackticks with 1 sentence.\n2 - Translate the summary into French.\n3 - List each name in the French summary.\n4 - Output a json object that contains the following \\\nkeys: french_summary, num_names.\n\nSeparate your answers with line breaks.\n\nText:\n```{text}```\n\"\"\""
+  },
+  {
+    "objectID": "slides/guidelines.html#section-8",
+    "href": "slides/guidelines.html#section-8",
+    "title": "Prompt Engineering Guidelines",
+    "section": "",
+    "text": "response = get_completion(prompt_1)\n\nprint(\"Completion for prompt 1:\")\nprint(response)\n\n\n\nCompletion for prompt 1:\n1 - Jack and Jill, siblings, go on a quest to fetch water from a hilltop well, but encounter misfortune when Jack trips on a stone and tumbles down the hill, with Jill following suit, yet they return home and remain undeterred in their adventurous spirits.\n\n2 - Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent déterminés dans leur esprit d'aventure.\n\n3 - Jack, Jill\n\n4 - {\n  \"french_summary\": \"Jack et Jill, frère et sœur, partent en quête d'eau d'un puits au sommet d'une colline, mais rencontrent un malheur lorsque Jack trébuche sur une pierre et dévale la colline, suivi par Jill, pourtant ils rentrent chez eux et restent déterminés dans leur esprit d'aventure.\",\n  \"num_names\": 2\n}"
+  },
+  {
+    "objectID": "slides/guidelines.html#work-on-own-solution",
+    "href": "slides/guidelines.html#work-on-own-solution",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Work on own solution",
+    "text": "Work on own solution\nInstruct the model to work out its own solution before rushing to a conclusion\n\nprompt = f\"\"\"\nYour task is to determine if the student's solution \\\nis correct or not.\nTo solve the problem do the following:\n- First, work out your own solution to the problem. \n- Then compare your solution to the student's solution \\ \nand evaluate if the student's solution is correct or not. \nDon't decide if the student's solution is correct until \nyou have done the problem yourself.\n\nUse the following format:\n\nQuestion:\n'''\nquestion here\n'''\n\nStudent's solution:\n'''\nstudent's solution here\n'''\n\nActual solution:\n'''\nsteps to work out the solution and your solution here\n'''\n\nIs the student's solution the same as actual solution \\\njust calculated:\n'''\nyes or no\n'''\n\nStudent grade:\n'''\ncorrect or incorrect\n'''\n\nQuestion:\n'''\nA bat and a ball cost $1.10 in total. \nThe bat costs $1.00 more than the ball. \nHow much does the ball cost?\n''' \nStudent's solution:\n'''\n1. The bat costs $1.00\n2. Therefore, the ball costs $0.10 \n'''\n\nActual solution:\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#work-on-own-solution-output",
+    "href": "slides/guidelines.html#work-on-own-solution-output",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Work on own solution",
+    "text": "Work on own solution\n\n'''\nLet's assume the cost of the ball is x dollars. \nAccording to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. \nThe total cost of the bat and the ball is $1.10, so we can write the equation: \nx + (x + $1.00) = $1.10 \nSimplifying the equation, we get: \n2x + $1.00 = $1.10 \nSubtracting $1.00 from both sides, we get: \n2x = $0.10 \nDividing both sides by 2, we get: \nx = $0.05 \nTherefore, the ball costs $0.05. \n'''\n\nIs the student's solution the same as actual solution just calculated:\n'''\nNo\n'''\n\nStudent grade:\n'''\nIncorrect\n'''"
+  },
+  {
+    "objectID": "slides/guidelines.html#causes",
+    "href": "slides/guidelines.html#causes",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Causes",
+    "text": "Causes\n\nOvergeneralization: LLMs might overgeneralize from the patterns they have learned in the training data.\nLack of Source of Truth: Without a reliable source of truth during generation, LLMs can drift from accurate information.\nInsufficient Context: Sometimes, the context provided to the model may not be sufficient for accurate generation."
+  },
+  {
+    "objectID": "slides/guidelines.html#mitigation-strategies",
+    "href": "slides/guidelines.html#mitigation-strategies",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Mitigation Strategies",
+    "text": "Mitigation Strategies\n\nData Augmentation: Including a diverse range of data can help in reducing hallucinations.\nExternal Knowledge Bases: Linking LLMs to external knowledge bases can provide a source of truth to verify generated information.\nUser Feedback: Incorporating user feedback can also help in identifying and reducing hallucinations."
+  },
+  {
+    "objectID": "slides/guidelines.html#example",
+    "href": "slides/guidelines.html#example",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Example",
+    "text": "Example\n\nBosch is a real company, the product name is not real.\n\n\nprompt = f\"\"\"\nTell me about the UltraSlim Cyborg Toothbrush by Bosch\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/guidelines.html#example-output",
+    "href": "slides/guidelines.html#example-output",
+    "title": "Prompt Engineering Guidelines",
+    "section": "Example",
+    "text": "Example\n\nI'm sorry, but as of my knowledge cutoff in September 2021, there is no information available about an UltraSlim Cyborg Toothbrush by Bosch. It's possible that this product does not exist or has not been widely publicized. Bosch is a well-known multinational engineering and technology company, but they primarily focus on manufacturing a wide range of products, including automotive components, power tools, home appliances, and security systems. If the UltraSlim Cyborg Toothbrush is a real product, it might be a specialized toothbrush that Bosch has developed, but without further information, it is difficult to provide specific details."
   }
 ]
