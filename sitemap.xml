@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/kirenz/lab-prompt/assignments.html</loc>
-    <lastmod>2023-09-21T16:07:12.499Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/code/expanding.html</loc>
-    <lastmod>2023-09-21T16:07:11.787Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/code/summarizing.html</loc>
-    <lastmod>2023-09-21T16:07:11.111Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/code/chatbot.html</loc>
-    <lastmod>2023-09-21T16:07:10.347Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/slides/inferring.html</loc>
-    <lastmod>2023-09-21T16:07:09.139Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/slides/summarizing.html</loc>
-    <lastmod>2023-09-21T16:07:08.099Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/slides/chatbot.html</loc>
-    <lastmod>2023-09-21T16:07:07.191Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/slides/expanding.html</loc>
-    <lastmod>2023-09-21T16:07:06.115Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/require.html</loc>
-    <lastmod>2023-09-21T16:07:03.747Z</lastmod>
+    <loc>https://github.com/kirenz/lab-prompt/slide.html</loc>
+    <lastmod>2023-10-19T12:59:55.884Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/kirenz/lab-prompt/index.html</loc>
-    <lastmod>2023-09-21T16:07:03.103Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/slide.html</loc>
-    <lastmod>2023-09-21T16:07:04.659Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/slides/iterative-prompt-development.html</loc>
-    <lastmod>2023-09-21T16:07:06.643Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/slides/guidelines.html</loc>
-    <lastmod>2023-09-21T16:07:07.695Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/slides/transforming.html</loc>
-    <lastmod>2023-09-21T16:07:08.739Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/code/guidelines.html</loc>
-    <lastmod>2023-09-21T16:07:09.923Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/kirenz/lab-prompt/code/iterative-prompt-development.html</loc>
-    <lastmod>2023-09-21T16:07:10.735Z</lastmod>
+    <lastmod>2023-10-19T12:59:54.380Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/kirenz/lab-prompt/code/inferring.html</loc>
-    <lastmod>2023-09-21T16:07:11.467Z</lastmod>
+    <lastmod>2023-10-19T12:59:53.348Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/code/guidelines.html</loc>
+    <lastmod>2023-10-19T12:59:52.328Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/code/chatbot.html</loc>
+    <lastmod>2023-10-19T12:59:51.224Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/slides/transforming.html</loc>
+    <lastmod>2023-10-19T12:59:49.736Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/slides/guidelines.html</loc>
+    <lastmod>2023-10-19T12:59:48.120Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/slides/summarizing.html</loc>
+    <lastmod>2023-10-19T12:59:46.708Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/slides/iterative-prompt-development.html</loc>
+    <lastmod>2023-10-19T12:59:43.608Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/assignments.html</loc>
+    <lastmod>2023-10-19T12:59:41.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/slides/expanding.html</loc>
+    <lastmod>2023-10-19T12:59:46.140Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/slides/inferring.html</loc>
+    <lastmod>2023-10-19T12:59:47.224Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/slides/chatbot.html</loc>
+    <lastmod>2023-10-19T12:59:48.888Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/code/expanding.html</loc>
+    <lastmod>2023-10-19T12:59:50.636Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/code/iterative-prompt-development.html</loc>
+    <lastmod>2023-10-19T12:59:51.748Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/code/summarizing.html</loc>
+    <lastmod>2023-10-19T12:59:52.832Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/kirenz/lab-prompt/code/transforming.html</loc>
-    <lastmod>2023-09-21T16:07:12.231Z</lastmod>
+    <lastmod>2023-10-19T12:59:53.944Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kirenz/lab-prompt/require.html</loc>
+    <lastmod>2023-10-19T12:59:54.800Z</lastmod>
   </url>
 </urlset>
