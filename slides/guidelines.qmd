@@ -4,7 +4,7 @@ lang: en
 subtitle: Prompt Engineering 1
 author: Jan Kirenz
 execute:
-  eval: true
+  eval: false
   echo: true
 highlight-style: github
 format:
@@ -99,15 +99,12 @@ more detailed and relevant outputs.
 ## Chat completion helper function {.smaller}
 
 ```{python}
-# | code-line-numbers: "|1|2|3|4|5|6|7|8"
-
 def get_completion(prompt, model="gpt-3.5-turbo"): # <1>
     messages = [{"role": "user", "content": prompt}] # <2>
     response = openai.ChatCompletion.create( # <3>
         model=model, # <4>
         messages=messages, # <5>
-        temperature=0,   # <6>  
-    )
+        temperature=0)   # <6>  
     return response.choices[0].message["content"] # <7>
 ```
 
@@ -235,6 +232,9 @@ response = get_completion(prompt)
 print(response)
 ```
 
+- Output: "To get the desired output from a model, it's important to give clear and specific instructions, and remember that longer prompts can actually be more helpful in providing context and clarity—just like how a detailed joke is often funnier!"
+
+
 
 ## Ask for structured output {.smaller}
 
@@ -254,10 +254,38 @@ book_id, title, author, genre.
 . . .
 
 ```{python}
-# | output-location: slide
 response = get_completion(prompt)
 print(response)
 ```
+
+## Output
+
+```json
+{
+  "books": [
+    {
+      "book_id": 1,
+      "title": "The Enigma of Elysium",
+      "author": "Evelyn Sinclair",
+      "genre": "Mystery"
+    },
+    {
+      "book_id": 2,
+      "title": "Whispers in the Wind",
+      "author": "Nathaniel Blackwood",
+      "genre": "Fantasy"
+    },
+    {
+      "book_id": 3,
+      "title": "Echoes of the Past",
+      "author": "Amelia Hart",
+      "genre": "Romance"
+    }
+  ]
+}
+
+```
+
 
 ## Check whether conditions are satisfied {.smaller}
 
@@ -296,16 +324,29 @@ then simply write \"No steps provided.\"
 ```
 
 
-## Response
+## Response {.smaller}
 
 ```{python}
-# | output-location: fragment
 response = get_completion(prompt)
 
 print("Completion for Text 1:")
 print(response)
 ```
 
+. . .
+
+- Output:
+
+```bash
+Completion for Text 1:
+Step 1 - Get some water boiling.
+Step 2 - Grab a cup and put a tea bag in it.
+Step 3 - Pour the hot water over the tea bag.
+Step 4 - Let the tea steep for a bit.
+Step 5 - Take out the tea bag.
+Step 6 - Add sugar or milk to taste.
+Step 7 - Enjoy your cup of tea.
+```
 
 ## Use "few-shot" prompting with examples 
 
@@ -333,10 +374,11 @@ the most intricate tapestry begins with a solitary thread.
 . . .
 
 ```{python}
-# | output-location: fragment
 response = get_completion(prompt)
 print(response)
 ```
+
+- Output: <grandparent>: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of obstacles. Just like a tree that bends but does not break in a storm, resilience allows us to weather the storms of life and come out stronger on the other side.
 
 
 # Prompting Principle 2
@@ -363,7 +405,6 @@ continued exploring with delight.
 
 
 ```{python}
-# | output-location: slide
 prompt_2 = f"""
 Your task is to perform the following actions: 
 1 - Summarize the following text delimited by 
@@ -387,6 +428,18 @@ print("\nCompletion for prompt 2:")
 print(response)
 ```
 
+## Output {.smaller}
+
+- Completion for prompt 2:
+- Summary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.
+
+- Translation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.
+
+- Names: Jack, Jill
+
+- Output JSON: {"german_summary": "Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.", "num_names": 2}
+
+
 ## Work on own solution {.smaller}
 
 - Instruct the model to work out its own solution before rushing to a conclusion
@@ -394,7 +447,6 @@ print(response)
 . . .
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Your task is to determine if the student's solution \
 is correct or not.
@@ -451,6 +503,30 @@ response = get_completion(prompt)
 print(response)
 ```
 
+## Output {.smaller}
+
+'''
+Let's assume the cost of the ball is x dollars. 
+According to the problem, the bat costs $1.00 more than the ball, so the cost of the bat is x + $1.00. 
+The total cost of the bat and the ball is $1.10, so we can write the equation: 
+x + (x + $1.00) = $1.10 
+Simplifying the equation, we get: 
+2x + $1.00 = $1.10 
+Subtracting $1.00 from both sides, we get: 
+2x = $0.10 
+Dividing both sides by 2, we get: 
+x = $0.05 
+Therefore, the ball costs $0.05.
+'''
+Is the student's solution the same as actual solution just calculated:
+'''
+No
+'''
+Student grade:
+'''
+Incorrect
+'''
+
 # Model Limitations: Hallucinations
 
 The generation of factually incorrect or nonsensical information that wasn't present in the training data.
@@ -472,12 +548,11 @@ The generation of factually incorrect or nonsensical information that wasn't pre
 
 - **User Feedback**: Incorporating user feedback can also help in identifying and reducing hallucinations.
 
-## Example
+## Example {.smaller}
 
 - Boie is a real company, the product name is not real.
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
 """
@@ -485,6 +560,7 @@ response = get_completion(prompt)
 print(response)
 ```
 
+- Output: 
 
 
 # Acknowledgments
