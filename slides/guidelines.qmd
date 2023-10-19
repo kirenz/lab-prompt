@@ -57,9 +57,11 @@ format:
 
 - Can also be used to generate and edit images or convert speech into text.
 
-## Example API prompt {.smaller}
+## Example prompt {.smaller}
 
 - Example prompt with a *system message* (helps set the behavior of the assistant)
+
+. . .
 
 ```{python}
 # | eval: false
@@ -72,9 +74,9 @@ into a single sentence and add a joke or playful comment
 ```
 
 - `f`: [Formatted strings](https://docs.python.org/3/tutorial/inputoutput.html) allow you to embed expressions inside string literals, using curly braces {}
-- Triple double-quotes are used to denote a string that spans multiple lines. 
-- The `\` (line break) is used to make the text more readable
-- `{text}` is a placeholder for a variable text that will be formatted into the string at that position. 
+- `"""`: Triple double-quotes are used to denote a string that spans multiple lines. 
+- `\`: line breaks are used to make the text more readable
+- `{text}` is a placeholder for a variable text that will be placed into the string at that position. 
 
 ## Example text
 
@@ -96,28 +98,23 @@ more detailed and relevant outputs.
 
 ## Chat completion helper function {.smaller}
 
-- We create a helper function using use Open AI's [chat completions endpoint](https://platform.openai.com/docs/guides/chat)
-- For cost efficiency reasons, we will always use OpenAI's `gpt-3.5-turbo` model 
-
-
 ```{python}
-# | code-line-numbers: 1|2|3|4|5|6|7|8
+# | code-line-numbers: "|1|2|3|4|5|6|7|8"
 
 def get_completion(prompt, model="gpt-3.5-turbo"): # <1>
     messages = [{"role": "user", "content": prompt}] # <2>
     response = openai.ChatCompletion.create( # <3>
         model=model, # <4>
         messages=messages, # <5>
-        temperature=0,   # <6> # 
+        temperature=0,   # <6>  
     )
     return response.choices[0].message["content"] # <7>
 ```
 
-
 1. Defines a new function named `get_completion` with two parameters: `prompt` and `model`
 2. Dictionary with two key-value pairs: setting the role as `"user"` and content as the `prompt` received by the function.
-3. Initiates an API call to OpenAI's `ChatCompletion` method, the result of which is stored in a variable named `response`.
-4. Specifies the language model to be used for the completion (we use `"gpt-3.5-turbo"`) 
+3. Initiates an API call to OpenAI's [ChatCompletion](https://platform.openai.com/docs/guides/chat) method, the result of which is stored in a variable named `response`.
+4. Specifies the language model to be used for the completion (for cost efficiency reasons we always use `"gpt-3.5-turbo"`) 
 5. Passes the `messages` list constructed earlier to the API (will be used as the conversation history)
 6. The degree of randomness of the model's output (0 makes the model's output more focused and deterministic).
 7. Extracts and returns the content of the message from the first choice in the `choices` array present in the `response` object. 
@@ -204,20 +201,19 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
 ```
 
-# Principle 1: Clear and Specific 
+# Prompting Principle 1
 
-Prompting Principle 1: Write clear and specific instructions
+Write clear and specific instructions
 
 
 ## Use delimiters {.smaller}
 
-- Always use delimiters to clearly indicate distinct parts of the input
-- Delimiters can be anything like: ```, """, < >, `<tag> </tag>`, `:`
+- Always use delimiters (like backticks) to clearly indicate distinct parts of the input
 
 . . .
 
 ```{python}
-# | output-location: slide
+# | output-location: fragment
 text = f"""
 You should express what you want a model to do by \ 
 providing instructions that are as clear and \ 
@@ -230,19 +226,17 @@ In many cases, longer prompts provide more clarity \
 and context for the model, which can lead to \ 
 more detailed and relevant outputs.
 """
-
 prompt = f"""
 Summarize the text delimited by triple backticks \ 
 into a single sentence and add a joke or playful comment
 ```{text}```
 """
-
 response = get_completion(prompt)
 print(response)
 ```
 
 
-## Ask for structured output
+## Ask for structured output {.smaller}
 
 - Ask for a structured output (e.g. JSON, HTML, ...)
 
@@ -265,9 +259,8 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Ask the model to check whether conditions are satisfied
+## Check whether conditions are satisfied {.smaller}
 
-. . .
 
 ```{python}
 text_1 = f"""
@@ -282,10 +275,6 @@ And that's it! You've got yourself a delicious \
 cup of tea to enjoy.
 """
 ```
-
-##  {.smaller}
-
-
 
 ```{python}
 prompt = f"""
@@ -307,7 +296,7 @@ then simply write \"No steps provided.\"
 ```
 
 
-## 
+## Response
 
 ```{python}
 # | output-location: fragment
@@ -317,52 +306,6 @@ print("Completion for Text 1:")
 print(response)
 ```
 
-## 
-
-```{python}
-text_2 = f"""
-The sun is shining brightly today, and the birds are \
-singing. It's a beautiful day to go for a \ 
-walk in the park. The flowers are blooming, and the \ 
-trees are swaying gently in the breeze. People \ 
-are out and about, enjoying the lovely weather. \ 
-Some are having picnics, while others are playing \ 
-games or simply relaxing on the grass. It's a \ 
-perfect day to spend time outdoors and appreciate the \ 
-beauty of nature.
-"""
-```
-
-## 
-
-
-```{python}
-prompt = f"""
-You will be provided with text delimited by triple backticks. 
-If it contains a sequence of instructions, \ 
-re-write those instructions in the following format:
-
-Step 1 - ...
-Step 2 - …
-…
-Step N - …
-
-If the text does not contain a sequence of instructions, \ 
-then simply write \"No steps provided.\"
-
-```{text_2}```
-"""
-```
-
-## 
-
-```{python}
-# | output-location: fragment
-response = get_completion(prompt)
-
-print("Completion for Text 2:")
-print(response)
-```
 
 ## Use "few-shot" prompting with examples 
 
@@ -370,7 +313,7 @@ print(response)
 - These examples serve as a reference or guide for the model to understand the task at hand.
 - Few-shot prompting can be an effective technique in prompt engineering, helping to guide the model's responses without the need for additional training data or fine-tuning.
 
-## 
+## Few-shot example {.smaller}
 
 ```{python}
 prompt = f"""
@@ -387,8 +330,7 @@ the most intricate tapestry begins with a solitary thread.
 """
 ```
 
-## 
-
+. . .
 
 ```{python}
 # | output-location: fragment
@@ -397,11 +339,11 @@ print(response)
 ```
 
 
-# Principle 2: Time to think
+# Prompting Principle 2
 
-Prompting Principle 2: Give the model time to “think”
+Give the model time to “think”
 
-## Specify the steps required to complete a task
+## Specify the the steps and output {.smaller}
 
 ```{python}
 text = f"""
@@ -417,39 +359,8 @@ continued exploring with delight.
 """
 ```
 
-## 
+. . .
 
-
-```{python}
-# example 1
-prompt_1 = f"""
-Perform the following actions: 
-1 - Summarize the following text delimited by triple \
-backticks with 1 sentence.
-2 - Translate the summary into French.
-3 - List each name in the French summary.
-4 - Output a json object that contains the following \
-keys: french_summary, num_names.
-
-Separate your answers with line breaks.
-
-Text:
-```{text}```
-"""
-```
-
-
-## 
-
-```{python}
-# | output-location: fragment
-response = get_completion(prompt_1)
-
-print("Completion for prompt 1:")
-print(response)
-```
-
-## Ask for output in a specified format {.smaller}
 
 ```{python}
 # | output-location: slide
@@ -478,7 +389,9 @@ print(response)
 
 ## Work on own solution {.smaller}
 
-Instruct the model to work out its own solution before rushing to a conclusion
+- Instruct the model to work out its own solution before rushing to a conclusion
+
+. . .
 
 ```{python}
 # | output-location: slide
@@ -561,12 +474,12 @@ The generation of factually incorrect or nonsensical information that wasn't pre
 
 ## Example
 
-- Bosch is a real company, the product name is not real.
+- Boie is a real company, the product name is not real.
 
 ```{python}
 # | output-location: slide
 prompt = f"""
-Tell me about the UltraSlim Cyborg Toothbrush by Bosch
+Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
 """
 response = get_completion(prompt)
 print(response)
@@ -576,7 +489,7 @@ print(response)
 
 # Acknowledgments
 
-*This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI as well as [OpenAI's GPT best practices](https://platform.openai.com/docs/guides/gpt-best-practices)*
+*This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearningAI as well as [OpenAI's GPT best practices](https://platform.openai.com/docs/guides/gpt-best-practices)*
 
 # What's next? {background-image="../images/logo.png" background-opacity="0.5"}
 
