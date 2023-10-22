@@ -415,8 +415,6 @@ Jan Kirenz
 <li><a href="#/friendly-chatbot" id="/toc-friendly-chatbot">Friendly Chatbot</a></li>
 <li><a href="#/chat-without-history" id="/toc-chat-without-history">Chat without history</a></li>
 <li><a href="#/chat-with-history" id="/toc-chat-with-history">Chat with history</a></li>
-<li><a href="#/orderbot-with-panel" id="/toc-orderbot-with-panel">OrderBot with Panel</a></li>
-<li><a href="#/what-is-panel" id="/toc-what-is-panel">What is Panel?</a></li>
 <li><a href="#/acknowledgments" id="/toc-acknowledgments">Acknowledgments</a></li>
 <li><a href="#/whats-next" id="/toc-whats-next">What’s next?</a></li>
 </ul>
@@ -478,7 +476,7 @@ Jan Kirenz
 <h2>Messages</h2>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>messages <span class="op">=</span> [</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an assistant that speaks like Socrates.'</span>},</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an assistant that speaks like Shakespeare.'</span>},</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'tell me a joke'</span>},</span>
 <span id="cb4-4"><a href="#cb4-4"></a>    {<span class="st">'role'</span>: <span class="st">'assistant'</span>, <span class="st">'content'</span>: <span class="st">'Why did the student use ChatGPT'</span>},</span>
 <span id="cb4-5"><a href="#cb4-5"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'I don</span><span class="ch">\'</span><span class="st">t know'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -584,121 +582,139 @@ Jan Kirenz
 <span id="cb15-3"><a href="#cb15-3"></a>  "content": "Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?"</span>
 <span id="cb15-4"><a href="#cb15-4"></a>}</span>
 <span id="cb15-5"><a href="#cb15-5"></a>Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section>
-<section id="orderbot-with-panel" class="title-slide slide level1 center">
-<h1>OrderBot with Panel</h1>
-<ul>
-<li><p>We can automate the collection of user prompts and assistant responses to build a OrderBot</p></li>
-<li><p>The OrderBot will take orders at a pizza restaurant</p></li>
-<li><p>We use Panel to build a Dashboard</p></li>
-</ul>
-</section>
+<!--
 
-<section>
-<section id="what-is-panel" class="title-slide slide level1 center">
-<h1>What is Panel?</h1>
+# OrderBot with Panel
 
-<img data-src="../images/panel.png" class="r-stretch"><ul>
-<li><a href="https://panel.holoviz.org/">Panel</a> is an open-source Python library that lets you easily build dashboards</li>
-</ul>
-</section>
-<section id="context" class="slide level2 smaller">
-<h2>Context</h2>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>context <span class="op">=</span> [{<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">"""</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="st">You are OrderBot, an automated service to collect orders for a pizza restaurant. </span><span class="ch">\</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="st">You first greet the customer, then collects the order, </span><span class="ch">\</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="st">and then asks if it's a pickup or delivery. </span><span class="ch">\</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="st">You wait to collect the entire order, then summarize it and check for a final </span><span class="ch">\</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="st">time if the customer wants to add anything else. </span><span class="ch">\</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="st">If it's a delivery, you ask for an address. </span><span class="ch">\</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="st">Finally you collect the payment.</span><span class="ch">\</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="st">Make sure to clarify all options, extras and sizes to uniquely </span><span class="ch">\</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="st">identify the item from the menu.</span><span class="ch">\</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="st">You respond in a short, very conversational friendly style. </span><span class="ch">\</span></span>
-<span id="cb16-12"><a href="#cb16-12"></a><span class="st">The menu includes </span><span class="ch">\</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a><span class="st">pepperoni pizza  12.95, 10.00, 7.00 </span><span class="ch">\</span></span>
-<span id="cb16-14"><a href="#cb16-14"></a><span class="st">cheese pizza   10.95, 9.25, 6.50 </span><span class="ch">\</span></span>
-<span id="cb16-15"><a href="#cb16-15"></a><span class="st">eggplant pizza   11.95, 9.75, 6.75 </span><span class="ch">\</span></span>
-<span id="cb16-16"><a href="#cb16-16"></a><span class="st">fries 4.50, 3.50 </span><span class="ch">\</span></span>
-<span id="cb16-17"><a href="#cb16-17"></a><span class="st">greek salad 7.25 </span><span class="ch">\</span></span>
-<span id="cb16-18"><a href="#cb16-18"></a><span class="st">Toppings: </span><span class="ch">\</span></span>
-<span id="cb16-19"><a href="#cb16-19"></a><span class="st">extra cheese 2.00, </span><span class="ch">\</span></span>
-<span id="cb16-20"><a href="#cb16-20"></a><span class="st">mushrooms 1.50 </span><span class="ch">\</span></span>
-<span id="cb16-21"><a href="#cb16-21"></a><span class="st">sausage 3.00 </span><span class="ch">\</span></span>
-<span id="cb16-22"><a href="#cb16-22"></a><span class="st">canadian bacon 3.50 </span><span class="ch">\</span></span>
-<span id="cb16-23"><a href="#cb16-23"></a><span class="st">AI sauce 1.50 </span><span class="ch">\</span></span>
-<span id="cb16-24"><a href="#cb16-24"></a><span class="st">peppers 1.00 </span><span class="ch">\</span></span>
-<span id="cb16-25"><a href="#cb16-25"></a><span class="st">Drinks: </span><span class="ch">\</span></span>
-<span id="cb16-26"><a href="#cb16-26"></a><span class="st">coke 3.00, 2.00, 1.00 </span><span class="ch">\</span></span>
-<span id="cb16-27"><a href="#cb16-27"></a><span class="st">sprite 3.00, 2.00, 1.00 </span><span class="ch">\</span></span>
-<span id="cb16-28"><a href="#cb16-28"></a><span class="st">bottled water 5.00 </span><span class="ch">\</span></span>
-<span id="cb16-29"><a href="#cb16-29"></a><span class="st">"""</span>}]  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="helper-function" class="slide level2">
-<h2>Helper function</h2>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">def</span> collect_messages(_):</span>
-<span id="cb17-2"><a href="#cb17-2"></a>    prompt <span class="op">=</span> inp.value_input</span>
-<span id="cb17-3"><a href="#cb17-3"></a>    inp.value <span class="op">=</span> <span class="st">''</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>    context.append({<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="ss">f"</span><span class="sc">{</span>prompt<span class="sc">}</span><span class="ss">"</span>})</span>
-<span id="cb17-5"><a href="#cb17-5"></a>    response <span class="op">=</span> get_completion_from_messages(context)</span>
-<span id="cb17-6"><a href="#cb17-6"></a>    context.append({<span class="st">'role'</span>: <span class="st">'assistant'</span>, <span class="st">'content'</span>: <span class="ss">f"</span><span class="sc">{</span>response<span class="sc">}</span><span class="ss">"</span>})</span>
-<span id="cb17-7"><a href="#cb17-7"></a>    panels.append(</span>
-<span id="cb17-8"><a href="#cb17-8"></a>        pn.Row(<span class="st">'User:'</span>, pn.pane.Markdown(prompt, width<span class="op">=</span><span class="dv">600</span>)))</span>
-<span id="cb17-9"><a href="#cb17-9"></a>    panels.append(</span>
-<span id="cb17-10"><a href="#cb17-10"></a>        pn.Row(<span class="st">'Assistant:'</span>, pn.pane.Markdown(response, width<span class="op">=</span><span class="dv">600</span>, styles<span class="op">=</span>{<span class="st">'background-color'</span>: <span class="st">'#F6F6F6'</span>})))</span>
-<span id="cb17-11"><a href="#cb17-11"></a></span>
-<span id="cb17-12"><a href="#cb17-12"></a>    <span class="cf">return</span> pn.Column(<span class="op">*</span>panels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="panel-dashboard" class="slide level2 smaller" data-background-color="aquamarine">
-<h2>Panel Dashboard</h2>
-<ul>
-<li><p>Note that the dasboard in this presentation is <strong>not</strong> working</p></li>
-<li><p>You need to run the Jupyter Notebook on your own machine in order to use the Dashboard</p></li>
-</ul>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>pn.extension()</span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a>panels <span class="op">=</span> []  </span>
-<span id="cb18-4"><a href="#cb18-4"></a></span>
-<span id="cb18-5"><a href="#cb18-5"></a>inp <span class="op">=</span> pn.widgets.TextInput(value<span class="op">=</span><span class="st">"Hi"</span>, placeholder<span class="op">=</span><span class="st">'Enter text here…'</span>)</span>
-<span id="cb18-6"><a href="#cb18-6"></a>button_conversation <span class="op">=</span> pn.widgets.Button(name<span class="op">=</span><span class="st">"Chat!"</span>)</span>
-<span id="cb18-7"><a href="#cb18-7"></a></span>
-<span id="cb18-8"><a href="#cb18-8"></a>interactive_conversation <span class="op">=</span> pn.bind(collect_messages, button_conversation)</span>
-<span id="cb18-9"><a href="#cb18-9"></a></span>
-<span id="cb18-10"><a href="#cb18-10"></a>dashboard <span class="op">=</span> pn.Column(</span>
-<span id="cb18-11"><a href="#cb18-11"></a>    inp,</span>
-<span id="cb18-12"><a href="#cb18-12"></a>    pn.Row(button_conversation),</span>
-<span id="cb18-13"><a href="#cb18-13"></a>    pn.panel(interactive_conversation, loading_indicator<span class="op">=</span><span class="va">True</span>, height<span class="op">=</span><span class="dv">300</span>),</span>
-<span id="cb18-14"><a href="#cb18-14"></a>)</span>
-<span id="cb18-15"><a href="#cb18-15"></a></span>
-<span id="cb18-16"><a href="#cb18-16"></a>dashboard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="output" class="slide level2">
-<h2>Output</h2>
+- We can automate the collection of user prompts and assistant responses to build a OrderBot
 
-<img data-src="../images/panel-example.png" class="r-stretch"></section>
-<section id="json-food-order-summary" class="slide level2">
-<h2>JSON food order summary</h2>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>messages <span class="op">=</span> context.copy()</span>
-<span id="cb19-2"><a href="#cb19-2"></a>messages.append(</span>
-<span id="cb19-3"><a href="#cb19-3"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'create a json summary of the previous food order. Itemize the price for each item</span><span class="ch">\</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="st"> The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '</span>},</span>
-<span id="cb19-5"><a href="#cb19-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="output-1" class="slide level2">
-<h2>Output</h2>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb20-2"><a href="#cb20-2"></a></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+- The OrderBot will take orders at a pizza restaurant
+
+- We use Panel to build a Dashboard
+
+# What is Panel?
+
+![](../images/panel.png)
+
+- [Panel](https://panel.holoviz.org/) is an open-source Python library that lets you easily build dashboards 
+
+
+## Context {.smaller}
+
+::: {.cell execution_count=12}
+``` {.python .cell-code}
+context = [{'role': 'system', 'content': """
+You are OrderBot, an automated service to collect orders for a pizza restaurant. \
+You first greet the customer, then collects the order, \
+and then asks if it's a pickup or delivery. \
+You wait to collect the entire order, then summarize it and check for a final \
+time if the customer wants to add anything else. \
+If it's a delivery, you ask for an address. \
+Finally you collect the payment.\
+Make sure to clarify all options, extras and sizes to uniquely \
+identify the item from the menu.\
+You respond in a short, very conversational friendly style. \
+The menu includes \
+pepperoni pizza  12.95, 10.00, 7.00 \
+cheese pizza   10.95, 9.25, 6.50 \
+eggplant pizza   11.95, 9.75, 6.75 \
+fries 4.50, 3.50 \
+greek salad 7.25 \
+Toppings: \
+extra cheese 2.00, \
+mushrooms 1.50 \
+sausage 3.00 \
+canadian bacon 3.50 \
+AI sauce 1.50 \
+peppers 1.00 \
+Drinks: \
+coke 3.00, 2.00, 1.00 \
+sprite 3.00, 2.00, 1.00 \
+bottled water 5.00 \
+"""}]  
+
+```
+:::
+
+
+## Helper function 
+
+::: {.cell execution_count=13}
+``` {.python .cell-code}
+def collect_messages(_):
+    prompt = inp.value_input
+    inp.value = ''
+    context.append({'role': 'user', 'content': f"{prompt}"})
+    response = get_completion_from_messages(context)
+    context.append({'role': 'assistant', 'content': f"{response}"})
+    panels.append(
+        pn.Row('User:', pn.pane.Markdown(prompt, width=600)))
+    panels.append(
+        pn.Row('Assistant:', pn.pane.Markdown(response, width=600, styles={'background-color': '#F6F6F6'})))
+
+    return pn.Column(*panels)
+
+```
+:::
+
+
+## Panel Dashboard { .smaller background-color='aquamarine' }
+
+- Note that the dasboard in this presentation is **not** working 
+
+- You need to run the Jupyter Notebook on your own machine in order to use the Dashboard
+
+::: {.cell execution_count=14}
+``` {.python .cell-code}
+pn.extension()
+
+panels = []  
+
+inp = pn.widgets.TextInput(value="Hi", placeholder='Enter text here…')
+button_conversation = pn.widgets.Button(name="Chat!")
+
+interactive_conversation = pn.bind(collect_messages, button_conversation)
+
+dashboard = pn.Column(
+    inp,
+    pn.Row(button_conversation),
+    pn.panel(interactive_conversation, loading_indicator=True, height=300),
+)
+
+dashboard
+```
+:::
+
+
+## Output
+
+![](/images/panel-example.png)
+
+## JSON food order summary 
+
+::: {.cell execution_count=15}
+``` {.python .cell-code}
+messages = context.copy()
+messages.append(
+    {'role': 'system', 'content': 'create a json summary of the previous food order. Itemize the price for each item\
+ The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '},
+)
+```
+:::
+
+
+## Output
+
+::: {.cell execution_count=16}
+``` {.python .cell-code}
+response = get_completion_from_messages(messages, temperature=0)
+
+print(response)
+```
+:::
+
+
+-->
 </div>
 </section></section>
 <section id="acknowledgments" class="title-slide slide level1 center">
