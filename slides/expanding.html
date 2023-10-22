@@ -409,11 +409,19 @@ Jan Kirenz
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
+<li><a href="#/expanding" id="/toc-expanding">Expanding</a></li>
 <li><a href="#/setup" id="/toc-setup">Setup</a></li>
 <li><a href="#/customized-reply" id="/toc-customized-reply">Customized Reply</a></li>
+<li><a href="#/acknowledgments" id="/toc-acknowledgments">Acknowledgments</a></li>
+<li><a href="#/whats-next" id="/toc-whats-next">What’s next?</a></li>
 </ul>
 </nav>
 </section>
+<section id="expanding" class="title-slide slide level1 center">
+<h1>Expanding</h1>
+<p>In this tutorial, you will generate customer service emails that are tailored to each customer’s review.</p>
+</section>
+
 <section>
 <section id="setup" class="title-slide slide level1 center">
 <h1>Setup</h1>
@@ -421,25 +429,25 @@ Jan Kirenz
 </section>
 <section id="python" class="slide level2">
 <h2>Python</h2>
-<div id="9e9466a5" class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> openai</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv, find_dotenv</span>
-<span id="cb1-5"><a href="#cb1-5"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())  <span class="co"># read local .env file</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())  </span>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
 <span id="cb1-7"><a href="#cb1-7"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="helper-function" class="slide level2">
 <h2>Helper function</h2>
-<div id="2a0820d9" class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>, temperature<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
 <span id="cb2-4"><a href="#cb2-4"></a>        model<span class="op">=</span>model,</span>
 <span id="cb2-5"><a href="#cb2-5"></a>        messages<span class="op">=</span>messages,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>        temperature<span class="op">=</span>temperature,  <span class="co"># this is the degree of randomness of the model's output</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>        temperature<span class="op">=</span>temperature,  </span>
 <span id="cb2-7"><a href="#cb2-7"></a>    )</span>
 <span id="cb2-8"><a href="#cb2-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -451,7 +459,7 @@ Jan Kirenz
 </section>
 <section id="sentiment-and-text" class="slide level2">
 <h2>Sentiment and text</h2>
-<div id="f7f1e848" class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>sentiment <span class="op">=</span> <span class="st">"negative"</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="co"># review for a blender</span></span>
@@ -491,7 +499,7 @@ Jan Kirenz
 </section>
 <section id="prompt" class="slide level2">
 <h2>Prompt</h2>
-<div id="d18d61e7" class="cell" height="302" data-execution_count="4">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="ss">You are a customer service AI assistant.</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="ss">Your task is to send an email reply to a valued customer.</span></span>
@@ -507,76 +515,70 @@ Jan Kirenz
 <span id="cb4-13"><a href="#cb4-13"></a><span class="ss">Customer review: ```</span><span class="sc">{</span>review<span class="sc">}</span><span class="ss">```</span></span>
 <span id="cb4-14"><a href="#cb4-14"></a><span class="ss">Review sentiment: </span><span class="sc">{</span>sentiment<span class="sc">}</span></span>
 <span id="cb4-15"><a href="#cb4-15"></a><span class="ss">"""</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
 </section>
-<section id="prompt-output" class="slide level2 output-location-slide"><h2>Prompt</h2><div class="cell output-location-slide" height="302" data-execution_count="4">
-<div class="cell-output cell-output-stdout">
-<pre><code>Dear Valued Customer,
-
-Thank you for taking the time to share your review with us. We appreciate your feedback and apologize for any inconvenience you may have experienced.
-
-We are sorry to hear about the price increase you noticed in December. We strive to provide competitive pricing for our products, and we understand your frustration. If you have any further concerns regarding pricing, we recommend reaching out to our customer service team who will be happy to assist you.
-
-We also appreciate your feedback regarding the base of the system. We continuously work to improve the quality of our products, and your comments will be taken into consideration for future enhancements.
-
-Regarding the motor issue you encountered, we apologize for any inconvenience caused. Our customer service team is available to assist you with any technical difficulties you may encounter, even if the warranty has expired. Please do not hesitate to reach out to them for further assistance.
-
-Thank you once again for your review. We value your loyalty and appreciate your support. If you have any further questions or concerns, please feel free to contact our customer service team.
-
-Best regards,
-
-AI customer agent</code></pre>
-</div>
-</div></section><section id="prompt-with-different-temperature" class="slide level2">
+<section id="output" class="slide level2 smaller">
+<h2>Output</h2>
+<p>Dear Valued Customer,</p>
+<p>Thank you for taking the time to share your review with us. We appreciate your feedback and apologize for any inconvenience you may have experienced.</p>
+<p>We are sorry to hear about the price increase you noticed in December. We strive to provide competitive pricing for our products, and we understand your frustration. If you have any further concerns regarding pricing, we recommend reaching out to our customer service team who will be happy to assist you.</p>
+<p>We also appreciate your feedback regarding the base of the system. We continuously work to improve the quality of our products, and your comments will be taken into consideration for future enhancements.</p>
+<p>Regarding the motor issue you encountered, we apologize for any inconvenience caused. Our customer service team is available to assist you with any technical difficulties you may encounter, even if the warranty has expired. Please do not hesitate to reach out to them for further assistance.</p>
+<p>Thank you once again for your review. We value your loyalty and appreciate your support. If you have any further questions or concerns, please feel free to contact our customer service team.</p>
+<p>Best regards,</p>
+<p>AI customer agent</p>
+</section>
+<section id="prompt-with-different-temperature" class="slide level2">
 <h2>Prompt with different temperature</h2>
-<div id="1e256bf4" class="cell" height="302" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="ss">You are a customer service AI assistant.</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="ss">Your task is to send an email reply to a valued customer.</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="ss">Given the customer email delimited by ```, </span><span class="ch">\</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="ss">Generate a reply to thank the customer for their review.</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="ss">If the sentiment is positive or neutral, thank them for </span><span class="ch">\</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="ss">their review.</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="ss">If the sentiment is negative, apologize and suggest that </span><span class="ch">\</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="ss">they can reach out to customer service. </span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="ss">Make sure to use specific details from the review.</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="ss">Write in a concise and professional tone.</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="ss">Sign the email as `AI customer agent`.</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="ss">Customer review: ```</span><span class="sc">{</span>review<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="ss">Review sentiment: </span><span class="sc">{</span>sentiment<span class="sc">}</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="ss">"""</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a>response <span class="op">=</span> get_completion(prompt, temperature<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ss">You are a customer service AI assistant.</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="ss">Your task is to send an email reply to a valued customer.</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="ss">Given the customer email delimited by ```, </span><span class="ch">\</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="ss">Generate a reply to thank the customer for their review.</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="ss">If the sentiment is positive or neutral, thank them for </span><span class="ch">\</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="ss">their review.</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="ss">If the sentiment is negative, apologize and suggest that </span><span class="ch">\</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="ss">they can reach out to customer service. </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="ss">Make sure to use specific details from the review.</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="ss">Write in a concise and professional tone.</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="ss">Sign the email as `AI customer agent`.</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="ss">Customer review: ```</span><span class="sc">{</span>review<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="ss">Review sentiment: </span><span class="sc">{</span>sentiment<span class="sc">}</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="ss">"""</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>response <span class="op">=</span> get_completion(prompt, temperature<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="output-1" class="slide level2 smaller">
+<h2>Output</h2>
+<p>Dear Valued Customer,</p>
+<p>Thank you for taking the time to provide us with your review. We appreciate your feedback and apologize for any inconvenience you may have experienced with our pricing and product quality.</p>
+<p>We are sorry to hear that you noticed a significant increase in the prices of our 17 piece and 11 piece systems during the month of December. We understand how frustrating this can be, and we apologize for any confusion it may have caused. We strive to offer competitive prices and value for our customers, and we apologize if our pricing did not meet your expectations.</p>
+<p>In regards to the base of the system, we appreciate your feedback about the locking mechanism. We understand that it may not look as good as in previous editions. We will take this into consideration for future improvements.</p>
+<p>Regarding the issue with the motor making a funny noise after about a year, we apologize for any inconvenience caused. We understand how important it is to have a reliable product, and we apologize if the warranty had already expired when you contacted our customer service. We value your loyalty and would like to assist you further. Please feel free to reach out to our customer service team at your convenience, and they will be more than happy to help you with any concerns or questions you may have.</p>
+<p>Once again, we apologize for any inconvenience and appreciate your understanding. We hope to have the opportunity to serve you better in the future. If there is anything else we can assist you with, please do not hesitate to contact us.</p>
+<p>Thank you for choosing our products.</p>
+<p>Best regards,</p>
+<p>AI customer agent</p>
+</section></section>
+<section id="acknowledgments" class="title-slide slide level1 center">
+<h1>Acknowledgments</h1>
+<p><em>This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearningAI as well as <a href="https://platform.openai.com/docs/guides/gpt-best-practices">OpenAI’s GPT best practices</a></em></p>
+</section>
 
+<section id="whats-next" class="title-slide slide level1 center" data-background-image="../images/logo.png" data-background-opacity="0.5">
+<h1>What’s next?</h1>
+<p><strong>Congratulations! You have completed this tutorial</strong> 👍</p>
+<p><strong>Next, you may want to go back to the <a href="https://kirenz.github.io/lab-prompt/">lab’s website</a></strong></p>
 
 <div class="footer footer-default">
 <p>Jan Kirenz</p>
 </div>
-</section><section id="prompt-with-different-temperature-output" class="slide level2 output-location-slide"><h2>Prompt with different temperature</h2><div class="cell output-location-slide" height="302" data-execution_count="5">
-<div class="cell-output cell-output-stdout">
-<pre><code>Dear Valued Customer,
-
-Thank you for taking the time to share your feedback with us. We appreciate your honesty and your loyalty to our brand.
-
-We sincerely apologize for any inconvenience you experienced regarding the pricing changes. We understand how frustrating it can be when prices fluctuate unexpectedly. We strive to offer competitive prices to our customers, and we apologize if this was not reflected in your recent purchase.
-
-Regarding the issue with the blade lock on the base, we apologize for any dissatisfaction caused. We appreciate your gentle usage and taking the time to share your observations. We value your feedback as it helps us identify areas for improvement.
-
-We are sorry to hear that you encountered a problem with the motor after a year of use. We understand your frustration, and we apologize for any inconvenience caused. If you have any further concerns or need assistance, please do not hesitate to reach out to our customer service team. They will be more than happy to assist you.
-
-Once again, we appreciate your feedback and your loyalty to our brand. We value your satisfaction and will continue working hard to improve our products and services.
-
-Thank you for choosing our brand.
-
-Best regards,
-
-AI customer agent</code></pre>
-</div>
-</div></section></section>
+</section>
     </div>
   </div>
 

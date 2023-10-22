@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Prompt - Setup</title>
+<title>Prompt - Transforming</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,38 +148,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#api-key-and-python-libaries" id="toc-api-key-and-python-libaries" class="nav-link active" data-scroll-target="#api-key-and-python-libaries">API key and Python libaries</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#api-key-and-python-libaries" id="toc-api-key-and-python-libaries" class="nav-link" data-scroll-target="#api-key-and-python-libaries">API key and Python libaries</a></li>
   <li><a href="#helper-function" id="toc-helper-function" class="nav-link" data-scroll-target="#helper-function">Helper function</a></li>
+  </ul></li>
   <li><a href="#translation" id="toc-translation" class="nav-link" data-scroll-target="#translation">Translation</a>
   <ul class="collapse">
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
-  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example 3</a></li>
-  <li><a href="#example-4" id="toc-example-4" class="nav-link" data-scroll-target="#example-4">Example 4</a></li>
+  <li><a href="#translate-this-text" id="toc-translate-this-text" class="nav-link" data-scroll-target="#translate-this-text">Translate this text</a></li>
+  <li><a href="#which-language-is-this" id="toc-which-language-is-this" class="nav-link" data-scroll-target="#which-language-is-this">Which language is this?</a></li>
+  <li><a href="#translate-with-style" id="toc-translate-with-style" class="nav-link" data-scroll-target="#translate-with-style">Translate with style</a></li>
   </ul></li>
   <li><a href="#universal-translator" id="toc-universal-translator" class="nav-link" data-scroll-target="#universal-translator">Universal Translator</a>
   <ul class="collapse">
   <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
   <li><a href="#user-messages" id="toc-user-messages" class="nav-link" data-scroll-target="#user-messages">User messages</a></li>
   <li><a href="#translations" id="toc-translations" class="nav-link" data-scroll-target="#translations">Translations</a></li>
-  <li><a href="#user-messages-with-english-translation" id="toc-user-messages-with-english-translation" class="nav-link" data-scroll-target="#user-messages-with-english-translation">User messages with English translation</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a></li>
   </ul></li>
   <li><a href="#tone-transformation" id="toc-tone-transformation" class="nav-link" data-scroll-target="#tone-transformation">Tone Transformation</a>
   <ul class="collapse">
   <li><a href="#from-slang-to-business-tone" id="toc-from-slang-to-business-tone" class="nav-link" data-scroll-target="#from-slang-to-business-tone">From slang to business tone</a></li>
+  <li><a href="#output-1" id="toc-output-1" class="nav-link" data-scroll-target="#output-1">Output</a></li>
   </ul></li>
   <li><a href="#format-conversion" id="toc-format-conversion" class="nav-link" data-scroll-target="#format-conversion">Format Conversion</a>
   <ul class="collapse">
   <li><a href="#from-dictionary-to-html" id="toc-from-dictionary-to-html" class="nav-link" data-scroll-target="#from-dictionary-to-html">From dictionary to HTML</a></li>
-  <li><a href="#html-output" id="toc-html-output" class="nav-link" data-scroll-target="#html-output">HTML output</a></li>
+  <li><a href="#output-2" id="toc-output-2" class="nav-link" data-scroll-target="#output-2">Output</a></li>
   </ul></li>
   <li><a href="#spellcheck-grammar-check" id="toc-spellcheck-grammar-check" class="nav-link" data-scroll-target="#spellcheck-grammar-check">Spellcheck &amp; Grammar check</a>
   <ul class="collapse">
-  <li><a href="#multiple-text-examples" id="toc-multiple-text-examples" class="nav-link" data-scroll-target="#multiple-text-examples">Multiple text examples</a></li>
+  <li><a href="#text-examples" id="toc-text-examples" class="nav-link" data-scroll-target="#text-examples">Text examples</a></li>
   <li><a href="#proofreading" id="toc-proofreading" class="nav-link" data-scroll-target="#proofreading">Proofreading</a></li>
+  <li><a href="#review-about-a-toy" id="toc-review-about-a-toy" class="nav-link" data-scroll-target="#review-about-a-toy">Review about a toy</a></li>
   <li><a href="#proofreading-1" id="toc-proofreading-1" class="nav-link" data-scroll-target="#proofreading-1">Proofreading</a></li>
+  <li><a href="#output-3" id="toc-output-3" class="nav-link" data-scroll-target="#output-3">Output</a></li>
   <li><a href="#display-differences" id="toc-display-differences" class="nav-link" data-scroll-target="#display-differences">Display differences</a></li>
   <li><a href="#make-it-more-compelling" id="toc-make-it-more-compelling" class="nav-link" data-scroll-target="#make-it-more-compelling">Make it more compelling</a></li>
+  <li><a href="#output-4" id="toc-output-4" class="nav-link" data-scroll-target="#output-4">Output</a></li>
+  <li><a href="#show-differences" id="toc-show-differences" class="nav-link" data-scroll-target="#show-differences">Show differences</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -189,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setup</h1>
+<h1 class="title">Transforming</h1>
 </div>
 
 
@@ -204,6 +211,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<p>In this tutorial, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.</p>
+<section id="setup" class="level1">
+<h1>Setup</h1>
 <section id="api-key-and-python-libaries" class="level2">
 <h2 class="anchored" data-anchor-id="api-key-and-python-libaries">API key and Python libaries</h2>
 <div class="cell">
@@ -213,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv, find_dotenv</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())  <span class="co"># read local .env file</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())  </span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -231,57 +241,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+</section>
 <section id="translation" class="level1">
 <h1>Translation</h1>
 <ul>
 <li>ChatGPT is trained with sources in many languages</li>
 <li>This gives the model the ability to do translation</li>
 </ul>
-<section id="example-1" class="level2">
-<h2 class="anchored" data-anchor-id="example-1">Example 1</h2>
-<div class="cell" data-output-location="fragment">
+<section id="translate-this-text" class="level2">
+<h2 class="anchored" data-anchor-id="translate-this-text">Translate this text</h2>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following English text to Spanish: \ </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following English text to German: \ </span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ss">```Hi, I would like to order a blender```</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ul>
+<li>Output: Hallo, ich möchte gerne einen Mixer bestellen.</li>
+</ul>
 </section>
-<section id="example-2" class="level2">
-<h2 class="anchored" data-anchor-id="example-2">Example 2</h2>
-<div class="cell" data-output-location="fragment">
+<section id="which-language-is-this" class="level2">
+<h2 class="anchored" data-anchor-id="which-language-is-this">Which language is this?</h2>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Tell me which language this is: </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ss">```Combien coûte le lampadaire?```</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ss">```Wie geht es dir?```</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ul>
+<li>Output: This language is German.</li>
+</ul>
 </section>
-<section id="example-3" class="level2">
-<h2 class="anchored" data-anchor-id="example-3">Example 3</h2>
-<div class="cell" data-output-location="fragment">
+<section id="translate-with-style" class="level2">
+<h2 class="anchored" data-anchor-id="translate-with-style">Translate with style</h2>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following  text to French and Spanish</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ss">and English pirate: </span><span class="ch">\</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ss">```I want to order a basketball```</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following text to German in both the </span><span class="ch">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ss">formal and informal forms: </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ss">'Would you like to order a pillow?'</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="example-4" class="level2">
-<h2 class="anchored" data-anchor-id="example-4">Example 4</h2>
-<div class="cell" data-output-location="fragment">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following text to Spanish in both the </span><span class="ch">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ss">formal and informal forms: </span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ss">'Would you like to order a pillow?'</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<ul>
+<li>Output:
+<ul>
+<li>Formal: Möchten Sie ein Kissen bestellen?</li>
+<li>Informal: Möchtest du ein Kissen bestellen?</li>
+</ul></li>
+</ul>
 </section>
 </section>
 <section id="universal-translator" class="level1">
@@ -298,58 +311,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="user-messages" class="level2">
 <h2 class="anchored" data-anchor-id="user-messages">User messages</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>user_messages <span class="op">=</span> [</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"La performance du système est plus lente que d'habitude."</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mi monitor tiene píxeles que no se iluminan."</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Il mio mouse non funziona"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mój klawisz Ctrl jest zepsuty"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"我的屏幕在闪烁"</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>user_messages <span class="op">=</span> [</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"La performance du système est plus lente que d'habitude."</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mi monitor tiene píxeles que no se iluminan."</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Il mio mouse non funziona"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mój klawisz Ctrl jest zepsuty"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"我的屏幕在闪烁"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="translations" class="level2">
 <h2 class="anchored" data-anchor-id="translations">Translations</h2>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> issue <span class="kw">in</span> user_messages:</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f"Tell me what language this is: ```</span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">```"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    lang <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Original message (</span><span class="sc">{</span>lang<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ss">    Translate the following  text to English </span><span class="ch">\</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ss">    and German: ```</span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(response, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> issue <span class="kw">in</span> user_messages:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f"Tell me what language this is: ```</span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">```"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    lang <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Original message (</span><span class="sc">{</span>lang<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ss">    Translate the following  text to English </span><span class="ch">\</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ss">    and German: ```</span><span class="sc">{</span>issue<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(response, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="user-messages-with-english-translation" class="level2">
-<h2 class="anchored" data-anchor-id="user-messages-with-english-translation">User messages with English translation</h2>
-<ul>
-<li>System performance is slower than normal: “La performance du système est plus lente que d’habitude.”,</li>
-<li>My monitor has pixels that are not lighting: “Mi monitor tiene píxeles que no se iluminan.”,</li>
-<li>My mouse is not working: “Il mio mouse non funziona”,</li>
-<li>My keyboard has a broken control key: “Mój klawisz Ctrl jest zepsuty”,</li>
-<li>My screen is flashing: ‚“我的屏幕在闪烁”</li>
-</ul>
+<section id="output" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="output">Output</h2>
+<p>Original message (The language is French.): La performance du système est plus lente que d’habitude. The performance of the system is slower than usual.</p>
+<p>Die Leistung des Systems ist langsamer als gewöhnlich.</p>
+<p>Original message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan. English: “My monitor has pixels that do not light up.”</p>
+<p>German: “Mein Monitor hat Pixel, die nicht aufleuchten.”</p>
+<p>Original message (The language is Italian.): Il mio mouse non funziona English: My mouse is not working. German: Meine Maus funktioniert nicht.</p>
+<p>Original message (The language is Polish.): Mój klawisz Ctrl jest zepsuty English: “My Ctrl key is broken” German: “Meine Strg-Taste ist kaputt”</p>
+<p>Original message (The language is Chinese.): 我的屏幕在闪烁 English: My screen is flickering. German: Mein Bildschirm flackert.</p>
 </section>
 </section>
 <section id="tone-transformation" class="level1">
 <h1>Tone Transformation</h1>
-<section id="from-slang-to-business-tone" class="level2">
-<h2 class="anchored" data-anchor-id="from-slang-to-business-tone">From slang to business tone</h2>
 <ul>
 <li>Writing can vary based on the intended audience.</li>
 <li>ChatGPT can produce different tones.</li>
 </ul>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following from slang to a business letter: </span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ss">'Dude, This is Joe, check out this spec on this standing lamp.'</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="from-slang-to-business-tone" class="level2">
+<h2 class="anchored" data-anchor-id="from-slang-to-business-tone">From slang to business tone</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following from slang to a business letter: </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ss">'Dude, This is Joe, check out this spec on this standing lamp.'</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="output-1" class="level2">
+<h2 class="anchored" data-anchor-id="output-1">Output</h2>
+<p>Dear Sir/Madam,</p>
+<p>I hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp.</p>
+<p>I kindly request that you take a moment to review the attached spec, as it contains important details about the standing lamp in question.</p>
+<p>Thank you for your time and consideration. I look forward to hearing from you soon.</p>
+<p>Sincerely, Joe</p>
 </section>
 </section>
 <section id="format-conversion" class="level1">
@@ -360,100 +381,189 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="from-dictionary-to-html" class="level2">
 <h2 class="anchored" data-anchor-id="from-dictionary-to-html">From dictionary to HTML</h2>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data_json <span class="op">=</span> {<span class="st">"restaurant employees"</span>: [</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Shyam"</span>, <span class="st">"email"</span>: <span class="st">"shyamjaiswal@gmail.com"</span>},</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Bob"</span>, <span class="st">"email"</span>: <span class="st">"bob32@gmail.com"</span>},</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Jai"</span>, <span class="st">"email"</span>: <span class="st">"jai87@gmail.com"</span>}</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>]}</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following python dictionary from JSON to an HTML </span><span class="ch">\</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ss">table with column headers and title: </span><span class="sc">{</span>data_json<span class="sc">}</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_json <span class="op">=</span> {<span class="st">"restaurant employees"</span>: [</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Shyam"</span>, <span class="st">"email"</span>: <span class="st">"shyamjaiswal@gmail.com"</span>},</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Bob"</span>, <span class="st">"email"</span>: <span class="st">"bob32@gmail.com"</span>},</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Jai"</span>, <span class="st">"email"</span>: <span class="st">"jai87@gmail.com"</span>}</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>]}</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ss">Translate the following python dictionary from JSON to an HTML </span><span class="ch">\</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ss">table with column headers and title: </span><span class="sc">{</span>data_json<span class="sc">}</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="html-output" class="level2">
-<h2 class="anchored" data-anchor-id="html-output">HTML output</h2>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>display(HTML(response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="output-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="output-2">Output</h2>
+
+
+
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+
+
+<h2 class="anchored">Restaurant Employees</h2>
+
+
+<table data-quarto-postprocess="true" class="table">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Name</td>
+<td data-quarto-table-cell-role="th">Email</td>
+</tr>
+<tr class="even">
+<td>Shyam</td>
+<td>shyamjaiswal@gmail.com</td>
+</tr>
+<tr class="odd">
+<td>Bob</td>
+<td>bob32@gmail.com</td>
+</tr>
+<tr class="even">
+<td>Jai</td>
+<td>jai87@gmail.com</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
 </section>
 </section>
 <section id="spellcheck-grammar-check" class="level1">
 <h1>Spellcheck &amp; Grammar check</h1>
-<ul>
-<li>To signal to the LLM that you want it to proofread your text, you instruct the model to ‘proofread’ or ‘proofread and correct’</li>
-</ul>
-<section id="multiple-text-examples" class="level2">
-<h2 class="anchored" data-anchor-id="multiple-text-examples">Multiple text examples</h2>
+<p>To signal to the LLM that you want it to proofread your text, you instruct the model to ‘proofread’ or ‘proofread and correct’</p>
+<section id="text-examples" class="level2">
+<h2 class="anchored" data-anchor-id="text-examples">Text examples</h2>
 <ul>
 <li>Text examples are taken from <a href="https://writingprompts.com/bad-grammar-examples/">Writing Prompts</a></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> [</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The girl with the black and white puppies have a ball."</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Yolanda has her notebook."</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Its going to be a long day. Does the car need it’s oil changed?"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Their goes my freedom. There going to bring they’re suitcases."</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Your going to need you’re notebook."</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"That medicine effects my ability to sleep. Have you heard of the butterfly affect?"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"This phrase is to cherck chatGPT for speling abilitty"</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> [</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The girl with the black and white puppies have a ball."</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Yolanda has her notebook."</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Its going to be a long day. Does the car need it’s oil changed?"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Their goes my freedom. There going to bring they’re suitcases."</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Your going to need you’re notebook."</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"That medicine effects my ability to sleep. Have you heard of the butterfly affect?"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"This phrase is to cherck chatGPT for speling abilitty"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="proofreading" class="level2">
 <h2 class="anchored" data-anchor-id="proofreading">Proofreading</h2>
-<p>prompt = f”““Proofread and correct the following text and rewrite the corrected version. If you don’t find and errors, just say”No errors found”. Don’t use any punctuation around the text: <code>waj</code>““” response = get_completion(prompt) print(response)</p>
-<pre><code>
-## Review about a toy  {.smaller}
-
-::: {.cell output-location='slide'}
-``` {.python .cell-code}
-text = f"""
-Got this for my daughter for her birthday cuz she keeps taking \
-mine from my room.  Yes, adults also like pandas too.  She takes \
-it everywhere with her, and it's super soft and cute.  One of the \
-ears is a bit lower than the other, and I don't think that was \
-designed to be asymmetrical. It's a bit small for what I paid for it \
-though. I think there might be other options that are bigger for \
-the same price.  It arrived a day earlier than expected, so I got \
-to play with it myself before I gave it to my daughter.
-"""</code></pre>
-<p>:::</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Proofread and correct all sentences in the following Python list delimited by triple backticks and rewrite the corrected version. Mark the corrected words in markdown italic style using the  symbol. If you don't find any errors in an item, just say "No errors found":</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ss">```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Output:</li>
+<li>[‘The girl with the black and white puppies <em>has</em> a ball.’]</li>
+<li>[‘<em>Yolanda</em> has her notebook.’]</li>
+<li>[‘<em>It’s</em> going to be a long day. Does the car need <em>its</em> oil changed?’]</li>
+<li>[‘<em>There</em> goes my freedom. <em>They’re</em> going to bring <em>their</em> suitcases.’]</li>
+<li>[‘<em>You’re</em> going to need <em>your</em> notebook.’]</li>
+<li>[‘That medicine <em>affects</em> my ability to sleep. Have you heard of the butterfly <em>effect</em>?’]</li>
+<li>[‘This phrase is <em>to check</em> <em>ChatGPT</em> for <em>spelling ability</em>.’]</li>
+</ul>
+</section>
+<section id="review-about-a-toy" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="review-about-a-toy">Review about a toy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Got this for my daughter for her birthday cuz she keeps taking </span><span class="ch">\</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ss">mine from my room.  Yes, adults also like pandas too.  She takes </span><span class="ch">\</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ss">it everywhere with her, and it's super soft and cute.  One of the </span><span class="ch">\</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ss">ears is a bit lower than the other, and I don't think that was </span><span class="ch">\</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ss">designed to be asymmetrical. It's a bit small for what I paid for it </span><span class="ch">\</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ss">though. I think there might be other options that are bigger for </span><span class="ch">\</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ss">the same price.  It arrived a day earlier than expected, so I got </span><span class="ch">\</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ss">to play with it myself before I gave it to my daughter.</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="proofreading-1" class="level2">
 <h2 class="anchored" data-anchor-id="proofreading-1">Proofreading</h2>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"proofread and correct this review: ```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```"</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"proofread and correct this review: ```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="output-3" class="level2">
+<h2 class="anchored" data-anchor-id="output-3">Output</h2>
+<p>Got this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super soft and cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. Additionally, it’s a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter.</p>
 </section>
 <section id="display-differences" class="level2">
 <h2 class="anchored" data-anchor-id="display-differences">Display differences</h2>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>diff <span class="op">=</span> Redlines(text, response)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>display(Markdown(diff.output_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Use the following code to display the dfferences between the two texts:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>diff <span class="op">=</span> Redlines(text, response)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>display(Markdown(diff.output_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="make-it-more-compelling" class="level2">
 <h2 class="anchored" data-anchor-id="make-it-more-compelling">Make it more compelling</h2>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ss">proofread and correct this review. Make it more compelling. </span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ss">Ensure it follows APA style guide and targets an advanced reader. </span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ss">Output in markdown format.</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ss">Text: ```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>display(Markdown(response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ss">proofread and correct this review. Make it more compelling. </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ss">Ensure it follows APA style guide and targets an advanced reader. </span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ss">Output in markdown format.</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ss">Text: ```</span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>display(Markdown(response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>diff2 <span class="op">=</span> Redlines(text, response)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>display(Markdown(diff2.output_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="output-4" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="output-4">Output</h2>
+<p>Title: A Delightful Gift for Panda Enthusiasts: A Review of the Soft and Adorable Panda Plush Toy</p>
+<p>Reviewer: [Your Name]</p>
+<p>I recently purchased this charming panda plush toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of these lovable creatures. This review aims to provide an in-depth analysis of the product, catering to advanced readers who appreciate a comprehensive evaluation.</p>
+<p>First and foremost, the softness and cuteness of this panda plush toy are simply unparalleled. Its irresistibly plush exterior makes it a joy to touch and hold, ensuring a delightful sensory experience for both children and adults alike. The attention to detail is evident, with its endearing features capturing the essence of a real panda. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice.</p>
+<p>While the overall quality of the product is commendable, I must express my slight disappointment regarding its size in relation to its price. Considering the investment made, I expected a larger plush toy. It is worth exploring alternative options that offer a more substantial size for the same price point. Nevertheless, this minor setback does not overshadow the undeniable appeal and charm of the panda plush toy.</p>
+<p>In terms of delivery, I was pleasantly surprised to receive the product a day earlier than anticipated. This unexpected early arrival allowed me to indulge in some personal playtime with the panda plush toy before presenting it to my daughter. This added bonus further exemplifies the exceptional customer service provided by the seller.</p>
+<p>In conclusion, the softness, cuteness, and attention to detail of this panda plush toy make it an ideal gift for panda enthusiasts of all ages. While the size may not fully meet expectations, the overall quality and timely delivery contribute to a positive purchasing experience. For those seeking a delightful and endearing companion, this panda plush toy is sure to bring joy and comfort to its lucky owner.</p>
+<p>Note: This review adheres to the APA style guide, providing a concise and compelling evaluation of the panda plush toy. The language used is targeted towards an advanced reader, ensuring a sophisticated and engaging review.</p>
+</section>
+<section id="show-differences" class="level2">
+<h2 class="anchored" data-anchor-id="show-differences">Show differences</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>diff2 <span class="op">=</span> Redlines(text, response)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>display(Markdown(diff2.output_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

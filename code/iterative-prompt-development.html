@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Prompt - Setup</title>
+<title>Prompt - Iterative Prompt Development</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,22 +148,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#api-key-and-python-libaries" id="toc-api-key-and-python-libaries" class="nav-link active" data-scroll-target="#api-key-and-python-libaries">API key and Python libaries</a></li>
-  <li><a href="#gpt-3.5-turbo-vs-gpt-4" id="toc-gpt-3.5-turbo-vs-gpt-4" class="nav-link" data-scroll-target="#gpt-3.5-turbo-vs-gpt-4">GPT-3.5 Turbo vs GPT-4</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#api-key-and-python-libaries" id="toc-api-key-and-python-libaries" class="nav-link" data-scroll-target="#api-key-and-python-libaries">API key and Python libaries</a></li>
   <li><a href="#helper-function" id="toc-helper-function" class="nav-link" data-scroll-target="#helper-function">Helper function</a></li>
-  <li><a href="#marketing-use-case" id="toc-marketing-use-case" class="nav-link" data-scroll-target="#marketing-use-case">Marketing use case</a>
+  </ul></li>
+  <li><a href="#use-case-example" id="toc-use-case-example" class="nav-link" data-scroll-target="#use-case-example">Use case example</a>
   <ul class="collapse">
   <li><a href="#marketing-product-description" id="toc-marketing-product-description" class="nav-link" data-scroll-target="#marketing-product-description">Marketing product description</a></li>
-  <li><a href="#initial-prompt" id="toc-initial-prompt" class="nav-link" data-scroll-target="#initial-prompt">Initial prompt</a></li>
   </ul></li>
-  <li><a href="#iterative-prompt-improvement" id="toc-iterative-prompt-improvement" class="nav-link" data-scroll-target="#iterative-prompt-improvement">Iterative Prompt Improvement</a>
+  <li><a href="#initial-prompt" id="toc-initial-prompt" class="nav-link" data-scroll-target="#initial-prompt">Initial prompt</a>
   <ul class="collapse">
-  <li><a href="#issue-too-long" id="toc-issue-too-long" class="nav-link" data-scroll-target="#issue-too-long">Issue: Too long</a></li>
-  <li><a href="#issue-too-long-1" id="toc-issue-too-long-1" class="nav-link" data-scroll-target="#issue-too-long-1">Issue: Too long</a></li>
-  <li><a href="#issue-wrong-details" id="toc-issue-wrong-details" class="nav-link" data-scroll-target="#issue-wrong-details">Issue: Wrong details</a></li>
-  <li><a href="#issue-wrong-details-1" id="toc-issue-wrong-details-1" class="nav-link" data-scroll-target="#issue-wrong-details-1">Issue: Wrong details</a></li>
-  <li><a href="#issue-3-no-table" id="toc-issue-3-no-table" class="nav-link" data-scroll-target="#issue-3-no-table">Issue 3: No Table</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a></li>
+  <li><a href="#issue-text-is-too-long" id="toc-issue-text-is-too-long" class="nav-link" data-scroll-target="#issue-text-is-too-long">Issue: Text is too long</a></li>
   </ul></li>
+  <li><a href="#prompt-improvement-1" id="toc-prompt-improvement-1" class="nav-link" data-scroll-target="#prompt-improvement-1">Prompt Improvement 1</a>
+  <ul class="collapse">
+  <li><a href="#output-1" id="toc-output-1" class="nav-link" data-scroll-target="#output-1">Output</a></li>
+  </ul></li>
+  <li><a href="#prompt-improvement-2" id="toc-prompt-improvement-2" class="nav-link" data-scroll-target="#prompt-improvement-2">Prompt Improvement 2</a>
+  <ul class="collapse">
+  <li><a href="#output-2" id="toc-output-2" class="nav-link" data-scroll-target="#output-2">Output</a></li>
+  </ul></li>
+  <li><a href="#prompt-improvement-3" id="toc-prompt-improvement-3" class="nav-link" data-scroll-target="#prompt-improvement-3">Prompt Improvement 3</a></li>
   </ul>
 </nav>
     </div>
@@ -172,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setup</h1>
+<h1 class="title">Iterative Prompt Development</h1>
 </div>
 
 
@@ -187,6 +194,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<p>In this tutorial, we’ll iteratively analyze and refine our prompts to generate marketing copy from a product fact sheet.</p>
+<section id="setup" class="level1">
+<h1>Setup</h1>
 <section id="api-key-and-python-libaries" class="level2">
 <h2 class="anchored" data-anchor-id="api-key-and-python-libaries">API key and Python libaries</h2>
 <div class="cell">
@@ -200,17 +210,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="gpt-3.5-turbo-vs-gpt-4" class="level2">
-<h2 class="anchored" data-anchor-id="gpt-3.5-turbo-vs-gpt-4">GPT-3.5 Turbo vs GPT-4</h2>
-<ul>
-<li><p>For cost efficiency reasons, we will use OpenAI’s <code>gpt-3.5-turbo</code> model and the <a href="https://platform.openai.com/docs/guides/chat">chat completions endpoint</a>.</p></li>
-<li><p>However, you can simply replace <code>model="gpt-3.5-turbo"</code>with <code>model="gpt-4"</code> in the helper function</p></li>
-</ul>
-</section>
 <section id="helper-function" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="helper-function">Helper function</h2>
 <ul>
 <li>This helper function will make it easier to use prompts and look at the generated outputs:</li>
+<li>For cost efficiency reasons, we will use OpenAI’s <code>gpt-3.5-turbo</code> model and the <a href="https://platform.openai.com/docs/guides/chat">chat completions endpoint</a>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>):</span>
@@ -218,15 +222,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span>model,</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        messages<span class="op">=</span>messages,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="dv">0</span>,  <span class="co"># this is the degree of randomness of the model's output</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="dv">0</span>, </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="marketing-use-case" class="level1">
-<h1>Marketing use case</h1>
-<section id="marketing-product-description" class="level2 smaller scrollable">
-<h2 class="smaller scrollable anchored" data-anchor-id="marketing-product-description">Marketing product description</h2>
+</section>
+<section id="use-case-example" class="level1">
+<h1>Use case example</h1>
+<section id="marketing-product-description" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="marketing-product-description">Marketing product description</h2>
 <ul>
 <li>Generate a marketing product description from a product fact sheet</li>
 </ul>
@@ -273,9 +278,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="initial-prompt" class="level2 smaller scrollable">
-<h2 class="smaller scrollable anchored" data-anchor-id="initial-prompt">Initial prompt</h2>
-<div class="cell" data-output-location="slide">
+</section>
+<section id="initial-prompt" class="level1 smaller">
+<h1 class="smaller">Initial prompt</h1>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Your task is to help a marketing team create a </span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ss">description for a retail website of a product based </span></span>
@@ -287,20 +293,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="output" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="output">Output</h2>
+<p>Introducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. This chair is part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, all designed with a timeless mid-century aesthetic.</p>
+<p>One of the standout features of this chair is the variety of customization options available. You can choose from several shell colors and base finishes to perfectly match your existing decor. The chair is available with either plastic back and front upholstery or full upholstery in a range of 10 fabric and 6 leather options, allowing you to create a look that is uniquely yours.</p>
+<p>The chair is also available with or without armrests, giving you the flexibility to choose the option that best suits your needs. The base finish options include stainless steel, matte black, gloss white, or chrome, ensuring that you can find the perfect match for your space.</p>
+<p>In terms of construction, this chair is built to last. It features a 5-wheel plastic coated aluminum base, providing stability and mobility. The pneumatic chair adjust allows for easy raise and lower action, ensuring optimal comfort throughout the day.</p>
+<p>When it comes to dimensions, this chair is designed with both style and comfort in mind. With a width of 53 cm (20.87”), depth of 51 cm (20.08”), and height of 80 cm (31.50”), it offers ample space without overwhelming your space. The seat height is 44 cm (17.32”) and the seat depth is 41 cm (16.14”), providing a comfortable seating experience for users of all heights.</p>
+<p>We understand that every space is unique, which is why we offer a range of options to further customize your chair. You can choose between soft or hard-floor caster options, ensuring that your chair glides smoothly across any surface. Additionally, you have the choice of two seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3), allowing you to select the level of support that suits your preferences.</p>
+<p>The materials used in the construction of this chair are of the highest quality. The shell base glider is made from cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The shell thickness is 10 mm, providing a sturdy and reliable foundation. The seat is made from HD36 foam, known for its comfort and resilience.</p>
+<p>Finally, this chair is proudly made in Italy, a country renowned for its craftsmanship and attention to detail. With its combination of style, functionality, and quality, this chair is the perfect choice for those seeking a mid-century inspired office chair that will elevate any space.</p>
+<p>Experience the timeless elegance of our mid-century inspired office chair and transform your workspace today.</p>
 </section>
-</section>
-<section id="iterative-prompt-improvement" class="level1">
-<h1>Iterative Prompt Improvement</h1>
-<section id="issue-too-long" class="level2 smaller scrollable">
-<h2 class="smaller scrollable anchored" data-anchor-id="issue-too-long">Issue: Too long</h2>
+<section id="issue-text-is-too-long" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="issue-text-is-too-long">Issue: Text is too long</h2>
 <ul>
-<li><p>The text is too long</p></li>
-<li><p>Limit the number of words/sentences/characters.</p></li>
+<li><p><em>Issue</em>: The text is too long and we want to limit the number of words/sentences/characters.</p></li>
+<li><p><em>Solution</em>: Instructing the model to generate a specific number of words (does not always work with high precision)</p>
+<ul>
+<li>Example: Summarize the text delimited by triple quotes in about 50 word</li>
+</ul></li>
+<li><p><em>Alternative solution</em>: Generate outputs with a specific number of paragraphs or bullet points.</p>
+<ul>
+<li>Example: Summarize the text delimited by triple quotes in 2 paragraphs.</li>
+<li>Example: Summarize the text delimited by triple quotes in 3 bullet points.</li>
+</ul></li>
 </ul>
-<div class="cell" data-output-location="slide">
+</section>
+</section>
+<section id="prompt-improvement-1" class="level1">
+<h1>Prompt Improvement 1</h1>
+<ul>
+<li>Specify the desired length of the output: “Use at most 50 words.”</li>
+</ul>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Your task is to help a marketing team create a </span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ss">description for a retail website of a product based </span></span>
@@ -317,18 +347,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="issue-too-long-1" class="level2 smaller scrollable">
-<h2 class="smaller scrollable anchored" data-anchor-id="issue-too-long-1">Issue: Too long</h2>
-<div class="cell" data-output-location="fragment">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="issue-wrong-details" class="level2 smaller scrollable">
-<h2 class="smaller scrollable anchored" data-anchor-id="issue-wrong-details">Issue: Wrong details</h2>
+<section id="output-1" class="level2">
+<h2 class="anchored" data-anchor-id="output-1">Output</h2>
+<p>Introducing our mid-century inspired office chair, part of a stunning furniture collection. With various color and finish options, choose between plastic or full upholstery in fabric or leather. The chair features a durable aluminum base, pneumatic chair adjustment, and is suitable for both home and business settings. Made in Italy.</p>
 <ul>
-<li><p>Text focuses on the wrong details</p></li>
-<li><p>Ask it to focus on the aspects that are relevant to the intended audience.</p></li>
+<li>Issue: Text focuses on the wrong details</li>
+</ul>
+</section>
+</section>
+<section id="prompt-improvement-2" class="level1 smaller">
+<h1 class="smaller">Prompt Improvement 2</h1>
+<ul>
+<li>Ask to focus on the aspects that are relevant to the intended audience.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Your task is to help a marketing team create a </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ss">description for a retail website of a product based </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ss">on a technical fact sheet.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ss">Write a product description based on the information </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ss">provided in the technical specifications delimited by </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ss">triple backticks.</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ss">The description is intended for furniture retailers, </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ss">so should be technical in nature and focus on the </span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ss">materials the product is constructed from.</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ss">At the end of the description, include every 7-character </span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ss">Product ID in the technical specification.</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="ss">Use at most 50 words.</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="output-2" class="level2">
+<h2 class="anchored" data-anchor-id="output-2">Output</h2>
+<p>Introducing our mid-century inspired office chair, part of a beautiful furniture collection. With various shell colors and base finishes, it offers versatility for any setting. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a durable aluminum base and pneumatic chair adjustment for easy use. Made in Italy.</p>
+<ul>
+<li>Issue:
+<ul>
+<li>Lets’s assume oure description needs a table of dimensions</li>
+<li>Output should be in HTML</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="prompt-improvement-3" class="level1 smaller">
+<h1 class="smaller">Prompt Improvement 3</h1>
+<ul>
+<li>Ask it to extract information and organize it in a table in HTML.</li>
 </ul>
 <div class="cell" data-output-location="slide">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
@@ -344,89 +415,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ss">so should be technical in nature and focus on the </span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ss">materials the product is constructed from.</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ss">Use at most 50 words.</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="issue-wrong-details-1" class="level2 smaller scrollable">
-<h2 class="smaller scrollable anchored" data-anchor-id="issue-wrong-details-1">Issue: Wrong details</h2>
-<ul>
-<li>Include product ID’s</li>
-</ul>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Your task is to help a marketing team create a </span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ss">description for a retail website of a product based </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ss">on a technical fact sheet.</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ss">Write a product description based on the information </span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ss">provided in the technical specifications delimited by </span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ss">triple backticks.</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ss">The description is intended for furniture retailers, </span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ss">so should be technical in nature and focus on the </span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ss">materials the product is constructed from.</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ss">At the end of the description, include every 7-character </span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ss">Product ID in the technical specification.</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ss">Use at most 50 words.</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="issue-3-no-table" class="level2 smaller scrollable">
-<h2 class="smaller scrollable anchored" data-anchor-id="issue-3-no-table">Issue 3: No Table</h2>
-<ul>
-<li><p>Description needs a table of dimensions</p></li>
-<li><p>Ask it to extract information and organize it in a table.</p></li>
-</ul>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Your task is to help a marketing team create a </span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ss">description for a retail website of a product based </span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ss">on a technical fact sheet.</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ss">Write a product description based on the information </span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ss">provided in the technical specifications delimited by </span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ss">triple backticks.</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ss">The description is intended for furniture retailers, </span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ss">so should be technical in nature and focus on the </span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ss">materials the product is constructed from.</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="ss">At the end of the description, include every 7-character </span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ss">Product ID in the technical specification.</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ss">After the description, include a table that gives the </span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ss">product's dimensions. The table should have two columns.</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ss">In the first column include the name of the dimension. </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ss">In the second column include the measurements in inches only.</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ss">Give the table the title 'Product Dimensions'.</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="ss">Format everything as HTML that can be used in a website. </span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="ss">Place the description in a &lt;div&gt; element.</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>display(HTML(response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ss">At the end of the description, include every 7-character </span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="ss">Product ID in the technical specification.</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ss">After the description, include a table that gives the </span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ss">product's dimensions. The table should have two columns.</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ss">In the first column include the name of the dimension. </span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="ss">In the second column include the measurements in inches only.</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="ss">Give the table the title 'Product Dimensions'.</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="ss">Format everything as HTML that can be used in a website. </span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="ss">Place the description in a &lt;div&gt; element.</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
