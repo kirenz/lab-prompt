@@ -29,7 +29,9 @@ format:
     footer: Jan Kirenz
 ---
 
-# Introduction
+# Prompt Engineering Guidelines
+
+In this tutorial, we'll practice two prompting principles and their related tactics in order to write effective prompts for large language models.
 
 ## What is prompt engineering?
 
