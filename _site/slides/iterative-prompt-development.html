@@ -409,8 +409,9 @@ Jan Kirenz
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
+<li class="fragment"><a href="#/iterative-prompt-development" id="/toc-iterative-prompt-development">Iterative Prompt Development</a></li>
 <li class="fragment"><a href="#/setup" id="/toc-setup">Setup</a></li>
-<li class="fragment"><a href="#/marketing-use-case" id="/toc-marketing-use-case">Marketing use case</a></li>
+<li class="fragment"><a href="#/use-case-example" id="/toc-use-case-example">Use case example</a></li>
 <li class="fragment"><a href="#/initial-prompt" id="/toc-initial-prompt">Initial prompt</a></li>
 <li class="fragment"><a href="#/prompt-improvement-1" id="/toc-prompt-improvement-1">Prompt Improvement 1</a></li>
 <li class="fragment"><a href="#/prompt-improvement-2" id="/toc-prompt-improvement-2">Prompt Improvement 2</a></li>
@@ -420,6 +421,11 @@ Jan Kirenz
 </ul>
 </nav>
 </section>
+<section id="iterative-prompt-development" class="title-slide slide level1 center">
+<h1>Iterative Prompt Development</h1>
+<p>In this tutorial, we’ll iteratively analyze and refine our prompts to generate marketing copy from a product fact sheet.</p>
+</section>
+
 <section>
 <section id="setup" class="title-slide slide level1 center">
 <h1>Setup</h1>
@@ -458,8 +464,8 @@ Jan Kirenz
 </div>
 </section></section>
 <section>
-<section id="marketing-use-case" class="title-slide slide level1 center">
-<h1>Marketing use case</h1>
+<section id="use-case-example" class="title-slide slide level1 center">
+<h1>Use case example</h1>
 
 </section>
 <section id="marketing-product-description" class="slide level2 smaller">
@@ -544,18 +550,26 @@ Jan Kirenz
 <p>Finally, this chair is proudly made in Italy, a country renowned for its craftsmanship and attention to detail. With its combination of style, functionality, and quality, this chair is the perfect choice for those seeking a mid-century inspired office chair that will elevate any space.</p>
 <p>Experience the timeless elegance of our mid-century inspired office chair and transform your workspace today.</p>
 </section>
-<section id="issue-too-long" class="slide level2">
-<h2>Issue: Too long</h2>
+<section id="issue-text-is-too-long" class="slide level2 smaller">
+<h2>Issue: Text is too long</h2>
 <ul>
-<li class="fragment"><p>The text is too long</p></li>
-<li class="fragment"><p>Limit the number of words/sentences/characters.</p></li>
+<li class="fragment"><p><em>Issue</em>: The text is too long and we want to limit the number of words/sentences/characters.</p></li>
+<li class="fragment"><p><em>Solution</em>: Instructing the model to generate a specific number of words (does not always work with high precision)</p>
+<ul>
+<li class="fragment">Example: Summarize the text delimited by triple quotes in about 50 word</li>
+</ul></li>
+<li class="fragment"><p><em>Alternative solution</em>: Generate outputs with a specific number of paragraphs or bullet points.</p>
+<ul>
+<li class="fragment">Example: Summarize the text delimited by triple quotes in 2 paragraphs.</li>
+<li class="fragment">Example: Summarize the text delimited by triple quotes in 3 bullet points.</li>
+</ul></li>
 </ul>
 </section></section>
 <section>
 <section id="prompt-improvement-1" class="title-slide slide level1 center">
 <h1>Prompt Improvement 1</h1>
 <ul>
-<li class="fragment">Use at most 50 words.</li>
+<li class="fragment">Specify the desired length of the output: “Use at most 50 words.”</li>
 </ul>
 <div class="fragment">
 <div class="cell" data-execution_count="5">
