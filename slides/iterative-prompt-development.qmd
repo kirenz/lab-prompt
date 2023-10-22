@@ -29,6 +29,11 @@ format:
     footer: Jan Kirenz
 ---
 
+
+# Iterative Prompt Development
+
+In this tutorial, we'll iteratively analyze and refine our prompts to generate marketing copy from a product fact sheet.
+
 # Setup
 
 ## API key and Python libaries
@@ -68,7 +73,7 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
 ```
 
-# Marketing use case 
+# Use case example
 
 ## Marketing product description {.smaller }
 
@@ -161,15 +166,20 @@ Finally, this chair is proudly made in Italy, a country renowned for its craftsm
 Experience the timeless elegance of our mid-century inspired office chair and transform your workspace today.
 
 
-## Issue: Too long 
+## Issue: Text is too long {.smaller}
 
-- The text is too long 
+- *Issue*: The text is too long and we want to limit the number of words/sentences/characters.
 
-- Limit the number of words/sentences/characters.
+- *Solution*: Instructing the model to generate a specific number of words (does not always work with high precision)
+  - Example: Summarize the text delimited by triple quotes in about 50 word
+
+- *Alternative solution*: Generate outputs with a specific number of paragraphs or bullet points.
+  - Example: Summarize the text delimited by triple quotes in 2 paragraphs.
+  - Example: Summarize the text delimited by triple quotes in 3 bullet points.
 
 # Prompt Improvement 1
 
-- Use at most 50 words.
+- Specify the desired length of the output: "Use at most 50 words."
 
 . . .
 
