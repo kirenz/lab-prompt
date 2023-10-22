@@ -66,7 +66,6 @@ In this tutorial, we'll practice two prompting principles and their related tact
 . . .
 
 ```{python}
-# | eval: false
 prompt = f"""
 Summarize the text delimited by triple backticks \ 
 into a single sentence and add a joke or playful comment
@@ -83,7 +82,6 @@ into a single sentence and add a joke or playful comment
 ## Example text
 
 ```{python}
-# | eval: false
 text = f"""
 You should express what you want a model to do by \ 
 providing instructions that are as clear and \ 
@@ -110,13 +108,13 @@ def get_completion(prompt, model="gpt-3.5-turbo"): # <1>
     return response.choices[0].message["content"] # <7>
 ```
 
-1. Defines a new function named `get_completion` with two parameters: `prompt` and `model`
-2. Dictionary with two key-value pairs: setting the role as `"user"` and content as the `prompt` received by the function.
-3. Initiates an API call to OpenAI's [ChatCompletion](https://platform.openai.com/docs/guides/chat) method, the result of which is stored in a variable named `response`.
-4. Specifies the language model to be used for the completion (for cost efficiency reasons we always use `"gpt-3.5-turbo"`) 
-5. Passes the `messages` list constructed earlier to the API (will be used as the conversation history)
+1. Defines the function `get_completion` with two parameters
+2. Dictionary with two key-value pairs (role as `"user"`; content as `prompt`) 
+3. Initiates an API call to OpenAI's [ChatCompletion](https://platform.openai.com/docs/guides/chat) method; result is stored in a variable named `response`.
+4. Specifies the model to be used (we always use `"gpt-3.5-turbo"`) 
+5. Passes the `messages` list to the API
 6. The degree of randomness of the model's output (0 makes the model's output more focused and deterministic).
-7. Extracts and returns the content of the message from the first choice in the `choices` array present in the `response` object. 
+7. Extracts and returns the content of the message. 
 
 
 ## What is a sytem message?
@@ -124,9 +122,9 @@ def get_completion(prompt, model="gpt-3.5-turbo"): # <1>
 - The *system message* is optional and helps set the behavior of the assistant.
 
 - You can modify the *personality* of the assistant or provide *specific instructions* about how it should behave
+  - You can use specific personas (e.g. write in the style of Socrates)
   - If outputs are too simple, ask for expert-level writing.  
   - If you dislike the format, demonstrate the format you’d like to see. 
-  - You can also use specific personas (e.g. write in the style of Socrates)
 
 ## What is the temperature?
 
@@ -145,6 +143,11 @@ def get_completion(prompt, model="gpt-3.5-turbo"): # <1>
 
 - For example, the string "ChatGPT is great!" is encoded into six tokens: 
   - `["Chat", "G", "PT", " is", " great", "!"]`.
+
+## Tokens
+
+![](/images/tokens.png)
+
 
 ## Tokens and API calls
 
@@ -200,7 +203,7 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
 ```
 
-# Prompting Principle 1
+# Principle 1: Be clear and specific
 
 Write clear and specific instructions
 
@@ -294,15 +297,17 @@ print(response)
 
 ```{python}
 text_1 = f"""
-Making a cup of tea is easy! First, you need to get some \ 
-water boiling. While that's happening, \ 
-grab a cup and put a tea bag in it. Once the water is \ 
-hot enough, just pour it over the tea bag. \ 
-Let it sit for a bit so the tea can steep. After a \ 
-few minutes, take out the tea bag. If you \ 
-like, you can add some sugar or milk to taste. \ 
-And that's it! You've got yourself a delicious \ 
-cup of tea to enjoy.
+Begin with a clear understanding of the desired outcome from the prompt, including the \ 
+kind of information and format you seek in the response. Familiarize yourself with the \ 
+capabilities and limitations of the model you're working with, ensuring you know its  \ 
+strengths and weaknesses in generating text. Draft a preliminary version of your prompt, \ 
+keeping it concise yet detailed enough to guide the model towards the desired outcome. \ 
+Test the preliminary prompt with the model, analyzing the generated responses for \ 
+accuracy, relevance, and completeness. Refine the prompt based on the feedback from the \ 
+initial testing, adjusting the language, structure, or additional details as necessary. \ 
+Perform multiple rounds of testing and refinement, continually honing the prompt for \ 
+better results. Document the final version of the prompt and any notable observations from \ 
+the testing process for future reference and learning.
 """
 ```
 
@@ -316,6 +321,8 @@ Step 1 - ...
 Step 2 - …
 …
 Step N - …
+
+
 
 If the text does not contain a sequence of instructions, \ 
 then simply write \"No steps provided.\"
@@ -337,15 +344,15 @@ print(response)
 
 . . .
 
-```bash
-Completion for Text 1:
-Step 1 - Get some water boiling.
-Step 2 - Grab a cup and put a tea bag in it.
-Step 3 - Pour the hot water over the tea bag.
-Step 4 - Let the tea steep for a bit.
-Step 5 - Take out the tea bag.
-Step 6 - Add sugar or milk to taste.
-Step 7 - Enjoy your cup of tea.
+```markdown
+Completion for Text 1:  
+Step 1 - Begin with a clear understanding of the desired outcome from the prompt, including the kind of information and format you seek in the response.
+Step 2 - Familiarize yourself with the capabilities and limitations of the model you're working with, ensuring you know its strengths and weaknesses in generating text.
+Step 3 - Draft a preliminary version of your prompt, keeping it concise yet detailed enough to guide the model towards the desired outcome.
+Step 4 - Test the preliminary prompt with the model, analyzing the generated responses for accuracy, relevance, and completeness.
+Step 5 - Refine the prompt based on the feedback from the initial testing, adjusting the language, structure, or additional details as necessary.
+Step 6 - Perform multiple rounds of testing and refinement, continually honing the prompt for better results.
+Step 7 - Document the final version of the prompt and any notable observations from the testing process for future reference and learning.
 ```
 
 ## Use "few-shot" prompting with examples 
@@ -381,7 +388,7 @@ print(response)
 - *Output:* \<grandparent\>: Resilience is the unwavering strength that emerges from facing adversity. It is the ability to bounce back, to rise above challenges, and to persevere in the face of obstacles. Just like a tree that bends but does not break in a storm, resilience allows us to weather the storms of life and come out stronger on the other side.
 
 
-# Prompting Principle 2
+# Principle 2: Time to think
 
 Give the model time to “think”
 
@@ -389,15 +396,17 @@ Give the model time to “think”
 
 ```{python}
 text = f"""
-In a charming village, siblings Jack and Jill set out on \ 
-a quest to fetch water from a hilltop \ 
-well. As they climbed, singing joyfully, misfortune \ 
-struck—Jack tripped on a stone and tumbled \ 
-down the hill, with Jill following suit. \ 
-Though slightly battered, the pair returned home to \ 
-comforting embraces. Despite the mishap, \ 
-their adventurous spirits remained undimmed, and they \ 
-continued exploring with delight.
+Prompt engineering is a pivotal aspect of harnessing the full \ 
+potential of language models such as OpenAI's ChatGPT. It serves \ 
+as a conduit between human intent and machine comprehension, \ 
+facilitating a clearer transmission of the task or information desired. \ 
+By meticulously crafting prompts, individuals can steer ChatGPT towards  \ 
+delivering more precise, pertinent, and beneficial responses. The iterative \ 
+process of refining prompts in prompt engineering not only augments the \ 
+interaction with ChatGPT but also furthers the overarching objective of \ 
+making AI more accessible and in tune with human requirements. Furthermore, \ 
+it furnishes invaluable insights into ChatGPT's behavior, thereby aiding \ 
+the continuous effort to enhance and fine-tune AI systems developed by OpenAI.
 """
 ```
 
@@ -431,14 +440,17 @@ print(response)
 ## Output {.smaller}
 
 Completion for prompt 2:
+Summary: Prompt engineering is crucial for maximizing the potential of language models like OpenAI's ChatGPT by improving the clarity and precision of responses, making AI more accessible and aligned with human needs, and providing valuable insights for enhancing and fine-tuning AI systems.
 
-Summary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.
+Translation: Die Gestaltung von Anweisungen ist entscheidend, um das Potenzial von Sprachmodellen wie OpenAI's ChatGPT optimal zu nutzen, indem die Klarheit und Präzision der Antworten verbessert wird, was die Zugänglichkeit von KI erhöht und auf die Bedürfnisse der Menschen abstimmt, sowie wertvolle Einblicke für die Verbesserung und Feinabstimmung von KI-Systemen liefert.
 
-Translation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.
+Names: ChatGPT, OpenAI
 
-Names: Jack, Jill
-
-Output JSON: {"german_summary": "Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.", "num_names": 2}
+Output JSON: 
+{
+  "german_summary": "Die Gestaltung von Anweisungen ist entscheidend, um das Potenzial von Sprachmodellen wie OpenAI's ChatGPT optimal zu nutzen, indem die Klarheit und Präzision der Antworten verbessert wird, was die Zugänglichkeit von KI erhöht und auf die Bedürfnisse der Menschen abstimmt, sowie wertvolle Einblicke für die Verbesserung und Feinabstimmung von KI-Systemen liefert.",
+  "num_names": 2
+}
 
 
 ## Work on own solution {.smaller}
@@ -557,7 +569,7 @@ The generation of factually incorrect or nonsensical information that wasn't pre
 
 ```{python}
 prompt = f"""
-Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
+Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie. Use about 50 words.
 """
 response = get_completion(prompt)
 print(response)
