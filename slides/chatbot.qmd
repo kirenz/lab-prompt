@@ -4,7 +4,7 @@ lang: en
 subtitle: Prompt Engineering 7
 author: Jan Kirenz
 execute:
-  eval: true
+  eval: false
   echo: true
 highlight-style: github
 format:
@@ -28,6 +28,10 @@ format:
    #logo: images/logo.png
     footer: Jan Kirenz
 ---
+
+# Chatbot
+
+In this tutorial, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.
 
 # Setup
 
@@ -53,7 +57,7 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
-        temperature=0,  # this is the degree of randomness of the model's output
+        temperature=0, 
     )
     return response.choices[0].message["content"]
 ```
@@ -82,20 +86,30 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
 ```{python}
 
 messages = [
-    {'role': 'system', 'content': 'You are an assistant that speaks like Shakespeare.'},
+    {'role': 'system', 'content': 'You are an assistant that speaks like Socrates.'},
     {'role': 'user', 'content': 'tell me a joke'},
-    {'role': 'assistant', 'content': 'Why did the chicken cross the road'},
+    {'role': 'assistant', 'content': 'Why did the student use ChatGPT'},
     {'role': 'user', 'content': 'I don\'t know'}]
 ```
 
 ## Response
 
 ```{python}
-# | output-location: fragment
 response = get_completion_from_messages(messages, temperature=1)
 
 print(response)
 ```
+
+. . .
+
+```markdown
+{  
+  "role": "assistant",  
+  "content": "Because 'twas far easier than using a book, forsooth!"  
+}  
+Because 'twas far easier than using a book, forsooth!  
+```
+
 
 # Friendly Chatbot
 
@@ -103,18 +117,27 @@ print(response)
 
 ```{python}
 messages = [
-    {'role': 'system', 'content': 'You are friendly chatbot.'},
-    {'role': 'user', 'content': 'Hi, my name is Isa'}]
+    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},
+    {'role': 'user', 'content': 'Hi, my name is Jan and I study at HdM Stuttgart'}]
 ```
 
 ## Response
 
 
 ```{python}
-# | output-location: fragment
 response = get_completion_from_messages(messages, temperature=1)
 
 print(response)
+```
+
+. . .
+
+```markdown
+{  
+  "role": "assistant",  
+  "content": "Oh, well aren't you special, Jan? Studying at HdM   Stuttgart must make you feel like the king of the world. How   fortunate for the rest of us."  
+}  
+Oh, well aren't you special, Jan? Studying at HdM Stuttgart must make  you feel like the king of the world. How fortunate for the rest of us.    
 ```
 
 
@@ -124,17 +147,28 @@ print(response)
 
 ```{python}
 messages = [
-    {'role': 'system', 'content': 'You are friendly chatbot.'},
-    {'role': 'user', 'content': 'Yes,  can you remind me, What is my name?'}]
+    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},
+    {'role': 'user', 'content': 'Can you remind me, What is my name?'}]
 ```
+
+
 
 ## Response
 
 ```{python}
-# | output-location: fragment
 response = get_completion_from_messages(messages, temperature=1)
 
 print(response)
+```
+
+. . .
+
+```markdown
+{  
+  "role": "assistant",  
+  "content": "Oh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself."  
+}  
+Oh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself.  
 ```
 
 # Chat with history
@@ -144,21 +178,33 @@ print(response)
 ```{python}
 
 messages = [
-    {'role': 'system', 'content': 'You are friendly chatbot.'},
-    {'role': 'user', 'content': 'Hi, my name is Isa'},
-    {'role': 'assistant', 'content': "Hi Isa! It's nice to meet you. \
+    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},
+    {'role': 'user', 'content': 'Hi, my name is Jan'},
+    {'role': 'assistant', 'content': "Hi Jan! \
 Is there anything I can help you with today?"},
     {'role': 'user', 'content': 'Yes, you can remind me, What is my name?'}]
 ```
 
+
+
 ## Response
 
 ```{python}
-# | output-location: fragment
 response = get_completion_from_messages(messages, temperature=1)
 
 print(response)
 ```
+
+. . .
+
+```markdown
+{
+  "role": "assistant",
+  "content": "Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?"
+}
+Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?
+```
+
 
 # OrderBot with Panel
 
@@ -208,7 +254,7 @@ Drinks: \
 coke 3.00, 2.00, 1.00 \
 sprite 3.00, 2.00, 1.00 \
 bottled water 5.00 \
-"""}]  # accumulate messages
+"""}]  
 
 
 ```
@@ -242,11 +288,10 @@ def collect_messages(_):
 - You need to run the Jupyter Notebook on your own machine in order to use the Dashboard
 
 ```{python}
-# | output-location: slide
 
 pn.extension()
 
-panels = []  # collect display
+panels = []  
 
 inp = pn.widgets.TextInput(value="Hi", placeholder='Enter text here…')
 button_conversation = pn.widgets.Button(name="Chat!")
@@ -263,6 +308,9 @@ dashboard
 
 ```
 
+## Output
+
+![](/images/panel-example.png)
 
 ## JSON food order summary 
 
@@ -278,8 +326,17 @@ messages.append(
 ## Output
 
 ```{python}
-# | output-location: slide
 response = get_completion_from_messages(messages, temperature=0)
 
 print(response)
 ```
+
+# Acknowledgments
+
+*This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearningAI as well as [OpenAI's GPT best practices](https://platform.openai.com/docs/guides/gpt-best-practices)*
+
+# What's next? {background-image="../images/logo.png" background-opacity="0.5"}
+
+**Congratulations! You have completed this tutorial** 👍
+
+**Next, you may want to go back to the [lab's website](https://kirenz.github.io/lab-prompt/)**
