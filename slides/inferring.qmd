@@ -4,22 +4,22 @@ lang: en
 subtitle: Prompt Engineering 4
 author: Jan Kirenz
 execute:
-  eval: true
+  eval: false
   echo: true
 highlight-style: github
 format:
   revealjs: 
     toc: true
-    toc-depth: 2
+    toc-depth: 1
     embed-resources: false
     theme: [dark, ../custom.scss]  
-    incremental: false
+    incremental: true
     transition: slide
     background-transition: fade
     transition-speed: slow
     code-copy: true
     code-line-numbers: true
-    smaller: true
+    smaller: false
     scrollable: true
     slide-number: c
     preview-links: auto
@@ -28,6 +28,11 @@ format:
    #logo: images/logo.png
     footer: Jan Kirenz
 ---
+
+# Inferring
+
+In this tutorial, you will infer sentiment and topics from product reviews and news articles.
+
 
 
 # Setup
@@ -41,7 +46,7 @@ import openai
 import os
 
 from dotenv import load_dotenv, find_dotenv
-_ = load_dotenv(find_dotenv())  # read local .env file
+_ = load_dotenv(find_dotenv())  
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 ```
@@ -57,16 +62,14 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
-        temperature=0,  # this is the degree of randomness of the model's output
+        temperature=0, 
     )
     return response.choices[0].message["content"]
 
 
 ```
 
-# Product review example
-
-## Text
+# Product review example {.smaller}
 
 ```{python}
 lamp_review = """
@@ -82,10 +85,13 @@ about their customers and products!!
 """
 ```
 
-## Infer sentiment 
+# Infer sentiment 
+
+Sentiment analysis is a natural language processing technique that identifies the polarity (e.g. positive) of a given text. 
+
+## Sentiment?
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 What is the sentiment of the following product review, 
 which is delimited with triple backticks?
@@ -96,11 +102,12 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Infer sentiment (positive/negative)
+- Output: The sentiment of the product review is positive.
 
+
+## Positive or negative?
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 What is the sentiment of the following product review, 
 which is delimited with triple backticks?
@@ -114,10 +121,11 @@ response = get_completion(prompt)
 print(response)
 ```
 
+- Output: positive
+
 ## Identify types of emotions
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Identify a list of emotions that the writer of the \
 following review is expressing. Include no more than \
@@ -130,10 +138,11 @@ response = get_completion(prompt)
 print(response)
 ```
 
+- Output: happy, satisfied, impressed, grateful, pleased
+
 ## Identify anger
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Is the writer of the following review expressing anger?\
 The review is delimited with triple backticks. \
@@ -145,10 +154,11 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Extract product and company name
+- Output: No
+
+## Extract product and company name {.smaller}
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Identify the following items from the review text: 
 - Item purchased by reviewer
@@ -167,10 +177,20 @@ response = get_completion(prompt)
 print(response)
 ```
  
+
+. . .
+
+```JSON
+{
+  "Item": "lamp",
+  "Brand": "Lumina"
+}
+```
+
+
 ## Doing multiple tasks at once
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Identify the following items from the review text: 
 - Sentiment (positive or negative)
@@ -192,9 +212,24 @@ response = get_completion(prompt)
 print(response)
 ```
 
+
+## Output
+
+```JSON
+{
+  "Sentiment": "positive",
+  "Anger": false,
+  "Item": "lamp",
+  "Brand": "Lumina"
+}
+```
+
+
 # Inferring topics
 
-## Text
+We want the model to find topics in a given text
+
+## Example text {.smaller}
 
 ```{python}
 story = """
@@ -219,24 +254,23 @@ hard work is paying off."
 
 The survey also revealed that the 
 Social Security Administration had the lowest satisfaction 
-rating, with only 45% of employees indicating they were 
+rating, with only 45 percent of employees indicating they were 
 satisfied with their job. The government has pledged to 
 address the concerns raised by employees in the survey and 
 work towards improving job satisfaction across all departments.
 """
 ```
 
-## Infer 5 topics
+## Let's infer 5 topics {.smaller}
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Determine five topics that are being discussed in the \
 following text, which is delimited by triple backticks.
 
 Make each item one or two words long. 
 
-Format your response as a list of items separated by commas.
+Provide your response as a Python list separated by commas.
 
 Text sample: '''{story}'''
 """
@@ -244,14 +278,15 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Split responses
 
+. . .
 
-```{python}
-response.split(sep=',')
+```Python
+['survey', 'satisfaction', 'NASA', 'Social Security Administration', 'job satisfaction']
 ```
 
-## Topic list 
+
+## We create a topic list 
 
 
 ```{python}
@@ -264,7 +299,6 @@ topic_list = [
 ## Give answer as list with 0 and 1
 
 ```{python}
-# | output-location: slide
 prompt = f"""
 Determine whether each item in the following list of \
 topics is a topic in the text below, which
@@ -274,8 +308,22 @@ Give your answer as list with 0 or 1 for each topic.\
 
 List of topics: {", ".join(topic_list)}
 
-Text sample: '''{story}'''
+Text sample: ```{story}```
 """
 response = get_completion(prompt)
 print(response)
 ```
+
+
+- Output: [1, 0, 0, 1, 1]
+
+
+# Acknowledgments
+
+*This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearningAI as well as [OpenAI's GPT best practices](https://platform.openai.com/docs/guides/gpt-best-practices)*
+
+# What's next? {background-image="../images/logo.png" background-opacity="0.5"}
+
+**Congratulations! You have completed this tutorial** 👍
+
+**Next, you may want to go back to the [lab's website](https://kirenz.github.io/lab-prompt/)**
