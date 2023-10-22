@@ -409,10 +409,10 @@ Jan Kirenz
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li class="fragment"><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
+<li class="fragment"><a href="#/prompt-engineering-guidelines" id="/toc-prompt-engineering-guidelines">Prompt Engineering Guidelines</a></li>
 <li class="fragment"><a href="#/setup" id="/toc-setup">Setup</a></li>
-<li class="fragment"><a href="#/prompting-principle-1" id="/toc-prompting-principle-1">Prompting Principle 1</a></li>
-<li class="fragment"><a href="#/prompting-principle-2" id="/toc-prompting-principle-2">Prompting Principle 2</a></li>
+<li class="fragment"><a href="#/principle-1-be-clear-and-specific" id="/toc-principle-1-be-clear-and-specific">Principle 1: Be clear and specific</a></li>
+<li class="fragment"><a href="#/principle-2-time-to-think" id="/toc-principle-2-time-to-think">Principle 2: Time to think</a></li>
 <li class="fragment"><a href="#/model-limitations-hallucinations" id="/toc-model-limitations-hallucinations">Model Limitations: Hallucinations</a></li>
 <li class="fragment"><a href="#/acknowledgments" id="/toc-acknowledgments">Acknowledgments</a></li>
 <li class="fragment"><a href="#/whats-next" id="/toc-whats-next">What’s next?</a></li>
@@ -420,9 +420,9 @@ Jan Kirenz
 </nav>
 </section>
 <section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-
+<section id="prompt-engineering-guidelines" class="title-slide slide level1 center">
+<h1>Prompt Engineering Guidelines</h1>
+<p>In this tutorial, we’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models.</p>
 </section>
 <section id="what-is-prompt-engineering" class="slide level2">
 <h2>What is prompt engineering?</h2>
@@ -505,31 +505,31 @@ Jan Kirenz
 <dl class="code-annotation-container-grid">
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd class="fragment">
-<span data-code-annotation="1" data-code-cell="annotated-cell-3" data-code-lines="1">Defines a new function named <code>get_completion</code> with two parameters: <code>prompt</code> and <code>model</code></span>
+<span data-code-lines="1" data-code-annotation="1" data-code-cell="annotated-cell-3">Defines the function <code>get_completion</code> with two parameters</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd class="fragment">
-<span data-code-annotation="2" data-code-cell="annotated-cell-3" data-code-lines="2">Dictionary with two key-value pairs: setting the role as <code>"user"</code> and content as the <code>prompt</code> received by the function.</span>
+<span data-code-lines="2" data-code-annotation="2" data-code-cell="annotated-cell-3">Dictionary with two key-value pairs (role as <code>"user"</code>; content as <code>prompt</code>)</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd class="fragment">
-<span data-code-annotation="3" data-code-cell="annotated-cell-3" data-code-lines="3">Initiates an API call to OpenAI’s <a href="https://platform.openai.com/docs/guides/chat">ChatCompletion</a> method, the result of which is stored in a variable named <code>response</code>.</span>
+<span data-code-lines="3" data-code-annotation="3" data-code-cell="annotated-cell-3">Initiates an API call to OpenAI’s <a href="https://platform.openai.com/docs/guides/chat">ChatCompletion</a> method; result is stored in a variable named <code>response</code>.</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd class="fragment">
-<span data-code-annotation="4" data-code-cell="annotated-cell-3" data-code-lines="4">Specifies the language model to be used for the completion (for cost efficiency reasons we always use <code>"gpt-3.5-turbo"</code>)</span>
+<span data-code-lines="4" data-code-annotation="4" data-code-cell="annotated-cell-3">Specifies the model to be used (we always use <code>"gpt-3.5-turbo"</code>)</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd class="fragment">
-<span data-code-annotation="5" data-code-cell="annotated-cell-3" data-code-lines="5">Passes the <code>messages</code> list constructed earlier to the API (will be used as the conversation history)</span>
+<span data-code-lines="5" data-code-annotation="5" data-code-cell="annotated-cell-3">Passes the <code>messages</code> list to the API</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
 <dd class="fragment">
-<span data-code-annotation="6" data-code-cell="annotated-cell-3" data-code-lines="6">The degree of randomness of the model’s output (0 makes the model’s output more focused and deterministic).</span>
+<span data-code-lines="6" data-code-annotation="6" data-code-cell="annotated-cell-3">The degree of randomness of the model’s output (0 makes the model’s output more focused and deterministic).</span>
 </dd>
 <dt class="fragment" data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
 <dd class="fragment">
-<span data-code-annotation="7" data-code-cell="annotated-cell-3" data-code-lines="7">Extracts and returns the content of the message from the first choice in the <code>choices</code> array present in the <code>response</code> object.</span>
+<span data-code-lines="7" data-code-annotation="7" data-code-cell="annotated-cell-3">Extracts and returns the content of the message.</span>
 </dd>
 </dl>
 </div>
@@ -541,10 +541,10 @@ Jan Kirenz
 <li class="fragment"><p>The <em>system message</em> is optional and helps set the behavior of the assistant.</p></li>
 <li class="fragment"><p>You can modify the <em>personality</em> of the assistant or provide <em>specific instructions</em> about how it should behave</p>
 <ul>
+<li class="fragment">You can use specific personas (e.g.&nbsp;write in the style of Socrates)</li>
 <li class="fragment">If outputs are too simple, ask for expert-level writing.<br>
 </li>
 <li class="fragment">If you dislike the format, demonstrate the format you’d like to see.</li>
-<li class="fragment">You can also use specific personas (e.g.&nbsp;write in the style of Socrates)</li>
 </ul></li>
 </ul>
 </section>
@@ -567,6 +567,10 @@ Jan Kirenz
 </ul></li>
 </ul>
 </section>
+<section id="tokens" class="slide level2">
+<h2>Tokens</h2>
+
+<img data-src="../images/tokens.png" class="r-stretch"></section>
 <section id="tokens-and-api-calls" class="slide level2">
 <h2>Tokens and API calls</h2>
 <ul>
@@ -623,8 +627,8 @@ Jan Kirenz
 </div>
 </section></section>
 <section>
-<section id="prompting-principle-1" class="title-slide slide level1 center">
-<h1>Prompting Principle 1</h1>
+<section id="principle-1-be-clear-and-specific" class="title-slide slide level1 center">
+<h1>Principle 1: Be clear and specific</h1>
 <p>Write clear and specific instructions</p>
 </section>
 <section id="use-delimiters" class="slide level2 smaller">
@@ -713,16 +717,18 @@ Jan Kirenz
 <h2>Check whether conditions are satisfied</h2>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>text_1 <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ss">Making a cup of tea is easy! First, you need to get some \ </span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="ss">water boiling. While that's happening, \ </span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="ss">grab a cup and put a tea bag in it. Once the water is \ </span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="ss">hot enough, just pour it over the tea bag. \ </span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="ss">Let it sit for a bit so the tea can steep. After a \ </span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="ss">few minutes, take out the tea bag. If you \ </span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="ss">like, you can add some sugar or milk to taste. \ </span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="ss">And that's it! You've got yourself a delicious \ </span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="ss">cup of tea to enjoy.</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="ss">Begin with a clear understanding of the desired outcome from the prompt, including the \ </span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="ss">kind of information and format you seek in the response. Familiarize yourself with the \ </span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="ss">capabilities and limitations of the model you're working with, ensuring you know its &nbsp;\ </span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="ss">strengths and weaknesses in generating text. Draft a preliminary version of your prompt, \ </span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="ss">keeping it concise yet detailed enough to guide the model towards the desired outcome. \ </span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="ss">Test the preliminary prompt with the model, analyzing the generated responses for \ </span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="ss">accuracy, relevance, and completeness. Refine the prompt based on the feedback from the \ </span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="ss">initial testing, adjusting the language, structure, or additional details as necessary. \ </span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="ss">Perform multiple rounds of testing and refinement, continually honing the prompt for \ </span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="ss">better results. Document the final version of the prompt and any notable observations from \ </span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="ss">the testing process for future reference and learning.</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
@@ -735,11 +741,13 @@ Jan Kirenz
 <span id="cb10-8"><a href="#cb10-8"></a><span class="ss">…</span></span>
 <span id="cb10-9"><a href="#cb10-9"></a><span class="ss">Step N - …</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="ss">If the text does not contain a sequence of instructions, \ </span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="ss">then simply write </span><span class="ch">\"</span><span class="ss">No steps provided.</span><span class="ch">\"</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="ss">```</span><span class="sc">{</span>text_1<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="ss">If the text does not contain a sequence of instructions, \ </span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="ss">then simply write </span><span class="ch">\"</span><span class="ss">No steps provided.</span><span class="ch">\"</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="ss">```</span><span class="sc">{</span>text_1<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="response" class="slide level2 smaller">
@@ -751,14 +759,14 @@ Jan Kirenz
 <span id="cb11-4"><a href="#cb11-4"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">Completion</span> for Text 1:</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="ex">Step</span> 1 <span class="at">-</span> Get some water boiling.</span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="ex">Step</span> 2 <span class="at">-</span> Grab a cup and put a tea bag in it.</span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="ex">Step</span> 3 <span class="at">-</span> Pour the hot water over the tea bag.</span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="ex">Step</span> 4 <span class="at">-</span> Let the tea steep for a bit.</span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="ex">Step</span> 5 <span class="at">-</span> Take out the tea bag.</span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="ex">Step</span> 6 <span class="at">-</span> Add sugar or milk to taste.</span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="ex">Step</span> 7 <span class="at">-</span> Enjoy your cup of tea.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="an">Completion for Text 1:</span><span class="co">  </span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>Step 1 - Begin with a clear understanding of the desired outcome from the prompt, including the kind of information and format you seek in the response.</span>
+<span id="cb12-3"><a href="#cb12-3"></a>Step 2 - Familiarize yourself with the capabilities and limitations of the model you're working with, ensuring you know its strengths and weaknesses in generating text.</span>
+<span id="cb12-4"><a href="#cb12-4"></a>Step 3 - Draft a preliminary version of your prompt, keeping it concise yet detailed enough to guide the model towards the desired outcome.</span>
+<span id="cb12-5"><a href="#cb12-5"></a>Step 4 - Test the preliminary prompt with the model, analyzing the generated responses for accuracy, relevance, and completeness.</span>
+<span id="cb12-6"><a href="#cb12-6"></a>Step 5 - Refine the prompt based on the feedback from the initial testing, adjusting the language, structure, or additional details as necessary.</span>
+<span id="cb12-7"><a href="#cb12-7"></a>Step 6 - Perform multiple rounds of testing and refinement, continually honing the prompt for better results.</span>
+<span id="cb12-8"><a href="#cb12-8"></a>Step 7 - Document the final version of the prompt and any notable observations from the testing process for future reference and learning.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="use-few-shot-prompting-with-examples" class="slide level2">
@@ -796,24 +804,26 @@ Jan Kirenz
 </div>
 </section></section>
 <section>
-<section id="prompting-principle-2" class="title-slide slide level1 center">
-<h1>Prompting Principle 2</h1>
+<section id="principle-2-time-to-think" class="title-slide slide level1 center">
+<h1>Principle 2: Time to think</h1>
 <p>Give the model time to “think”</p>
 </section>
 <section id="specify-the-the-steps-and-output" class="slide level2 smaller">
 <h2>Specify the the steps and output</h2>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>text <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="ss">In a charming village, siblings Jack and Jill set out on \ </span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="ss">a quest to fetch water from a hilltop \ </span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="ss">well. As they climbed, singing joyfully, misfortune \ </span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="ss">struck—Jack tripped on a stone and tumbled \ </span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="ss">down the hill, with Jill following suit. \ </span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="ss">Though slightly battered, the pair returned home to \ </span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="ss">comforting embraces. Despite the mishap, \ </span></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="ss">their adventurous spirits remained undimmed, and they \ </span></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="ss">continued exploring with delight.</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ss">Prompt engineering is a pivotal aspect of harnessing the full \ </span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="ss">potential of language models such as OpenAI's ChatGPT. It serves \ </span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="ss">as a conduit between human intent and machine comprehension, \ </span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="ss">facilitating a clearer transmission of the task or information desired. \ </span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="ss">By meticulously crafting prompts, individuals can steer ChatGPT towards  \ </span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="ss">delivering more precise, pertinent, and beneficial responses. The iterative \ </span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="ss">process of refining prompts in prompt engineering not only augments the \ </span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="ss">interaction with ChatGPT but also furthers the overarching objective of \ </span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="ss">making AI more accessible and in tune with human requirements. Furthermore, \ </span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="ss">it furnishes invaluable insights into ChatGPT's behavior, thereby aiding \ </span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="ss">the continuous effort to enhance and fine-tune AI systems developed by OpenAI.</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="ss">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <div class="cell" data-execution_count="15">
@@ -843,11 +853,10 @@ Jan Kirenz
 </section>
 <section id="output-1" class="slide level2 smaller">
 <h2>Output</h2>
-<p>Completion for prompt 2:</p>
-<p>Summary: Jack and Jill go on a quest to fetch water from a hilltop well, but they both fall down the hill and return home slightly battered but with undimmed adventurous spirits.</p>
-<p>Translation: Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.</p>
-<p>Names: Jack, Jill</p>
-<p>Output JSON: {“german_summary”: “Jack und Jill machen sich auf die Suche nach Wasser aus einem Brunnen auf einem Hügel, aber sie fallen beide den Hügel hinunter und kehren leicht lädiert, aber mit ungetrübtem Abenteuergeist nach Hause zurück.”, “num_names”: 2}</p>
+<p>Completion for prompt 2: Summary: Prompt engineering is crucial for maximizing the potential of language models like OpenAI’s ChatGPT by improving the clarity and precision of responses, making AI more accessible and aligned with human needs, and providing valuable insights for enhancing and fine-tuning AI systems.</p>
+<p>Translation: Die Gestaltung von Anweisungen ist entscheidend, um das Potenzial von Sprachmodellen wie OpenAI’s ChatGPT optimal zu nutzen, indem die Klarheit und Präzision der Antworten verbessert wird, was die Zugänglichkeit von KI erhöht und auf die Bedürfnisse der Menschen abstimmt, sowie wertvolle Einblicke für die Verbesserung und Feinabstimmung von KI-Systemen liefert.</p>
+<p>Names: ChatGPT, OpenAI</p>
+<p>Output JSON: { “german_summary”: “Die Gestaltung von Anweisungen ist entscheidend, um das Potenzial von Sprachmodellen wie OpenAI’s ChatGPT optimal zu nutzen, indem die Klarheit und Präzision der Antworten verbessert wird, was die Zugänglichkeit von KI erhöht und auf die Bedürfnisse der Menschen abstimmt, sowie wertvolle Einblicke für die Verbesserung und Feinabstimmung von KI-Systemen liefert.”, “num_names”: 2 }</p>
 </section>
 <section id="work-on-own-solution" class="slide level2 smaller">
 <h2>Work on own solution</h2>
@@ -962,7 +971,7 @@ Incorrect<br>
 </ul>
 <div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="ss">Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ss">Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie. Use about 50 words.</span></span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="ss">"""</span></span>
 <span id="cb18-4"><a href="#cb18-4"></a>response <span class="op">=</span> get_completion(prompt)</span>
 <span id="cb18-5"><a href="#cb18-5"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
