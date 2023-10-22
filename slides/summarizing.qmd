@@ -1,10 +1,10 @@
 ---
-title: Iterative Prompt Development
+title: Summarizing
 lang: en
 subtitle: Prompt Engineering 3
 author: Jan Kirenz
 execute:
-  eval: true
+  eval: false
   echo: true
 highlight-style: github
 format:
@@ -13,13 +13,13 @@ format:
     toc-depth: 1
     embed-resources: false
     theme: [dark, ../custom.scss]  
-    incremental: false
+    incremental: true
     transition: slide
     background-transition: fade
     transition-speed: slow
     code-copy: true
     code-line-numbers: true
-    smaller: true
+    smaller: false
     scrollable: true
     slide-number: c
     preview-links: auto
@@ -29,14 +29,17 @@ format:
     footer: Jan Kirenz
 ---
 
+
+# Summarizing
+
+In this tutorial, we will summarize text with a focus on specific topics.
+
 # Setup
 
 
 ## API key and Python libaries
 
 ```{python}
-# | output-location: slide
-
 import openai
 import os
 
@@ -46,14 +49,8 @@ _ = load_dotenv(find_dotenv())  # read local .env file
 openai.api_key = os.getenv('OPENAI_API_KEY')
 ```
 
-## GPT-3.5 Turbo vs GPT-4
-
-- For cost efficiency reasons, we will use OpenAI's `gpt-3.5-turbo` model and the [chat completions endpoint](https://platform.openai.com/docs/guides/chat). 
-
-- However, you can simply replace `model="gpt-3.5-turbo"`with `model="gpt-4"` in the helper function
 
 ## Helper function
-
 
 ```{python}
 
@@ -70,9 +67,7 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
 ```
 
-# Summarization
-
-## Text to summarize 
+# Product review example {.smaller}
 
 ```{python}
 prod_review = """
@@ -89,10 +84,11 @@ to her.
 
 ## Summarization 
 
-- Summarize with a word/sentence/character limit
+- Summarize with a word limit
+
+. . .
 
 ```{python}
-# | output-location: slide
 
 prompt = f"""
 Your task is to generate a short summary of a product \
@@ -108,13 +104,20 @@ response = get_completion(prompt)
 print(response)
 ```
 
+
+## Output
+
+This review praises the panda plush toy for being soft, cute, and having a friendly face. However, the reviewer feels it is small for the price and suggests there may be larger options available.
+
+# Summary with focus
+
 ## Focus on shipping and delivery 
 
 - Summarize with a focus on shipping and delivery
 
-```{python}
-# | output-location: slide
+. . .
 
+```{python}
 prompt = f"""
 Your task is to generate a short summary of a product \
 review from an ecommerce site to give feedback to the \
@@ -131,13 +134,19 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Focus on price and value
+
+## Output
+
+The customer is happy with the product but mentions that it is smaller than expected. They also mention that the shipping was faster than expected.
+
+
+## Focus on price and value {.smaller}
 
 - Summarize with a focus on price and value
 
-```{python}
-# | output-location: slide
+. . .
 
+```{python}
 prompt = f"""
 Your task is to generate a short summary of a product \
 review from an ecommerce site to give feedback to the \
@@ -155,15 +164,18 @@ response = get_completion(prompt)
 print(response)
 ```
 
+## Output
+
+The customer loves the panda plush toy but feels it is overpriced for its size. They suggest considering other options that offer a larger size for the same price.
+
+
 # Prompt Improvement
 
-- Summaries include topics that are not related to the topic of focus.
+Summaries include topics that are not related to the topic of focus.
 
-## Try "extract" instead of "summarize"
+## "extract" instead of "summarize"
 
 ```{python}
-# | output-location: slide
-
 prompt = f"""
 Your task is to extract relevant information from \ 
 a product review from an ecommerce site to give \
@@ -180,7 +192,12 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## Summarize multiple product reviews
+## Output
+
+The shipping department should take note that the product arrived a day earlier than expected.
+
+
+# Multiple product reviews {.smaller}
 
 ```{python}
 
@@ -262,8 +279,6 @@ reviews = [review_1, review_2, review_3, review_4]
 
 
 ```{python}
-# | output-location: slide
-
 for i in range(len(reviews)):
     prompt = f"""
     Your task is to generate a short summary of a product \ 
@@ -279,5 +294,23 @@ for i in range(len(reviews)):
     print(i, response, "\n")
 ```
 
+## Output
+
+- 0 Soft and cute panda plush toy loved by daughter, but small for the price. Arrived early. 
+
+- 1 This lamp with storage is affordable and the company provides excellent customer support. 
+
+- 2 The reviewer recommends the electric toothbrush for its impressive battery life, but criticizes the small brush head. 
+
+- 3 The reviewer found the price increase after the sale disappointing and noticed a decrease in quality. 
 
 
+# Acknowledgments
+
+*This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearningAI as well as [OpenAI's GPT best practices](https://platform.openai.com/docs/guides/gpt-best-practices)*
+
+# What's next? {background-image="../images/logo.png" background-opacity="0.5"}
+
+**Congratulations! You have completed this tutorial** 👍
+
+**Next, you may want to go back to the [lab's website](https://kirenz.github.io/lab-prompt/)**
