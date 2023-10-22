@@ -4,7 +4,7 @@ lang: en
 subtitle: Prompt Engineering 5
 author: Jan Kirenz
 execute:
-  eval: true
+  eval: false
   echo: true
 highlight-style: github
 format:
@@ -13,7 +13,7 @@ format:
     toc-depth: 1
     embed-resources: false
     theme: [dark, ../custom.scss]  
-    incremental: false
+    incremental: true
     transition: slide
     background-transition: fade
     transition-speed: slow
@@ -29,6 +29,10 @@ format:
     footer: Jan Kirenz
 ---
 
+# Transforming
+
+In this tutorial, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.
+
 # Setup
 
 ## API key and Python libaries
@@ -41,7 +45,7 @@ import openai
 import os
 
 from dotenv import load_dotenv, find_dotenv
-_ = load_dotenv(find_dotenv())  # read local .env file
+_ = load_dotenv(find_dotenv())  
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 ```
@@ -69,60 +73,51 @@ def get_completion(prompt, model="gpt-3.5-turbo", temperature=0):
 - This gives the model the ability to do translation
 
 
-## Example 1
+## Translate this text
 
 ```{python}
-# | output-location: fragment
 
 prompt = f"""
-Translate the following English text to Spanish: \ 
+Translate the following English text to German: \ 
 ```Hi, I would like to order a blender```
 """
+
 response = get_completion(prompt)
 print(response)
 ```
 
+- Output: Hallo, ich möchte gerne einen Mixer bestellen.
 
-## Example 2
+## Which language is this?
 
 ```{python}
-# | output-location: fragment
 
 prompt = f"""
 Tell me which language this is: 
-```Combien coûte le lampadaire?```
+```Wie geht es dir?```
 """
 response = get_completion(prompt)
 print(response)
 ```
 
-## Example 3
+- Output: This language is German.
+
+
+## Translate with style
 
 ```{python}
-# | output-location: fragment
-
 prompt = f"""
-Translate the following  text to French and Spanish
-and English pirate: \
-```I want to order a basketball```
-"""
-response = get_completion(prompt)
-print(response)
-```
-
-## Example 4
-
-```{python}
-# | output-location: fragment
-
-prompt = f"""
-Translate the following text to Spanish in both the \
+Translate the following text to German in both the \
 formal and informal forms: 
 'Would you like to order a pillow?'
 """
 response = get_completion(prompt)
 print(response)
 ```
+
+- Output:
+  - Formal: Möchten Sie ein Kissen bestellen?
+  - Informal: Möchtest du ein Kissen bestellen?
 
 # Universal Translator
 
@@ -149,7 +144,6 @@ user_messages = [
 ## Translations
 
 ```{python}
-# | output-location: slide
 
 for issue in user_messages:
     prompt = f"Tell me what language this is: ```{issue}```"
@@ -164,24 +158,40 @@ for issue in user_messages:
     print(response, "\n")
 ```
 
+## Output {.smaller}
 
-## User messages with English translation
+Original message (The language is French.): La performance du système est plus lente que d'habitude.
+The performance of the system is slower than usual.
 
-- System performance is slower than normal: "La performance du système est plus lente que d'habitude.",
-- My monitor has pixels that are not lighting: "Mi monitor tiene píxeles que no se iluminan.",
-- My mouse is not working: "Il mio mouse non funziona",
-- My keyboard has a broken control key: "Mój klawisz Ctrl jest zepsuty",
-- My screen is flashing: ‚"我的屏幕在闪烁"  
+Die Leistung des Systems ist langsamer als gewöhnlich. 
+
+Original message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan.
+English: "My monitor has pixels that do not light up."
+
+German: "Mein Monitor hat Pixel, die nicht aufleuchten." 
+
+Original message (The language is Italian.): Il mio mouse non funziona
+English: My mouse is not working.
+German: Meine Maus funktioniert nicht. 
+
+Original message (The language is Polish.): Mój klawisz Ctrl jest zepsuty
+English: "My Ctrl key is broken"
+German: "Meine Strg-Taste ist kaputt" 
+
+Original message (The language is Chinese.): 我的屏幕在闪烁
+English: My screen is flickering.
+German: Mein Bildschirm flackert. 
+ 
 
 # Tone Transformation
-
-## From slang to business tone
 
 - Writing can vary based on the intended audience. 
 - ChatGPT can produce different tones.
 
+## From slang to business tone
+
+
 ```{python}
-# | output-location: slide
 
 prompt = f"""
 Translate the following from slang to a business letter: 
@@ -191,6 +201,20 @@ response = get_completion(prompt)
 print(response)
 ```
 
+## Output
+
+Dear Sir/Madam,
+
+I hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp. 
+
+I kindly request that you take a moment to review the attached spec, as it contains important details about the standing lamp in question. 
+
+Thank you for your time and consideration. I look forward to hearing from you soon.
+
+Sincerely,
+Joe
+
+
 # Format Conversion
 
 - ChatGPT can translate between formats. 
@@ -199,7 +223,6 @@ print(response)
 ## From dictionary to HTML 
 
 ```{python}
-# | output-location: slide
 
 data_json = {"restaurant employees": [
     {"name": "Shyam", "email": "shyamjaiswal@gmail.com"},
@@ -215,20 +238,65 @@ response = get_completion(prompt)
 print(response)
 ```
 
-## HTML output
+## Output {.smaller}
+
+```{=html}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Restaurant Employees</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+  <tr>
+    <td>Shyam</td>
+    <td>shyamjaiswal@gmail.com</td>
+  </tr>
+  <tr>
+    <td>Bob</td>
+    <td>bob32@gmail.com</td>
+  </tr>
+  <tr>
+    <td>Jai</td>
+    <td>jai87@gmail.com</td>
+  </tr>
+</table>
+
+</body>
+</html>
 
 
-```{python}
-# | output-location: slide
-
-display(HTML(response))
 ```
+
 
 # Spellcheck & Grammar check
 
-- To signal to the LLM that you want it to proofread your text, you instruct the model to 'proofread' or 'proofread and correct'
+To signal to the LLM that you want it to proofread your text, you instruct the model to 'proofread' or 'proofread and correct'
 
-## Multiple text examples
+## Text examples
 
 - Text examples are taken from [Writing Prompts](https://writingprompts.com/bad-grammar-examples/)
 
@@ -249,18 +317,29 @@ text = [
 ## Proofreading
 
 ```{python}
-# | output-location: slide
 
-prompt = f"""Proofread and correct the following text and rewrite the corrected version. If you don't find and errors, just say "No errors found". Don't use  any punctuation around the text:
-    ```{t}```"""
+prompt = f"""
+Proofread and correct all sentences in the following Python list delimited by triple backticks and rewrite the corrected version. Mark the corrected words in markdown italic style using the  symbol. If you don't find any errors in an item, just say "No errors found":
+```{text}```
+"""
+
 response = get_completion(prompt)
 print(response)
 ```
 
+- Output:
+* ['The girl with the black and white puppies *has* a ball.']
+* ['*Yolanda* has her notebook.']
+* ['*It's* going to be a long day. Does the car need *its* oil changed?']
+* ['*There* goes my freedom. *They're* going to bring *their* suitcases.']
+* ['*You're* going to need *your* notebook.']
+* ['That medicine *affects* my ability to sleep. Have you heard of the butterfly *effect*?']
+* ['This phrase is *to check* *ChatGPT* for *spelling ability*.']
+
+
 ## Review about a toy  {.smaller}
 
 ```{python}
-# | output-location: slide
 
 text = f"""
 Got this for my daughter for her birthday cuz she keeps taking \
@@ -278,29 +357,33 @@ to play with it myself before I gave it to my daughter.
 
 
 ```{python}
-# | output-location: slide
-
 prompt = f"proofread and correct this review: ```{text}```"
+
 response = get_completion(prompt)
 print(response)
 ```
 
+
+## Output
+
+Got this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it's super soft and cute. However, one of the ears is a bit lower than the other, and I don't think that was designed to be asymmetrical. Additionally, it's a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter.
+
 ## Display differences
 
+- Use the following code to display the dfferences between the two texts:
 
 ```{python}
-# | output-location: slide
-
 diff = Redlines(text, response)
+
 display(Markdown(diff.output_markdown))
 ```
+
 
 
 ## Make it more compelling
 
 
 ```{python}
-# | output-location: slide
 
 prompt = f"""
 proofread and correct this review. Make it more compelling. 
@@ -308,14 +391,45 @@ Ensure it follows APA style guide and targets an advanced reader.
 Output in markdown format.
 Text: ```{text}```
 """
+
 response = get_completion(prompt)
 display(Markdown(response))
 ```
 
+## Output {.smaller}
+
+Title: A Delightful Gift for Panda Enthusiasts: A Review of the Soft and Adorable Panda Plush Toy
+
+Reviewer: [Your Name]
+
+I recently purchased this charming panda plush toy as a birthday gift for my daughter, who has a penchant for "borrowing" my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of these lovable creatures. This review aims to provide an in-depth analysis of the product, catering to advanced readers who appreciate a comprehensive evaluation.
+
+First and foremost, the softness and cuteness of this panda plush toy are simply unparalleled. Its irresistibly plush exterior makes it a joy to touch and hold, ensuring a delightful sensory experience for both children and adults alike. The attention to detail is evident, with its endearing features capturing the essence of a real panda. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice.
+
+While the overall quality of the product is commendable, I must express my slight disappointment regarding its size in relation to its price. Considering the investment made, I expected a larger plush toy. It is worth exploring alternative options that offer a more substantial size for the same price point. Nevertheless, this minor setback does not overshadow the undeniable appeal and charm of the panda plush toy.
+
+In terms of delivery, I was pleasantly surprised to receive the product a day earlier than anticipated. This unexpected early arrival allowed me to indulge in some personal playtime with the panda plush toy before presenting it to my daughter. This added bonus further exemplifies the exceptional customer service provided by the seller.
+
+In conclusion, the softness, cuteness, and attention to detail of this panda plush toy make it an ideal gift for panda enthusiasts of all ages. While the size may not fully meet expectations, the overall quality and timely delivery contribute to a positive purchasing experience. For those seeking a delightful and endearing companion, this panda plush toy is sure to bring joy and comfort to its lucky owner.
+
+Note: This review adheres to the APA style guide, providing a concise and compelling evaluation of the panda plush toy. The language used is targeted towards an advanced reader, ensuring a sophisticated and engaging review.
+
+
 ## Show differences
 
 ```{python}
-# | output-location: slide
 diff2 = Redlines(text, response)
 display(Markdown(diff2.output_markdown))
 ```
+
+
+
+# Acknowledgments
+
+*This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearningAI as well as [OpenAI's GPT best practices](https://platform.openai.com/docs/guides/gpt-best-practices)*
+
+# What's next? {background-image="../images/logo.png" background-opacity="0.5"}
+
+**Congratulations! You have completed this tutorial** 👍
+
+**Next, you may want to go back to the [lab's website](https://kirenz.github.io/lab-prompt/)**
