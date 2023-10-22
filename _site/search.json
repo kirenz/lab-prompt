@@ -366,7 +366,7 @@
   {
     "objectID": "slides/summarizing.html#helper-function",
     "href": "slides/summarizing.html#helper-function",
-    "title": "Iterative Prompt Development",
+    "title": "Summarizing",
     "section": "Helper function",
     "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
   },
@@ -394,9 +394,9 @@
   {
     "objectID": "slides/summarizing.html#focus-on-shipping-and-delivery",
     "href": "slides/summarizing.html#focus-on-shipping-and-delivery",
-    "title": "Iterative Prompt Development",
+    "title": "Summarizing",
     "section": "Focus on shipping and delivery",
-    "text": "Focus on shipping and delivery\n\nSummarize with a focus on shipping and delivery\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\nShipping department. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat mention shipping and delivery of the product. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "text": "Focus on shipping and delivery\n\nSummarize with a focus on shipping and delivery\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\nShipping department. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat mention shipping and delivery of the product. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
     "objectID": "slides/summarizing.html#focus-on-shipping-and-delivery-output",
@@ -408,9 +408,9 @@
   {
     "objectID": "slides/summarizing.html#focus-on-price-and-value",
     "href": "slides/summarizing.html#focus-on-price-and-value",
-    "title": "Iterative Prompt Development",
+    "title": "Summarizing",
     "section": "Focus on price and value",
-    "text": "Focus on price and value\n\nSummarize with a focus on price and value\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\npricing department, responsible for determining the \\\nprice of the product.  \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat are relevant to the price and perceived value. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "text": "Focus on price and value\n\nSummarize with a focus on price and value\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\npricing department, responsible for determining the \\\nprice of the product.  \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat are relevant to the price and perceived value. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
     "objectID": "slides/summarizing.html#focus-on-price-and-value-output",
@@ -436,16 +436,16 @@
   {
     "objectID": "slides/summarizing.html#summarize-multiple-product-reviews",
     "href": "slides/summarizing.html#summarize-multiple-product-reviews",
-    "title": "Iterative Prompt Development",
+    "title": "Summarizing",
     "section": "Summarize multiple product reviews",
-    "text": "Summarize multiple product reviews\n\nreview_1 = prod_review\n\n# review for a standing lamp\nreview_2 = \"\"\"\nNeeded a nice lamp for my bedroom, and this one \\\nhad additional storage and not too high of a price \\\npoint. Got it fast - arrived in 2 days. The string \\\nto the lamp broke during the transit and the company \\\nhappily sent over a new one. Came within a few days \\\nas well. It was easy to put together. Then I had a \\\nmissing part, so I contacted their support and they \\\nvery quickly got me the missing piece! Seems to me \\\nto be a great company that cares about their customers \\\nand products. \n\"\"\"\n\n# review for an electric toothbrush\nreview_3 = \"\"\"\nMy dental hygienist recommended an electric toothbrush, \\\nwhich is why I got this. The battery life seems to be \\\npretty impressive so far. After initial charging and \\\nleaving the charger plugged in for the first week to \\\ncondition the battery, I've unplugged the charger and \\\nbeen using it for twice daily brushing for the last \\\n3 weeks all on the same charge. But the toothbrush head \\\nis too small. I’ve seen baby toothbrushes bigger than \\\nthis one. I wish the head was bigger with different \\\nlength bristles to get between teeth better because \\\nthis one doesn’t.  Overall if you can get this one \\\naround the $50 mark, it's a good deal. The manufactuer's \\\nreplacements heads are pretty expensive, but you can \\\nget generic ones that're more reasonably priced. This \\\ntoothbrush makes me feel like I've been to the dentist \\\nevery day. My teeth feel sparkly clean! \n\"\"\"\n\n# review for a blender\nreview_4 = \"\"\"\nSo, they still had the 17 piece system on seasonal \\\nsale for around $49 in the month of November, about \\\nhalf off, but for some reason (call it price gouging) \\\naround the second week of December the prices all went \\\nup to about anywhere from between $70-$89 for the same \\\nsystem. And the 11 piece system went up around $10 or \\\nso in price also from the earlier sale price of $29. \\\nSo it looks okay, but if you look at the base, the part \\\nwhere the blade locks into place doesn’t look as good \\\nas in previous editions from a few years ago, but I \\\nplan to be very gentle with it (example, I crush \\\nvery hard items like beans, ice, rice, etc. in the \\ \nblender first then pulverize them in the serving size \\\nI want in the blender then switch to the whipping \\\nblade for a finer flour, and use the cross cutting blade \\\nfirst when making smoothies, then use the flat blade \\\nif I need them finer/less pulpy). Special tip when making \\\nsmoothies, finely cut and freeze the fruits and \\\nvegetables (if using spinach-lightly stew soften the \\ \nspinach then freeze until ready for use-and if making \\\nsorbet, use a small to medium sized food processor) \\ \nthat you plan to use that way you can avoid adding so \\\nmuch ice if at all-when making your smoothie. \\\nAfter about a year, the motor was making a funny noise. \\\nI called customer service but the warranty expired \\\nalready, so I had to buy another one. FYI: The overall \\\nquality has gone done in these types of products, so \\\nthey are kind of counting on brand recognition and \\\nconsumer loyalty to maintain sales. Got it in about \\\ntwo days.\n\"\"\"\n\nreviews = [review_1, review_2, review_3, review_4]"
+    "text": "Summarize multiple product reviews\n\nfor i in range(len(reviews)):\n    prompt = f\"\"\"\n    Your task is to generate a short summary of a product \\ \n    review from an ecommerce site. \n\n    Summarize the review below, delimited by triple \\\n    backticks in at most 20 words. \n\n    Review: ```{reviews[i]}```\n    \"\"\"\n\n    response = get_completion(prompt)\n    print(i, response, \"\\n\")"
   },
   {
     "objectID": "slides/summarizing.html#summarize-multiple-product-reviews-1",
     "href": "slides/summarizing.html#summarize-multiple-product-reviews-1",
-    "title": "Iterative Prompt Development",
+    "title": "Summarizing",
     "section": "Summarize multiple product reviews",
-    "text": "Summarize multiple product reviews\n\nfor i in range(len(reviews)):\n    prompt = f\"\"\"\n    Your task is to generate a short summary of a product \\ \n    review from an ecommerce site. \n\n    Summarize the review below, delimited by triple \\\n    backticks in at most 20 words. \n\n    Review: ```{reviews[i]}```\n    \"\"\"\n\n    response = get_completion(prompt)\n    print(i, response, \"\\n\")\n\n\n\n\nJan Kirenz"
+    "text": "Summarize multiple product reviews\n\nfor i in range(len(reviews)):\n    prompt = f\"\"\"\n    Your task is to generate a short summary of a product \\ \n    review from an ecommerce site. \n\n    Summarize the review below, delimited by triple \\\n    backticks in at most 20 words. \n\n    Review: ```{reviews[i]}```\n    \"\"\"\n\n    response = get_completion(prompt)\n    print(i, response, \"\\n\")"
   },
   {
     "objectID": "slides/summarizing.html#summarize-multiple-product-reviews-1-output",
@@ -1398,5 +1398,61 @@
     "title": "Iterative Prompt Development",
     "section": "Output",
     "text": "Output\n\n\n  Product Description\n  \n    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is perfect for both home and business settings.\n  \n  \n    The SWC Chair is available in several options of shell color and base finishes, allowing you to create a look that matches your style. You can choose between plastic back and front upholstery or full upholstery in a variety of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. Additionally, you have the choice of having the chair with or without armrests.\n  \n  \n    Constructed with durability and comfort in mind, the SWC Chair features a 5-wheel plastic coated aluminum base for stability and mobility. The chair also has a pneumatic adjuster, allowing for easy raise and lower action to find the perfect height for your workspace.\n  \n  \n    The SWC Chair is not only stylish and functional, but it is also designed with quality materials. The shell and base glider are made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The seat is made with HD36 foam, providing a comfortable seating experience throughout the day.\n  \n  \n    With its versatility, durability, and stylish design, the SWC Chair is the perfect addition to any office or workspace. It is qualified for contract use, making it suitable for commercial settings as well. Experience the comfort and style of the SWC Chair today.\n  \n  Product ID:\n  \n    SWC-100\n    SWC-110\n  \n  Product Dimensions\n  \n\n\n\nDimension\nMeasurement (inches)\n\n\nWidth\n20.87\"\n\n\nDepth\n20.08\"\n\n\nHeight\n31.50\"\n\n\nSeat Height\n17.32\"\n\n\nSeat Depth\n16.14\""
+  },
+  {
+    "objectID": "slides/summarizing.html#api-key-and-python-libaries",
+    "href": "slides/summarizing.html#api-key-and-python-libaries",
+    "title": "Summarizing",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "slides/summarizing.html#summarization",
+    "href": "slides/summarizing.html#summarization",
+    "title": "Summarizing",
+    "section": "Summarization",
+    "text": "Summarization\n\nSummarize with a word limit\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/summarizing.html#output",
+    "href": "slides/summarizing.html#output",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\nThis review praises the panda plush toy for being soft, cute, and having a friendly face. However, the reviewer feels it is small for the price and suggests there may be larger options available."
+  },
+  {
+    "objectID": "slides/summarizing.html#output-1",
+    "href": "slides/summarizing.html#output-1",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\nThe customer is happy with the product but mentions that it is smaller than expected. They also mention that the shipping was faster than expected."
+  },
+  {
+    "objectID": "slides/summarizing.html#output-2",
+    "href": "slides/summarizing.html#output-2",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\nThe customer loves the panda plush toy but feels it is overpriced for its size. They suggest considering other options that offer a larger size for the same price."
+  },
+  {
+    "objectID": "slides/summarizing.html#extract-instead-of-summarize",
+    "href": "slides/summarizing.html#extract-instead-of-summarize",
+    "title": "Summarizing",
+    "section": "“extract” instead of “summarize”",
+    "text": "“extract” instead of “summarize”\n\nprompt = f\"\"\"\nYour task is to extract relevant information from \\ \na product review from an ecommerce site to give \\\nfeedback to the Shipping department. \n\nFrom the review below, delimited by triple quotes \\\nextract the information relevant to shipping and \\ \ndelivery. Limit to 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/summarizing.html#output-3",
+    "href": "slides/summarizing.html#output-3",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\nThe shipping department should take note that the product arrived a day earlier than expected."
+  },
+  {
+    "objectID": "slides/summarizing.html#output-4",
+    "href": "slides/summarizing.html#output-4",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\n\n0 Soft and cute panda plush toy loved by daughter, but small for the price. Arrived early.\n1 This lamp with storage is affordable and the company provides excellent customer support.\n2 The reviewer recommends the electric toothbrush for its impressive battery life, but criticizes the small brush head.\n3 The reviewer found the price increase after the sale disappointing and noticed a decrease in quality."
   }
 ]
