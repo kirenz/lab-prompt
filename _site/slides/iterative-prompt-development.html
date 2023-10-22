@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.268">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Jan Kirenz">
   <title>Prompt - Iterative Prompt Development</title>
@@ -224,8 +224,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -389,9 +388,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -415,7 +411,12 @@ Jan Kirenz
 <ul>
 <li class="fragment"><a href="#/setup" id="/toc-setup">Setup</a></li>
 <li class="fragment"><a href="#/marketing-use-case" id="/toc-marketing-use-case">Marketing use case</a></li>
-<li class="fragment"><a href="#/iterative-prompt-improvement" id="/toc-iterative-prompt-improvement">Iterative Prompt Improvement</a></li>
+<li class="fragment"><a href="#/initial-prompt" id="/toc-initial-prompt">Initial prompt</a></li>
+<li class="fragment"><a href="#/prompt-improvement-1" id="/toc-prompt-improvement-1">Prompt Improvement 1</a></li>
+<li class="fragment"><a href="#/prompt-improvement-2" id="/toc-prompt-improvement-2">Prompt Improvement 2</a></li>
+<li class="fragment"><a href="#/prompt-improvement-3" id="/toc-prompt-improvement-3">Prompt Improvement 3</a></li>
+<li class="fragment"><a href="#/acknowledgments" id="/toc-acknowledgments">Acknowledgments</a></li>
+<li class="fragment"><a href="#/whats-next" id="/toc-whats-next">What’s next?</a></li>
 </ul>
 </nav>
 </section>
@@ -426,7 +427,7 @@ Jan Kirenz
 </section>
 <section id="api-key-and-python-libaries" class="slide level2">
 <h2>API key and Python libaries</h2>
-<div id="3ccf2928" class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> openai</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> os</span>
@@ -437,27 +438,23 @@ Jan Kirenz
 <span id="cb1-8"><a href="#cb1-8"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="gpt-3.5-turbo-vs-gpt-4" class="slide level2">
-<h2>GPT-3.5 Turbo vs GPT-4</h2>
-<ul>
-<li class="fragment"><p>For cost efficiency reasons, we will use OpenAI’s <code>gpt-3.5-turbo</code> model and the <a href="https://platform.openai.com/docs/guides/chat">chat completions endpoint</a>.</p></li>
-<li class="fragment"><p>However, you can simply replace <code>model="gpt-3.5-turbo"</code>with <code>model="gpt-4"</code> in the helper function</p></li>
-</ul>
-</section>
 <section id="helper-function" class="slide level2 smaller">
 <h2>Helper function</h2>
 <ul>
 <li class="fragment">This helper function will make it easier to use prompts and look at the generated outputs:</li>
+<li class="fragment">For cost efficiency reasons, we will use OpenAI’s <code>gpt-3.5-turbo</code> model and the <a href="https://platform.openai.com/docs/guides/chat">chat completions endpoint</a>.</li>
 </ul>
-<div id="09155228" class="cell" data-execution_count="2">
+<div class="fragment">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> get_completion(prompt, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
 <span id="cb2-4"><a href="#cb2-4"></a>        model<span class="op">=</span>model,</span>
 <span id="cb2-5"><a href="#cb2-5"></a>        messages<span class="op">=</span>messages,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>        temperature<span class="op">=</span><span class="dv">0</span>,  <span class="co"># this is the degree of randomness of the model's output</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>        temperature<span class="op">=</span><span class="dv">0</span>, </span>
 <span id="cb2-7"><a href="#cb2-7"></a>    )</span>
 <span id="cb2-8"><a href="#cb2-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section></section>
 <section>
@@ -465,13 +462,13 @@ Jan Kirenz
 <h1>Marketing use case</h1>
 
 </section>
-<section id="marketing-product-description" class="slide level2 smaller scrollable">
+<section id="marketing-product-description" class="slide level2 smaller">
 <h2>Marketing product description</h2>
 <ul>
 <li class="fragment">Generate a marketing product description from a product fact sheet</li>
 </ul>
 <div class="fragment">
-<div id="962c0f75" class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>fact_sheet_chair <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="st">OVERVIEW</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="st">- Part of a beautiful family of mid-century inspired office furniture, </span></span>
@@ -514,10 +511,11 @@ Jan Kirenz
 <span id="cb3-40"><a href="#cb3-40"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</section>
-<section id="initial-prompt" class="slide level2 smaller scrollable">
-<h2>Initial prompt</h2>
-<div id="492b4b52" class="cell" data-execution_count="4">
+</section></section>
+<section>
+<section id="initial-prompt" class="title-slide slide level1 smaller center">
+<h1>Initial prompt</h1>
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="ss">Your task is to help a marketing team create a </span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="ss">description for a retail website of a product based </span></span>
@@ -529,44 +527,70 @@ Jan Kirenz
 <span id="cb4-9"><a href="#cb4-9"></a></span>
 <span id="cb4-10"><a href="#cb4-10"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
 <span id="cb4-11"><a href="#cb4-11"></a><span class="ss">"""</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-</section><section id="initial-prompt-output" class="slide level2 smaller scrollable output-location-slide"><h2>Initial prompt</h2><div class="cell output-location-slide" data-execution_count="4">
-<div class="cell-output cell-output-stdout">
-<pre><code>Introducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. This chair is part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, all designed with a timeless mid-century aesthetic.
-
-One of the standout features of this chair is the variety of customization options available. You can choose from several shell colors and base finishes to perfectly match your existing decor. The chair is available with either plastic back and front upholstery or full upholstery in a range of 10 fabric and 6 leather options, allowing you to create a look that is uniquely yours.
-
-The chair is also available with or without armrests, giving you the flexibility to choose the option that best suits your needs. The base finish options include stainless steel, matte black, gloss white, or chrome, ensuring that you can find the perfect match for your space.
-
-In terms of construction, this chair is built to last. It features a 5-wheel plastic coated aluminum base, providing stability and mobility. The pneumatic chair adjust allows for easy raise and lower action, ensuring optimal comfort throughout the day.
-
-When it comes to dimensions, this chair is designed with both style and comfort in mind. With a width of 53 cm (20.87"), depth of 51 cm (20.08"), and height of 80 cm (31.50"), it offers ample space without overwhelming your space. The seat height is 44 cm (17.32") and the seat depth is 41 cm (16.14"), providing a comfortable seating experience for extended periods.
-
-We understand that every space is unique, which is why we offer a range of options to further customize your chair. You can choose between soft or hard-floor caster options, ensuring that your chair glides smoothly on any surface. Additionally, you have the choice between two seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3), allowing you to select the level of support that suits your preferences. The chair is also available with armless design or 8 position PU armrests, providing additional comfort and versatility.
-
-When it comes to materials, this chair is crafted with the utmost attention to quality. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The shell thickness is 10 mm, providing a sturdy and reliable structure. The seat is made of HD36 foam, offering a comfortable and supportive seating experience.
-
-Finally, this chair is proudly made in Italy, known for its exceptional craftsmanship and attention to detail. With its timeless design and superior construction, this chair is not only a stylish addition to any space but also a reliable and functional piece of furniture.
-
-Upgrade your office or home with our mid-century inspired office chair and experience the perfect blend of style, comfort, and functionality.</code></pre>
-</div>
-</div></section></section>
-<section>
-<section id="iterative-prompt-improvement" class="title-slide slide level1 center">
-<h1>Iterative Prompt Improvement</h1>
-
 </section>
-<section id="issue-too-long" class="slide level2 smaller scrollable">
+<section id="output" class="slide level2 smaller">
+<h2>Output</h2>
+<p>Introducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. This chair is part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, all designed with a timeless mid-century aesthetic.</p>
+<p>One of the standout features of this chair is the variety of customization options available. You can choose from several shell colors and base finishes to perfectly match your existing decor. The chair is available with either plastic back and front upholstery or full upholstery in a range of 10 fabric and 6 leather options, allowing you to create a look that is uniquely yours.</p>
+<p>The chair is also available with or without armrests, giving you the flexibility to choose the option that best suits your needs. The base finish options include stainless steel, matte black, gloss white, or chrome, ensuring that you can find the perfect match for your space.</p>
+<p>In terms of construction, this chair is built to last. It features a 5-wheel plastic coated aluminum base, providing stability and mobility. The pneumatic chair adjust allows for easy raise and lower action, ensuring optimal comfort throughout the day.</p>
+<p>When it comes to dimensions, this chair is designed with both style and comfort in mind. With a width of 53 cm (20.87”), depth of 51 cm (20.08”), and height of 80 cm (31.50”), it offers ample space without overwhelming your space. The seat height is 44 cm (17.32”) and the seat depth is 41 cm (16.14”), providing a comfortable seating experience for users of all heights.</p>
+<p>We understand that every space is unique, which is why we offer a range of options to further customize your chair. You can choose between soft or hard-floor caster options, ensuring that your chair glides smoothly across any surface. Additionally, you have the choice of two seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3), allowing you to select the level of support that suits your preferences.</p>
+<p>The materials used in the construction of this chair are of the highest quality. The shell base glider is made from cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The shell thickness is 10 mm, providing a sturdy and reliable foundation. The seat is made from HD36 foam, known for its comfort and resilience.</p>
+<p>Finally, this chair is proudly made in Italy, a country renowned for its craftsmanship and attention to detail. With its combination of style, functionality, and quality, this chair is the perfect choice for those seeking a mid-century inspired office chair that will elevate any space.</p>
+<p>Experience the timeless elegance of our mid-century inspired office chair and transform your workspace today.</p>
+</section>
+<section id="issue-too-long" class="slide level2">
 <h2>Issue: Too long</h2>
 <ul>
 <li class="fragment"><p>The text is too long</p></li>
 <li class="fragment"><p>Limit the number of words/sentences/characters.</p></li>
 </ul>
+</section></section>
+<section>
+<section id="prompt-improvement-1" class="title-slide slide level1 center">
+<h1>Prompt Improvement 1</h1>
+<ul>
+<li class="fragment">Use at most 50 words.</li>
+</ul>
 <div class="fragment">
-<div id="6769a8e5" class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ss">Your task is to help a marketing team create a </span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="ss">description for a retail website of a product based </span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="ss">on a technical fact sheet.</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="ss">Write a product description based on the information </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="ss">provided in the technical specifications delimited by </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="ss">triple backticks.</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="ss">Use at most 50 words.</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="ss">"""</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="output-1" class="slide level2">
+<h2>Output</h2>
+<p>Introducing our mid-century inspired office chair, part of a stunning furniture collection. With various color and finish options, choose between plastic or full upholstery in fabric or leather. The chair features a durable aluminum base, pneumatic chair adjustment, and is suitable for both home and business settings. Made in Italy.</p>
+<ul>
+<li class="fragment">Issue: Text focuses on the wrong details</li>
+</ul>
+</section></section>
+<section>
+<section id="prompt-improvement-2" class="title-slide slide level1 smaller center">
+<h1>Prompt Improvement 2</h1>
+<ul>
+<li class="fragment">Ask to focus on the aspects that are relevant to the intended audience.</li>
+</ul>
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="ss">Your task is to help a marketing team create a </span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="ss">description for a retail website of a product based </span></span>
@@ -576,224 +600,100 @@ Upgrade your office or home with our mid-century inspired office chair and exper
 <span id="cb6-7"><a href="#cb6-7"></a><span class="ss">provided in the technical specifications delimited by </span></span>
 <span id="cb6-8"><a href="#cb6-8"></a><span class="ss">triple backticks.</span></span>
 <span id="cb6-9"><a href="#cb6-9"></a></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="ss">Use at most 50 words.</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="ss">"""</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</div>
-</section>
-<section id="issue-too-long-output" class="slide level2 smaller scrollable output-location-slide"><h2>Issue: Too long</h2><div class="cell output-location-slide" data-execution_count="5">
-<div class="cell-output cell-output-stdout">
-<pre><code>Introducing our mid-century inspired office chair, part of a stunning furniture collection. With various color and finish options, choose between plastic or full upholstery in fabric or leather. The chair features a durable aluminum base with 5 wheels and pneumatic height adjustment. Perfect for home or business use. Made in Italy.</code></pre>
-</div>
-</div></section><section id="issue-too-long-1" class="slide level2 smaller scrollable">
-<h2>Issue: Too long</h2>
-<div id="f6dea161" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="bu">len</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment" data-execution_count="6">
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>333</code></pre>
-</div>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="ss">The description is intended for furniture retailers, </span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="ss">so should be technical in nature and focus on the </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="ss">materials the product is constructed from.</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="ss">At the end of the description, include every 7-character </span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="ss">Product ID in the technical specification.</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="ss">Use at most 50 words.</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="ss">"""</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="issue-wrong-details" class="slide level2 smaller scrollable">
-<h2>Issue: Wrong details</h2>
+<section id="output-2" class="slide level2">
+<h2>Output</h2>
+<p>Introducing our mid-century inspired office chair, part of a beautiful furniture collection. With various shell colors and base finishes, it offers versatility for any setting. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a durable aluminum base and pneumatic chair adjustment for easy use. Made in Italy.</p>
 <ul>
-<li class="fragment"><p>Text focuses on the wrong details</p></li>
-<li class="fragment"><p>Ask it to focus on the aspects that are relevant to the intended audience.</p></li>
-</ul>
-<div class="fragment">
-<div id="54a24990" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="ss">Your task is to help a marketing team create a </span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="ss">description for a retail website of a product based </span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="ss">on a technical fact sheet.</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="ss">Write a product description based on the information </span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="ss">provided in the technical specifications delimited by </span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="ss">triple backticks.</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="ss">The description is intended for furniture retailers, </span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="ss">so should be technical in nature and focus on the </span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="ss">materials the product is constructed from.</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="ss">Use at most 50 words.</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="ss">"""</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</div>
-</section>
-<section id="issue-wrong-details-output" class="slide level2 smaller scrollable output-location-slide"><h2>Issue: Wrong details</h2><div class="cell output-location-slide" data-execution_count="7">
-<div class="cell-output cell-output-stdout">
-<pre><code>Introducing our mid-century inspired office chair, part of a beautiful furniture collection. With various shell colors and base finishes, it offers versatility for any setting. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a durable aluminum base and pneumatic chair adjustment for easy height customization. Made in Italy.</code></pre>
-</div>
-</div></section><section id="issue-wrong-details-1" class="slide level2 smaller scrollable">
-<h2>Issue: Wrong details</h2>
+<li class="fragment">Issue:
 <ul>
-<li class="fragment">Include product ID’s</li>
+<li class="fragment">Lets’s assume oure description needs a table of dimensions</li>
+<li class="fragment">Output should be in HTML</li>
+</ul></li>
 </ul>
-<div class="fragment">
-<div id="58ca554d" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="ss">Your task is to help a marketing team create a </span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="ss">description for a retail website of a product based </span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="ss">on a technical fact sheet.</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="ss">Write a product description based on the information </span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="ss">provided in the technical specifications delimited by </span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="ss">triple backticks.</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="ss">The description is intended for furniture retailers, </span></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="ss">so should be technical in nature and focus on the </span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="ss">materials the product is constructed from.</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="ss">At the end of the description, include every 7-character </span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="ss">Product ID in the technical specification.</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a></span>
-<span id="cb12-17"><a href="#cb12-17"></a><span class="ss">Use at most 50 words.</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="ss">"""</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</div>
-</section>
-<section id="issue-wrong-details-1-output" class="slide level2 smaller scrollable output-location-slide"><h2>Issue: Wrong details</h2><div class="cell output-location-slide" data-execution_count="8">
-<div class="cell-output cell-output-stdout">
-<pre><code>Introducing our mid-century inspired office chair, part of a beautiful family of furniture. With various shell colors and base finishes, this chair offers versatility and style. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a 5-wheel plastic coated aluminum base and a pneumatic chair adjust for easy height adjustment. Available with or without armrests, this chair is suitable for both home and business settings. Made with high-quality materials, including a cast aluminum shell and HD36 foam seat, this chair is built to last. Product ID: SWC-100, SWC-110.</code></pre>
-</div>
-</div></section><section id="issue-3-no-table" class="slide level2 smaller scrollable">
-<h2>Issue 3: No Table</h2>
+</section></section>
+<section>
+<section id="prompt-improvement-3" class="title-slide slide level1 smaller center">
+<h1>Prompt Improvement 3</h1>
 <ul>
-<li class="fragment"><p>Description needs a table of dimensions</p></li>
-<li class="fragment"><p>Ask it to extract information and organize it in a table.</p></li>
+<li class="fragment">Ask it to extract information and organize it in a table in HTML.</li>
 </ul>
-<div class="fragment">
-<div id="2ed4bdf9" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="ss">Your task is to help a marketing team create a </span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="ss">description for a retail website of a product based </span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="ss">on a technical fact sheet.</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="ss">Write a product description based on the information </span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="ss">provided in the technical specifications delimited by </span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="ss">triple backticks.</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="ss">The description is intended for furniture retailers, </span></span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="ss">so should be technical in nature and focus on the </span></span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="ss">materials the product is constructed from.</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="ss">At the end of the description, include every 7-character </span></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="ss">Product ID in the technical specification.</span></span>
-<span id="cb14-16"><a href="#cb14-16"></a></span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="ss">After the description, include a table that gives the </span></span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="ss">product's dimensions. The table should have two columns.</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a><span class="ss">In the first column include the name of the dimension. </span></span>
-<span id="cb14-20"><a href="#cb14-20"></a><span class="ss">In the second column include the measurements in inches only.</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a></span>
-<span id="cb14-22"><a href="#cb14-22"></a><span class="ss">Give the table the title 'Product Dimensions'.</span></span>
-<span id="cb14-23"><a href="#cb14-23"></a></span>
-<span id="cb14-24"><a href="#cb14-24"></a><span class="ss">Format everything as HTML that can be used in a website. </span></span>
-<span id="cb14-25"><a href="#cb14-25"></a><span class="ss">Place the description in a &lt;div&gt; element.</span></span>
-<span id="cb14-26"><a href="#cb14-26"></a></span>
-<span id="cb14-27"><a href="#cb14-27"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
-<span id="cb14-28"><a href="#cb14-28"></a><span class="ss">"""</span></span>
-<span id="cb14-29"><a href="#cb14-29"></a></span>
-<span id="cb14-30"><a href="#cb14-30"></a>response <span class="op">=</span> get_completion(prompt)</span>
-<span id="cb14-31"><a href="#cb14-31"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ss">Your task is to help a marketing team create a </span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ss">description for a retail website of a product based </span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ss">on a technical fact sheet.</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ss">Write a product description based on the information </span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="ss">provided in the technical specifications delimited by </span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="ss">triple backticks.</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="ss">The description is intended for furniture retailers, </span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="ss">so should be technical in nature and focus on the </span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="ss">materials the product is constructed from.</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="ss">At the end of the description, include every 7-character </span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="ss">Product ID in the technical specification.</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="ss">After the description, include a table that gives the </span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="ss">product's dimensions. The table should have two columns.</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="ss">In the first column include the name of the dimension. </span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="ss">In the second column include the measurements in inches only.</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="ss">Give the table the title 'Product Dimensions'.</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="ss">Format everything as HTML that can be used in a website. </span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="ss">Place the description in a &lt;div&gt; element.</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="ss">Technical specifications: ```</span><span class="sc">{</span>fact_sheet_chair<span class="sc">}</span><span class="ss">```</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="ss">"""</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a></span>
+<span id="cb7-30"><a href="#cb7-30"></a>response <span class="op">=</span> get_completion(prompt)</span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-</div>
 </section>
-<section id="issue-3-no-table-output" class="slide level2 smaller scrollable output-location-slide"><h2>Issue 3: No Table</h2><div class="cell output-location-slide" data-execution_count="9">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;div&gt;
-  &lt;h2&gt;Product Description&lt;/h2&gt;
-  &lt;p&gt;
-    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is the perfect choice for any home or business setting.
-  &lt;/p&gt;
-  &lt;p&gt;
-    The SWC Chair offers several options for customization. You can choose from a variety of shell colors and base finishes to match your existing decor. The chair is available with plastic back and front upholstery or full upholstery in a range of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. You can also choose whether to have armrests or not, depending on your preference.
-  &lt;/p&gt;
-  &lt;p&gt;
-    The construction of the SWC Chair is top-notch. It features a 5-wheel plastic coated aluminum base, ensuring stability and durability. The chair also has a pneumatic adjuster, allowing for easy raise and lower action. This makes it convenient for users to find their desired height and maintain proper posture throughout the day.
-  &lt;/p&gt;
-  &lt;p&gt;
-    The SWC Chair is designed with comfort in mind. The seat is made with HD36 foam, providing a plush and supportive cushioning experience. You can also choose between soft or hard-floor caster options, depending on the type of flooring in your space. Additionally, there are two choices of seat foam densities available: medium (1.8 lb/ft3) or high (2.8 lb/ft3). This allows you to customize the level of firmness to suit your preferences.
-  &lt;/p&gt;
-  &lt;p&gt;
-    The SWC Chair is not only stylish and comfortable, but it is also built to last. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring strength and durability. The shell has a thickness of 10 mm, providing stability and support. With its high-quality materials and construction, the SWC Chair is qualified for contract use, making it suitable for commercial settings as well.
-  &lt;/p&gt;
-  &lt;p&gt;
-    Made in Italy, the SWC Chair is a testament to Italian craftsmanship and design. It combines style, functionality, and durability to create a chair that is both aesthetically pleasing and practical.
-  &lt;/p&gt;
-  &lt;h2&gt;Product Dimensions&lt;/h2&gt;
-  &lt;table&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Dimension&lt;/th&gt;
-      &lt;th&gt;Measurement (inches)&lt;/th&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Width&lt;/td&gt;
-      &lt;td&gt;20.87"&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Depth&lt;/td&gt;
-      &lt;td&gt;20.08"&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Height&lt;/td&gt;
-      &lt;td&gt;31.50"&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Seat Height&lt;/td&gt;
-      &lt;td&gt;17.32"&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Seat Depth&lt;/td&gt;
-      &lt;td&gt;16.14"&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/table&gt;
-&lt;/div&gt;
+<section id="prompt-improvement-3-output" class="title-slide slide level1 smaller output-location-slide center"><h1>Prompt Improvement 3</h1><div class="cell output-location-slide" data-execution_count="7">
 
-Product IDs: SWC-100, SWC-110</code></pre>
-</div>
-</div></section><section id="view-result-as-html" class="slide level2">
-<h2>View result as HTML</h2>
-<div id="da6f07b5" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>display(HTML(response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+</div></section><section id="output-3" class="slide level2 smaller">
+<h2>Output</h2>
+
 <div>
   <h2>Product Description</h2>
   <p>
-    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is the perfect choice for any home or business setting.
+    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is perfect for both home and business settings.
   </p>
   <p>
-    The SWC Chair offers several options for customization. You can choose from a variety of shell colors and base finishes to match your existing decor. The chair is available with plastic back and front upholstery or full upholstery in a range of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. You can also choose whether to have armrests or not, depending on your preference.
+    The SWC Chair is available in several options of shell color and base finishes, allowing you to create a look that matches your style. You can choose between plastic back and front upholstery or full upholstery in a variety of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. Additionally, you have the choice of having the chair with or without armrests.
   </p>
   <p>
-    The construction of the SWC Chair is top-notch. It features a 5-wheel plastic coated aluminum base, ensuring stability and durability. The chair also has a pneumatic adjuster, allowing for easy raise and lower action. This makes it convenient for users to find their desired height and maintain proper posture throughout the day.
+    Constructed with durability and comfort in mind, the SWC Chair features a 5-wheel plastic coated aluminum base for stability and mobility. The chair also has a pneumatic adjuster, allowing for easy raise and lower action to find the perfect height for your workspace.
   </p>
   <p>
-    The SWC Chair is designed with comfort in mind. The seat is made with HD36 foam, providing a plush and supportive cushioning experience. You can also choose between soft or hard-floor caster options, depending on the type of flooring in your space. Additionally, there are two choices of seat foam densities available: medium (1.8 lb/ft3) or high (2.8 lb/ft3). This allows you to customize the level of firmness to suit your preferences.
+    The SWC Chair is not only stylish and functional, but it is also designed with quality materials. The shell and base glider are made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The seat is made with HD36 foam, providing a comfortable seating experience throughout the day.
   </p>
   <p>
-    The SWC Chair is not only stylish and comfortable, but it is also built to last. The shell base glider is made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring strength and durability. The shell has a thickness of 10 mm, providing stability and support. With its high-quality materials and construction, the SWC Chair is qualified for contract use, making it suitable for commercial settings as well.
+    With its versatility, durability, and stylish design, the SWC Chair is the perfect addition to any office or workspace. It is qualified for contract use, making it suitable for commercial settings as well. Experience the comfort and style of the SWC Chair today.
   </p>
-  <p>
-    Made in Italy, the SWC Chair is a testament to Italian craftsmanship and design. It combines style, functionality, and durability to create a chair that is both aesthetically pleasing and practical.
-  </p>
+  <h3>Product ID:</h3>
+  <ul>
+    <li>SWC-100</li>
+    <li>SWC-110</li>
+  </ul>
   <h2>Product Dimensions</h2>
   
 <table data-quarto-postprocess="true">
@@ -826,15 +726,21 @@ Product IDs: SWC-100, SWC-110</code></pre>
 </table>
 
 </div>
+</section></section>
+<section id="acknowledgments" class="title-slide slide level1 center">
+<h1>Acknowledgments</h1>
+<p><em>This tutorial is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearningAI as well as <a href="https://platform.openai.com/docs/guides/gpt-best-practices">OpenAI’s GPT best practices</a></em></p>
+</section>
 
-Product IDs: SWC-100, SWC-110
-</div>
-</div>
+<section id="whats-next" class="title-slide slide level1 center" data-background-image="../images/logo.png" data-background-opacity="0.5">
+<h1>What’s next?</h1>
+<p><strong>Congratulations! You have completed this tutorial</strong> 👍</p>
+<p><strong>Next, you may want to go back to the <a href="https://kirenz.github.io/lab-prompt/">lab’s website</a></strong></p>
 
 <div class="footer footer-default">
 <p>Jan Kirenz</p>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -862,6 +768,7 @@ Product IDs: SWC-100, SWC-110
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1123,9 +1030,10 @@ Product IDs: SWC-100, SWC-110
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1135,17 +1043,8 @@ Product IDs: SWC-100, SWC-110
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
