@@ -201,7 +201,9 @@ Introducing our mid-century inspired office chair, part of a stunning furniture 
 
 # Prompt Improvement 2 {.smaller}
 
-  - Ask to focus on the aspects that are relevant to the intended audience.
+- Ask to focus on the aspects that are relevant to the intended audience.
+
+. . .
 
 ```{python}
 prompt = f"""
@@ -244,6 +246,7 @@ Introducing our mid-century inspired office chair, part of a beautiful furniture
 
 - Ask it to extract information and organize it in a table in HTML.
 
+. . .
 
 ```{python}
 # | output-location: slide
