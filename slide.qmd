@@ -87,7 +87,9 @@ In this tutorial, you will generate customer service emails that are tailored to
 
 In this presentation, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.
 
+<!--
 We use [Panel](https://panel.holoviz.org/), an open-source Python library that lets you easily build powerful tools, dashboards and complex applications entirely in Python. 
+-->
 
 ::: {.callout-tip appearance="simple" icon=false}
 - [🖥️ Presentation](/slides/chatbot.qmd)
