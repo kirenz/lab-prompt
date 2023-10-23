@@ -3,4 +3,92 @@ title: "Assignments"
 number-sections: true
 ---
 
-tbd.
+
+# Guidelines
+
+:::{.callout-note}
+You have learned two prompting principles and their related tactics in order to write effective prompts for large language models.
+:::
+
+You should be able to solve the following tasks:
+
+- What is prompt engineering?
+- Explain the 7 components of the chat completion helper function.
+- What are tokens?
+- Use the functions of OpenAI's Python API to obtain results from the LLM. 
+- Explain the tactics of the first and second prompting principles.
+- Explain the causes and mitigation strategies for LLM limitations (hallucinations) 
+
+
+# Iterative prompt development
+
+:::{.callout-note}
+You have iteratively analyzed and refined your prompts to generate marketing copy from a product fact sheet.
+:::
+
+You should be able to solve the following tasks:
+
+- What is the core idea behind iterative prompt development?
+- Explain possible options to improve a prompt.
+- Given a specific prompt, provide the Python code to optimize the prompt.
+
+
+# Summarize text
+
+:::{.callout-note}
+You have summarized text with a focus on specific topics.
+:::
+
+You should be able to solve the following tasks:
+
+- Write Python code to summarize multiple product reviews with a focus on a specific topic.
+
+
+
+# Inferring
+
+:::{.callout-note}
+You have inferred sentiment and topics from product reviews and news articles.
+:::
+
+You should be able to solve the following tasks:
+
+- Write a prompt to identify the polarity of a given text
+- Identify types of emotions.
+- Find topics in a given text.
+
+
+# Transforming
+
+:::{.callout-note}
+You have explored how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.
+:::
+
+You should be able to solve the following tasks:
+
+- Translate text.
+- Use tone transformations.
+- Perform format conversions.
+- Implement spellchecks & grammar checks.
+
+
+# Expanding
+
+:::{.callout-note}
+You have generated customer service emails that are tailored to each customer's review.
+:::
+
+You should be able to solve the following task:
+
+- Write a prompt which will generate customer service emails that are tailored to each customer's review.
+
+## Chatbot
+
+:::{.callout-note}
+You have explored how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.
+:::
+
+You should be able to solve the following task:
+
+- What are the different roles in the messages object?
+- Explain the concept of history in the context of chat.
