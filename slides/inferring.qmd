@@ -34,7 +34,6 @@ format:
 In this tutorial, you will infer sentiment and topics from product reviews and news articles.
 
 
-
 # Setup
 
 ## API key and Python libaries
@@ -87,7 +86,7 @@ about their customers and products!!
 
 # Infer sentiment 
 
-Sentiment analysis is a natural language processing technique that identifies the polarity (e.g. positive) of a given text. 
+Sentiment analysis is a technique that identifies the polarity (e.g. positive) of a given text. 
 
 ## Sentiment?
 
