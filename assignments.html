@@ -110,7 +110,21 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#guidelines" id="toc-guidelines" class="nav-link active" data-scroll-target="#guidelines"><span class="header-section-number">1</span> Guidelines</a></li>
+  <li><a href="#iterative-prompt-development" id="toc-iterative-prompt-development" class="nav-link" data-scroll-target="#iterative-prompt-development"><span class="header-section-number">2</span> Iterative prompt development</a></li>
+  <li><a href="#summarize-text" id="toc-summarize-text" class="nav-link" data-scroll-target="#summarize-text"><span class="header-section-number">3</span> Summarize text</a></li>
+  <li><a href="#inferring" id="toc-inferring" class="nav-link" data-scroll-target="#inferring"><span class="header-section-number">4</span> Inferring</a></li>
+  <li><a href="#transforming" id="toc-transforming" class="nav-link" data-scroll-target="#transforming"><span class="header-section-number">5</span> Transforming</a></li>
+  <li><a href="#expanding" id="toc-expanding" class="nav-link" data-scroll-target="#expanding"><span class="header-section-number">6</span> Expanding</a>
+  <ul class="collapse">
+  <li><a href="#chatbot" id="toc-chatbot" class="nav-link" data-scroll-target="#chatbot"><span class="header-section-number">6.1</span> Chatbot</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -132,9 +146,161 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>tbd.</p>
+<section id="guidelines" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Guidelines</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have learned two prompting principles and their related tactics in order to write effective prompts for large language models.</p>
+</div>
+</div>
+<p>You should be able to solve the following tasks:</p>
+<ul>
+<li>What is prompt engineering?</li>
+<li>Explain the 7 components of the chat completion helper function.</li>
+<li>What are tokens?</li>
+<li>Use the functions of OpenAI’s Python API to obtain results from the LLM.</li>
+<li>Explain the tactics of the first and second prompting principles.</li>
+<li>Explain the causes and mitigation strategies for LLM limitations (hallucinations)</li>
+</ul>
+</section>
+<section id="iterative-prompt-development" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Iterative prompt development</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have iteratively analyzed and refined your prompts to generate marketing copy from a product fact sheet.</p>
+</div>
+</div>
+<p>You should be able to solve the following tasks:</p>
+<ul>
+<li>What is the core idea behind iterative prompt development?</li>
+<li>Explain possible options to improve a prompt.</li>
+<li>Given a specific prompt, provide the Python code to optimize the prompt.</li>
+</ul>
+</section>
+<section id="summarize-text" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Summarize text</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have summarized text with a focus on specific topics.</p>
+</div>
+</div>
+<p>You should be able to solve the following tasks:</p>
+<ul>
+<li>Write Python code to summarize multiple product reviews with a focus on a specific topic.</li>
+</ul>
+</section>
+<section id="inferring" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Inferring</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have inferred sentiment and topics from product reviews and news articles.</p>
+</div>
+</div>
+<p>You should be able to solve the following tasks:</p>
+<ul>
+<li>Write a prompt to identify the polarity of a given text</li>
+<li>Identify types of emotions.</li>
+<li>Find topics in a given text.</li>
+</ul>
+</section>
+<section id="transforming" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Transforming</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have explored how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.</p>
+</div>
+</div>
+<p>You should be able to solve the following tasks:</p>
+<ul>
+<li>Translate text.</li>
+<li>Use tone transformations.</li>
+<li>Perform format conversions.</li>
+<li>Implement spellchecks &amp; grammar checks.</li>
+</ul>
+</section>
+<section id="expanding" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Expanding</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have generated customer service emails that are tailored to each customer’s review.</p>
+</div>
+</div>
+<p>You should be able to solve the following task:</p>
+<ul>
+<li>Write a prompt which will generate customer service emails that are tailored to each customer’s review.</li>
+</ul>
+<section id="chatbot" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="chatbot"><span class="header-section-number">6.1</span> Chatbot</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have explored how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.</p>
+</div>
+</div>
+<p>You should be able to solve the following task:</p>
+<ul>
+<li>What are the different roles in the messages object?</li>
+<li>Explain the concept of history in the context of chat.</li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

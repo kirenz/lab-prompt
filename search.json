@@ -4,7 +4,7 @@
     "href": "slide.html",
     "title": "Slides",
     "section": "",
-    "text": "Take a look at the slides tutorial to learn how to use all slide options.\nYou have several options to start code development:\nFor cost reasons we mainly use OpenAI’s gpt-3.5-turbo model in our tutorials. However, you can simply replace model=\"gpt-3.5-turbo\" with model=\"gpt-4\" in the helper function. Note the price difference between the two models."
+    "text": "Take a look at the slides tutorial to learn how to use all slide options.\nYou have several options to start code development:\nFor cost reasons we mainly use OpenAI’s gpt-3.5-turbo model in our tutorials. Note the price differences between the models."
   },
   {
     "objectID": "slide.html#chatbot",
@@ -340,7 +340,7 @@
     "href": "code/chatbot.html#helper-function-2",
     "title": "Chatbot",
     "section": "Helper function 2",
-    "text": "Helper function 2\n\ndef get_completion_from_messages(messages, model=\"gpt-3.5-turbo\", temperature=0):\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    print(str(response.choices[0].message))\n    return response.choices[0].message[\"content\"]"
+    "text": "Helper function 2\n\n1def get_completion_from_messages(messages, model=\"gpt-3.5-turbo\", temperature=0):\n2    response = openai.ChatCompletion.create(\n3        model=model,\n4        messages=messages,\n5        temperature=temperature,\n    )\n6    print(str(response.choices[0].message))\n7    return response.choices[0].message[\"content\"]\n\n\n1\n\nDefine function get_completion_from_messages with parameters messages, model (default: “gpt-3.5-turbo”), and temperature (default: 0).\n\n2\n\nCall openai.ChatCompletion.create method and store result in response.\n\n3\n\nSpecify model argument using model parameter.\n\n4\n\nSpecify messages argument using messages parameter.\n\n5\n\nSpecify temperature argument using temperature parameter.\n\n6\n\nPrint message of first choice from response to console (this is the chat history).\n\n7\n\nReturn content attribute of message of first choice from response."
   },
   {
     "objectID": "code/chatbot.html#messages",
@@ -928,7 +928,14 @@
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "tbd."
+    "text": "Note\n\n\n\nYou have learned two prompting principles and their related tactics in order to write effective prompts for large language models.\n\n\nYou should be able to solve the following tasks:\n\nWhat is prompt engineering?\nExplain the 7 components of the chat completion helper function.\nWhat are tokens?\nUse the functions of OpenAI’s Python API to obtain results from the LLM.\nExplain the tactics of the first and second prompting principles.\nExplain the causes and mitigation strategies for LLM limitations (hallucinations)"
+  },
+  {
+    "objectID": "assignments.html#chatbot",
+    "href": "assignments.html#chatbot",
+    "title": "Assignments",
+    "section": "6.1 Chatbot",
+    "text": "6.1 Chatbot\n\n\n\n\n\n\nNote\n\n\n\nYou have explored how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nYou should be able to solve the following task:\n\nWhat are the different roles in the messages object?\nExplain the concept of history in the context of chat."
   },
   {
     "objectID": "slides/expanding.html#python",
@@ -1089,7 +1096,7 @@
     "href": "slides/chatbot.html#helper-function-2",
     "title": "Chatbot",
     "section": "Helper function 2",
-    "text": "Helper function 2\n\ndef get_completion_from_messages(messages, model=\"gpt-3.5-turbo\", temperature=0):\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    print(str(response.choices[0].message))\n    return response.choices[0].message[\"content\"]"
+    "text": "Helper function 2\n\n1def get_completion_from_messages(messages, model=\"gpt-3.5-turbo\", temperature=0):\n2    response = openai.ChatCompletion.create(\n3        model=model,\n4        messages=messages,\n5        temperature=temperature,\n    )\n6    print(str(response.choices[0].message))\n7    return response.choices[0].message[\"content\"]\n\n\n1\n\nDefine function get_completion_from_messages with parameters messages, model (default: “gpt-3.5-turbo”), and temperature (default: 0).\n\n2\n\nCall openai.ChatCompletion.create method and store result in response.\n\n3\n\nSpecify model argument using model parameter.\n\n4\n\nSpecify messages argument using messages parameter.\n\n5\n\nSpecify temperature argument using temperature parameter.\n\n6\n\nPrint message of first choice from response to console (this is the chat history).\n\n7\n\nReturn content attribute of message of first choice from response."
   },
   {
     "objectID": "slides/chatbot.html#messages",
