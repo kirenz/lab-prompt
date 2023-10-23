@@ -62,22 +62,31 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     return response.choices[0].message["content"]
 ```
 
-## Helper function 2
+## Helper function 2 {.smaller}
+
 
 ```{python}
 
-
-def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0):
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=messages,
-        temperature=temperature,
+def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0): # <1>
+    response = openai.ChatCompletion.create( # <2>
+        model=model, # <3>
+        messages=messages, # <4>
+        temperature=temperature, # <5>
     )
-    print(str(response.choices[0].message))
-    return response.choices[0].message["content"]
-
+    print(str(response.choices[0].message)) # <6>
+    return response.choices[0].message["content"] # <7>
 
 ```
+
+
+1. Define function `get_completion_from_messages` with parameters `messages`, `model` (default: "gpt-3.5-turbo"), and `temperature` (default: 0).
+2. Call `openai.ChatCompletion.create` method and store result in `response`.
+3. Specify `model` argument using `model` parameter.
+4. Specify `messages` argument using `messages` parameter.
+5. Specify `temperature` argument using `temperature` parameter.
+6. Print message of first choice from `response` to console (this is the chat history).
+7. Return `content` attribute of message of first choice from `response`.
+
 
 # Shakespeare Chatbot
 
@@ -111,7 +120,7 @@ Because 'twas far easier than using a book, forsooth!
 ```
 
 
-# Friendly Chatbot
+# Unfriendly Chatbot
 
 ## Messages
 
