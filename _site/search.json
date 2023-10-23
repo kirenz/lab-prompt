@@ -921,7 +921,7 @@
     "href": "slides/chatbot.html#helper-function-2",
     "title": "Chatbot",
     "section": "Helper function 2",
-    "text": "Helper function 2\n\ndef get_completion_from_messages(messages, model=\"gpt-3.5-turbo\", temperature=0):\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    print(str(response.choices[0].message))\n    return response.choices[0].message[\"content\"]"
+    "text": "Helper function 2\n\n1def get_completion_from_messages(messages, model=\"gpt-3.5-turbo\", temperature=0):\n2    response = openai.ChatCompletion.create(\n3        model=model,\n4        messages=messages,\n5        temperature=temperature,\n    )\n6    print(str(response.choices[0].message))\n7    return response.choices[0].message[\"content\"]\n\n\n1\n\nDefine function get_completion_from_messages with parameters messages, model (default: “gpt-3.5-turbo”), and temperature (default: 0).\n\n2\n\nCall openai.ChatCompletion.create method and store result in response.\n\n3\n\nSpecify model argument using model parameter.\n\n4\n\nSpecify messages argument using messages parameter.\n\n5\n\nSpecify temperature argument using temperature parameter.\n\n6\n\nPrint message of first choice from response to console (this is the chat history).\n\n7\n\nReturn content attribute of message of first choice from response."
   },
   {
     "objectID": "slides/chatbot.html#messages",
