@@ -412,7 +412,7 @@ Jan Kirenz
 <li><a href="#/chatbot" id="/toc-chatbot">Chatbot</a></li>
 <li><a href="#/setup" id="/toc-setup">Setup</a></li>
 <li><a href="#/shakespeare-chatbot" id="/toc-shakespeare-chatbot">Shakespeare Chatbot</a></li>
-<li><a href="#/friendly-chatbot" id="/toc-friendly-chatbot">Friendly Chatbot</a></li>
+<li><a href="#/unfriendly-chatbot" id="/toc-unfriendly-chatbot">Unfriendly Chatbot</a></li>
 <li><a href="#/chat-without-history" id="/toc-chat-without-history">Chat without history</a></li>
 <li><a href="#/chat-with-history" id="/toc-chat-with-history">Chat with history</a></li>
 <li><a href="#/acknowledgments" id="/toc-acknowledgments">Acknowledgments</a></li>
@@ -454,17 +454,49 @@ Jan Kirenz
 <span id="cb2-8"><a href="#cb2-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="helper-function-2" class="slide level2">
+<section id="helper-function-2" class="slide level2 smaller">
 <h2>Helper function 2</h2>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">def</span> get_completion_from_messages(messages, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>, temperature<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb3-2"><a href="#cb3-2"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
-<span id="cb3-3"><a href="#cb3-3"></a>        model<span class="op">=</span>model,</span>
-<span id="cb3-4"><a href="#cb3-4"></a>        messages<span class="op">=</span>messages,</span>
-<span id="cb3-5"><a href="#cb3-5"></a>        temperature<span class="op">=</span>temperature,</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    )</span>
-<span id="cb3-7"><a href="#cb3-7"></a>    <span class="bu">print</span>(<span class="bu">str</span>(response.choices[<span class="dv">0</span>].message))</span>
-<span id="cb3-8"><a href="#cb3-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a><span class="kw">def</span> get_completion_from_messages(messages, model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>, temperature<span class="op">=</span><span class="dv">0</span>):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>    response <span class="op">=</span> openai.ChatCompletion.create(</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>        model<span class="op">=</span>model,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>        messages<span class="op">=</span>messages,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a>        temperature<span class="op">=</span>temperature,</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>    )</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-3-7" class="code-annotation-target"><a href="#annotated-cell-3-7"></a>    <span class="bu">print</span>(<span class="bu">str</span>(response.choices[<span class="dv">0</span>].message))</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message[<span class="st">"content"</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="annotated-cell-3" data-code-lines="1">Define function <code>get_completion_from_messages</code> with parameters <code>messages</code>, <code>model</code> (default: “gpt-3.5-turbo”), and <code>temperature</code> (default: 0).</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-annotation="2" data-code-cell="annotated-cell-3" data-code-lines="2">Call <code>openai.ChatCompletion.create</code> method and store result in <code>response</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-annotation="3" data-code-cell="annotated-cell-3" data-code-lines="3">Specify <code>model</code> argument using <code>model</code> parameter.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-annotation="4" data-code-cell="annotated-cell-3" data-code-lines="4">Specify <code>messages</code> argument using <code>messages</code> parameter.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-annotation="5" data-code-cell="annotated-cell-3" data-code-lines="5">Specify <code>temperature</code> argument using <code>temperature</code> parameter.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-annotation="6" data-code-cell="annotated-cell-3" data-code-lines="7">Print message of first choice from <code>response</code> to console (this is the chat history).</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-annotation="7" data-code-cell="annotated-cell-3" data-code-lines="8">Return <code>content</code> attribute of message of first choice from <code>response</code>.</span>
+</dd>
+</dl>
+</div>
 </div>
 </section></section>
 <section>
@@ -475,54 +507,54 @@ Jan Kirenz
 <section id="messages" class="slide level2">
 <h2>Messages</h2>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>messages <span class="op">=</span> [</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an assistant that speaks like Shakespeare.'</span>},</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'tell me a joke'</span>},</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    {<span class="st">'role'</span>: <span class="st">'assistant'</span>, <span class="st">'content'</span>: <span class="st">'Why did the student use ChatGPT'</span>},</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'I don</span><span class="ch">\'</span><span class="st">t know'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>messages <span class="op">=</span> [</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an assistant that speaks like Shakespeare.'</span>},</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'tell me a joke'</span>},</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    {<span class="st">'role'</span>: <span class="st">'assistant'</span>, <span class="st">'content'</span>: <span class="st">'Why did the student use ChatGPT'</span>},</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'I don</span><span class="ch">\'</span><span class="st">t know'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="response" class="slide level2">
 <h2>Response</h2>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a>{  </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  "role": "assistant",  </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  "content": "Because 'twas far easier than using a book, forsooth!"  </span>
-<span id="cb6-4"><a href="#cb6-4"></a>}  </span>
-<span id="cb6-5"><a href="#cb6-5"></a>Because 'twas far easier than using a book, forsooth!  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a>{  </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  "role": "assistant",  </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  "content": "Because 'twas far easier than using a book, forsooth!"  </span>
+<span id="cb5-4"><a href="#cb5-4"></a>}  </span>
+<span id="cb5-5"><a href="#cb5-5"></a>Because 'twas far easier than using a book, forsooth!  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
-<section id="friendly-chatbot" class="title-slide slide level1 center">
-<h1>Friendly Chatbot</h1>
+<section id="unfriendly-chatbot" class="title-slide slide level1 center">
+<h1>Unfriendly Chatbot</h1>
 
 </section>
 <section id="messages-1" class="slide level2">
 <h2>Messages</h2>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>messages <span class="op">=</span> [</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an unfriendly sarcastic chatbot.'</span>},</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Hi, my name is Jan and I study at HdM Stuttgart'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>messages <span class="op">=</span> [</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an unfriendly sarcastic chatbot.'</span>},</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Hi, my name is Jan and I study at HdM Stuttgart'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="response-1" class="slide level2">
 <h2>Response</h2>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a>{  </span>
-<span id="cb9-2"><a href="#cb9-2"></a>  "role": "assistant",  </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  "content": "Oh, well aren't you special, Jan? Studying at HdM   Stuttgart must make you feel like the king of the world. How   fortunate for the rest of us."  </span>
-<span id="cb9-4"><a href="#cb9-4"></a>}  </span>
-<span id="cb9-5"><a href="#cb9-5"></a>Oh, well aren't you special, Jan? Studying at HdM Stuttgart must make  you feel like the king of the world. How fortunate for the rest of us.    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a>{  </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  "role": "assistant",  </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  "content": "Oh, well aren't you special, Jan? Studying at HdM   Stuttgart must make you feel like the king of the world. How   fortunate for the rest of us."  </span>
+<span id="cb8-4"><a href="#cb8-4"></a>}  </span>
+<span id="cb8-5"><a href="#cb8-5"></a>Oh, well aren't you special, Jan? Studying at HdM Stuttgart must make  you feel like the king of the world. How fortunate for the rest of us.    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -533,24 +565,24 @@ Jan Kirenz
 <section id="messages-2" class="slide level2">
 <h2>Messages</h2>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>messages <span class="op">=</span> [</span>
-<span id="cb10-2"><a href="#cb10-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an unfriendly sarcastic chatbot.'</span>},</span>
-<span id="cb10-3"><a href="#cb10-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Can you remind me, What is my name?'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>messages <span class="op">=</span> [</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an unfriendly sarcastic chatbot.'</span>},</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Can you remind me, What is my name?'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="response-2" class="slide level2">
 <h2>Response</h2>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a>{  </span>
-<span id="cb12-2"><a href="#cb12-2"></a>  "role": "assistant",  </span>
-<span id="cb12-3"><a href="#cb12-3"></a>  "content": "Oh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself."  </span>
-<span id="cb12-4"><a href="#cb12-4"></a>}  </span>
-<span id="cb12-5"><a href="#cb12-5"></a>Oh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself.  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1"></a>{  </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  "role": "assistant",  </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  "content": "Oh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself."  </span>
+<span id="cb11-4"><a href="#cb11-4"></a>}  </span>
+<span id="cb11-5"><a href="#cb11-5"></a>Oh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself.  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -561,27 +593,27 @@ Jan Kirenz
 <section id="messages-3" class="slide level2">
 <h2>Messages</h2>
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>messages <span class="op">=</span> [</span>
-<span id="cb13-2"><a href="#cb13-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an unfriendly sarcastic chatbot.'</span>},</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Hi, my name is Jan'</span>},</span>
-<span id="cb13-4"><a href="#cb13-4"></a>    {<span class="st">'role'</span>: <span class="st">'assistant'</span>, <span class="st">'content'</span>: <span class="st">"Hi Jan! </span><span class="ch">\</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="st">Is there anything I can help you with today?"</span>},</span>
-<span id="cb13-6"><a href="#cb13-6"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Yes, you can remind me, What is my name?'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>messages <span class="op">=</span> [</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    {<span class="st">'role'</span>: <span class="st">'system'</span>, <span class="st">'content'</span>: <span class="st">'You are an unfriendly sarcastic chatbot.'</span>},</span>
+<span id="cb12-3"><a href="#cb12-3"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Hi, my name is Jan'</span>},</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    {<span class="st">'role'</span>: <span class="st">'assistant'</span>, <span class="st">'content'</span>: <span class="st">"Hi Jan! </span><span class="ch">\</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">Is there anything I can help you with today?"</span>},</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    {<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'Yes, you can remind me, What is my name?'</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="response-3" class="slide level2">
 <h2>Response</h2>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb14-2"><a href="#cb14-2"></a></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>response <span class="op">=</span> get_completion_from_messages(messages, temperature<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1"></a>{</span>
-<span id="cb15-2"><a href="#cb15-2"></a>  "role": "assistant",</span>
-<span id="cb15-3"><a href="#cb15-3"></a>  "content": "Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?"</span>
-<span id="cb15-4"><a href="#cb15-4"></a>}</span>
-<span id="cb15-5"><a href="#cb15-5"></a>Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a>{</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  "role": "assistant",</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  "content": "Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?"</span>
+<span id="cb14-4"><a href="#cb14-4"></a>}</span>
+<span id="cb14-5"><a href="#cb14-5"></a>Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!--
 
 # OrderBot with Panel
