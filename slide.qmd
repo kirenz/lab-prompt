@@ -19,7 +19,7 @@ You have several options to start code development:
 4. **Local VS Code with Codespace**: Use [GitHub Codespaces in your local Visual Studio Code environment](https://docs.github.com/en/codespaces/developing-in-codespaces/using-github-codespaces-in-visual-studio-code).
 
 
-For cost reasons we mainly use OpenAI's `gpt-3.5-turbo` model in our tutorials. However, you can simply replace `model="gpt-3.5-turbo"` with `model="gpt-4"` in the helper function. Note the [price difference](https://openai.com/pricing) between the two models.
+For cost reasons we mainly use OpenAI's `gpt-3.5-turbo` model in our tutorials. Note the [price differences](https://openai.com/pricing) between the models.
 
 
 # Guidelines
