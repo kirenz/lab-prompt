@@ -177,7 +177,7 @@ Experience the timeless elegance of our mid-century inspired office chair and tr
   - Example: Summarize the text delimited by triple quotes in 2 paragraphs.
   - Example: Summarize the text delimited by triple quotes in 3 bullet points.
 
-# Prompt Improvement 1
+# Prompt Improvement 1: Output length
 
 - Specify the desired length of the output: "Use at most 50 words."
 
@@ -209,7 +209,7 @@ Introducing our mid-century inspired office chair, part of a stunning furniture 
 - Issue: Text focuses on the wrong details
 
 
-# Prompt Improvement 2 {.smaller}
+# Prompt Improvement 2: Focus {.smaller}
 
 - Ask to focus on the aspects that are relevant to the intended audience.
 
@@ -252,7 +252,7 @@ Introducing our mid-century inspired office chair, part of a beautiful furniture
   - Output should be in HTML
 
 
-# Prompt Improvement 3 {.smaller}
+# Prompt Improvement 3: Optimize output {.smaller}
 
 - Ask it to extract information and organize it in a table in HTML.
 
