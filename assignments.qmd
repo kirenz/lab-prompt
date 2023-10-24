@@ -88,7 +88,7 @@ You should be able to solve the following task:
 You have explored how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.
 :::
 
-You should be able to solve the following task:
+You should be able to solve the following tasks:
 
 - What are the different roles in the messages object?
 - Explain the concept of history in the context of chat.
