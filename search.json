@@ -935,7 +935,7 @@
     "href": "assignments.html#chatbot",
     "title": "Assignments",
     "section": "6.1 Chatbot",
-    "text": "6.1 Chatbot\n\n\n\n\n\n\nNote\n\n\n\nYou have explored how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nYou should be able to solve the following task:\n\nWhat are the different roles in the messages object?\nExplain the concept of history in the context of chat."
+    "text": "6.1 Chatbot\n\n\n\n\n\n\nNote\n\n\n\nYou have explored how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nYou should be able to solve the following tasks:\n\nWhat are the different roles in the messages object?\nExplain the concept of history in the context of chat."
   },
   {
     "objectID": "slides/expanding.html#python",
