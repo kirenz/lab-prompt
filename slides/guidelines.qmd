@@ -587,4 +587,3 @@ print(response)
 
 **Congratulations! You have completed this tutorial** 👍
 
-**Next, you may want to go back to the [lab's website](https://kirenz.github.io/lab-prompt/)**
