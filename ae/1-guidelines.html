@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Prompt - Slides</title>
+<title>Prompt - Prompt Engineering Guidelinesx</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href=".//images/logo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//images/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -62,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -72,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Prompt</span>
     </a>
   </div>
@@ -83,19 +117,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./slide.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../slide.html" rel="" target="">
  <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./require.html" rel="" target="">
+    <a class="nav-link" href="../require.html" rel="" target="">
  <span class="menu-text">Requirements</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./assignments.html" rel="" target="">
+    <a class="nav-link" href="../assignments.html" rel="" target="">
  <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
@@ -114,13 +148,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#guidelines" id="toc-guidelines" class="nav-link active" data-scroll-target="#guidelines"><span class="header-section-number">1</span> Guidelines</a></li>
-  <li><a href="#iterative-prompt-development" id="toc-iterative-prompt-development" class="nav-link" data-scroll-target="#iterative-prompt-development"><span class="header-section-number">2</span> Iterative prompt development</a></li>
-  <li><a href="#summarize-text" id="toc-summarize-text" class="nav-link" data-scroll-target="#summarize-text"><span class="header-section-number">3</span> Summarize text</a></li>
-  <li><a href="#inferring" id="toc-inferring" class="nav-link" data-scroll-target="#inferring"><span class="header-section-number">4</span> Inferring</a></li>
-  <li><a href="#transforming" id="toc-transforming" class="nav-link" data-scroll-target="#transforming"><span class="header-section-number">5</span> Transforming</a></li>
-  <li><a href="#expanding" id="toc-expanding" class="nav-link" data-scroll-target="#expanding"><span class="header-section-number">6</span> Expanding</a></li>
-  <li><a href="#chatbot" id="toc-chatbot" class="nav-link" data-scroll-target="#chatbot"><span class="header-section-number">7</span> Chatbot</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#helper-function" id="toc-helper-function" class="nav-link" data-scroll-target="#helper-function">Helper function</a></li>
+  <li><a href="#principle-1-be-clear-and-specific" id="toc-principle-1-be-clear-and-specific" class="nav-link" data-scroll-target="#principle-1-be-clear-and-specific">Principle 1: Be clear and specific</a>
+  <ul class="collapse">
+  <li><a href="#use-delimiters" id="toc-use-delimiters" class="nav-link" data-scroll-target="#use-delimiters">Use delimiters</a></li>
+  <li><a href="#ask-for-structured-output" id="toc-ask-for-structured-output" class="nav-link" data-scroll-target="#ask-for-structured-output">Ask for structured output</a></li>
+  <li><a href="#check-whether-conditions-are-satisfied" id="toc-check-whether-conditions-are-satisfied" class="nav-link" data-scroll-target="#check-whether-conditions-are-satisfied">Check whether conditions are satisfied</a></li>
+  <li><a href="#response" id="toc-response" class="nav-link" data-scroll-target="#response">Response</a></li>
+  <li><a href="#use-few-shot-prompting-with-examples" id="toc-use-few-shot-prompting-with-examples" class="nav-link" data-scroll-target="#use-few-shot-prompting-with-examples">Use “few-shot” prompting with examples</a></li>
+  </ul></li>
+  <li><a href="#principle-2-time-to-think" id="toc-principle-2-time-to-think" class="nav-link" data-scroll-target="#principle-2-time-to-think">Principle 2: Time to think</a>
+  <ul class="collapse">
+  <li><a href="#specify-the-the-steps-and-output" id="toc-specify-the-the-steps-and-output" class="nav-link" data-scroll-target="#specify-the-the-steps-and-output">Specify the the steps and output</a></li>
+  <li><a href="#work-on-own-solution" id="toc-work-on-own-solution" class="nav-link" data-scroll-target="#work-on-own-solution">Work on own solution</a></li>
+  </ul></li>
+  <li><a href="#model-limitations-hallucinations" id="toc-model-limitations-hallucinations" class="nav-link" data-scroll-target="#model-limitations-hallucinations">Model Limitations: Hallucinations</a></li>
   </ul>
 </nav>
     </div>
@@ -129,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Slides</h1>
+<h1 class="title">Prompt Engineering Guidelinesx</h1>
 </div>
 
 
@@ -144,145 +187,64 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Take a look at the <a href="https://kirenz.github.io/lab-toolkit/slides/slides.html#/title-slide">slides tutorial</a> to learn how to use all slide options.</p>
-</div>
-</div>
-</div>
-<p>You have several options to start code development:</p>
-<ol type="1">
-<li><p><strong>Colab</strong>: Click on one of the links “💻 Jupyter Notebook” to start a Colab session.</p></li>
-<li><p><strong>Local</strong>: Click on one of the links “💻 Jupyter Notebook” below, go to the Colab menu and choose “File” &gt; “Download” &gt; “Download .ipynb”</p></li>
-<li><p><strong>Cloud Codespace</strong>: Work in a fully configured dev environment in the cloud with a <a href="https://github.com/kirenz/lab-prompt/blob/main/README.md">GitHub Codespace VS Code Browser</a> environment.</p></li>
-<li><p><strong>Local VS Code with Codespace</strong>: Use <a href="https://docs.github.com/en/codespaces/developing-in-codespaces/using-github-codespaces-in-visual-studio-code">GitHub Codespaces in your local Visual Studio Code environment</a>.</p></li>
-</ol>
-<p>For cost reasons we mainly use OpenAI’s <code>gpt-3.5-turbo</code> model in our tutorials. Note the <a href="https://openai.com/pricing">price differences</a> between the models.</p>
-<section id="guidelines" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Guidelines</h1>
-<p>In this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<ul>
-<li><a href="./slides/guidelines.html">🖥️ Presentation</a></li>
-<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/guidelines.ipynb">💻 Jupyter Notebook</a></li>
-</ul>
-</div>
-</div>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> openai</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv, find_dotenv</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> load_dotenv(find_dotenv())</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">'OPENAI_API_KEY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="iterative-prompt-development" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Iterative prompt development</h1>
-<p>In this tutorial, you’ll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<ul>
-<li><a href="./slides/iterative-prompt-development.html">🖥️ Presentation</a></li>
-<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/iterative-prompt-development.ipynb">💻 Jupyter Notebook</a></li>
-</ul>
-</div>
-</div>
+<section id="helper-function" class="level2">
+<h2 class="anchored" data-anchor-id="helper-function">Helper function</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="summarize-text" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Summarize text</h1>
-<p>In this tutorial, you will summarize text with a focus on specific topics.</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
+<section id="principle-1-be-clear-and-specific" class="level1">
+<h1>Principle 1: Be clear and specific</h1>
+<p>Write clear and specific instructions</p>
+<section id="use-delimiters" class="level2">
+<h2 class="anchored" data-anchor-id="use-delimiters">Use delimiters</h2>
 <ul>
-<li><a href="./slides/summarizing.html">🖥️ Presentation</a></li>
-<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/summarizing.ipynb">💻 Jupyter Notebook</a></li>
+<li>Always use delimiters (like backticks) to clearly indicate distinct parts of the input</li>
 </ul>
-</div>
-</div>
-</div>
 </section>
-<section id="inferring" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Inferring</h1>
-<p>In this tutorial, you will infer sentiment and topics from product reviews and news articles.</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
+<section id="ask-for-structured-output" class="level2">
+<h2 class="anchored" data-anchor-id="ask-for-structured-output">Ask for structured output</h2>
 <ul>
-<li><a href="./slides/inferring.html">🖥️ Presentation</a></li>
-<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/inferring.ipynb">💻 Jupyter Notebook</a></li>
+<li>Ask for a structured output (e.g.&nbsp;JSON, HTML, …)</li>
 </ul>
-</div>
-</div>
-</div>
 </section>
-<section id="transforming" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Transforming</h1>
-<p>In this presentation, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<ul>
-<li><a href="./slides/transforming.html">🖥️ Presentation</a></li>
-<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/transforming.ipynb">💻 Jupyter Notebook</a></li>
-</ul>
-</div>
-</div>
-</div>
+<section id="check-whether-conditions-are-satisfied" class="level2">
+<h2 class="anchored" data-anchor-id="check-whether-conditions-are-satisfied">Check whether conditions are satisfied</h2>
 </section>
-<section id="expanding" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Expanding</h1>
-<p>In this tutorial, you will generate customer service emails that are tailored to each customer’s review.</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<ul>
-<li><a href="./slides/expanding.html">🖥️ Presentation</a></li>
-<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/expanding.ipynb">💻 Jupyter Notebook</a></li>
-</ul>
-</div>
-</div>
-</div>
+<section id="response" class="level2">
+<h2 class="anchored" data-anchor-id="response">Response</h2>
 </section>
-<section id="chatbot" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Chatbot</h1>
-<p>In this presentation, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.</p>
-<!--
-We use [Panel](https://panel.holoviz.org/), an open-source Python library that lets you easily build powerful tools, dashboards and complex applications entirely in Python. 
--->
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
+<section id="use-few-shot-prompting-with-examples" class="level2">
+<h2 class="anchored" data-anchor-id="use-few-shot-prompting-with-examples">Use “few-shot” prompting with examples</h2>
+</section>
+</section>
+<section id="principle-2-time-to-think" class="level1">
+<h1>Principle 2: Time to think</h1>
+<p>Give the model time to “think”</p>
+<section id="specify-the-the-steps-and-output" class="level2">
+<h2 class="anchored" data-anchor-id="specify-the-the-steps-and-output">Specify the the steps and output</h2>
+</section>
+<section id="work-on-own-solution" class="level2">
+<h2 class="anchored" data-anchor-id="work-on-own-solution">Work on own solution</h2>
 <ul>
-<li><a href="./slides/chatbot.html">🖥️ Presentation</a></li>
-<li><a href="https://colab.research.google.com/github/kirenz/lab-prompt/blob/main/code/chatbot.ipynb">💻 Jupyter Notebook</a></li>
+<li>Instruct the model to work out its own solution before rushing to a conclusion</li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+<section id="model-limitations-hallucinations" class="level1">
+<h1>Model Limitations: Hallucinations</h1>
 
 
 </section>
@@ -528,13 +490,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./slide.html">Slides</a>
+    <a class="nav-link" href="../slide.html">Slides</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./require.html">Requirements</a>
+    <a class="nav-link" href="../require.html">Requirements</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./assignments.html">Assignments</a>
+    <a class="nav-link" href="../assignments.html">Assignments</a>
   </li>  
 </ul>
     </div>

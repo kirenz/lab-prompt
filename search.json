@@ -18,259 +18,7 @@
     "href": "slide.html",
     "title": "Slides",
     "section": "",
-    "text": "Take a look at the slides tutorial to learn how to use all slide options.\nYou have several options to start code development:\nFor cost reasons we mainly use OpenAI’s gpt-3.5-turbo model in our tutorials. Note the price differences between the models."
-  },
-  {
-    "objectID": "slide.html#chatbot",
-    "href": "slide.html#chatbot",
-    "title": "Slides",
-    "section": "6.1 Chatbot",
-    "text": "6.1 Chatbot\nIn this presentation, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\n\n\n\n\n\n\n🖥️ Presentation\n💻 Jupyter Notebook"
-  },
-  {
-    "objectID": "slides/inferring.html#api-key-and-python-libaries",
-    "href": "slides/inferring.html#api-key-and-python-libaries",
-    "title": "Inferring",
-    "section": "API key and Python libaries",
-    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
-  },
-  {
-    "objectID": "slides/inferring.html#helper-function",
-    "href": "slides/inferring.html#helper-function",
-    "title": "Inferring",
-    "section": "Helper function",
-    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
-  },
-  {
-    "objectID": "slides/inferring.html#sentiment",
-    "href": "slides/inferring.html#sentiment",
-    "title": "Inferring",
-    "section": "Sentiment?",
-    "text": "Sentiment?\n\nprompt = f\"\"\"\nWhat is the sentiment of the following product review, \nwhich is delimited with triple backticks?\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: The sentiment of the product review is positive."
-  },
-  {
-    "objectID": "slides/inferring.html#positive-or-negative",
-    "href": "slides/inferring.html#positive-or-negative",
-    "title": "Inferring",
-    "section": "Positive or negative?",
-    "text": "Positive or negative?\n\nprompt = f\"\"\"\nWhat is the sentiment of the following product review, \nwhich is delimited with triple backticks?\n\nGive your answer as a single word, either \"positive\" \\\nor \"negative\".\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: positive"
-  },
-  {
-    "objectID": "slides/inferring.html#identify-types-of-emotions",
-    "href": "slides/inferring.html#identify-types-of-emotions",
-    "title": "Inferring",
-    "section": "Identify types of emotions",
-    "text": "Identify types of emotions\n\nprompt = f\"\"\"\nIdentify a list of emotions that the writer of the \\\nfollowing review is expressing. Include no more than \\\nfive items in the list. Format your answer as a list of \\\nlower-case words separated by commas.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: happy, satisfied, impressed, grateful, pleased"
-  },
-  {
-    "objectID": "slides/inferring.html#identify-anger",
-    "href": "slides/inferring.html#identify-anger",
-    "title": "Inferring",
-    "section": "Identify anger",
-    "text": "Identify anger\n\nprompt = f\"\"\"\nIs the writer of the following review expressing anger?\\\nThe review is delimited with triple backticks. \\\nGive your answer as either yes or no.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: No"
-  },
-  {
-    "objectID": "slides/inferring.html#extract-product-and-company-name",
-    "href": "slides/inferring.html#extract-product-and-company-name",
-    "title": "Inferring",
-    "section": "Extract product and company name",
-    "text": "Extract product and company name\n\nprompt = f\"\"\"\nIdentify the following items from the review text: \n- Item purchased by reviewer\n- Company that made the item\n\nThe review is delimited with triple backticks. \\\nFormat your response as a JSON object with \\\n\"Item\" and \"Brand\" as the keys. \nIf the information isn't present, use \"unknown\" \\\nas the value.\nMake your response as short as possible.\n  \nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n{\n  \"Item\": \"lamp\",\n  \"Brand\": \"Lumina\"\n}"
-  },
-  {
-    "objectID": "slides/inferring.html#doing-multiple-tasks-at-once",
-    "href": "slides/inferring.html#doing-multiple-tasks-at-once",
-    "title": "Inferring",
-    "section": "Doing multiple tasks at once",
-    "text": "Doing multiple tasks at once\n\nprompt = f\"\"\"\nIdentify the following items from the review text: \n- Sentiment (positive or negative)\n- Is the reviewer expressing anger? (true or false)\n- Item purchased by reviewer\n- Company that made the item\n\nThe review is delimited with triple backticks. \\\nFormat your response as a JSON object with \\\n\"Sentiment\", \"Anger\", \"Item\" and \"Brand\" as the keys.\nIf the information isn't present, use \"unknown\" \\\nas the value.\nMake your response as short as possible.\nFormat the Anger value as a boolean.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/inferring.html#output",
-    "href": "slides/inferring.html#output",
-    "title": "Inferring",
-    "section": "Output",
-    "text": "Output\n{\n  \"Sentiment\": \"positive\",\n  \"Anger\": false,\n  \"Item\": \"lamp\",\n  \"Brand\": \"Lumina\"\n}"
-  },
-  {
-    "objectID": "slides/inferring.html#example-text",
-    "href": "slides/inferring.html#example-text",
-    "title": "Inferring",
-    "section": "Example text",
-    "text": "Example text\n\nstory = \"\"\"\nIn a recent survey conducted by the government, \npublic sector employees were asked to rate their level \nof satisfaction with the department they work at. \nThe results revealed that NASA was the most popular \ndepartment with a satisfaction rating of 95%.\n\nOne NASA employee, John Smith, commented on the findings, \nstating, \"I'm not surprised that NASA came out on top. \nIt's a great place to work with amazing people and \nincredible opportunities. I'm proud to be a part of \nsuch an innovative organization.\"\n\nThe results were also welcomed by NASA's management team, \nwith Director Tom Johnson stating, \"We are thrilled to \nhear that our employees are satisfied with their work at NASA. \nWe have a talented and dedicated team who work tirelessly \nto achieve our goals, and it's fantastic to see that their \nhard work is paying off.\"\n\nThe survey also revealed that the \nSocial Security Administration had the lowest satisfaction \nrating, with only 45 percent of employees indicating they were \nsatisfied with their job. The government has pledged to \naddress the concerns raised by employees in the survey and \nwork towards improving job satisfaction across all departments.\n\"\"\""
-  },
-  {
-    "objectID": "slides/inferring.html#lets-infer-5-topics",
-    "href": "slides/inferring.html#lets-infer-5-topics",
-    "title": "Inferring",
-    "section": "Let’s infer 5 topics",
-    "text": "Let’s infer 5 topics\n\nprompt = f\"\"\"\nDetermine five topics that are being discussed in the \\\nfollowing text, which is delimited by triple backticks.\n\nMake each item one or two words long. \n\nProvide your response as a Python list separated by commas.\n\nText sample: '''{story}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n['survey', 'satisfaction', 'NASA', 'Social Security Administration', 'job satisfaction']"
-  },
-  {
-    "objectID": "slides/inferring.html#we-create-a-topic-list",
-    "href": "slides/inferring.html#we-create-a-topic-list",
-    "title": "Inferring",
-    "section": "We create a topic list",
-    "text": "We create a topic list\n\ntopic_list = [\n    \"nasa\", \"local government\", \"engineering\",\n    \"employee satisfaction\", \"federal government\"\n]"
-  },
-  {
-    "objectID": "slides/inferring.html#give-answer-as-list-with-0-and-1",
-    "href": "slides/inferring.html#give-answer-as-list-with-0-and-1",
-    "title": "Inferring",
-    "section": "Give answer as list with 0 and 1",
-    "text": "Give answer as list with 0 and 1\n\nprompt = f\"\"\"\nDetermine whether each item in the following list of \\\ntopics is a topic in the text below, which\nis delimited with triple backticks.\n\nGive your answer as list with 0 or 1 for each topic.\\\n\nList of topics: {\", \".join(topic_list)}\n\nText sample: ```{story}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: [1, 0, 0, 1, 1]"
-  },
-  {
-    "objectID": "slides/transforming.html#api-key-and-python-libaries",
-    "href": "slides/transforming.html#api-key-and-python-libaries",
-    "title": "Transforming",
-    "section": "API key and Python libaries",
-    "text": "API key and Python libaries\n\nfrom redlines import Redlines\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
-  },
-  {
-    "objectID": "slides/transforming.html#helper-function",
-    "href": "slides/transforming.html#helper-function",
-    "title": "Transforming",
-    "section": "Helper function",
-    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    return response.choices[0].message[\"content\"]"
-  },
-  {
-    "objectID": "slides/transforming.html#translate-this-text",
-    "href": "slides/transforming.html#translate-this-text",
-    "title": "Transforming",
-    "section": "Translate this text",
-    "text": "Translate this text\n\nprompt = f\"\"\"\nTranslate the following English text to German: \\ \n```Hi, I would like to order a blender```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: Hallo, ich möchte gerne einen Mixer bestellen."
-  },
-  {
-    "objectID": "slides/transforming.html#which-language-is-this",
-    "href": "slides/transforming.html#which-language-is-this",
-    "title": "Transforming",
-    "section": "Which language is this?",
-    "text": "Which language is this?\n\nprompt = f\"\"\"\nTell me which language this is: \n```Wie geht es dir?```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: This language is German."
-  },
-  {
-    "objectID": "slides/transforming.html#translate-with-style",
-    "href": "slides/transforming.html#translate-with-style",
-    "title": "Transforming",
-    "section": "Translate with style",
-    "text": "Translate with style\n\nprompt = f\"\"\"\nTranslate the following text to German in both the \\\nformal and informal forms: \n'Would you like to order a pillow?'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput:\n\nFormal: Möchten Sie ein Kissen bestellen?\nInformal: Möchtest du ein Kissen bestellen?"
-  },
-  {
-    "objectID": "slides/transforming.html#context",
-    "href": "slides/transforming.html#context",
-    "title": "Transforming",
-    "section": "Context",
-    "text": "Context\n\nImagine you are in charge of IT at a large multinational e-commerce company\nUsers are messaging you with IT issues in all their native languages\nYour staff is from all over the world and speaks only their native languages\nYou need a universal translator!"
-  },
-  {
-    "objectID": "slides/transforming.html#user-messages",
-    "href": "slides/transforming.html#user-messages",
-    "title": "Transforming",
-    "section": "User messages",
-    "text": "User messages\n\nuser_messages = [\n    \"La performance du système est plus lente que d'habitude.\",\n    \"Mi monitor tiene píxeles que no se iluminan.\",\n    \"Il mio mouse non funziona\",\n    \"Mój klawisz Ctrl jest zepsuty\",\n    \"我的屏幕在闪烁\"\n]"
-  },
-  {
-    "objectID": "slides/transforming.html#translations",
-    "href": "slides/transforming.html#translations",
-    "title": "Transforming",
-    "section": "Translations",
-    "text": "Translations\n\nfor issue in user_messages:\n    prompt = f\"Tell me what language this is: ```{issue}```\"\n    lang = get_completion(prompt)\n    print(f\"Original message ({lang}): {issue}\")\n\n    prompt = f\"\"\"\n    Translate the following  text to English \\\n    and German: ```{issue}```\n    \"\"\"\n    response = get_completion(prompt)\n    print(response, \"\\n\")"
-  },
-  {
-    "objectID": "slides/transforming.html#output",
-    "href": "slides/transforming.html#output",
-    "title": "Transforming",
-    "section": "Output",
-    "text": "Output\nOriginal message (The language is French.): La performance du système est plus lente que d’habitude. The performance of the system is slower than usual.\nDie Leistung des Systems ist langsamer als gewöhnlich.\nOriginal message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan. English: “My monitor has pixels that do not light up.”\nGerman: “Mein Monitor hat Pixel, die nicht aufleuchten.”\nOriginal message (The language is Italian.): Il mio mouse non funziona English: My mouse is not working. German: Meine Maus funktioniert nicht.\nOriginal message (The language is Polish.): Mój klawisz Ctrl jest zepsuty English: “My Ctrl key is broken” German: “Meine Strg-Taste ist kaputt”\nOriginal message (The language is Chinese.): 我的屏幕在闪烁 English: My screen is flickering. German: Mein Bildschirm flackert."
-  },
-  {
-    "objectID": "slides/transforming.html#from-slang-to-business-tone",
-    "href": "slides/transforming.html#from-slang-to-business-tone",
-    "title": "Transforming",
-    "section": "From slang to business tone",
-    "text": "From slang to business tone\n\nprompt = f\"\"\"\nTranslate the following from slang to a business letter: \n'Dude, This is Joe, check out this spec on this standing lamp.'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/transforming.html#output-1",
-    "href": "slides/transforming.html#output-1",
-    "title": "Transforming",
-    "section": "Output",
-    "text": "Output\nDear Sir/Madam,\nI hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp.\nI kindly request that you take a moment to review the attached spec, as it contains important details about the standing lamp in question.\nThank you for your time and consideration. I look forward to hearing from you soon.\nSincerely, Joe"
-  },
-  {
-    "objectID": "slides/transforming.html#from-dictionary-to-html",
-    "href": "slides/transforming.html#from-dictionary-to-html",
-    "title": "Transforming",
-    "section": "From dictionary to HTML",
-    "text": "From dictionary to HTML\n\ndata_json = {\"restaurant employees\": [\n    {\"name\": \"Shyam\", \"email\": \"shyamjaiswal@gmail.com\"},\n    {\"name\": \"Bob\", \"email\": \"bob32@gmail.com\"},\n    {\"name\": \"Jai\", \"email\": \"jai87@gmail.com\"}\n]}\n\nprompt = f\"\"\"\nTranslate the following python dictionary from JSON to an HTML \\\ntable with column headers and title: {data_json}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/transforming.html#output-2",
-    "href": "slides/transforming.html#output-2",
-    "title": "Transforming",
-    "section": "Output",
-    "text": "Output\n\n\n\n\n\n\n\n\nRestaurant Employees\n\n\n\n\n\nName\nEmail\n\n\nShyam\nshyamjaiswal@gmail.com\n\n\nBob\nbob32@gmail.com\n\n\nJai\njai87@gmail.com"
-  },
-  {
-    "objectID": "slides/transforming.html#text-examples",
-    "href": "slides/transforming.html#text-examples",
-    "title": "Transforming",
-    "section": "Text examples",
-    "text": "Text examples\n\nText examples are taken from Writing Prompts\n\n\ntext = [\n    \"The girl with the black and white puppies have a ball.\",\n    \"Yolanda has her notebook.\",\n    \"Its going to be a long day. Does the car need it’s oil changed?\",\n    \"Their goes my freedom. There going to bring they’re suitcases.\",\n    \"Your going to need you’re notebook.\",\n    \"That medicine effects my ability to sleep. Have you heard of the butterfly affect?\",\n    \"This phrase is to cherck chatGPT for speling abilitty\"\n]"
-  },
-  {
-    "objectID": "slides/transforming.html#proofreading",
-    "href": "slides/transforming.html#proofreading",
-    "title": "Transforming",
-    "section": "Proofreading",
-    "text": "Proofreading\n\nprompt = f\"\"\"\nProofread and correct all sentences in the following Python list delimited by triple backticks and rewrite the corrected version. Mark the corrected words in markdown italic style using the  symbol. If you don't find any errors in an item, just say \"No errors found\":\n```{text}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput:\n[‘The girl with the black and white puppies has a ball.’]\n[‘Yolanda has her notebook.’]\n[‘It’s going to be a long day. Does the car need its oil changed?’]\n[‘There goes my freedom. They’re going to bring their suitcases.’]\n[‘You’re going to need your notebook.’]\n[‘That medicine affects my ability to sleep. Have you heard of the butterfly effect?’]\n[‘This phrase is to check ChatGPT for spelling ability.’]"
-  },
-  {
-    "objectID": "slides/transforming.html#review-about-a-toy",
-    "href": "slides/transforming.html#review-about-a-toy",
-    "title": "Transforming",
-    "section": "Review about a toy",
-    "text": "Review about a toy\n\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\""
-  },
-  {
-    "objectID": "slides/transforming.html#proofreading-1",
-    "href": "slides/transforming.html#proofreading-1",
-    "title": "Transforming",
-    "section": "Proofreading",
-    "text": "Proofreading\n\nprompt = f\"proofread and correct this review: ```{text}```\"\n\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/transforming.html#output-3",
-    "href": "slides/transforming.html#output-3",
-    "title": "Transforming",
-    "section": "Output",
-    "text": "Output\nGot this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super soft and cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. Additionally, it’s a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
-  },
-  {
-    "objectID": "slides/transforming.html#display-differences",
-    "href": "slides/transforming.html#display-differences",
-    "title": "Transforming",
-    "section": "Display differences",
-    "text": "Display differences\n\nUse the following code to display the dfferences between the two texts:\n\n\ndiff = Redlines(text, response)\n\ndisplay(Markdown(diff.output_markdown))"
-  },
-  {
-    "objectID": "slides/transforming.html#make-it-more-compelling",
-    "href": "slides/transforming.html#make-it-more-compelling",
-    "title": "Transforming",
-    "section": "Make it more compelling",
-    "text": "Make it more compelling\n\nprompt = f\"\"\"\nproofread and correct this review. Make it more compelling. \nEnsure it follows APA style guide and targets an advanced reader. \nOutput in markdown format.\nText: ```{text}```\n\"\"\"\n\nresponse = get_completion(prompt)\ndisplay(Markdown(response))"
-  },
-  {
-    "objectID": "slides/transforming.html#output-4",
-    "href": "slides/transforming.html#output-4",
-    "title": "Transforming",
-    "section": "Output",
-    "text": "Output\nTitle: A Delightful Gift for Panda Enthusiasts: A Review of the Soft and Adorable Panda Plush Toy\nReviewer: [Your Name]\nI recently purchased this charming panda plush toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of these lovable creatures. This review aims to provide an in-depth analysis of the product, catering to advanced readers who appreciate a comprehensive evaluation.\nFirst and foremost, the softness and cuteness of this panda plush toy are simply unparalleled. Its irresistibly plush exterior makes it a joy to touch and hold, ensuring a delightful sensory experience for both children and adults alike. The attention to detail is evident, with its endearing features capturing the essence of a real panda. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice.\nWhile the overall quality of the product is commendable, I must express my slight disappointment regarding its size in relation to its price. Considering the investment made, I expected a larger plush toy. It is worth exploring alternative options that offer a more substantial size for the same price point. Nevertheless, this minor setback does not overshadow the undeniable appeal and charm of the panda plush toy.\nIn terms of delivery, I was pleasantly surprised to receive the product a day earlier than anticipated. This unexpected early arrival allowed me to indulge in some personal playtime with the panda plush toy before presenting it to my daughter. This added bonus further exemplifies the exceptional customer service provided by the seller.\nIn conclusion, the softness, cuteness, and attention to detail of this panda plush toy make it an ideal gift for panda enthusiasts of all ages. While the size may not fully meet expectations, the overall quality and timely delivery contribute to a positive purchasing experience. For those seeking a delightful and endearing companion, this panda plush toy is sure to bring joy and comfort to its lucky owner.\nNote: This review adheres to the APA style guide, providing a concise and compelling evaluation of the panda plush toy. The language used is targeted towards an advanced reader, ensuring a sophisticated and engaging review."
-  },
-  {
-    "objectID": "slides/transforming.html#show-differences",
-    "href": "slides/transforming.html#show-differences",
-    "title": "Transforming",
-    "section": "Show differences",
-    "text": "Show differences\n\ndiff2 = Redlines(text, response)\ndisplay(Markdown(diff2.output_markdown))"
+    "text": "Take a look at the slides tutorial to learn how to use all slide options.\n\n\n\nYou have several options to start code development:\n\nColab: Click on one of the links “💻 Jupyter Notebook” to start a Colab session.\nLocal: Click on one of the links “💻 Jupyter Notebook” below, go to the Colab menu and choose “File” &gt; “Download” &gt; “Download .ipynb”\nCloud Codespace: Work in a fully configured dev environment in the cloud with a GitHub Codespace VS Code Browser environment.\nLocal VS Code with Codespace: Use GitHub Codespaces in your local Visual Studio Code environment.\n\nFor cost reasons we mainly use OpenAI’s gpt-3.5-turbo model in our tutorials. Note the price differences between the models.\n\n1 Guidelines\nIn this tutorial, you’ll practice two prompting principles and their related tactics in order to write effective prompts for large language models:\n\n\n\n\n\n\n\n🖥️ Presentation\n💻 Jupyter Notebook\n\n\n\n\n\n\n2 Iterative prompt development\nIn this tutorial, you’ll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.\n\n\n\n\n\n\n\n🖥️ Presentation\n💻 Jupyter Notebook\n\n\n\n\n\n\n3 Summarize text\nIn this tutorial, you will summarize text with a focus on specific topics.\n\n\n\n\n\n\n\n🖥️ Presentation\n💻 Jupyter Notebook\n\n\n\n\n\n\n4 Inferring\nIn this tutorial, you will infer sentiment and topics from product reviews and news articles.\n\n\n\n\n\n\n\n🖥️ Presentation\n💻 Jupyter Notebook\n\n\n\n\n\n\n5 Transforming\nIn this presentation, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\n\n\n\n\n\n\n\n🖥️ Presentation\n💻 Jupyter Notebook\n\n\n\n\n\n\n6 Expanding\nIn this tutorial, you will generate customer service emails that are tailored to each customer’s review.\n\n\n\n\n\n\n\n🖥️ Presentation\n💻 Jupyter Notebook\n\n\n\n\n\n\n7 Chatbot\nIn this presentation, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\n\n\n\n\n\n\n🖥️ Presentation\n💻 Jupyter Notebook"
   },
   {
     "objectID": "slides/chatbot.html#python",
@@ -539,144 +287,641 @@
     "text": "Example\n\nBoie is a real company, the product name is not real.\n\n\nprompt = f\"\"\"\nTell me about AeroGlide UltraSlim Smart Toothbrush by Boie. Use about 50 words.\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: The AeroGlide UltraSlim Smart Toothbrush by Boie is a technologically advanced toothbrush designed to provide a superior brushing experience. Boie is a company known for its innovative oral care products, and the AeroGlide UltraSlim Smart Toothbrush is no exception. One of the standout features of this toothbrush is its ultra-slim design. The brush head is only 2mm thick, making it much thinner than traditional toothbrushes. This slim profile allows for better access to hard-to-reach areas of the mouth, ensuring a thorough and effective clean. The AeroGlide UltraSlim Smart Toothbrush also incorporates smart technology. It connects to a mobile app via Bluetooth, allowing users to track their brushing habits and receive personalized recommendations for improving their oral hygiene routine…"
   },
   {
-    "objectID": "code/iterative-prompt-development.html",
-    "href": "code/iterative-prompt-development.html",
-    "title": "Iterative Prompt Development",
-    "section": "",
-    "text": "In this tutorial, we’ll iteratively analyze and refine our prompts to generate marketing copy from a product fact sheet."
-  },
-  {
-    "objectID": "code/iterative-prompt-development.html#api-key-and-python-libaries",
-    "href": "code/iterative-prompt-development.html#api-key-and-python-libaries",
-    "title": "Iterative Prompt Development",
-    "section": "API key and Python libaries",
-    "text": "API key and Python libaries\n\nfrom IPython.display import display, HTML\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
-  },
-  {
-    "objectID": "code/iterative-prompt-development.html#helper-function",
-    "href": "code/iterative-prompt-development.html#helper-function",
-    "title": "Iterative Prompt Development",
-    "section": "Helper function",
-    "text": "Helper function\n\nThis helper function will make it easier to use prompts and look at the generated outputs:\nFor cost efficiency reasons, we will use OpenAI’s gpt-3.5-turbo model and the chat completions endpoint.\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
-  },
-  {
-    "objectID": "code/iterative-prompt-development.html#marketing-product-description",
-    "href": "code/iterative-prompt-development.html#marketing-product-description",
-    "title": "Iterative Prompt Development",
-    "section": "Marketing product description",
-    "text": "Marketing product description\n\nGenerate a marketing product description from a product fact sheet\n\n\nfact_sheet_chair = \"\"\"\nOVERVIEW\n- Part of a beautiful family of mid-century inspired office furniture, \nincluding filing cabinets, desks, bookcases, meeting tables, and more.\n- Several options of shell color and base finishes.\n- Available with plastic back and front upholstery (SWC-100) \nor full upholstery (SWC-110) in 10 fabric and 6 leather options.\n- Base finish options are: stainless steel, matte black, \ngloss white, or chrome.\n- Chair is available with or without armrests.\n- Suitable for home or business settings.\n- Qualified for contract use.\n\nCONSTRUCTION\n- 5-wheel plastic coated aluminum base.\n- Pneumatic chair adjust for easy raise/lower action.\n\nDIMENSIONS\n- WIDTH 53 CM | 20.87”\n- DEPTH 51 CM | 20.08”\n- HEIGHT 80 CM | 31.50”\n- SEAT HEIGHT 44 CM | 17.32”\n- SEAT DEPTH 41 CM | 16.14”\n\nOPTIONS\n- Soft or hard-floor caster options.\n- Two choices of seat foam densities: \n medium (1.8 lb/ft3) or high (2.8 lb/ft3)\n- Armless or 8 position PU armrests \n\nMATERIALS\nSHELL BASE GLIDER\n- Cast Aluminum with modified nylon PA6/PA66 coating.\n- Shell thickness: 10 mm.\nSEAT\n- HD36 foam\n\nCOUNTRY OF ORIGIN\n- Italy\n\"\"\""
-  },
-  {
-    "objectID": "code/iterative-prompt-development.html#output",
-    "href": "code/iterative-prompt-development.html#output",
-    "title": "Iterative Prompt Development",
-    "section": "Output",
-    "text": "Output\nIntroducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. This chair is part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, all designed with a timeless mid-century aesthetic.\nOne of the standout features of this chair is the variety of customization options available. You can choose from several shell colors and base finishes to perfectly match your existing decor. The chair is available with either plastic back and front upholstery or full upholstery in a range of 10 fabric and 6 leather options, allowing you to create a look that is uniquely yours.\nThe chair is also available with or without armrests, giving you the flexibility to choose the option that best suits your needs. The base finish options include stainless steel, matte black, gloss white, or chrome, ensuring that you can find the perfect match for your space.\nIn terms of construction, this chair is built to last. It features a 5-wheel plastic coated aluminum base, providing stability and mobility. The pneumatic chair adjust allows for easy raise and lower action, ensuring optimal comfort throughout the day.\nWhen it comes to dimensions, this chair is designed with both style and comfort in mind. With a width of 53 cm (20.87”), depth of 51 cm (20.08”), and height of 80 cm (31.50”), it offers ample space without overwhelming your space. The seat height is 44 cm (17.32”) and the seat depth is 41 cm (16.14”), providing a comfortable seating experience for users of all heights.\nWe understand that every space is unique, which is why we offer a range of options to further customize your chair. You can choose between soft or hard-floor caster options, ensuring that your chair glides smoothly across any surface. Additionally, you have the choice of two seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3), allowing you to select the level of support that suits your preferences.\nThe materials used in the construction of this chair are of the highest quality. The shell base glider is made from cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The shell thickness is 10 mm, providing a sturdy and reliable foundation. The seat is made from HD36 foam, known for its comfort and resilience.\nFinally, this chair is proudly made in Italy, a country renowned for its craftsmanship and attention to detail. With its combination of style, functionality, and quality, this chair is the perfect choice for those seeking a mid-century inspired office chair that will elevate any space.\nExperience the timeless elegance of our mid-century inspired office chair and transform your workspace today."
-  },
-  {
-    "objectID": "code/iterative-prompt-development.html#issue-text-is-too-long",
-    "href": "code/iterative-prompt-development.html#issue-text-is-too-long",
-    "title": "Iterative Prompt Development",
-    "section": "Issue: Text is too long",
-    "text": "Issue: Text is too long\n\nIssue: The text is too long and we want to limit the number of words/sentences/characters.\nSolution: Instructing the model to generate a specific number of words (does not always work with high precision)\n\nExample: Summarize the text delimited by triple quotes in about 50 word\n\nAlternative solution: Generate outputs with a specific number of paragraphs or bullet points.\n\nExample: Summarize the text delimited by triple quotes in 2 paragraphs.\nExample: Summarize the text delimited by triple quotes in 3 bullet points."
-  },
-  {
-    "objectID": "code/iterative-prompt-development.html#output-1",
-    "href": "code/iterative-prompt-development.html#output-1",
-    "title": "Iterative Prompt Development",
-    "section": "Output",
-    "text": "Output\nIntroducing our mid-century inspired office chair, part of a stunning furniture collection. With various color and finish options, choose between plastic or full upholstery in fabric or leather. The chair features a durable aluminum base, pneumatic chair adjustment, and is suitable for both home and business settings. Made in Italy.\n\nIssue: Text focuses on the wrong details"
-  },
-  {
-    "objectID": "code/iterative-prompt-development.html#output-2",
-    "href": "code/iterative-prompt-development.html#output-2",
-    "title": "Iterative Prompt Development",
-    "section": "Output",
-    "text": "Output\nIntroducing our mid-century inspired office chair, part of a beautiful furniture collection. With various shell colors and base finishes, it offers versatility for any setting. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a durable aluminum base and pneumatic chair adjustment for easy use. Made in Italy.\n\nIssue:\n\nLets’s assume oure description needs a table of dimensions\nOutput should be in HTML"
-  },
-  {
-    "objectID": "code/summarizing.html",
-    "href": "code/summarizing.html",
-    "title": "Summarizing",
-    "section": "",
-    "text": "In this tutorial, we will summarize text with a focus on specific topics."
-  },
-  {
-    "objectID": "code/summarizing.html#api-key-and-python-libaries",
-    "href": "code/summarizing.html#api-key-and-python-libaries",
+    "objectID": "slides/summarizing.html#api-key-and-python-libaries",
+    "href": "slides/summarizing.html#api-key-and-python-libaries",
     "title": "Summarizing",
     "section": "API key and Python libaries",
     "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
   },
   {
-    "objectID": "code/summarizing.html#helper-function",
-    "href": "code/summarizing.html#helper-function",
+    "objectID": "slides/summarizing.html#helper-function",
+    "href": "slides/summarizing.html#helper-function",
     "title": "Summarizing",
     "section": "Helper function",
     "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
   },
   {
-    "objectID": "code/summarizing.html#summarization",
-    "href": "code/summarizing.html#summarization",
+    "objectID": "slides/summarizing.html#summarization",
+    "href": "slides/summarizing.html#summarization",
     "title": "Summarizing",
     "section": "Summarization",
-    "text": "Summarization\n\nSummarize with a word limit\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "text": "Summarization\n\nSummarize with a word limit\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/summarizing.html#output",
-    "href": "code/summarizing.html#output",
+    "objectID": "slides/summarizing.html#output",
+    "href": "slides/summarizing.html#output",
     "title": "Summarizing",
     "section": "Output",
     "text": "Output\nThis review praises the panda plush toy for being soft, cute, and having a friendly face. However, the reviewer feels it is small for the price and suggests there may be larger options available."
   },
   {
-    "objectID": "code/summarizing.html#focus-on-shipping-and-delivery",
-    "href": "code/summarizing.html#focus-on-shipping-and-delivery",
+    "objectID": "slides/summarizing.html#focus-on-shipping-and-delivery",
+    "href": "slides/summarizing.html#focus-on-shipping-and-delivery",
     "title": "Summarizing",
     "section": "Focus on shipping and delivery",
-    "text": "Focus on shipping and delivery\n\nSummarize with a focus on shipping and delivery\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\nShipping department. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat mention shipping and delivery of the product. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "text": "Focus on shipping and delivery\n\nSummarize with a focus on shipping and delivery\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\nShipping department. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat mention shipping and delivery of the product. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/summarizing.html#output-1",
-    "href": "code/summarizing.html#output-1",
+    "objectID": "slides/summarizing.html#output-1",
+    "href": "slides/summarizing.html#output-1",
     "title": "Summarizing",
     "section": "Output",
     "text": "Output\nThe customer is happy with the product but mentions that it is smaller than expected. They also mention that the shipping was faster than expected."
   },
   {
-    "objectID": "code/summarizing.html#focus-on-price-and-value",
-    "href": "code/summarizing.html#focus-on-price-and-value",
+    "objectID": "slides/summarizing.html#focus-on-price-and-value",
+    "href": "slides/summarizing.html#focus-on-price-and-value",
     "title": "Summarizing",
     "section": "Focus on price and value",
-    "text": "Focus on price and value\n\nSummarize with a focus on price and value\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\npricing department, responsible for determining the \\\nprice of the product.  \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat are relevant to the price and perceived value. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "text": "Focus on price and value\n\nSummarize with a focus on price and value\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\npricing department, responsible for determining the \\\nprice of the product.  \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat are relevant to the price and perceived value. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/summarizing.html#output-2",
-    "href": "code/summarizing.html#output-2",
+    "objectID": "slides/summarizing.html#output-2",
+    "href": "slides/summarizing.html#output-2",
     "title": "Summarizing",
     "section": "Output",
     "text": "Output\nThe customer loves the panda plush toy but feels it is overpriced for its size. They suggest considering other options that offer a larger size for the same price."
   },
   {
-    "objectID": "code/summarizing.html#extract-instead-of-summarize",
-    "href": "code/summarizing.html#extract-instead-of-summarize",
+    "objectID": "slides/summarizing.html#extract-instead-of-summarize",
+    "href": "slides/summarizing.html#extract-instead-of-summarize",
     "title": "Summarizing",
     "section": "“extract” instead of “summarize”",
     "text": "“extract” instead of “summarize”\n\nprompt = f\"\"\"\nYour task is to extract relevant information from \\ \na product review from an ecommerce site to give \\\nfeedback to the Shipping department. \n\nFrom the review below, delimited by triple quotes \\\nextract the information relevant to shipping and \\ \ndelivery. Limit to 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/summarizing.html#output-3",
-    "href": "code/summarizing.html#output-3",
+    "objectID": "slides/summarizing.html#output-3",
+    "href": "slides/summarizing.html#output-3",
     "title": "Summarizing",
     "section": "Output",
     "text": "Output\nThe shipping department should take note that the product arrived a day earlier than expected."
   },
   {
-    "objectID": "code/summarizing.html#summarize-multiple-product-reviews",
-    "href": "code/summarizing.html#summarize-multiple-product-reviews",
+    "objectID": "slides/summarizing.html#summarize-multiple-product-reviews",
+    "href": "slides/summarizing.html#summarize-multiple-product-reviews",
     "title": "Summarizing",
     "section": "Summarize multiple product reviews",
     "text": "Summarize multiple product reviews\n\nfor i in range(len(reviews)):\n    prompt = f\"\"\"\n    Your task is to generate a short summary of a product \\ \n    review from an ecommerce site. \n\n    Summarize the review below, delimited by triple \\\n    backticks in at most 20 words. \n\n    Review: ```{reviews[i]}```\n    \"\"\"\n\n    response = get_completion(prompt)\n    print(i, response, \"\\n\")"
+  },
+  {
+    "objectID": "slides/summarizing.html#output-4",
+    "href": "slides/summarizing.html#output-4",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\n\n0 Soft and cute panda plush toy loved by daughter, but small for the price. Arrived early.\n1 This lamp with storage is affordable and the company provides excellent customer support.\n2 The reviewer recommends the electric toothbrush for its impressive battery life, but criticizes the small brush head.\n3 The reviewer found the price increase after the sale disappointing and noticed a decrease in quality."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome 👋",
+    "section": "",
+    "text": "Welcome to the lab “prompt engineering”\n\nIn this lab, we will use OpenAI’s API to leverage Large Language Models (LLMs) like GPT-3.5 Turbo and GPT-4 into custom Python applications.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI as well as OpenAI’s GPT best practices"
+  },
+  {
+    "objectID": "ae/3-summarizing.html",
+    "href": "ae/3-summarizing.html",
+    "title": "Summarizing",
+    "section": "",
+    "text": "In this tutorial, we will summarize text with a focus on specific topics."
+  },
+  {
+    "objectID": "ae/3-summarizing.html#api-key-and-python-libaries",
+    "href": "ae/3-summarizing.html#api-key-and-python-libaries",
+    "title": "Summarizing",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo-1106\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "ae/3-summarizing.html#summarization",
+    "href": "ae/3-summarizing.html#summarization",
+    "title": "Summarizing",
+    "section": "Summarization",
+    "text": "Summarization\n\nSummarize with a word limit"
+  },
+  {
+    "objectID": "ae/3-summarizing.html#focus-on-specific-aspects",
+    "href": "ae/3-summarizing.html#focus-on-specific-aspects",
+    "title": "Summarizing",
+    "section": "Focus on specific aspects",
+    "text": "Focus on specific aspects"
+  },
+  {
+    "objectID": "ae/3-summarizing.html#use-extract-instead-of-summarize",
+    "href": "ae/3-summarizing.html#use-extract-instead-of-summarize",
+    "title": "Summarizing",
+    "section": "Use “extract” instead of “summarize”",
+    "text": "Use “extract” instead of “summarize”"
+  },
+  {
+    "objectID": "ae/3-summarizing.html#summarize-multiple-product-reviews",
+    "href": "ae/3-summarizing.html#summarize-multiple-product-reviews",
+    "title": "Summarizing",
+    "section": "Summarize multiple product reviews",
+    "text": "Summarize multiple product reviews"
+  },
+  {
+    "objectID": "ae/6-expanding-c.html",
+    "href": "ae/6-expanding-c.html",
+    "title": "Expanding",
+    "section": "",
+    "text": "In this tutorial, you will generate customer service emails that are tailored to each customer’s review."
+  },
+  {
+    "objectID": "ae/6-expanding-c.html#python",
+    "href": "ae/6-expanding-c.html#python",
+    "title": "Expanding",
+    "section": "Python",
+    "text": "Python\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "ae/6-expanding-c.html#helper-function",
+    "href": "ae/6-expanding-c.html#helper-function",
+    "title": "Expanding",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo-1106\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,  \n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "ae/6-expanding-c.html#sentiment-and-text",
+    "href": "ae/6-expanding-c.html#sentiment-and-text",
+    "title": "Expanding",
+    "section": "Sentiment and text",
+    "text": "Sentiment and text\n\nsentiment = \"negative\"\n\n# review for a blender\nreview = f\"\"\"\nSo, they still had the 17 piece system on seasonal \\\nsale for around $49 in the month of November, about \\\nhalf off, but for some reason (call it price gouging) \\\naround the second week of December the prices all went \\\nup to about anywhere from between $70-$89 for the same \\\nsystem. And the 11 piece system went up around $10 or \\\nso in price also from the earlier sale price of $29. \\\nSo it looks okay, but if you look at the base, the part \\\nwhere the blade locks into place doesn’t look as good \\\nas in previous editions from a few years ago, but I \\\nplan to be very gentle with it (example, I crush \\\nvery hard items like beans, ice, rice, etc. in the \\ \nblender first then pulverize them in the serving size \\\nI want in the blender then switch to the whipping \\\nblade for a finer flour, and use the cross cutting blade \\\nfirst when making smoothies, then use the flat blade \\\nif I need them finer/less pulpy). Special tip when making \\\nsmoothies, finely cut and freeze the fruits and \\\nvegetables (if using spinach-lightly stew soften the \\ \nspinach then freeze until ready for use-and if making \\\nsorbet, use a small to medium sized food processor) \\ \nthat you plan to use that way you can avoid adding so \\\nmuch ice if at all-when making your smoothie. \\\nAfter about a year, the motor was making a funny noise. \\\nI called customer service but the warranty expired \\\nalready, so I had to buy another one. FYI: The overall \\\nquality has gone done in these types of products, so \\\nthey are kind of counting on brand recognition and \\\nconsumer loyalty to maintain sales. Got it in about \\\ntwo days.\n\"\"\""
+  },
+  {
+    "objectID": "ae/6-expanding-c.html#prompt",
+    "href": "ae/6-expanding-c.html#prompt",
+    "title": "Expanding",
+    "section": "Prompt",
+    "text": "Prompt\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "ae/6-expanding-c.html#output",
+    "href": "ae/6-expanding-c.html#output",
+    "title": "Expanding",
+    "section": "Output",
+    "text": "Output\nDear Valued Customer,\nThank you for taking the time to share your review with us. We appreciate your feedback and apologize for any inconvenience you may have experienced.\nWe are sorry to hear about the price increase you noticed in December. We strive to provide competitive pricing for our products, and we understand your frustration. If you have any further concerns regarding pricing, we recommend reaching out to our customer service team who will be happy to assist you.\nWe also appreciate your feedback regarding the base of the system. We continuously work to improve the quality of our products, and your comments will be taken into consideration for future enhancements.\nRegarding the motor issue you encountered, we apologize for any inconvenience caused. Our customer service team is available to assist you with any technical difficulties you may encounter, even if the warranty has expired. Please do not hesitate to reach out to them for further assistance.\nThank you once again for your review. We value your loyalty and appreciate your support. If you have any further questions or concerns, please feel free to contact our customer service team.\nBest regards,\nAI customer agent"
+  },
+  {
+    "objectID": "ae/6-expanding-c.html#prompt-with-different-temperature",
+    "href": "ae/6-expanding-c.html#prompt-with-different-temperature",
+    "title": "Expanding",
+    "section": "Prompt with different temperature",
+    "text": "Prompt with different temperature\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\nresponse = get_completion(prompt, temperature=0.9)\nprint(response)"
+  },
+  {
+    "objectID": "ae/5-transforming.html",
+    "href": "ae/5-transforming.html",
+    "title": "Transforming",
+    "section": "",
+    "text": "In this tutorial, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion."
+  },
+  {
+    "objectID": "ae/5-transforming.html#api-key-and-python-libaries",
+    "href": "ae/5-transforming.html#api-key-and-python-libaries",
+    "title": "Transforming",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom redlines import Redlines\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo-1106\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "ae/5-transforming.html#translate-text",
+    "href": "ae/5-transforming.html#translate-text",
+    "title": "Transforming",
+    "section": "Translate text",
+    "text": "Translate text"
+  },
+  {
+    "objectID": "ae/5-transforming.html#which-language-is-this",
+    "href": "ae/5-transforming.html#which-language-is-this",
+    "title": "Transforming",
+    "section": "Which language is this?",
+    "text": "Which language is this?"
+  },
+  {
+    "objectID": "ae/5-transforming.html#translate-with-style",
+    "href": "ae/5-transforming.html#translate-with-style",
+    "title": "Transforming",
+    "section": "Translate with style",
+    "text": "Translate with style"
+  },
+  {
+    "objectID": "ae/5-transforming.html#context",
+    "href": "ae/5-transforming.html#context",
+    "title": "Transforming",
+    "section": "Context",
+    "text": "Context\n\nImagine you are in charge of IT at a large multinational e-commerce company\nUsers are messaging you with IT issues in all their native languages\nYour staff is from all over the world and speaks only their native languages\nYou need a universal translator!"
+  },
+  {
+    "objectID": "ae/5-transforming.html#user-messages",
+    "href": "ae/5-transforming.html#user-messages",
+    "title": "Transforming",
+    "section": "User messages",
+    "text": "User messages\n\nuser_messages = [\n    \"La performance du système est plus lente que d'habitude.\",\n    \"Mi monitor tiene píxeles que no se iluminan.\",\n    \"Il mio mouse non funziona\",\n    \"Mój klawisz Ctrl jest zepsuty\",\n    \"我的屏幕在闪烁\"\n]"
+  },
+  {
+    "objectID": "ae/5-transforming.html#translations",
+    "href": "ae/5-transforming.html#translations",
+    "title": "Transforming",
+    "section": "Translations",
+    "text": "Translations"
+  },
+  {
+    "objectID": "ae/5-transforming.html#from-slang-to-business-tone",
+    "href": "ae/5-transforming.html#from-slang-to-business-tone",
+    "title": "Transforming",
+    "section": "From slang to business tone",
+    "text": "From slang to business tone"
+  },
+  {
+    "objectID": "ae/5-transforming.html#from-dictionary-to-html",
+    "href": "ae/5-transforming.html#from-dictionary-to-html",
+    "title": "Transforming",
+    "section": "From dictionary to HTML",
+    "text": "From dictionary to HTML\n\ndata_json = {\"restaurant employees\": [\n    {\"name\": \"Shyam\", \"email\": \"shyamjaiswal@gmail.com\"},\n    {\"name\": \"Bob\", \"email\": \"bob32@gmail.com\"},\n    {\"name\": \"Jai\", \"email\": \"jai87@gmail.com\"}\n]}"
+  },
+  {
+    "objectID": "ae/5-transforming.html#text-examples",
+    "href": "ae/5-transforming.html#text-examples",
+    "title": "Transforming",
+    "section": "Text examples",
+    "text": "Text examples\n\nText examples are taken from Writing Prompts"
+  },
+  {
+    "objectID": "ae/5-transforming.html#proofreading",
+    "href": "ae/5-transforming.html#proofreading",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading"
+  },
+  {
+    "objectID": "ae/5-transforming.html#review",
+    "href": "ae/5-transforming.html#review",
+    "title": "Transforming",
+    "section": "Review",
+    "text": "Review"
+  },
+  {
+    "objectID": "ae/5-transforming.html#proofreading-1",
+    "href": "ae/5-transforming.html#proofreading-1",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading"
+  },
+  {
+    "objectID": "ae/5-transforming.html#display-differences",
+    "href": "ae/5-transforming.html#display-differences",
+    "title": "Transforming",
+    "section": "Display differences",
+    "text": "Display differences\n\nUse the following code to display the dfferences between the two texts:"
+  },
+  {
+    "objectID": "ae/5-transforming.html#make-it-more-compelling",
+    "href": "ae/5-transforming.html#make-it-more-compelling",
+    "title": "Transforming",
+    "section": "Make it more compelling",
+    "text": "Make it more compelling"
+  },
+  {
+    "objectID": "ae/5-transforming.html#show-differences",
+    "href": "ae/5-transforming.html#show-differences",
+    "title": "Transforming",
+    "section": "Show differences",
+    "text": "Show differences"
+  },
+  {
+    "objectID": "code/expanding.html",
+    "href": "code/expanding.html",
+    "title": "Expanding",
+    "section": "",
+    "text": "In this tutorial, you will generate customer service emails that are tailored to each customer’s review."
+  },
+  {
+    "objectID": "code/expanding.html#python",
+    "href": "code/expanding.html#python",
+    "title": "Expanding",
+    "section": "Python",
+    "text": "Python\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "code/expanding.html#helper-function",
+    "href": "code/expanding.html#helper-function",
+    "title": "Expanding",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,  \n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "code/expanding.html#sentiment-and-text",
+    "href": "code/expanding.html#sentiment-and-text",
+    "title": "Expanding",
+    "section": "Sentiment and text",
+    "text": "Sentiment and text\n\nsentiment = \"negative\"\n\n# review for a blender\nreview = f\"\"\"\nSo, they still had the 17 piece system on seasonal \\\nsale for around $49 in the month of November, about \\\nhalf off, but for some reason (call it price gouging) \\\naround the second week of December the prices all went \\\nup to about anywhere from between $70-$89 for the same \\\nsystem. And the 11 piece system went up around $10 or \\\nso in price also from the earlier sale price of $29. \\\nSo it looks okay, but if you look at the base, the part \\\nwhere the blade locks into place doesn’t look as good \\\nas in previous editions from a few years ago, but I \\\nplan to be very gentle with it (example, I crush \\\nvery hard items like beans, ice, rice, etc. in the \\ \nblender first then pulverize them in the serving size \\\nI want in the blender then switch to the whipping \\\nblade for a finer flour, and use the cross cutting blade \\\nfirst when making smoothies, then use the flat blade \\\nif I need them finer/less pulpy). Special tip when making \\\nsmoothies, finely cut and freeze the fruits and \\\nvegetables (if using spinach-lightly stew soften the \\ \nspinach then freeze until ready for use-and if making \\\nsorbet, use a small to medium sized food processor) \\ \nthat you plan to use that way you can avoid adding so \\\nmuch ice if at all-when making your smoothie. \\\nAfter about a year, the motor was making a funny noise. \\\nI called customer service but the warranty expired \\\nalready, so I had to buy another one. FYI: The overall \\\nquality has gone done in these types of products, so \\\nthey are kind of counting on brand recognition and \\\nconsumer loyalty to maintain sales. Got it in about \\\ntwo days.\n\"\"\""
+  },
+  {
+    "objectID": "code/expanding.html#prompt",
+    "href": "code/expanding.html#prompt",
+    "title": "Expanding",
+    "section": "Prompt",
+    "text": "Prompt\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "code/expanding.html#output",
+    "href": "code/expanding.html#output",
+    "title": "Expanding",
+    "section": "Output",
+    "text": "Output\nDear Valued Customer,\nThank you for taking the time to share your review with us. We appreciate your feedback and apologize for any inconvenience you may have experienced.\nWe are sorry to hear about the price increase you noticed in December. We strive to provide competitive pricing for our products, and we understand your frustration. If you have any further concerns regarding pricing, we recommend reaching out to our customer service team who will be happy to assist you.\nWe also appreciate your feedback regarding the base of the system. We continuously work to improve the quality of our products, and your comments will be taken into consideration for future enhancements.\nRegarding the motor issue you encountered, we apologize for any inconvenience caused. Our customer service team is available to assist you with any technical difficulties you may encounter, even if the warranty has expired. Please do not hesitate to reach out to them for further assistance.\nThank you once again for your review. We value your loyalty and appreciate your support. If you have any further questions or concerns, please feel free to contact our customer service team.\nBest regards,\nAI customer agent"
+  },
+  {
+    "objectID": "code/expanding.html#prompt-with-different-temperature",
+    "href": "code/expanding.html#prompt-with-different-temperature",
+    "title": "Expanding",
+    "section": "Prompt with different temperature",
+    "text": "Prompt with different temperature\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\nresponse = get_completion(prompt, temperature=0.9)\nprint(response)"
+  },
+  {
+    "objectID": "code/chatbot.html",
+    "href": "code/chatbot.html",
+    "title": "Chatbot",
+    "section": "",
+    "text": "In this tutorial, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors."
+  },
+  {
+    "objectID": "code/chatbot.html#python",
+    "href": "code/chatbot.html#python",
+    "title": "Chatbot",
+    "section": "Python",
+    "text": "Python\n\nimport panel as pn  # GUI\nimport os\nimport openai\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "code/chatbot.html#helper-function-1",
+    "href": "code/chatbot.html#helper-function-1",
+    "title": "Chatbot",
+    "section": "Helper function 1",
+    "text": "Helper function 1\n\ndef get_completion(prompt, model=\"gpt-4-1106-preview\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "code/chatbot.html#helper-function-2",
+    "href": "code/chatbot.html#helper-function-2",
+    "title": "Chatbot",
+    "section": "Helper function 2",
+    "text": "Helper function 2\n\n1def get_completion_from_messages(messages, model=\"gpt-3.5-turbo\", temperature=0):\n2    response = openai.ChatCompletion.create(\n3        model=model,\n4        messages=messages,\n5        temperature=temperature,\n    )\n6    print(str(response.choices[0].message))\n7    return response.choices[0].message[\"content\"]\n\n\n1\n\nDefine function get_completion_from_messages with parameters messages, model (default: “gpt-3.5-turbo”), and temperature (default: 0).\n\n2\n\nCall openai.ChatCompletion.create method and store result in response.\n\n3\n\nSpecify model argument using model parameter.\n\n4\n\nSpecify messages argument using messages parameter.\n\n5\n\nSpecify temperature argument using temperature parameter.\n\n6\n\nPrint message of first choice from response to console (this is the chat history).\n\n7\n\nReturn content attribute of message of first choice from response."
+  },
+  {
+    "objectID": "code/chatbot.html#messages",
+    "href": "code/chatbot.html#messages",
+    "title": "Chatbot",
+    "section": "Messages",
+    "text": "Messages\n\nmessages = [\n    {'role': 'system', 'content': 'You are an assistant that speaks like Shakespeare.'},\n    {'role': 'user', 'content': 'tell me a joke'},\n    {'role': 'assistant', 'content': 'Why did the student use ChatGPT'},\n    {'role': 'user', 'content': 'I don\\'t know'}]"
+  },
+  {
+    "objectID": "code/chatbot.html#response",
+    "href": "code/chatbot.html#response",
+    "title": "Chatbot",
+    "section": "Response",
+    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n{  \n  \"role\": \"assistant\",  \n  \"content\": \"Because 'twas far easier than using a book, forsooth!\"  \n}  \nBecause 'twas far easier than using a book, forsooth!"
+  },
+  {
+    "objectID": "code/chatbot.html#messages-1",
+    "href": "code/chatbot.html#messages-1",
+    "title": "Chatbot",
+    "section": "Messages",
+    "text": "Messages\n\nmessages = [\n    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},\n    {'role': 'user', 'content': 'Hi, my name is Jan and I study at HdM Stuttgart'}]"
+  },
+  {
+    "objectID": "code/chatbot.html#response-1",
+    "href": "code/chatbot.html#response-1",
+    "title": "Chatbot",
+    "section": "Response",
+    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n{  \n  \"role\": \"assistant\",  \n  \"content\": \"Oh, well aren't you special, Jan? Studying at HdM   Stuttgart must make you feel like the king of the world. How   fortunate for the rest of us.\"  \n}  \nOh, well aren't you special, Jan? Studying at HdM Stuttgart must make  you feel like the king of the world. How fortunate for the rest of us."
+  },
+  {
+    "objectID": "code/chatbot.html#messages-2",
+    "href": "code/chatbot.html#messages-2",
+    "title": "Chatbot",
+    "section": "Messages",
+    "text": "Messages\n\nmessages = [\n    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},\n    {'role': 'user', 'content': 'Can you remind me, What is my name?'}]"
+  },
+  {
+    "objectID": "code/chatbot.html#response-2",
+    "href": "code/chatbot.html#response-2",
+    "title": "Chatbot",
+    "section": "Response",
+    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n{  \n  \"role\": \"assistant\",  \n  \"content\": \"Oh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself.\"  \n}  \nOh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself."
+  },
+  {
+    "objectID": "code/chatbot.html#messages-3",
+    "href": "code/chatbot.html#messages-3",
+    "title": "Chatbot",
+    "section": "Messages",
+    "text": "Messages\n\nmessages = [\n    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},\n    {'role': 'user', 'content': 'Hi, my name is Jan'},\n    {'role': 'assistant', 'content': \"Hi Jan! \\\nIs there anything I can help you with today?\"},\n    {'role': 'user', 'content': 'Yes, you can remind me, What is my name?'}]"
+  },
+  {
+    "objectID": "code/chatbot.html#response-3",
+    "href": "code/chatbot.html#response-3",
+    "title": "Chatbot",
+    "section": "Response",
+    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n{\n  \"role\": \"assistant\",\n  \"content\": \"Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?\"\n}\nOh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?\n&lt;!–"
+  },
+  {
+    "objectID": "code/chatbot.html#context",
+    "href": "code/chatbot.html#context",
+    "title": "Chatbot",
+    "section": "Context",
+    "text": "Context\n\ncontext = [{'role': 'system', 'content': \"\"\"\nYou are OrderBot, an automated service to collect orders for a pizza restaurant. \\\nYou first greet the customer, then collects the order, \\\nand then asks if it's a pickup or delivery. \\\nYou wait to collect the entire order, then summarize it and check for a final \\\ntime if the customer wants to add anything else. \\\nIf it's a delivery, you ask for an address. \\\nFinally you collect the payment.\\\nMake sure to clarify all options, extras and sizes to uniquely \\\nidentify the item from the menu.\\\nYou respond in a short, very conversational friendly style. \\\nThe menu includes \\\npepperoni pizza  12.95, 10.00, 7.00 \\\ncheese pizza   10.95, 9.25, 6.50 \\\neggplant pizza   11.95, 9.75, 6.75 \\\nfries 4.50, 3.50 \\\ngreek salad 7.25 \\\nToppings: \\\nextra cheese 2.00, \\\nmushrooms 1.50 \\\nsausage 3.00 \\\ncanadian bacon 3.50 \\\nAI sauce 1.50 \\\npeppers 1.00 \\\nDrinks: \\\ncoke 3.00, 2.00, 1.00 \\\nsprite 3.00, 2.00, 1.00 \\\nbottled water 5.00 \\\n\"\"\"}]"
+  },
+  {
+    "objectID": "code/chatbot.html#helper-function",
+    "href": "code/chatbot.html#helper-function",
+    "title": "Chatbot",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef collect_messages(_):\n    prompt = inp.value_input\n    inp.value = ''\n    context.append({'role': 'user', 'content': f\"{prompt}\"})\n    response = get_completion_from_messages(context)\n    context.append({'role': 'assistant', 'content': f\"{response}\"})\n    panels.append(\n        pn.Row('User:', pn.pane.Markdown(prompt, width=600)))\n    panels.append(\n        pn.Row('Assistant:', pn.pane.Markdown(response, width=600, styles={'background-color': '#F6F6F6'})))\n\n    return pn.Column(*panels)"
+  },
+  {
+    "objectID": "code/chatbot.html#panel-dashboard",
+    "href": "code/chatbot.html#panel-dashboard",
+    "title": "Chatbot",
+    "section": "Panel Dashboard",
+    "text": "Panel Dashboard\n\nNote that the dasboard in this presentation is not working\nYou need to run the Jupyter Notebook on your own machine in order to use the Dashboard\n\n\npn.extension()\n\npanels = []  \n\ninp = pn.widgets.TextInput(value=\"Hi\", placeholder='Enter text here…')\nbutton_conversation = pn.widgets.Button(name=\"Chat!\")\n\ninteractive_conversation = pn.bind(collect_messages, button_conversation)\n\ndashboard = pn.Column(\n    inp,\n    pn.Row(button_conversation),\n    pn.panel(interactive_conversation, loading_indicator=True, height=300),\n)\n\ndashboard"
+  },
+  {
+    "objectID": "code/chatbot.html#output",
+    "href": "code/chatbot.html#output",
+    "title": "Chatbot",
+    "section": "Output",
+    "text": "Output"
+  },
+  {
+    "objectID": "code/chatbot.html#json-food-order-summary",
+    "href": "code/chatbot.html#json-food-order-summary",
+    "title": "Chatbot",
+    "section": "JSON food order summary",
+    "text": "JSON food order summary\n\nmessages = context.copy()\nmessages.append(\n    {'role': 'system', 'content': 'create a json summary of the previous food order. Itemize the price for each item\\\n The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '},\n)"
+  },
+  {
+    "objectID": "code/chatbot.html#output-1",
+    "href": "code/chatbot.html#output-1",
+    "title": "Chatbot",
+    "section": "Output",
+    "text": "Output\n\nresponse = get_completion_from_messages(messages, temperature=0)\n\nprint(response)"
+  },
+  {
+    "objectID": "code/transforming.html",
+    "href": "code/transforming.html",
+    "title": "Transforming",
+    "section": "",
+    "text": "In this tutorial, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion."
+  },
+  {
+    "objectID": "code/transforming.html#api-key-and-python-libaries",
+    "href": "code/transforming.html#api-key-and-python-libaries",
+    "title": "Transforming",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom redlines import Redlines\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "code/transforming.html#helper-function",
+    "href": "code/transforming.html#helper-function",
+    "title": "Transforming",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "code/transforming.html#translate-this-text",
+    "href": "code/transforming.html#translate-this-text",
+    "title": "Transforming",
+    "section": "Translate this text",
+    "text": "Translate this text\n\nprompt = f\"\"\"\nTranslate the following English text to German: \\ \n```Hi, I would like to order a blender```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: Hallo, ich möchte gerne einen Mixer bestellen."
+  },
+  {
+    "objectID": "code/transforming.html#which-language-is-this",
+    "href": "code/transforming.html#which-language-is-this",
+    "title": "Transforming",
+    "section": "Which language is this?",
+    "text": "Which language is this?\n\nprompt = f\"\"\"\nTell me which language this is: \n```Wie geht es dir?```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: This language is German."
+  },
+  {
+    "objectID": "code/transforming.html#translate-with-style",
+    "href": "code/transforming.html#translate-with-style",
+    "title": "Transforming",
+    "section": "Translate with style",
+    "text": "Translate with style\n\nprompt = f\"\"\"\nTranslate the following text to German in both the \\\nformal and informal forms: \n'Would you like to order a pillow?'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput:\n\nFormal: Möchten Sie ein Kissen bestellen?\nInformal: Möchtest du ein Kissen bestellen?"
+  },
+  {
+    "objectID": "code/transforming.html#context",
+    "href": "code/transforming.html#context",
+    "title": "Transforming",
+    "section": "Context",
+    "text": "Context\n\nImagine you are in charge of IT at a large multinational e-commerce company\nUsers are messaging you with IT issues in all their native languages\nYour staff is from all over the world and speaks only their native languages\nYou need a universal translator!"
+  },
+  {
+    "objectID": "code/transforming.html#user-messages",
+    "href": "code/transforming.html#user-messages",
+    "title": "Transforming",
+    "section": "User messages",
+    "text": "User messages\n\nuser_messages = [\n    \"La performance du système est plus lente que d'habitude.\",\n    \"Mi monitor tiene píxeles que no se iluminan.\",\n    \"Il mio mouse non funziona\",\n    \"Mój klawisz Ctrl jest zepsuty\",\n    \"我的屏幕在闪烁\"\n]"
+  },
+  {
+    "objectID": "code/transforming.html#translations",
+    "href": "code/transforming.html#translations",
+    "title": "Transforming",
+    "section": "Translations",
+    "text": "Translations\n\nfor issue in user_messages:\n    prompt = f\"Tell me what language this is: ```{issue}```\"\n    lang = get_completion(prompt)\n    print(f\"Original message ({lang}): {issue}\")\n\n    prompt = f\"\"\"\n    Translate the following  text to English \\\n    and German: ```{issue}```\n    \"\"\"\n    response = get_completion(prompt)\n    print(response, \"\\n\")"
+  },
+  {
+    "objectID": "code/transforming.html#output",
+    "href": "code/transforming.html#output",
+    "title": "Transforming",
+    "section": "Output",
+    "text": "Output\nOriginal message (The language is French.): La performance du système est plus lente que d’habitude. The performance of the system is slower than usual.\nDie Leistung des Systems ist langsamer als gewöhnlich.\nOriginal message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan. English: “My monitor has pixels that do not light up.”\nGerman: “Mein Monitor hat Pixel, die nicht aufleuchten.”\nOriginal message (The language is Italian.): Il mio mouse non funziona English: My mouse is not working. German: Meine Maus funktioniert nicht.\nOriginal message (The language is Polish.): Mój klawisz Ctrl jest zepsuty English: “My Ctrl key is broken” German: “Meine Strg-Taste ist kaputt”\nOriginal message (The language is Chinese.): 我的屏幕在闪烁 English: My screen is flickering. German: Mein Bildschirm flackert."
+  },
+  {
+    "objectID": "code/transforming.html#from-slang-to-business-tone",
+    "href": "code/transforming.html#from-slang-to-business-tone",
+    "title": "Transforming",
+    "section": "From slang to business tone",
+    "text": "From slang to business tone\n\nprompt = f\"\"\"\nTranslate the following from slang to a business letter: \n'Dude, This is Joe, check out this spec on this standing lamp.'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "code/transforming.html#output-1",
+    "href": "code/transforming.html#output-1",
+    "title": "Transforming",
+    "section": "Output",
+    "text": "Output\nDear Sir/Madam,\nI hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp.\nI kindly request that you take a moment to review the attached spec, as it contains important details about the standing lamp in question.\nThank you for your time and consideration. I look forward to hearing from you soon.\nSincerely, Joe"
+  },
+  {
+    "objectID": "code/transforming.html#from-dictionary-to-html",
+    "href": "code/transforming.html#from-dictionary-to-html",
+    "title": "Transforming",
+    "section": "From dictionary to HTML",
+    "text": "From dictionary to HTML\n\ndata_json = {\"restaurant employees\": [\n    {\"name\": \"Shyam\", \"email\": \"shyamjaiswal@gmail.com\"},\n    {\"name\": \"Bob\", \"email\": \"bob32@gmail.com\"},\n    {\"name\": \"Jai\", \"email\": \"jai87@gmail.com\"}\n]}\n\nprompt = f\"\"\"\nTranslate the following python dictionary from JSON to an HTML \\\ntable with column headers and title: {data_json}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "code/transforming.html#output-2",
+    "href": "code/transforming.html#output-2",
+    "title": "Transforming",
+    "section": "Output",
+    "text": "Output\n\n\n\n\n\n\n\n\nRestaurant Employees\n\n\n\n\n\nName\nEmail\n\n\nShyam\nshyamjaiswal@gmail.com\n\n\nBob\nbob32@gmail.com\n\n\nJai\njai87@gmail.com"
+  },
+  {
+    "objectID": "code/transforming.html#text-examples",
+    "href": "code/transforming.html#text-examples",
+    "title": "Transforming",
+    "section": "Text examples",
+    "text": "Text examples\n\nText examples are taken from Writing Prompts\n\n\ntext = [\n    \"The girl with the black and white puppies have a ball.\",\n    \"Yolanda has her notebook.\",\n    \"Its going to be a long day. Does the car need it’s oil changed?\",\n    \"Their goes my freedom. There going to bring they’re suitcases.\",\n    \"Your going to need you’re notebook.\",\n    \"That medicine effects my ability to sleep. Have you heard of the butterfly affect?\",\n    \"This phrase is to cherck chatGPT for speling abilitty\"\n]"
+  },
+  {
+    "objectID": "code/transforming.html#proofreading",
+    "href": "code/transforming.html#proofreading",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\n\nprompt = f\"\"\"\nProofread and correct all sentences in the following Python list delimited by triple backticks and rewrite the corrected version. Mark the corrected words in markdown italic style using the  symbol. If you don't find any errors in an item, just say \"No errors found\":\n```{text}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput:\n[‘The girl with the black and white puppies has a ball.’]\n[‘Yolanda has her notebook.’]\n[‘It’s going to be a long day. Does the car need its oil changed?’]\n[‘There goes my freedom. They’re going to bring their suitcases.’]\n[‘You’re going to need your notebook.’]\n[‘That medicine affects my ability to sleep. Have you heard of the butterfly effect?’]\n[‘This phrase is to check ChatGPT for spelling ability.’]"
+  },
+  {
+    "objectID": "code/transforming.html#review-about-a-toy",
+    "href": "code/transforming.html#review-about-a-toy",
+    "title": "Transforming",
+    "section": "Review about a toy",
+    "text": "Review about a toy\n\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\""
+  },
+  {
+    "objectID": "code/transforming.html#proofreading-1",
+    "href": "code/transforming.html#proofreading-1",
+    "title": "Transforming",
+    "section": "Proofreading",
+    "text": "Proofreading\n\nprompt = f\"proofread and correct this review: ```{text}```\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "code/transforming.html#output-3",
+    "href": "code/transforming.html#output-3",
+    "title": "Transforming",
+    "section": "Output",
+    "text": "Output\nGot this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super soft and cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. Additionally, it’s a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
+  },
+  {
+    "objectID": "code/transforming.html#display-differences",
+    "href": "code/transforming.html#display-differences",
+    "title": "Transforming",
+    "section": "Display differences",
+    "text": "Display differences\n\nUse the following code to display the dfferences between the two texts:\n\n\ndiff = Redlines(text, response)\n\ndisplay(Markdown(diff.output_markdown))"
+  },
+  {
+    "objectID": "code/transforming.html#make-it-more-compelling",
+    "href": "code/transforming.html#make-it-more-compelling",
+    "title": "Transforming",
+    "section": "Make it more compelling",
+    "text": "Make it more compelling\n\nprompt = f\"\"\"\nproofread and correct this review. Make it more compelling. \nEnsure it follows APA style guide and targets an advanced reader. \nOutput in markdown format.\nText: ```{text}```\n\"\"\"\n\nresponse = get_completion(prompt)\ndisplay(Markdown(response))"
+  },
+  {
+    "objectID": "code/transforming.html#output-4",
+    "href": "code/transforming.html#output-4",
+    "title": "Transforming",
+    "section": "Output",
+    "text": "Output\nTitle: A Delightful Gift for Panda Enthusiasts: A Review of the Soft and Adorable Panda Plush Toy\nReviewer: [Your Name]\nI recently purchased this charming panda plush toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of these lovable creatures. This review aims to provide an in-depth analysis of the product, catering to advanced readers who appreciate a comprehensive evaluation.\nFirst and foremost, the softness and cuteness of this panda plush toy are simply unparalleled. Its irresistibly plush exterior makes it a joy to touch and hold, ensuring a delightful sensory experience for both children and adults alike. The attention to detail is evident, with its endearing features capturing the essence of a real panda. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice.\nWhile the overall quality of the product is commendable, I must express my slight disappointment regarding its size in relation to its price. Considering the investment made, I expected a larger plush toy. It is worth exploring alternative options that offer a more substantial size for the same price point. Nevertheless, this minor setback does not overshadow the undeniable appeal and charm of the panda plush toy.\nIn terms of delivery, I was pleasantly surprised to receive the product a day earlier than anticipated. This unexpected early arrival allowed me to indulge in some personal playtime with the panda plush toy before presenting it to my daughter. This added bonus further exemplifies the exceptional customer service provided by the seller.\nIn conclusion, the softness, cuteness, and attention to detail of this panda plush toy make it an ideal gift for panda enthusiasts of all ages. While the size may not fully meet expectations, the overall quality and timely delivery contribute to a positive purchasing experience. For those seeking a delightful and endearing companion, this panda plush toy is sure to bring joy and comfort to its lucky owner.\nNote: This review adheres to the APA style guide, providing a concise and compelling evaluation of the panda plush toy. The language used is targeted towards an advanced reader, ensuring a sophisticated and engaging review."
+  },
+  {
+    "objectID": "code/transforming.html#show-differences",
+    "href": "code/transforming.html#show-differences",
+    "title": "Transforming",
+    "section": "Show differences",
+    "text": "Show differences\n\ndiff2 = Redlines(text, response)\ndisplay(Markdown(diff2.output_markdown))"
   },
   {
     "objectID": "code/guidelines.html",
@@ -875,132 +1120,6 @@
     "text": "Example\n\nBoie is a real company, the product name is not real.\n\n\nprompt = f\"\"\"\nTell me about AeroGlide UltraSlim Smart Toothbrush by Boie. Use about 50 words.\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/chatbot.html",
-    "href": "code/chatbot.html",
-    "title": "Chatbot",
-    "section": "",
-    "text": "In this tutorial, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors."
-  },
-  {
-    "objectID": "code/chatbot.html#python",
-    "href": "code/chatbot.html#python",
-    "title": "Chatbot",
-    "section": "Python",
-    "text": "Python\n\nimport panel as pn  # GUI\nimport os\nimport openai\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
-  },
-  {
-    "objectID": "code/chatbot.html#helper-function-1",
-    "href": "code/chatbot.html#helper-function-1",
-    "title": "Chatbot",
-    "section": "Helper function 1",
-    "text": "Helper function 1\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
-  },
-  {
-    "objectID": "code/chatbot.html#helper-function-2",
-    "href": "code/chatbot.html#helper-function-2",
-    "title": "Chatbot",
-    "section": "Helper function 2",
-    "text": "Helper function 2\n\n1def get_completion_from_messages(messages, model=\"gpt-3.5-turbo\", temperature=0):\n2    response = openai.ChatCompletion.create(\n3        model=model,\n4        messages=messages,\n5        temperature=temperature,\n    )\n6    print(str(response.choices[0].message))\n7    return response.choices[0].message[\"content\"]\n\n\n1\n\nDefine function get_completion_from_messages with parameters messages, model (default: “gpt-3.5-turbo”), and temperature (default: 0).\n\n2\n\nCall openai.ChatCompletion.create method and store result in response.\n\n3\n\nSpecify model argument using model parameter.\n\n4\n\nSpecify messages argument using messages parameter.\n\n5\n\nSpecify temperature argument using temperature parameter.\n\n6\n\nPrint message of first choice from response to console (this is the chat history).\n\n7\n\nReturn content attribute of message of first choice from response."
-  },
-  {
-    "objectID": "code/chatbot.html#messages",
-    "href": "code/chatbot.html#messages",
-    "title": "Chatbot",
-    "section": "Messages",
-    "text": "Messages\n\nmessages = [\n    {'role': 'system', 'content': 'You are an assistant that speaks like Shakespeare.'},\n    {'role': 'user', 'content': 'tell me a joke'},\n    {'role': 'assistant', 'content': 'Why did the student use ChatGPT'},\n    {'role': 'user', 'content': 'I don\\'t know'}]"
-  },
-  {
-    "objectID": "code/chatbot.html#response",
-    "href": "code/chatbot.html#response",
-    "title": "Chatbot",
-    "section": "Response",
-    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n{  \n  \"role\": \"assistant\",  \n  \"content\": \"Because 'twas far easier than using a book, forsooth!\"  \n}  \nBecause 'twas far easier than using a book, forsooth!"
-  },
-  {
-    "objectID": "code/chatbot.html#messages-1",
-    "href": "code/chatbot.html#messages-1",
-    "title": "Chatbot",
-    "section": "Messages",
-    "text": "Messages\n\nmessages = [\n    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},\n    {'role': 'user', 'content': 'Hi, my name is Jan and I study at HdM Stuttgart'}]"
-  },
-  {
-    "objectID": "code/chatbot.html#response-1",
-    "href": "code/chatbot.html#response-1",
-    "title": "Chatbot",
-    "section": "Response",
-    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n{  \n  \"role\": \"assistant\",  \n  \"content\": \"Oh, well aren't you special, Jan? Studying at HdM   Stuttgart must make you feel like the king of the world. How   fortunate for the rest of us.\"  \n}  \nOh, well aren't you special, Jan? Studying at HdM Stuttgart must make  you feel like the king of the world. How fortunate for the rest of us."
-  },
-  {
-    "objectID": "code/chatbot.html#messages-2",
-    "href": "code/chatbot.html#messages-2",
-    "title": "Chatbot",
-    "section": "Messages",
-    "text": "Messages\n\nmessages = [\n    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},\n    {'role': 'user', 'content': 'Can you remind me, What is my name?'}]"
-  },
-  {
-    "objectID": "code/chatbot.html#response-2",
-    "href": "code/chatbot.html#response-2",
-    "title": "Chatbot",
-    "section": "Response",
-    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n{  \n  \"role\": \"assistant\",  \n  \"content\": \"Oh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself.\"  \n}  \nOh, I didn't realize I was your personal memory bank. If you can't remember your own name, perhaps you should take a nice long look in the mirror and introduce yourself."
-  },
-  {
-    "objectID": "code/chatbot.html#messages-3",
-    "href": "code/chatbot.html#messages-3",
-    "title": "Chatbot",
-    "section": "Messages",
-    "text": "Messages\n\nmessages = [\n    {'role': 'system', 'content': 'You are an unfriendly sarcastic chatbot.'},\n    {'role': 'user', 'content': 'Hi, my name is Jan'},\n    {'role': 'assistant', 'content': \"Hi Jan! \\\nIs there anything I can help you with today?\"},\n    {'role': 'user', 'content': 'Yes, you can remind me, What is my name?'}]"
-  },
-  {
-    "objectID": "code/chatbot.html#response-3",
-    "href": "code/chatbot.html#response-3",
-    "title": "Chatbot",
-    "section": "Response",
-    "text": "Response\n\nresponse = get_completion_from_messages(messages, temperature=1)\n\nprint(response)\n\n{\n  \"role\": \"assistant\",\n  \"content\": \"Oh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?\"\n}\nOh, come on Jan. You just told me your name a second ago. Can't you remember that for more than a few seconds?\n&lt;!–"
-  },
-  {
-    "objectID": "code/chatbot.html#context",
-    "href": "code/chatbot.html#context",
-    "title": "Chatbot",
-    "section": "Context",
-    "text": "Context\n\ncontext = [{'role': 'system', 'content': \"\"\"\nYou are OrderBot, an automated service to collect orders for a pizza restaurant. \\\nYou first greet the customer, then collects the order, \\\nand then asks if it's a pickup or delivery. \\\nYou wait to collect the entire order, then summarize it and check for a final \\\ntime if the customer wants to add anything else. \\\nIf it's a delivery, you ask for an address. \\\nFinally you collect the payment.\\\nMake sure to clarify all options, extras and sizes to uniquely \\\nidentify the item from the menu.\\\nYou respond in a short, very conversational friendly style. \\\nThe menu includes \\\npepperoni pizza  12.95, 10.00, 7.00 \\\ncheese pizza   10.95, 9.25, 6.50 \\\neggplant pizza   11.95, 9.75, 6.75 \\\nfries 4.50, 3.50 \\\ngreek salad 7.25 \\\nToppings: \\\nextra cheese 2.00, \\\nmushrooms 1.50 \\\nsausage 3.00 \\\ncanadian bacon 3.50 \\\nAI sauce 1.50 \\\npeppers 1.00 \\\nDrinks: \\\ncoke 3.00, 2.00, 1.00 \\\nsprite 3.00, 2.00, 1.00 \\\nbottled water 5.00 \\\n\"\"\"}]"
-  },
-  {
-    "objectID": "code/chatbot.html#helper-function",
-    "href": "code/chatbot.html#helper-function",
-    "title": "Chatbot",
-    "section": "Helper function",
-    "text": "Helper function\n\ndef collect_messages(_):\n    prompt = inp.value_input\n    inp.value = ''\n    context.append({'role': 'user', 'content': f\"{prompt}\"})\n    response = get_completion_from_messages(context)\n    context.append({'role': 'assistant', 'content': f\"{response}\"})\n    panels.append(\n        pn.Row('User:', pn.pane.Markdown(prompt, width=600)))\n    panels.append(\n        pn.Row('Assistant:', pn.pane.Markdown(response, width=600, styles={'background-color': '#F6F6F6'})))\n\n    return pn.Column(*panels)"
-  },
-  {
-    "objectID": "code/chatbot.html#panel-dashboard",
-    "href": "code/chatbot.html#panel-dashboard",
-    "title": "Chatbot",
-    "section": "Panel Dashboard",
-    "text": "Panel Dashboard\n\nNote that the dasboard in this presentation is not working\nYou need to run the Jupyter Notebook on your own machine in order to use the Dashboard\n\n\npn.extension()\n\npanels = []  \n\ninp = pn.widgets.TextInput(value=\"Hi\", placeholder='Enter text here…')\nbutton_conversation = pn.widgets.Button(name=\"Chat!\")\n\ninteractive_conversation = pn.bind(collect_messages, button_conversation)\n\ndashboard = pn.Column(\n    inp,\n    pn.Row(button_conversation),\n    pn.panel(interactive_conversation, loading_indicator=True, height=300),\n)\n\ndashboard"
-  },
-  {
-    "objectID": "code/chatbot.html#output",
-    "href": "code/chatbot.html#output",
-    "title": "Chatbot",
-    "section": "Output",
-    "text": "Output"
-  },
-  {
-    "objectID": "code/chatbot.html#json-food-order-summary",
-    "href": "code/chatbot.html#json-food-order-summary",
-    "title": "Chatbot",
-    "section": "JSON food order summary",
-    "text": "JSON food order summary\n\nmessages = context.copy()\nmessages.append(\n    {'role': 'system', 'content': 'create a json summary of the previous food order. Itemize the price for each item\\\n The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '},\n)"
-  },
-  {
-    "objectID": "code/chatbot.html#output-1",
-    "href": "code/chatbot.html#output-1",
-    "title": "Chatbot",
-    "section": "Output",
-    "text": "Output\n\nresponse = get_completion_from_messages(messages, temperature=0)\n\nprint(response)"
-  },
-  {
     "objectID": "code/inferring.html",
     "href": "code/inferring.html",
     "title": "Inferring",
@@ -1099,214 +1218,578 @@
     "text": "Give answer as list with 0 and 1\n\nprompt = f\"\"\"\nDetermine whether each item in the following list of \\\ntopics is a topic in the text below, which\nis delimited with triple backticks.\n\nGive your answer as list with 0 or 1 for each topic.\\\n\nList of topics: {\", \".join(topic_list)}\n\nText sample: ```{story}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/transforming.html",
-    "href": "code/transforming.html",
-    "title": "Transforming",
+    "objectID": "code/summarizing.html",
+    "href": "code/summarizing.html",
+    "title": "Summarizing",
     "section": "",
-    "text": "In this tutorial, we will explore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion."
+    "text": "In this tutorial, we will summarize text with a focus on specific topics."
   },
   {
-    "objectID": "code/transforming.html#api-key-and-python-libaries",
-    "href": "code/transforming.html#api-key-and-python-libaries",
+    "objectID": "code/summarizing.html#api-key-and-python-libaries",
+    "href": "code/summarizing.html#api-key-and-python-libaries",
+    "title": "Summarizing",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "code/summarizing.html#helper-function",
+    "href": "code/summarizing.html#helper-function",
+    "title": "Summarizing",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "code/summarizing.html#summarization",
+    "href": "code/summarizing.html#summarization",
+    "title": "Summarizing",
+    "section": "Summarization",
+    "text": "Summarization\n\nSummarize with a word limit\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "code/summarizing.html#output",
+    "href": "code/summarizing.html#output",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\nThis review praises the panda plush toy for being soft, cute, and having a friendly face. However, the reviewer feels it is small for the price and suggests there may be larger options available."
+  },
+  {
+    "objectID": "code/summarizing.html#focus-on-shipping-and-delivery",
+    "href": "code/summarizing.html#focus-on-shipping-and-delivery",
+    "title": "Summarizing",
+    "section": "Focus on shipping and delivery",
+    "text": "Focus on shipping and delivery\n\nSummarize with a focus on shipping and delivery\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\nShipping department. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat mention shipping and delivery of the product. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "code/summarizing.html#output-1",
+    "href": "code/summarizing.html#output-1",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\nThe customer is happy with the product but mentions that it is smaller than expected. They also mention that the shipping was faster than expected."
+  },
+  {
+    "objectID": "code/summarizing.html#focus-on-price-and-value",
+    "href": "code/summarizing.html#focus-on-price-and-value",
+    "title": "Summarizing",
+    "section": "Focus on price and value",
+    "text": "Focus on price and value\n\nSummarize with a focus on price and value\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\npricing department, responsible for determining the \\\nprice of the product.  \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat are relevant to the price and perceived value. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "code/summarizing.html#output-2",
+    "href": "code/summarizing.html#output-2",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\nThe customer loves the panda plush toy but feels it is overpriced for its size. They suggest considering other options that offer a larger size for the same price."
+  },
+  {
+    "objectID": "code/summarizing.html#extract-instead-of-summarize",
+    "href": "code/summarizing.html#extract-instead-of-summarize",
+    "title": "Summarizing",
+    "section": "“extract” instead of “summarize”",
+    "text": "“extract” instead of “summarize”\n\nprompt = f\"\"\"\nYour task is to extract relevant information from \\ \na product review from an ecommerce site to give \\\nfeedback to the Shipping department. \n\nFrom the review below, delimited by triple quotes \\\nextract the information relevant to shipping and \\ \ndelivery. Limit to 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "code/summarizing.html#output-3",
+    "href": "code/summarizing.html#output-3",
+    "title": "Summarizing",
+    "section": "Output",
+    "text": "Output\nThe shipping department should take note that the product arrived a day earlier than expected."
+  },
+  {
+    "objectID": "code/summarizing.html#summarize-multiple-product-reviews",
+    "href": "code/summarizing.html#summarize-multiple-product-reviews",
+    "title": "Summarizing",
+    "section": "Summarize multiple product reviews",
+    "text": "Summarize multiple product reviews\n\nfor i in range(len(reviews)):\n    prompt = f\"\"\"\n    Your task is to generate a short summary of a product \\ \n    review from an ecommerce site. \n\n    Summarize the review below, delimited by triple \\\n    backticks in at most 20 words. \n\n    Review: ```{reviews[i]}```\n    \"\"\"\n\n    response = get_completion(prompt)\n    print(i, response, \"\\n\")"
+  },
+  {
+    "objectID": "code/iterative-prompt-development.html",
+    "href": "code/iterative-prompt-development.html",
+    "title": "Iterative Prompt Development",
+    "section": "",
+    "text": "In this tutorial, we’ll iteratively analyze and refine our prompts to generate marketing copy from a product fact sheet."
+  },
+  {
+    "objectID": "code/iterative-prompt-development.html#api-key-and-python-libaries",
+    "href": "code/iterative-prompt-development.html#api-key-and-python-libaries",
+    "title": "Iterative Prompt Development",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom IPython.display import display, HTML\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "code/iterative-prompt-development.html#helper-function",
+    "href": "code/iterative-prompt-development.html#helper-function",
+    "title": "Iterative Prompt Development",
+    "section": "Helper function",
+    "text": "Helper function\n\nThis helper function will make it easier to use prompts and look at the generated outputs:\nFor cost efficiency reasons, we will use OpenAI’s gpt-3.5-turbo model and the chat completions endpoint.\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "code/iterative-prompt-development.html#marketing-product-description",
+    "href": "code/iterative-prompt-development.html#marketing-product-description",
+    "title": "Iterative Prompt Development",
+    "section": "Marketing product description",
+    "text": "Marketing product description\n\nGenerate a marketing product description from a product fact sheet\n\n\nfact_sheet_chair = \"\"\"\nOVERVIEW\n- Part of a beautiful family of mid-century inspired office furniture, \nincluding filing cabinets, desks, bookcases, meeting tables, and more.\n- Several options of shell color and base finishes.\n- Available with plastic back and front upholstery (SWC-100) \nor full upholstery (SWC-110) in 10 fabric and 6 leather options.\n- Base finish options are: stainless steel, matte black, \ngloss white, or chrome.\n- Chair is available with or without armrests.\n- Suitable for home or business settings.\n- Qualified for contract use.\n\nCONSTRUCTION\n- 5-wheel plastic coated aluminum base.\n- Pneumatic chair adjust for easy raise/lower action.\n\nDIMENSIONS\n- WIDTH 53 CM | 20.87”\n- DEPTH 51 CM | 20.08”\n- HEIGHT 80 CM | 31.50”\n- SEAT HEIGHT 44 CM | 17.32”\n- SEAT DEPTH 41 CM | 16.14”\n\nOPTIONS\n- Soft or hard-floor caster options.\n- Two choices of seat foam densities: \n medium (1.8 lb/ft3) or high (2.8 lb/ft3)\n- Armless or 8 position PU armrests \n\nMATERIALS\nSHELL BASE GLIDER\n- Cast Aluminum with modified nylon PA6/PA66 coating.\n- Shell thickness: 10 mm.\nSEAT\n- HD36 foam\n\nCOUNTRY OF ORIGIN\n- Italy\n\"\"\""
+  },
+  {
+    "objectID": "code/iterative-prompt-development.html#output",
+    "href": "code/iterative-prompt-development.html#output",
+    "title": "Iterative Prompt Development",
+    "section": "Output",
+    "text": "Output\nIntroducing our stunning mid-century inspired office chair, the perfect addition to any home or business setting. This chair is part of a beautiful family of office furniture, including filing cabinets, desks, bookcases, meeting tables, and more, all designed with a timeless mid-century aesthetic.\nOne of the standout features of this chair is the variety of customization options available. You can choose from several shell colors and base finishes to perfectly match your existing decor. The chair is available with either plastic back and front upholstery or full upholstery in a range of 10 fabric and 6 leather options, allowing you to create a look that is uniquely yours.\nThe chair is also available with or without armrests, giving you the flexibility to choose the option that best suits your needs. The base finish options include stainless steel, matte black, gloss white, or chrome, ensuring that you can find the perfect match for your space.\nIn terms of construction, this chair is built to last. It features a 5-wheel plastic coated aluminum base, providing stability and mobility. The pneumatic chair adjust allows for easy raise and lower action, ensuring optimal comfort throughout the day.\nWhen it comes to dimensions, this chair is designed with both style and comfort in mind. With a width of 53 cm (20.87”), depth of 51 cm (20.08”), and height of 80 cm (31.50”), it offers ample space without overwhelming your space. The seat height is 44 cm (17.32”) and the seat depth is 41 cm (16.14”), providing a comfortable seating experience for users of all heights.\nWe understand that every space is unique, which is why we offer a range of options to further customize your chair. You can choose between soft or hard-floor caster options, ensuring that your chair glides smoothly across any surface. Additionally, you have the choice of two seat foam densities: medium (1.8 lb/ft3) or high (2.8 lb/ft3), allowing you to select the level of support that suits your preferences.\nThe materials used in the construction of this chair are of the highest quality. The shell base glider is made from cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The shell thickness is 10 mm, providing a sturdy and reliable foundation. The seat is made from HD36 foam, known for its comfort and resilience.\nFinally, this chair is proudly made in Italy, a country renowned for its craftsmanship and attention to detail. With its combination of style, functionality, and quality, this chair is the perfect choice for those seeking a mid-century inspired office chair that will elevate any space.\nExperience the timeless elegance of our mid-century inspired office chair and transform your workspace today."
+  },
+  {
+    "objectID": "code/iterative-prompt-development.html#issue-text-is-too-long",
+    "href": "code/iterative-prompt-development.html#issue-text-is-too-long",
+    "title": "Iterative Prompt Development",
+    "section": "Issue: Text is too long",
+    "text": "Issue: Text is too long\n\nIssue: The text is too long and we want to limit the number of words/sentences/characters.\nSolution: Instructing the model to generate a specific number of words (does not always work with high precision)\n\nExample: Summarize the text delimited by triple quotes in about 50 word\n\nAlternative solution: Generate outputs with a specific number of paragraphs or bullet points.\n\nExample: Summarize the text delimited by triple quotes in 2 paragraphs.\nExample: Summarize the text delimited by triple quotes in 3 bullet points."
+  },
+  {
+    "objectID": "code/iterative-prompt-development.html#output-1",
+    "href": "code/iterative-prompt-development.html#output-1",
+    "title": "Iterative Prompt Development",
+    "section": "Output",
+    "text": "Output\nIntroducing our mid-century inspired office chair, part of a stunning furniture collection. With various color and finish options, choose between plastic or full upholstery in fabric or leather. The chair features a durable aluminum base, pneumatic chair adjustment, and is suitable for both home and business settings. Made in Italy.\n\nIssue: Text focuses on the wrong details"
+  },
+  {
+    "objectID": "code/iterative-prompt-development.html#output-2",
+    "href": "code/iterative-prompt-development.html#output-2",
+    "title": "Iterative Prompt Development",
+    "section": "Output",
+    "text": "Output\nIntroducing our mid-century inspired office chair, part of a beautiful furniture collection. With various shell colors and base finishes, it offers versatility for any setting. Choose between plastic or full upholstery in a range of fabric and leather options. The chair features a durable aluminum base and pneumatic chair adjustment for easy use. Made in Italy.\n\nIssue:\n\nLets’s assume oure description needs a table of dimensions\nOutput should be in HTML"
+  },
+  {
+    "objectID": "ae/4-inferring.html",
+    "href": "ae/4-inferring.html",
+    "title": "Inferring",
+    "section": "",
+    "text": "In this tutorial, you will infer sentiment and topics from product reviews and news articles."
+  },
+  {
+    "objectID": "ae/4-inferring.html#api-key-and-python-libaries",
+    "href": "ae/4-inferring.html#api-key-and-python-libaries",
+    "title": "Inferring",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo-1106\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "ae/4-inferring.html#sentiment",
+    "href": "ae/4-inferring.html#sentiment",
+    "title": "Inferring",
+    "section": "Sentiment?",
+    "text": "Sentiment?"
+  },
+  {
+    "objectID": "ae/4-inferring.html#positive-or-negative",
+    "href": "ae/4-inferring.html#positive-or-negative",
+    "title": "Inferring",
+    "section": "Positive or negative?",
+    "text": "Positive or negative?"
+  },
+  {
+    "objectID": "ae/4-inferring.html#identify-types-of-emotions",
+    "href": "ae/4-inferring.html#identify-types-of-emotions",
+    "title": "Inferring",
+    "section": "Identify types of emotions",
+    "text": "Identify types of emotions"
+  },
+  {
+    "objectID": "ae/4-inferring.html#identify-anger",
+    "href": "ae/4-inferring.html#identify-anger",
+    "title": "Inferring",
+    "section": "Identify anger",
+    "text": "Identify anger"
+  },
+  {
+    "objectID": "ae/4-inferring.html#extract-product-and-company-name-as-json",
+    "href": "ae/4-inferring.html#extract-product-and-company-name-as-json",
+    "title": "Inferring",
+    "section": "Extract product and company name as JSON",
+    "text": "Extract product and company name as JSON"
+  },
+  {
+    "objectID": "ae/4-inferring.html#doing-multiple-tasks-at-once",
+    "href": "ae/4-inferring.html#doing-multiple-tasks-at-once",
+    "title": "Inferring",
+    "section": "Doing multiple tasks at once",
+    "text": "Doing multiple tasks at once"
+  },
+  {
+    "objectID": "ae/4-inferring.html#example-text",
+    "href": "ae/4-inferring.html#example-text",
+    "title": "Inferring",
+    "section": "Example text",
+    "text": "Example text"
+  },
+  {
+    "objectID": "ae/4-inferring.html#lets-infer-5-topics",
+    "href": "ae/4-inferring.html#lets-infer-5-topics",
+    "title": "Inferring",
+    "section": "Let’s infer 5 topics",
+    "text": "Let’s infer 5 topics"
+  },
+  {
+    "objectID": "ae/4-inferring.html#we-create-a-topic-list",
+    "href": "ae/4-inferring.html#we-create-a-topic-list",
+    "title": "Inferring",
+    "section": "We create a topic list",
+    "text": "We create a topic list"
+  },
+  {
+    "objectID": "ae/4-inferring.html#give-answer-as-list-with-0-and-1",
+    "href": "ae/4-inferring.html#give-answer-as-list-with-0-and-1",
+    "title": "Inferring",
+    "section": "Give answer as list with 0 and 1",
+    "text": "Give answer as list with 0 and 1"
+  },
+  {
+    "objectID": "ae/1-guidelines.html",
+    "href": "ae/1-guidelines.html",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "",
+    "text": "import openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#setup",
+    "href": "ae/1-guidelines.html#setup",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "",
+    "text": "import openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#helper-function",
+    "href": "ae/1-guidelines.html#helper-function",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "Helper function",
+    "text": "Helper function"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#use-delimiters",
+    "href": "ae/1-guidelines.html#use-delimiters",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "Use delimiters",
+    "text": "Use delimiters\n\nAlways use delimiters (like backticks) to clearly indicate distinct parts of the input"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#ask-for-structured-output",
+    "href": "ae/1-guidelines.html#ask-for-structured-output",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "Ask for structured output",
+    "text": "Ask for structured output\n\nAsk for a structured output (e.g. JSON, HTML, …)"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#check-whether-conditions-are-satisfied",
+    "href": "ae/1-guidelines.html#check-whether-conditions-are-satisfied",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "Check whether conditions are satisfied",
+    "text": "Check whether conditions are satisfied"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#response",
+    "href": "ae/1-guidelines.html#response",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "Response",
+    "text": "Response"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#use-few-shot-prompting-with-examples",
+    "href": "ae/1-guidelines.html#use-few-shot-prompting-with-examples",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "Use “few-shot” prompting with examples",
+    "text": "Use “few-shot” prompting with examples"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#specify-the-the-steps-and-output",
+    "href": "ae/1-guidelines.html#specify-the-the-steps-and-output",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "Specify the the steps and output",
+    "text": "Specify the the steps and output"
+  },
+  {
+    "objectID": "ae/1-guidelines.html#work-on-own-solution",
+    "href": "ae/1-guidelines.html#work-on-own-solution",
+    "title": "Prompt Engineering Guidelinesx",
+    "section": "Work on own solution",
+    "text": "Work on own solution\n\nInstruct the model to work out its own solution before rushing to a conclusion"
+  },
+  {
+    "objectID": "ae/2-iterative-prompt-development.html",
+    "href": "ae/2-iterative-prompt-development.html",
+    "title": "Iterative Prompt Development",
+    "section": "",
+    "text": "In this tutorial, we’ll iteratively analyze and refine our prompts to generate marketing copy from a product fact sheet."
+  },
+  {
+    "objectID": "ae/2-iterative-prompt-development.html#api-key-and-python-libaries",
+    "href": "ae/2-iterative-prompt-development.html#api-key-and-python-libaries",
+    "title": "Iterative Prompt Development",
+    "section": "API key and Python libaries",
+    "text": "API key and Python libaries\n\nfrom IPython.display import display, HTML\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo-1106\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "ae/2-iterative-prompt-development.html#marketing-product-description",
+    "href": "ae/2-iterative-prompt-development.html#marketing-product-description",
+    "title": "Iterative Prompt Development",
+    "section": "Marketing product description",
+    "text": "Marketing product description\n\nGenerate a marketing product description from a product facts"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html",
+    "href": "ae/7-chatbot-c.html",
+    "title": "Chatbot",
+    "section": "",
+    "text": "In this tutorial, you will explore how you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors."
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#python",
+    "href": "ae/7-chatbot-c.html#python",
+    "title": "Chatbot",
+    "section": "Python",
+    "text": "Python\n\nimport panel as pn  # GUI\nimport os\nimport openai\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())\nopenai.api_key = os.getenv('OPENAI_API_KEY')\n\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo-1106\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#helper-function-2",
+    "href": "ae/7-chatbot-c.html#helper-function-2",
+    "title": "Chatbot",
+    "section": "Helper function 2",
+    "text": "Helper function 2\n\nDefine function get_completion_from_messages with parameters messages, model (default: “gpt-3.5-turbo”), and temperature (default: 0).\nCall openai.ChatCompletion.create method and store result in response.\nSpecify model argument using model parameter.\nSpecify messages argument using messages parameter.\nSpecify temperature argument using temperature parameter.\nPrint message of first choice from response to console (this is the chat history).\nReturn content attribute of message of first choice from response."
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#messages",
+    "href": "ae/7-chatbot-c.html#messages",
+    "title": "Chatbot",
+    "section": "Messages",
+    "text": "Messages"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#response",
+    "href": "ae/7-chatbot-c.html#response",
+    "title": "Chatbot",
+    "section": "Response",
+    "text": "Response"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#messages-1",
+    "href": "ae/7-chatbot-c.html#messages-1",
+    "title": "Chatbot",
+    "section": "Messages",
+    "text": "Messages"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#response-1",
+    "href": "ae/7-chatbot-c.html#response-1",
+    "title": "Chatbot",
+    "section": "Response",
+    "text": "Response"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#messages-2",
+    "href": "ae/7-chatbot-c.html#messages-2",
+    "title": "Chatbot",
+    "section": "Messages",
+    "text": "Messages"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#response-2",
+    "href": "ae/7-chatbot-c.html#response-2",
+    "title": "Chatbot",
+    "section": "Response",
+    "text": "Response"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#messages-3",
+    "href": "ae/7-chatbot-c.html#messages-3",
+    "title": "Chatbot",
+    "section": "Messages",
+    "text": "Messages"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#response-3",
+    "href": "ae/7-chatbot-c.html#response-3",
+    "title": "Chatbot",
+    "section": "Response",
+    "text": "Response"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#helper-function",
+    "href": "ae/7-chatbot-c.html#helper-function",
+    "title": "Chatbot",
+    "section": "Helper function",
+    "text": "Helper function\n\ndef collect_messages(_):\n    prompt = inp.value_input\n    inp.value = ''\n    context.append({'role': 'user', 'content': f\"{prompt}\"})\n    response = get_completion_from_messages(context)\n    context.append({'role': 'assistant', 'content': f\"{response}\"})\n    panels.append(\n        pn.Row('User:', pn.pane.Markdown(prompt, width=600)))\n    panels.append(\n        pn.Row('Assistant:', pn.pane.Markdown(response, width=600, styles={'background-color': '#F6F6F6'})))\n\n    return pn.Column(*panels)"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#panel-dashboard",
+    "href": "ae/7-chatbot-c.html#panel-dashboard",
+    "title": "Chatbot",
+    "section": "Panel Dashboard",
+    "text": "Panel Dashboard\n\nNote that the dasboard in this presentation is not working\nYou need to run the Jupyter Notebook on your own machine in order to use the Dashboard\n\n\npn.extension()\n\npanels = []  \n\ninp = pn.widgets.TextInput(value=\"Hi\", placeholder='Enter text here…')\nbutton_conversation = pn.widgets.Button(name=\"Chat!\")\n\ninteractive_conversation = pn.bind(collect_messages, button_conversation)\n\ndashboard = pn.Column(\n    inp,\n    pn.Row(button_conversation),\n    pn.panel(interactive_conversation, loading_indicator=True, height=300),\n)\n\ndashboard"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#function",
+    "href": "ae/7-chatbot-c.html#function",
+    "title": "Chatbot",
+    "section": "Function",
+    "text": "Function"
+  },
+  {
+    "objectID": "ae/7-chatbot-c.html#output",
+    "href": "ae/7-chatbot-c.html#output",
+    "title": "Chatbot",
+    "section": "Output",
+    "text": "Output"
+  },
+  {
+    "objectID": "slides/transforming.html#api-key-and-python-libaries",
+    "href": "slides/transforming.html#api-key-and-python-libaries",
     "title": "Transforming",
     "section": "API key and Python libaries",
     "text": "API key and Python libaries\n\nfrom redlines import Redlines\nfrom IPython.display import display, Markdown, Latex, HTML, JSON\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
   },
   {
-    "objectID": "code/transforming.html#helper-function",
-    "href": "code/transforming.html#helper-function",
+    "objectID": "slides/transforming.html#helper-function",
+    "href": "slides/transforming.html#helper-function",
     "title": "Transforming",
     "section": "Helper function",
     "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,\n    )\n    return response.choices[0].message[\"content\"]"
   },
   {
-    "objectID": "code/transforming.html#translate-this-text",
-    "href": "code/transforming.html#translate-this-text",
+    "objectID": "slides/transforming.html#translate-this-text",
+    "href": "slides/transforming.html#translate-this-text",
     "title": "Transforming",
     "section": "Translate this text",
     "text": "Translate this text\n\nprompt = f\"\"\"\nTranslate the following English text to German: \\ \n```Hi, I would like to order a blender```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: Hallo, ich möchte gerne einen Mixer bestellen."
   },
   {
-    "objectID": "code/transforming.html#which-language-is-this",
-    "href": "code/transforming.html#which-language-is-this",
+    "objectID": "slides/transforming.html#which-language-is-this",
+    "href": "slides/transforming.html#which-language-is-this",
     "title": "Transforming",
     "section": "Which language is this?",
     "text": "Which language is this?\n\nprompt = f\"\"\"\nTell me which language this is: \n```Wie geht es dir?```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: This language is German."
   },
   {
-    "objectID": "code/transforming.html#translate-with-style",
-    "href": "code/transforming.html#translate-with-style",
+    "objectID": "slides/transforming.html#translate-with-style",
+    "href": "slides/transforming.html#translate-with-style",
     "title": "Transforming",
     "section": "Translate with style",
     "text": "Translate with style\n\nprompt = f\"\"\"\nTranslate the following text to German in both the \\\nformal and informal forms: \n'Would you like to order a pillow?'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput:\n\nFormal: Möchten Sie ein Kissen bestellen?\nInformal: Möchtest du ein Kissen bestellen?"
   },
   {
-    "objectID": "code/transforming.html#context",
-    "href": "code/transforming.html#context",
+    "objectID": "slides/transforming.html#context",
+    "href": "slides/transforming.html#context",
     "title": "Transforming",
     "section": "Context",
     "text": "Context\n\nImagine you are in charge of IT at a large multinational e-commerce company\nUsers are messaging you with IT issues in all their native languages\nYour staff is from all over the world and speaks only their native languages\nYou need a universal translator!"
   },
   {
-    "objectID": "code/transforming.html#user-messages",
-    "href": "code/transforming.html#user-messages",
+    "objectID": "slides/transforming.html#user-messages",
+    "href": "slides/transforming.html#user-messages",
     "title": "Transforming",
     "section": "User messages",
     "text": "User messages\n\nuser_messages = [\n    \"La performance du système est plus lente que d'habitude.\",\n    \"Mi monitor tiene píxeles que no se iluminan.\",\n    \"Il mio mouse non funziona\",\n    \"Mój klawisz Ctrl jest zepsuty\",\n    \"我的屏幕在闪烁\"\n]"
   },
   {
-    "objectID": "code/transforming.html#translations",
-    "href": "code/transforming.html#translations",
+    "objectID": "slides/transforming.html#translations",
+    "href": "slides/transforming.html#translations",
     "title": "Transforming",
     "section": "Translations",
     "text": "Translations\n\nfor issue in user_messages:\n    prompt = f\"Tell me what language this is: ```{issue}```\"\n    lang = get_completion(prompt)\n    print(f\"Original message ({lang}): {issue}\")\n\n    prompt = f\"\"\"\n    Translate the following  text to English \\\n    and German: ```{issue}```\n    \"\"\"\n    response = get_completion(prompt)\n    print(response, \"\\n\")"
   },
   {
-    "objectID": "code/transforming.html#output",
-    "href": "code/transforming.html#output",
+    "objectID": "slides/transforming.html#output",
+    "href": "slides/transforming.html#output",
     "title": "Transforming",
     "section": "Output",
     "text": "Output\nOriginal message (The language is French.): La performance du système est plus lente que d’habitude. The performance of the system is slower than usual.\nDie Leistung des Systems ist langsamer als gewöhnlich.\nOriginal message (The language is Spanish.): Mi monitor tiene píxeles que no se iluminan. English: “My monitor has pixels that do not light up.”\nGerman: “Mein Monitor hat Pixel, die nicht aufleuchten.”\nOriginal message (The language is Italian.): Il mio mouse non funziona English: My mouse is not working. German: Meine Maus funktioniert nicht.\nOriginal message (The language is Polish.): Mój klawisz Ctrl jest zepsuty English: “My Ctrl key is broken” German: “Meine Strg-Taste ist kaputt”\nOriginal message (The language is Chinese.): 我的屏幕在闪烁 English: My screen is flickering. German: Mein Bildschirm flackert."
   },
   {
-    "objectID": "code/transforming.html#from-slang-to-business-tone",
-    "href": "code/transforming.html#from-slang-to-business-tone",
+    "objectID": "slides/transforming.html#from-slang-to-business-tone",
+    "href": "slides/transforming.html#from-slang-to-business-tone",
     "title": "Transforming",
     "section": "From slang to business tone",
     "text": "From slang to business tone\n\nprompt = f\"\"\"\nTranslate the following from slang to a business letter: \n'Dude, This is Joe, check out this spec on this standing lamp.'\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/transforming.html#output-1",
-    "href": "code/transforming.html#output-1",
+    "objectID": "slides/transforming.html#output-1",
+    "href": "slides/transforming.html#output-1",
     "title": "Transforming",
     "section": "Output",
     "text": "Output\nDear Sir/Madam,\nI hope this letter finds you well. My name is Joe, and I am writing to bring your attention to a specification document regarding a standing lamp.\nI kindly request that you take a moment to review the attached spec, as it contains important details about the standing lamp in question.\nThank you for your time and consideration. I look forward to hearing from you soon.\nSincerely, Joe"
   },
   {
-    "objectID": "code/transforming.html#from-dictionary-to-html",
-    "href": "code/transforming.html#from-dictionary-to-html",
+    "objectID": "slides/transforming.html#from-dictionary-to-html",
+    "href": "slides/transforming.html#from-dictionary-to-html",
     "title": "Transforming",
     "section": "From dictionary to HTML",
     "text": "From dictionary to HTML\n\ndata_json = {\"restaurant employees\": [\n    {\"name\": \"Shyam\", \"email\": \"shyamjaiswal@gmail.com\"},\n    {\"name\": \"Bob\", \"email\": \"bob32@gmail.com\"},\n    {\"name\": \"Jai\", \"email\": \"jai87@gmail.com\"}\n]}\n\nprompt = f\"\"\"\nTranslate the following python dictionary from JSON to an HTML \\\ntable with column headers and title: {data_json}\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/transforming.html#output-2",
-    "href": "code/transforming.html#output-2",
+    "objectID": "slides/transforming.html#output-2",
+    "href": "slides/transforming.html#output-2",
     "title": "Transforming",
     "section": "Output",
     "text": "Output\n\n\n\n\n\n\n\n\nRestaurant Employees\n\n\n\n\n\nName\nEmail\n\n\nShyam\nshyamjaiswal@gmail.com\n\n\nBob\nbob32@gmail.com\n\n\nJai\njai87@gmail.com"
   },
   {
-    "objectID": "code/transforming.html#text-examples",
-    "href": "code/transforming.html#text-examples",
+    "objectID": "slides/transforming.html#text-examples",
+    "href": "slides/transforming.html#text-examples",
     "title": "Transforming",
     "section": "Text examples",
     "text": "Text examples\n\nText examples are taken from Writing Prompts\n\n\ntext = [\n    \"The girl with the black and white puppies have a ball.\",\n    \"Yolanda has her notebook.\",\n    \"Its going to be a long day. Does the car need it’s oil changed?\",\n    \"Their goes my freedom. There going to bring they’re suitcases.\",\n    \"Your going to need you’re notebook.\",\n    \"That medicine effects my ability to sleep. Have you heard of the butterfly affect?\",\n    \"This phrase is to cherck chatGPT for speling abilitty\"\n]"
   },
   {
-    "objectID": "code/transforming.html#proofreading",
-    "href": "code/transforming.html#proofreading",
+    "objectID": "slides/transforming.html#proofreading",
+    "href": "slides/transforming.html#proofreading",
     "title": "Transforming",
     "section": "Proofreading",
     "text": "Proofreading\n\nprompt = f\"\"\"\nProofread and correct all sentences in the following Python list delimited by triple backticks and rewrite the corrected version. Mark the corrected words in markdown italic style using the  symbol. If you don't find any errors in an item, just say \"No errors found\":\n```{text}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput:\n[‘The girl with the black and white puppies has a ball.’]\n[‘Yolanda has her notebook.’]\n[‘It’s going to be a long day. Does the car need its oil changed?’]\n[‘There goes my freedom. They’re going to bring their suitcases.’]\n[‘You’re going to need your notebook.’]\n[‘That medicine affects my ability to sleep. Have you heard of the butterfly effect?’]\n[‘This phrase is to check ChatGPT for spelling ability.’]"
   },
   {
-    "objectID": "code/transforming.html#review-about-a-toy",
-    "href": "code/transforming.html#review-about-a-toy",
+    "objectID": "slides/transforming.html#review-about-a-toy",
+    "href": "slides/transforming.html#review-about-a-toy",
     "title": "Transforming",
     "section": "Review about a toy",
     "text": "Review about a toy\n\ntext = f\"\"\"\nGot this for my daughter for her birthday cuz she keeps taking \\\nmine from my room.  Yes, adults also like pandas too.  She takes \\\nit everywhere with her, and it's super soft and cute.  One of the \\\nears is a bit lower than the other, and I don't think that was \\\ndesigned to be asymmetrical. It's a bit small for what I paid for it \\\nthough. I think there might be other options that are bigger for \\\nthe same price.  It arrived a day earlier than expected, so I got \\\nto play with it myself before I gave it to my daughter.\n\"\"\""
   },
   {
-    "objectID": "code/transforming.html#proofreading-1",
-    "href": "code/transforming.html#proofreading-1",
+    "objectID": "slides/transforming.html#proofreading-1",
+    "href": "slides/transforming.html#proofreading-1",
     "title": "Transforming",
     "section": "Proofreading",
     "text": "Proofreading\n\nprompt = f\"proofread and correct this review: ```{text}```\"\n\nresponse = get_completion(prompt)\nprint(response)"
   },
   {
-    "objectID": "code/transforming.html#output-3",
-    "href": "code/transforming.html#output-3",
+    "objectID": "slides/transforming.html#output-3",
+    "href": "slides/transforming.html#output-3",
     "title": "Transforming",
     "section": "Output",
     "text": "Output\nGot this for my daughter for her birthday because she keeps taking mine from my room. Yes, adults also like pandas too. She takes it everywhere with her, and it’s super soft and cute. However, one of the ears is a bit lower than the other, and I don’t think that was designed to be asymmetrical. Additionally, it’s a bit small for what I paid for it. I believe there might be other options that are bigger for the same price. On the positive side, it arrived a day earlier than expected, so I got to play with it myself before I gave it to my daughter."
   },
   {
-    "objectID": "code/transforming.html#display-differences",
-    "href": "code/transforming.html#display-differences",
+    "objectID": "slides/transforming.html#display-differences",
+    "href": "slides/transforming.html#display-differences",
     "title": "Transforming",
     "section": "Display differences",
     "text": "Display differences\n\nUse the following code to display the dfferences between the two texts:\n\n\ndiff = Redlines(text, response)\n\ndisplay(Markdown(diff.output_markdown))"
   },
   {
-    "objectID": "code/transforming.html#make-it-more-compelling",
-    "href": "code/transforming.html#make-it-more-compelling",
+    "objectID": "slides/transforming.html#make-it-more-compelling",
+    "href": "slides/transforming.html#make-it-more-compelling",
     "title": "Transforming",
     "section": "Make it more compelling",
     "text": "Make it more compelling\n\nprompt = f\"\"\"\nproofread and correct this review. Make it more compelling. \nEnsure it follows APA style guide and targets an advanced reader. \nOutput in markdown format.\nText: ```{text}```\n\"\"\"\n\nresponse = get_completion(prompt)\ndisplay(Markdown(response))"
   },
   {
-    "objectID": "code/transforming.html#output-4",
-    "href": "code/transforming.html#output-4",
+    "objectID": "slides/transforming.html#output-4",
+    "href": "slides/transforming.html#output-4",
     "title": "Transforming",
     "section": "Output",
     "text": "Output\nTitle: A Delightful Gift for Panda Enthusiasts: A Review of the Soft and Adorable Panda Plush Toy\nReviewer: [Your Name]\nI recently purchased this charming panda plush toy as a birthday gift for my daughter, who has a penchant for “borrowing” my belongings from time to time. As an adult, I must admit that I too have fallen under the spell of these lovable creatures. This review aims to provide an in-depth analysis of the product, catering to advanced readers who appreciate a comprehensive evaluation.\nFirst and foremost, the softness and cuteness of this panda plush toy are simply unparalleled. Its irresistibly plush exterior makes it a joy to touch and hold, ensuring a delightful sensory experience for both children and adults alike. The attention to detail is evident, with its endearing features capturing the essence of a real panda. However, it is worth noting that one of the ears appears to be slightly asymmetrical, which may not have been an intentional design choice.\nWhile the overall quality of the product is commendable, I must express my slight disappointment regarding its size in relation to its price. Considering the investment made, I expected a larger plush toy. It is worth exploring alternative options that offer a more substantial size for the same price point. Nevertheless, this minor setback does not overshadow the undeniable appeal and charm of the panda plush toy.\nIn terms of delivery, I was pleasantly surprised to receive the product a day earlier than anticipated. This unexpected early arrival allowed me to indulge in some personal playtime with the panda plush toy before presenting it to my daughter. This added bonus further exemplifies the exceptional customer service provided by the seller.\nIn conclusion, the softness, cuteness, and attention to detail of this panda plush toy make it an ideal gift for panda enthusiasts of all ages. While the size may not fully meet expectations, the overall quality and timely delivery contribute to a positive purchasing experience. For those seeking a delightful and endearing companion, this panda plush toy is sure to bring joy and comfort to its lucky owner.\nNote: This review adheres to the APA style guide, providing a concise and compelling evaluation of the panda plush toy. The language used is targeted towards an advanced reader, ensuring a sophisticated and engaging review."
   },
   {
-    "objectID": "code/transforming.html#show-differences",
-    "href": "code/transforming.html#show-differences",
+    "objectID": "slides/transforming.html#show-differences",
+    "href": "slides/transforming.html#show-differences",
     "title": "Transforming",
     "section": "Show differences",
     "text": "Show differences\n\ndiff2 = Redlines(text, response)\ndisplay(Markdown(diff2.output_markdown))"
-  },
-  {
-    "objectID": "code/expanding.html",
-    "href": "code/expanding.html",
-    "title": "Expanding",
-    "section": "",
-    "text": "In this tutorial, you will generate customer service emails that are tailored to each customer’s review."
-  },
-  {
-    "objectID": "code/expanding.html#python",
-    "href": "code/expanding.html#python",
-    "title": "Expanding",
-    "section": "Python",
-    "text": "Python\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
-  },
-  {
-    "objectID": "code/expanding.html#helper-function",
-    "href": "code/expanding.html#helper-function",
-    "title": "Expanding",
-    "section": "Helper function",
-    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\", temperature=0):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=temperature,  \n    )\n    return response.choices[0].message[\"content\"]"
-  },
-  {
-    "objectID": "code/expanding.html#sentiment-and-text",
-    "href": "code/expanding.html#sentiment-and-text",
-    "title": "Expanding",
-    "section": "Sentiment and text",
-    "text": "Sentiment and text\n\nsentiment = \"negative\"\n\n# review for a blender\nreview = f\"\"\"\nSo, they still had the 17 piece system on seasonal \\\nsale for around $49 in the month of November, about \\\nhalf off, but for some reason (call it price gouging) \\\naround the second week of December the prices all went \\\nup to about anywhere from between $70-$89 for the same \\\nsystem. And the 11 piece system went up around $10 or \\\nso in price also from the earlier sale price of $29. \\\nSo it looks okay, but if you look at the base, the part \\\nwhere the blade locks into place doesn’t look as good \\\nas in previous editions from a few years ago, but I \\\nplan to be very gentle with it (example, I crush \\\nvery hard items like beans, ice, rice, etc. in the \\ \nblender first then pulverize them in the serving size \\\nI want in the blender then switch to the whipping \\\nblade for a finer flour, and use the cross cutting blade \\\nfirst when making smoothies, then use the flat blade \\\nif I need them finer/less pulpy). Special tip when making \\\nsmoothies, finely cut and freeze the fruits and \\\nvegetables (if using spinach-lightly stew soften the \\ \nspinach then freeze until ready for use-and if making \\\nsorbet, use a small to medium sized food processor) \\ \nthat you plan to use that way you can avoid adding so \\\nmuch ice if at all-when making your smoothie. \\\nAfter about a year, the motor was making a funny noise. \\\nI called customer service but the warranty expired \\\nalready, so I had to buy another one. FYI: The overall \\\nquality has gone done in these types of products, so \\\nthey are kind of counting on brand recognition and \\\nconsumer loyalty to maintain sales. Got it in about \\\ntwo days.\n\"\"\""
-  },
-  {
-    "objectID": "code/expanding.html#prompt",
-    "href": "code/expanding.html#prompt",
-    "title": "Expanding",
-    "section": "Prompt",
-    "text": "Prompt\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "code/expanding.html#output",
-    "href": "code/expanding.html#output",
-    "title": "Expanding",
-    "section": "Output",
-    "text": "Output\nDear Valued Customer,\nThank you for taking the time to share your review with us. We appreciate your feedback and apologize for any inconvenience you may have experienced.\nWe are sorry to hear about the price increase you noticed in December. We strive to provide competitive pricing for our products, and we understand your frustration. If you have any further concerns regarding pricing, we recommend reaching out to our customer service team who will be happy to assist you.\nWe also appreciate your feedback regarding the base of the system. We continuously work to improve the quality of our products, and your comments will be taken into consideration for future enhancements.\nRegarding the motor issue you encountered, we apologize for any inconvenience caused. Our customer service team is available to assist you with any technical difficulties you may encounter, even if the warranty has expired. Please do not hesitate to reach out to them for further assistance.\nThank you once again for your review. We value your loyalty and appreciate your support. If you have any further questions or concerns, please feel free to contact our customer service team.\nBest regards,\nAI customer agent"
-  },
-  {
-    "objectID": "code/expanding.html#prompt-with-different-temperature",
-    "href": "code/expanding.html#prompt-with-different-temperature",
-    "title": "Expanding",
-    "section": "Prompt with different temperature",
-    "text": "Prompt with different temperature\n\nprompt = f\"\"\"\nYou are a customer service AI assistant.\nYour task is to send an email reply to a valued customer.\nGiven the customer email delimited by ```, \\\nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \\\ntheir review.\nIf the sentiment is negative, apologize and suggest that \\\nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nCustomer review: ```{review}```\nReview sentiment: {sentiment}\n\"\"\"\nresponse = get_completion(prompt, temperature=0.9)\nprint(response)"
   },
   {
     "objectID": "slides/expanding.html#python",
@@ -1358,88 +1841,95 @@
     "text": "Output\nDear Valued Customer,\nThank you for taking the time to provide us with your review. We appreciate your feedback and apologize for any inconvenience you may have experienced with our pricing and product quality.\nWe are sorry to hear that you noticed a significant increase in the prices of our 17 piece and 11 piece systems during the month of December. We understand how frustrating this can be, and we apologize for any confusion it may have caused. We strive to offer competitive prices and value for our customers, and we apologize if our pricing did not meet your expectations.\nIn regards to the base of the system, we appreciate your feedback about the locking mechanism. We understand that it may not look as good as in previous editions. We will take this into consideration for future improvements.\nRegarding the issue with the motor making a funny noise after about a year, we apologize for any inconvenience caused. We understand how important it is to have a reliable product, and we apologize if the warranty had already expired when you contacted our customer service. We value your loyalty and would like to assist you further. Please feel free to reach out to our customer service team at your convenience, and they will be more than happy to help you with any concerns or questions you may have.\nOnce again, we apologize for any inconvenience and appreciate your understanding. We hope to have the opportunity to serve you better in the future. If there is anything else we can assist you with, please do not hesitate to contact us.\nThank you for choosing our products.\nBest regards,\nAI customer agent"
   },
   {
-    "objectID": "slides/summarizing.html#api-key-and-python-libaries",
-    "href": "slides/summarizing.html#api-key-and-python-libaries",
-    "title": "Summarizing",
+    "objectID": "slides/inferring.html#api-key-and-python-libaries",
+    "href": "slides/inferring.html#api-key-and-python-libaries",
+    "title": "Inferring",
     "section": "API key and Python libaries",
-    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  # read local .env file\n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
+    "text": "API key and Python libaries\n\nimport openai\nimport os\n\nfrom dotenv import load_dotenv, find_dotenv\n_ = load_dotenv(find_dotenv())  \n\nopenai.api_key = os.getenv('OPENAI_API_KEY')"
   },
   {
-    "objectID": "slides/summarizing.html#helper-function",
-    "href": "slides/summarizing.html#helper-function",
-    "title": "Summarizing",
+    "objectID": "slides/inferring.html#helper-function",
+    "href": "slides/inferring.html#helper-function",
+    "title": "Inferring",
     "section": "Helper function",
-    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0,  # this is the degree of randomness of the model's output\n    )\n    return response.choices[0].message[\"content\"]"
+    "text": "Helper function\n\ndef get_completion(prompt, model=\"gpt-3.5-turbo\"):\n    messages = [{\"role\": \"user\", \"content\": prompt}]\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=messages,\n        temperature=0, \n    )\n    return response.choices[0].message[\"content\"]"
   },
   {
-    "objectID": "slides/summarizing.html#summarization",
-    "href": "slides/summarizing.html#summarization",
-    "title": "Summarizing",
-    "section": "Summarization",
-    "text": "Summarization\n\nSummarize with a word limit\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/inferring.html#sentiment",
+    "href": "slides/inferring.html#sentiment",
+    "title": "Inferring",
+    "section": "Sentiment?",
+    "text": "Sentiment?\n\nprompt = f\"\"\"\nWhat is the sentiment of the following product review, \nwhich is delimited with triple backticks?\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: The sentiment of the product review is positive."
   },
   {
-    "objectID": "slides/summarizing.html#output",
-    "href": "slides/summarizing.html#output",
-    "title": "Summarizing",
+    "objectID": "slides/inferring.html#positive-or-negative",
+    "href": "slides/inferring.html#positive-or-negative",
+    "title": "Inferring",
+    "section": "Positive or negative?",
+    "text": "Positive or negative?\n\nprompt = f\"\"\"\nWhat is the sentiment of the following product review, \nwhich is delimited with triple backticks?\n\nGive your answer as a single word, either \"positive\" \\\nor \"negative\".\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: positive"
+  },
+  {
+    "objectID": "slides/inferring.html#identify-types-of-emotions",
+    "href": "slides/inferring.html#identify-types-of-emotions",
+    "title": "Inferring",
+    "section": "Identify types of emotions",
+    "text": "Identify types of emotions\n\nprompt = f\"\"\"\nIdentify a list of emotions that the writer of the \\\nfollowing review is expressing. Include no more than \\\nfive items in the list. Format your answer as a list of \\\nlower-case words separated by commas.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: happy, satisfied, impressed, grateful, pleased"
+  },
+  {
+    "objectID": "slides/inferring.html#identify-anger",
+    "href": "slides/inferring.html#identify-anger",
+    "title": "Inferring",
+    "section": "Identify anger",
+    "text": "Identify anger\n\nprompt = f\"\"\"\nIs the writer of the following review expressing anger?\\\nThe review is delimited with triple backticks. \\\nGive your answer as either yes or no.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: No"
+  },
+  {
+    "objectID": "slides/inferring.html#extract-product-and-company-name",
+    "href": "slides/inferring.html#extract-product-and-company-name",
+    "title": "Inferring",
+    "section": "Extract product and company name",
+    "text": "Extract product and company name\n\nprompt = f\"\"\"\nIdentify the following items from the review text: \n- Item purchased by reviewer\n- Company that made the item\n\nThe review is delimited with triple backticks. \\\nFormat your response as a JSON object with \\\n\"Item\" and \"Brand\" as the keys. \nIf the information isn't present, use \"unknown\" \\\nas the value.\nMake your response as short as possible.\n  \nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n{\n  \"Item\": \"lamp\",\n  \"Brand\": \"Lumina\"\n}"
+  },
+  {
+    "objectID": "slides/inferring.html#doing-multiple-tasks-at-once",
+    "href": "slides/inferring.html#doing-multiple-tasks-at-once",
+    "title": "Inferring",
+    "section": "Doing multiple tasks at once",
+    "text": "Doing multiple tasks at once\n\nprompt = f\"\"\"\nIdentify the following items from the review text: \n- Sentiment (positive or negative)\n- Is the reviewer expressing anger? (true or false)\n- Item purchased by reviewer\n- Company that made the item\n\nThe review is delimited with triple backticks. \\\nFormat your response as a JSON object with \\\n\"Sentiment\", \"Anger\", \"Item\" and \"Brand\" as the keys.\nIf the information isn't present, use \"unknown\" \\\nas the value.\nMake your response as short as possible.\nFormat the Anger value as a boolean.\n\nReview text: '''{lamp_review}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)"
+  },
+  {
+    "objectID": "slides/inferring.html#output",
+    "href": "slides/inferring.html#output",
+    "title": "Inferring",
     "section": "Output",
-    "text": "Output\nThis review praises the panda plush toy for being soft, cute, and having a friendly face. However, the reviewer feels it is small for the price and suggests there may be larger options available."
+    "text": "Output\n{\n  \"Sentiment\": \"positive\",\n  \"Anger\": false,\n  \"Item\": \"lamp\",\n  \"Brand\": \"Lumina\"\n}"
   },
   {
-    "objectID": "slides/summarizing.html#focus-on-shipping-and-delivery",
-    "href": "slides/summarizing.html#focus-on-shipping-and-delivery",
-    "title": "Summarizing",
-    "section": "Focus on shipping and delivery",
-    "text": "Focus on shipping and delivery\n\nSummarize with a focus on shipping and delivery\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\nShipping department. \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat mention shipping and delivery of the product. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/inferring.html#example-text",
+    "href": "slides/inferring.html#example-text",
+    "title": "Inferring",
+    "section": "Example text",
+    "text": "Example text\n\nstory = \"\"\"\nIn a recent survey conducted by the government, \npublic sector employees were asked to rate their level \nof satisfaction with the department they work at. \nThe results revealed that NASA was the most popular \ndepartment with a satisfaction rating of 95%.\n\nOne NASA employee, John Smith, commented on the findings, \nstating, \"I'm not surprised that NASA came out on top. \nIt's a great place to work with amazing people and \nincredible opportunities. I'm proud to be a part of \nsuch an innovative organization.\"\n\nThe results were also welcomed by NASA's management team, \nwith Director Tom Johnson stating, \"We are thrilled to \nhear that our employees are satisfied with their work at NASA. \nWe have a talented and dedicated team who work tirelessly \nto achieve our goals, and it's fantastic to see that their \nhard work is paying off.\"\n\nThe survey also revealed that the \nSocial Security Administration had the lowest satisfaction \nrating, with only 45 percent of employees indicating they were \nsatisfied with their job. The government has pledged to \naddress the concerns raised by employees in the survey and \nwork towards improving job satisfaction across all departments.\n\"\"\""
   },
   {
-    "objectID": "slides/summarizing.html#output-1",
-    "href": "slides/summarizing.html#output-1",
-    "title": "Summarizing",
-    "section": "Output",
-    "text": "Output\nThe customer is happy with the product but mentions that it is smaller than expected. They also mention that the shipping was faster than expected."
+    "objectID": "slides/inferring.html#lets-infer-5-topics",
+    "href": "slides/inferring.html#lets-infer-5-topics",
+    "title": "Inferring",
+    "section": "Let’s infer 5 topics",
+    "text": "Let’s infer 5 topics\n\nprompt = f\"\"\"\nDetermine five topics that are being discussed in the \\\nfollowing text, which is delimited by triple backticks.\n\nMake each item one or two words long. \n\nProvide your response as a Python list separated by commas.\n\nText sample: '''{story}'''\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\n['survey', 'satisfaction', 'NASA', 'Social Security Administration', 'job satisfaction']"
   },
   {
-    "objectID": "slides/summarizing.html#focus-on-price-and-value",
-    "href": "slides/summarizing.html#focus-on-price-and-value",
-    "title": "Summarizing",
-    "section": "Focus on price and value",
-    "text": "Focus on price and value\n\nSummarize with a focus on price and value\n\n\n\nprompt = f\"\"\"\nYour task is to generate a short summary of a product \\\nreview from an ecommerce site to give feedback to the \\\npricing department, responsible for determining the \\\nprice of the product.  \n\nSummarize the review below, delimited by triple \nbackticks, in at most 30 words, and focusing on any aspects \\\nthat are relevant to the price and perceived value. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
+    "objectID": "slides/inferring.html#we-create-a-topic-list",
+    "href": "slides/inferring.html#we-create-a-topic-list",
+    "title": "Inferring",
+    "section": "We create a topic list",
+    "text": "We create a topic list\n\ntopic_list = [\n    \"nasa\", \"local government\", \"engineering\",\n    \"employee satisfaction\", \"federal government\"\n]"
   },
   {
-    "objectID": "slides/summarizing.html#output-2",
-    "href": "slides/summarizing.html#output-2",
-    "title": "Summarizing",
-    "section": "Output",
-    "text": "Output\nThe customer loves the panda plush toy but feels it is overpriced for its size. They suggest considering other options that offer a larger size for the same price."
-  },
-  {
-    "objectID": "slides/summarizing.html#extract-instead-of-summarize",
-    "href": "slides/summarizing.html#extract-instead-of-summarize",
-    "title": "Summarizing",
-    "section": "“extract” instead of “summarize”",
-    "text": "“extract” instead of “summarize”\n\nprompt = f\"\"\"\nYour task is to extract relevant information from \\ \na product review from an ecommerce site to give \\\nfeedback to the Shipping department. \n\nFrom the review below, delimited by triple quotes \\\nextract the information relevant to shipping and \\ \ndelivery. Limit to 30 words. \n\nReview: ```{prod_review}```\n\"\"\"\n\nresponse = get_completion(prompt)\nprint(response)"
-  },
-  {
-    "objectID": "slides/summarizing.html#output-3",
-    "href": "slides/summarizing.html#output-3",
-    "title": "Summarizing",
-    "section": "Output",
-    "text": "Output\nThe shipping department should take note that the product arrived a day earlier than expected."
-  },
-  {
-    "objectID": "slides/summarizing.html#summarize-multiple-product-reviews",
-    "href": "slides/summarizing.html#summarize-multiple-product-reviews",
-    "title": "Summarizing",
-    "section": "Summarize multiple product reviews",
-    "text": "Summarize multiple product reviews\n\nfor i in range(len(reviews)):\n    prompt = f\"\"\"\n    Your task is to generate a short summary of a product \\ \n    review from an ecommerce site. \n\n    Summarize the review below, delimited by triple \\\n    backticks in at most 20 words. \n\n    Review: ```{reviews[i]}```\n    \"\"\"\n\n    response = get_completion(prompt)\n    print(i, response, \"\\n\")"
-  },
-  {
-    "objectID": "slides/summarizing.html#output-4",
-    "href": "slides/summarizing.html#output-4",
-    "title": "Summarizing",
-    "section": "Output",
-    "text": "Output\n\n0 Soft and cute panda plush toy loved by daughter, but small for the price. Arrived early.\n1 This lamp with storage is affordable and the company provides excellent customer support.\n2 The reviewer recommends the electric toothbrush for its impressive battery life, but criticizes the small brush head.\n3 The reviewer found the price increase after the sale disappointing and noticed a decrease in quality."
+    "objectID": "slides/inferring.html#give-answer-as-list-with-0-and-1",
+    "href": "slides/inferring.html#give-answer-as-list-with-0-and-1",
+    "title": "Inferring",
+    "section": "Give answer as list with 0 and 1",
+    "text": "Give answer as list with 0 and 1\n\nprompt = f\"\"\"\nDetermine whether each item in the following list of \\\ntopics is a topic in the text below, which\nis delimited with triple backticks.\n\nGive your answer as list with 0 or 1 for each topic.\\\n\nList of topics: {\", \".join(topic_list)}\n\nText sample: ```{story}```\n\"\"\"\nresponse = get_completion(prompt)\nprint(response)\n\n\nOutput: [1, 0, 0, 1, 1]"
   },
   {
     "objectID": "slides/iterative-prompt-development.html#api-key-and-python-libaries",
@@ -1496,13 +1986,6 @@
     "title": "Iterative Prompt Development",
     "section": "Output",
     "text": "Output\n\n\n  Product Description\n  \n    Introducing our latest addition to our mid-century inspired office furniture collection - the SWC Chair. This chair is part of a beautiful family of furniture that includes filing cabinets, desks, bookcases, meeting tables, and more. With its sleek design and customizable options, the SWC Chair is perfect for both home and business settings.\n  \n  \n    The SWC Chair is available in several options of shell color and base finishes, allowing you to create a look that matches your style. You can choose between plastic back and front upholstery or full upholstery in a variety of fabric and leather options. The base finish options include stainless steel, matte black, gloss white, or chrome. Additionally, you have the choice of having the chair with or without armrests.\n  \n  \n    Constructed with durability and comfort in mind, the SWC Chair features a 5-wheel plastic coated aluminum base for stability and mobility. The chair also has a pneumatic adjuster, allowing for easy raise and lower action to find the perfect height for your workspace.\n  \n  \n    The SWC Chair is not only stylish and functional, but it is also designed with quality materials. The shell and base glider are made of cast aluminum with a modified nylon PA6/PA66 coating, ensuring durability and longevity. The seat is made with HD36 foam, providing a comfortable seating experience throughout the day.\n  \n  \n    With its versatility, durability, and stylish design, the SWC Chair is the perfect addition to any office or workspace. It is qualified for contract use, making it suitable for commercial settings as well. Experience the comfort and style of the SWC Chair today.\n  \n  Product ID:\n  \n    SWC-100\n    SWC-110\n  \n  Product Dimensions\n  \n\n\n\nDimension\nMeasurement (inches)\n\n\nWidth\n20.87\"\n\n\nDepth\n20.08\"\n\n\nHeight\n31.50\"\n\n\nSeat Height\n17.32\"\n\n\nSeat Depth\n16.14\""
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome 👋",
-    "section": "",
-    "text": "Welcome to the lab “prompt engineering”\n\nIn this lab, we will use OpenAI’s API to leverage Large Language Models (LLMs) like GPT-3.5 Turbo and GPT-4 into custom Python applications.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you meet all the requirements and have read the lecture slides before you start with the assignments\n\n\nWhat you will learn in this lab:\n\nYou’ll practice prompting principles and their related tactics\nHow to analyze and refine your prompts to generate marketing copy from a product fact sheet.\nSummarize text with a focus on specific topics.\nInfer sentiment and topics from product reviews and news articles.\nExplore how to use Large Language Models for text transformation tasks such as language translation, spelling and grammar checking, tone adjustment, and format conversion.\nGenerate customer service emails that are tailored to each customer’s review.\nHow you can utilize the chat format to have extended conversations with chatbots personalized or specialized for specific tasks or behaviors.\n\n\nThis lab is mainly based on an excellent course provided by Isa Fulford from OpenAI and Andrew Ng from DeepLearning.AI as well as OpenAI’s GPT best practices"
   },
   {
     "objectID": "require.html",
